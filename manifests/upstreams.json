@@ -14,6 +14,13 @@
       "commit": "d9eee9b3f248e5300e636c433255db2c1c3e086a",
       "license": "MIT; robot assets retain separate license",
       "runtime_installed": false
+    },
+    {
+      "path": "third_party/MyHIMLoco",
+      "url": "https://github.com/qyw23AI/MyHIMLoco.git",
+      "commit": "88dafdf03bd6c23f19c843b00cefd955d59dde2c",
+      "license": "See MyHIMLoco README and asset notices",
+      "runtime_installed": false
     }
   ]
 }

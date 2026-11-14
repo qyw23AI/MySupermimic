@@ -4,3 +4,6 @@
 [submodule "third_party/go2_supermimic"]
 	path = third_party/go2_supermimic
 	url = https://github.com/Zhengtianjin/go2-supermimic.git
+[submodule "third_party/MyHIMLoco"]
+	path = third_party/MyHIMLoco
+	url = https://github.com/qyw23AI/MyHIMLoco.git

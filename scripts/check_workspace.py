@@ -23,21 +23,21 @@ def main():
         except (OSError, subprocess.CalledProcessError) as exc:
             errors.append(f"Cannot inspect {item['path']}: {exc}")
     source = json.loads((root / "manifests/himloco_source.json").read_text())
-    local = Path(source["source_root"])
+    local = root / source["source_root"]
     if local.exists():
         for relative, expected in source["files"].items():
             path = local / relative
             if not path.is_file() or hashlib.sha256(path.read_bytes()).hexdigest() != expected:
                 errors.append(f"HIMLoco source drift: {relative}")
-        asset = Path(source["asset"]["path"])
+        asset = local / source["asset"]["path"]
         if not asset.is_file() or hashlib.sha256(asset.read_bytes()).hexdigest() != source["asset"]["sha256"]:
             errors.append("HIMLoco robot asset changed")
     else:
-        print("Local HIMLoco source unavailable; local fingerprint check skipped.")
+        errors.append(f"Missing MyHIMLoco source: {local}")
     if errors:
         print("\n".join(errors), file=sys.stderr)
         return 1
-    print("Source identity checks passed. Simulation, training and deployment remain unverified.")
+    print("Submodule pins and source fingerprints verified.")
     return 0
 
 

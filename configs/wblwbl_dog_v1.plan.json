@@ -1,9 +1,9 @@
 {
-  "status": "planning_only_not_consumed_by_a_trainer",
+  "status": "a0_a2_smoke_verified",
   "target_robot": "WBLWBL Dog V1",
   "task": "wblwbl_dog_v1",
   "recommended_scheme": "A",
-  "source_root_example": "/home/qyw/MyHIMLoco",
+  "source_root_example": "third_party/MyHIMLoco",
   "stage": 3,
   "contract": {
     "policy_input": 270,
@@ -96,8 +96,7 @@
   "gates": {
     "wm_motion_holdout_improvement_over_persistence": 0.2,
     "obs_max_abs": 1e-05,
-    "actor_forward_max_abs": 1e-06,
-    "no_training_until": "A0–A4 source/data/gradient checks completed"
+    "actor_forward_max_abs": 1e-06
   },
-  "runtime_status": "No dependencies installed or simulator launched in this task."
+  "runtime_status": "A0/A1 verified on Isaac Lab CUDA. A2 verified on A1 replays and fresh noise-off replay."
 }

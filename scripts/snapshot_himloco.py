@@ -8,6 +8,8 @@ import sys
 from datetime import datetime, timezone
 from pathlib import Path
 
+ROOT = Path(__file__).resolve().parents[1]
+
 FILES = [
     "README.md",
     "isaaclab_migration/README.md",
@@ -42,7 +44,7 @@ def digest(path):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--source", type=Path, required=True)
+    parser.add_argument("--source", type=Path, default=ROOT / "third_party/MyHIMLoco")
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     root = args.source.resolve(strict=True)
@@ -55,12 +57,12 @@ def main():
     data = {
         "schema_version": "himloco-source.v1",
         "recorded_at": datetime.now(timezone.utc).isoformat(),
-        "source_root": str(root),
+        "source_root": str(root.relative_to(ROOT) if root.is_relative_to(ROOT) else root),
         "head": git(root, "rev-parse", "HEAD"),
         "working_tree_status": git(root, "status", "--porcelain"),
         "note": "Hashes describe the working tree, including uncommitted edits. No simulation was run.",
         "files": {p: digest(root / p) for p in FILES},
-        "asset": {"path": str(asset), "sha256": digest(asset), "joint_names": names,
+        "asset": {"path": str(asset.relative_to(root)), "sha256": digest(asset), "joint_names": names,
                   "joint_limits": limits, "root_link": root_link},
         "profile": {"task": "wblwbl_dog_v1", "stage": 3, "num_envs_override": 512,
                     "env": class_to_dict(cfg), "train": train},

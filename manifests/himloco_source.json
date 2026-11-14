@@ -1,9 +1,9 @@
 {
   "schema_version": "himloco-source.v1",
-  "recorded_at": "2026-11-14T02:17:48.237643+00:00",
-  "source_root": "/home/qyw/MyHIMLoco",
-  "head": "8342fe75b127af1268ab46cbf3120d5b0e4bfbc8",
-  "working_tree_status": "M isaaclab_migration/.gitignore\n M isaaclab_migration/README.md\n D isaaclab_migration/docs/TASK_GAIT_VALIDATION.md\n D isaaclab_migration/docs/isaacgym_api_inventory.txt\n D isaaclab_migration/docs/sim_contract_result.json\n D isaaclab_migration/docs/source_manifest.json\n D isaaclab_migration/docs/terrain_contract_result.json\n M isaaclab_migration/himloco_lab/config.py\n M isaaclab_migration/himloco_lab/core.py\n M isaaclab_migration/himloco_lab/env.py\n M isaaclab_migration/himloco_lab/env_cfg.py\n M isaaclab_migration/scripts/play.py\n M isaaclab_migration/scripts/reward_comparison_experiments.py\n M isaaclab_migration/scripts/train.py\n D md/gettinghimloco_recent_changes.md\n M rsl_rl/rsl_rl/modules/him_actor_critic.py\n?? isaaclab_migration/configs/\n?? isaaclab_migration/docs/WBLWBL_DOG_V1.md\n?? isaaclab_migration/himloco_lab/legacy/wblwbl_dog_v1/\n?? isaaclab_migration/himloco_lab/paper_a1.py\n?? isaaclab_migration/scripts/a1_himloco.sh\n?? isaaclab_migration/tests/test_a1_reward_source_profile.py\n?? legged_gym/resources/robots/wblwbl_dog_v1/\n?? \"md/HIMLoco_WTW_AMP_\\346\\216\\242\\347\\264\\242\\346\\226\\271\\346\\241\\210.md\"\n?? md/WTW_AMP_HIMLOCO_ANALYSIS_20261021.md",
+  "recorded_at": "2026-11-14T06:47:49.735539+00:00",
+  "source_root": "third_party/MyHIMLoco",
+  "head": "88dafdf03bd6c23f19c843b00cefd955d59dde2c",
+  "working_tree_status": "",
   "note": "Hashes describe the working tree, including uncommitted edits. No simulation was run.",
   "files": {
     "README.md": "f5a1fc9bfb205e69d550b84945205367b01d9353c072435b9a4229045622a350",
@@ -28,7 +28,7 @@
     "rsl_rl/rsl_rl/storage/him_rollout_storage.py": "971369bb58bdc43e737f317f5ae57443df8f46de463597ee732150c5389bfd9a"
   },
   "asset": {
-    "path": "/home/qyw/MyHIMLoco/legged_gym/resources/robots/wblwbl_dog_v1/urdf/wblwbl_dog.urdf",
+    "path": "legged_gym/resources/robots/wblwbl_dog_v1/urdf/wblwbl_dog.urdf",
     "sha256": "89e32e162095dc5b8fafef0d739bd0179a0f71c6489ed4a000d43e6964c7e442",
     "joint_names": [
       "RR_hip_joint",
