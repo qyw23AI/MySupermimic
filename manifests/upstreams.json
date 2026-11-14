@@ -1,0 +1,19 @@
+{
+  "recorded_date": "2026-11-14",
+  "submodules": [
+    {
+      "path": "third_party/supermimic_official",
+      "url": "https://github.com/HybridRobotics/supermimic.git",
+      "commit": "abc124c1bd5976341034668af3d12c087f2f1f55",
+      "license": "Apache-2.0",
+      "runtime_installed": false
+    },
+    {
+      "path": "third_party/go2_supermimic",
+      "url": "https://github.com/Zhengtianjin/go2-supermimic.git",
+      "commit": "d9eee9b3f248e5300e636c433255db2c1c3e086a",
+      "license": "MIT; robot assets retain separate license",
+      "runtime_installed": false
+    }
+  ]
+}

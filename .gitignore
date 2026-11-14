@@ -1,0 +1,13 @@
+__pycache__/
+*.py[cod]
+.venv/
+.cache/
+outputs/
+logs/
+checkpoints/
+datasets/
+*.pt
+*.pth
+*.onnx
+.env
+configs/*.local.json

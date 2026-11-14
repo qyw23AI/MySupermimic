@@ -1,0 +1,601 @@
+{
+  "schema_version": "source-ledger.v1",
+  "persistence": "local_only",
+  "sources": [
+    {
+      "id": "O-POL",
+      "title": "Official policy learners",
+      "identifier": "https://github.com/HybridRobotics/supermimic/blob/abc124c1bd5976341034668af3d12c087f2f1f55/src/supermimic/learners/policy_learner.py",
+      "version": "abc124c1bd5976341034668af3d12c087f2f1f55",
+      "read_level": "fulltext",
+      "anchors": [
+        "BpttPolicyLearner.update/_train_batch",
+        "ActorCriticPolicyLearner._bootstrap/_fit_critic",
+        "gae_returns"
+      ],
+      "local_path": "third_party/supermimic_official/src/supermimic/learners/policy_learner.py",
+      "reading_scope": "Selected source methods inspected; not a runtime validation."
+    },
+    {
+      "id": "O-WM",
+      "title": "Official supervised world-model learner",
+      "identifier": "https://github.com/HybridRobotics/supermimic/blob/abc124c1bd5976341034668af3d12c087f2f1f55/src/supermimic/learners/wm_learner.py",
+      "version": "abc124c1bd5976341034668af3d12c087f2f1f55",
+      "read_level": "fulltext",
+      "anchors": [
+        "WorldModelLearnerCfg",
+        "_rollout",
+        "_compute_losses",
+        "update_normalization"
+      ],
+      "local_path": "third_party/supermimic_official/src/supermimic/learners/wm_learner.py",
+      "reading_scope": "Selected source methods inspected; not a runtime validation."
+    },
+    {
+      "id": "O-RUN",
+      "title": "Official runner",
+      "identifier": "https://github.com/HybridRobotics/supermimic/blob/abc124c1bd5976341034668af3d12c087f2f1f55/src/supermimic/runners/supermimic_runner.py",
+      "version": "abc124c1bd5976341034668af3d12c087f2f1f55",
+      "read_level": "fulltext",
+      "anchors": [
+        "BaseRunnerCfg",
+        "build_world_model",
+        "_step_and_store",
+        "SuperMimicRunner.run"
+      ],
+      "local_path": "third_party/supermimic_official/src/supermimic/runners/supermimic_runner.py",
+      "reading_scope": "Selected source methods inspected; not a runtime validation."
+    },
+    {
+      "id": "O-ENV",
+      "title": "Official differentiable world-model environment",
+      "identifier": "https://github.com/HybridRobotics/supermimic/blob/abc124c1bd5976341034668af3d12c087f2f1f55/src/supermimic/envs/world_model_env.py",
+      "version": "abc124c1bd5976341034668af3d12c087f2f1f55",
+      "read_level": "fulltext",
+      "anchors": [
+        "_wm_step",
+        "_compute_term_prob",
+        "_synth_sensor",
+        "sample_initial_states"
+      ],
+      "local_path": "third_party/supermimic_official/src/supermimic/envs/world_model_env.py",
+      "reading_scope": "Selected source methods inspected; not a runtime validation."
+    },
+    {
+      "id": "O-PROJECT",
+      "title": "Official dependency specification",
+      "identifier": "https://github.com/HybridRobotics/supermimic/blob/abc124c1bd5976341034668af3d12c087f2f1f55/pyproject.toml",
+      "version": "abc124c1bd5976341034668af3d12c087f2f1f55",
+      "read_level": "fulltext",
+      "anchors": [
+        "project.requires-python",
+        "tool.uv.sources"
+      ],
+      "local_path": "third_party/supermimic_official/pyproject.toml",
+      "reading_scope": "Selected source methods inspected; not a runtime validation."
+    },
+    {
+      "id": "G-WM",
+      "title": "Go2 residual world model",
+      "identifier": "https://github.com/Zhengtianjin/go2-supermimic/blob/d9eee9b3f248e5300e636c433255db2c1c3e086a/go2_supermimic/supermimic/world_model.py",
+      "version": "d9eee9b3f248e5300e636c433255db2c1c3e086a",
+      "read_level": "fulltext",
+      "anchors": [
+        "WorldModel.forward",
+        "WorldModel.loss",
+        "RunningNorm"
+      ],
+      "local_path": "third_party/go2_supermimic/go2_supermimic/supermimic/world_model.py",
+      "reading_scope": "Selected source methods inspected; not a runtime validation."
+    },
+    {
+      "id": "G-IM",
+      "title": "Go2 imagination",
+      "identifier": "https://github.com/Zhengtianjin/go2-supermimic/blob/d9eee9b3f248e5300e636c433255db2c1c3e086a/go2_supermimic/supermimic/imagine.py",
+      "version": "d9eee9b3f248e5300e636c433255db2c1c3e086a",
+      "read_level": "fulltext",
+      "anchors": [
+        "Imagination._step",
+        "_rewards",
+        "fall_prob",
+        "rollout",
+        "gae_targets"
+      ],
+      "local_path": "third_party/go2_supermimic/go2_supermimic/supermimic/imagine.py",
+      "reading_scope": "Selected source methods inspected; not a runtime validation."
+    },
+    {
+      "id": "G-TRAIN",
+      "title": "Go2 alternating trainer",
+      "identifier": "https://github.com/Zhengtianjin/go2-supermimic/blob/d9eee9b3f248e5300e636c433255db2c1c3e086a/go2_supermimic/supermimic/train.py",
+      "version": "d9eee9b3f248e5300e636c433255db2c1c3e086a",
+      "read_level": "fulltext",
+      "anchors": [
+        "TrainCfg",
+        "improve_policy",
+        "run"
+      ],
+      "local_path": "third_party/go2_supermimic/go2_supermimic/supermimic/train.py",
+      "reading_scope": "Selected source methods inspected; not a runtime validation."
+    },
+    {
+      "id": "G-README",
+      "title": "Go2 task and reproduction limitations",
+      "identifier": "https://github.com/Zhengtianjin/go2-supermimic/blob/d9eee9b3f248e5300e636c433255db2c1c3e086a/README.md",
+      "version": "d9eee9b3f248e5300e636c433255db2c1c3e086a",
+      "read_level": "fulltext",
+      "anchors": [
+        "Interfaces",
+        "How the released policies were trained",
+        "Limitations"
+      ],
+      "local_path": "third_party/go2_supermimic/README.md",
+      "reading_scope": "Selected source methods inspected; not a runtime validation."
+    },
+    {
+      "id": "H-MIGRATION",
+      "title": "Local runtime documentation",
+      "identifier": "/home/qyw/MyHIMLoco/isaaclab_migration/README.md",
+      "version": "working tree at 8342fe75b127af1268ab46cbf3120d5b0e4bfbc8; SHA256 8dba30813e97e0ee9b263670ec5b069b8c11e34d4b48471c0486505c565fb319",
+      "read_level": "fulltext",
+      "anchors": [
+        "当前运行环境",
+        "可视化训练与导出"
+      ],
+      "local_path": "/home/qyw/MyHIMLoco/isaaclab_migration/README.md",
+      "reading_scope": "Selected source methods inspected; not a runtime validation."
+    },
+    {
+      "id": "H-ENTRY",
+      "title": "Local training entry",
+      "identifier": "/home/qyw/MyHIMLoco/isaaclab_migration/scripts/train.py",
+      "version": "working tree at 8342fe75b127af1268ab46cbf3120d5b0e4bfbc8; SHA256 02312980ca77c4220f6f5ef8ad567089c06c22920773521ea951525f009cc379",
+      "read_level": "fulltext",
+      "anchors": [
+        "AppLauncher",
+        "stage/task parsing",
+        "Runner selection"
+      ],
+      "local_path": "/home/qyw/MyHIMLoco/isaaclab_migration/scripts/train.py",
+      "reading_scope": "Selected source methods inspected; not a runtime validation."
+    },
+    {
+      "id": "H-CONFIG",
+      "title": "Local configuration loading",
+      "identifier": "/home/qyw/MyHIMLoco/isaaclab_migration/himloco_lab/config.py",
+      "version": "working tree at 8342fe75b127af1268ab46cbf3120d5b0e4bfbc8; SHA256 248430c06a722b745a809baaa1d28abffaf61189e2ebdb232d459e4290df67c1",
+      "read_level": "fulltext",
+      "anchors": [
+        "load_config",
+        "asset_contract"
+      ],
+      "local_path": "/home/qyw/MyHIMLoco/isaaclab_migration/himloco_lab/config.py",
+      "reading_scope": "Selected source methods inspected; not a runtime validation."
+    },
+    {
+      "id": "H-CFG",
+      "title": "WBLWBL walking configuration",
+      "identifier": "/home/qyw/MyHIMLoco/isaaclab_migration/himloco_lab/legacy/wblwbl_dog_v1/wblwbl_dog_v1_config.py",
+      "version": "working tree at 8342fe75b127af1268ab46cbf3120d5b0e4bfbc8; SHA256 2138d9c67b6bb5954dacacb3e1525249026578f542e8323ad25fcf5f95b8b9b0",
+      "read_level": "fulltext",
+      "anchors": [
+        "WblwblDogV1Cfg",
+        "WblwblDogV1CfgPPO"
+      ],
+      "local_path": "/home/qyw/MyHIMLoco/isaaclab_migration/himloco_lab/legacy/wblwbl_dog_v1/wblwbl_dog_v1_config.py",
+      "reading_scope": "Selected source methods inspected; not a runtime validation."
+    },
+    {
+      "id": "H-BASE",
+      "title": "Inherited configuration",
+      "identifier": "/home/qyw/MyHIMLoco/isaaclab_migration/himloco_lab/legacy/base/legged_robot_config.py",
+      "version": "working tree at 8342fe75b127af1268ab46cbf3120d5b0e4bfbc8; SHA256 c11c5f341d5aae1762b9d4ca9cebbf0bed5168ef08ee6d92399f7ca4c398abbe",
+      "read_level": "fulltext",
+      "anchors": [
+        "env",
+        "domain_rand",
+        "sim",
+        "normalization"
+      ],
+      "local_path": "/home/qyw/MyHIMLoco/isaaclab_migration/himloco_lab/legacy/base/legged_robot_config.py",
+      "reading_scope": "Selected source methods inspected; not a runtime validation."
+    },
+    {
+      "id": "H-ENV-CFG",
+      "title": "Isaac Lab environment configuration",
+      "identifier": "/home/qyw/MyHIMLoco/isaaclab_migration/himloco_lab/env_cfg.py",
+      "version": "working tree at 8342fe75b127af1268ab46cbf3120d5b0e4bfbc8; SHA256 42b7130506dbbe7d14066ab0cf5313887d8cb0a707f1059be8695961cf12e182",
+      "read_level": "fulltext",
+      "anchors": [
+        "HIMEnvCfg",
+        "make_env_cfg"
+      ],
+      "local_path": "/home/qyw/MyHIMLoco/isaaclab_migration/himloco_lab/env_cfg.py",
+      "reading_scope": "Selected source methods inspected; not a runtime validation."
+    },
+    {
+      "id": "H-ENV",
+      "title": "Lab lifecycle and actuation",
+      "identifier": "/home/qyw/MyHIMLoco/isaaclab_migration/himloco_lab/env.py",
+      "version": "working tree at 8342fe75b127af1268ab46cbf3120d5b0e4bfbc8; SHA256 881269fdbc90559416da3a17a24d67086fd7cb1f61b1e23dcf923922daa55218",
+      "read_level": "fulltext",
+      "anchors": [
+        "sync_state",
+        "_pre_physics_step",
+        "_apply_action",
+        "_get_dones",
+        "_get_rewards",
+        "_reset_idx",
+        "_get_observations"
+      ],
+      "local_path": "/home/qyw/MyHIMLoco/isaaclab_migration/himloco_lab/env.py",
+      "reading_scope": "Selected source methods inspected; not a runtime validation."
+    },
+    {
+      "id": "H-CORE",
+      "title": "Core state and external events",
+      "identifier": "/home/qyw/MyHIMLoco/isaaclab_migration/himloco_lab/core.py",
+      "version": "working tree at 8342fe75b127af1268ab46cbf3120d5b0e4bfbc8; SHA256 e74aae7a619c2bf7ab66572e6d0379c54e26e1a56683b04100186609974e4826",
+      "read_level": "fulltext",
+      "anchors": [
+        "HIMCore.__init__",
+        "_push_robots",
+        "_disturbance_robots"
+      ],
+      "local_path": "/home/qyw/MyHIMLoco/isaaclab_migration/himloco_lab/core.py",
+      "reading_scope": "Selected source methods inspected; not a runtime validation."
+    },
+    {
+      "id": "H-LOGIC",
+      "title": "Legacy observations and rewards",
+      "identifier": "/home/qyw/MyHIMLoco/isaaclab_migration/himloco_lab/logic.py",
+      "version": "working tree at 8342fe75b127af1268ab46cbf3120d5b0e4bfbc8; SHA256 2e0e337f7c8bb676a9b070e88f83cf1ff317551c6349dc2ff5b778fbda9087ba",
+      "read_level": "fulltext",
+      "anchors": [
+        "check_termination",
+        "reset_idx",
+        "compute_observations",
+        "compute_termination_observations",
+        "_post_physics_step_callback",
+        "_compute_torques",
+        "reward functions"
+      ],
+      "local_path": "/home/qyw/MyHIMLoco/isaaclab_migration/himloco_lab/logic.py",
+      "reading_scope": "Selected source methods inspected; not a runtime validation."
+    },
+    {
+      "id": "H-ADAPTER",
+      "title": "Legacy Runner adapter",
+      "identifier": "/home/qyw/MyHIMLoco/isaaclab_migration/himloco_lab/adapter.py",
+      "version": "working tree at 8342fe75b127af1268ab46cbf3120d5b0e4bfbc8; SHA256 2ef4578058daf19c1572bfccf279eb28535c4df2f279a94c2585dae3e0145f36",
+      "read_level": "fulltext",
+      "anchors": [
+        "LegacyRunnerAdapter.step/reset"
+      ],
+      "local_path": "/home/qyw/MyHIMLoco/isaaclab_migration/himloco_lab/adapter.py",
+      "reading_scope": "Selected source methods inspected; not a runtime validation."
+    },
+    {
+      "id": "H-ACTOR",
+      "title": "Local HIM actor",
+      "identifier": "/home/qyw/MyHIMLoco/rsl_rl/rsl_rl/modules/him_actor_critic.py",
+      "version": "working tree at 8342fe75b127af1268ab46cbf3120d5b0e4bfbc8; SHA256 d864e00b30ce01efde3e78b8248055be3fc3f240b1bc2413a4e9e6aed4597964",
+      "read_level": "fulltext",
+      "anchors": [
+        "HIMActorCritic.__init__",
+        "update_distribution",
+        "act_inference"
+      ],
+      "local_path": "/home/qyw/MyHIMLoco/rsl_rl/rsl_rl/modules/him_actor_critic.py",
+      "reading_scope": "Selected source methods inspected; not a runtime validation."
+    },
+    {
+      "id": "H-EST",
+      "title": "Local HIM estimator",
+      "identifier": "/home/qyw/MyHIMLoco/rsl_rl/rsl_rl/modules/him_estimator.py",
+      "version": "working tree at 8342fe75b127af1268ab46cbf3120d5b0e4bfbc8; SHA256 a0cb97016fce9714168f357358dd50d0fb2eaba0017fe37ed5bbc469727024d2",
+      "read_level": "fulltext",
+      "anchors": [
+        "HIMEstimator.forward/encode",
+        "HIMEstimator.update"
+      ],
+      "local_path": "/home/qyw/MyHIMLoco/rsl_rl/rsl_rl/modules/him_estimator.py",
+      "reading_scope": "Selected source methods inspected; not a runtime validation."
+    },
+    {
+      "id": "H-PPO",
+      "title": "Local HIM PPO update",
+      "identifier": "/home/qyw/MyHIMLoco/rsl_rl/rsl_rl/algorithms/him_ppo.py",
+      "version": "working tree at 8342fe75b127af1268ab46cbf3120d5b0e4bfbc8; SHA256 35147cb44cb750afa6e07e915102490af845bfcdadf19c26a7c1a8985147ab52",
+      "read_level": "fulltext",
+      "anchors": [
+        "act",
+        "process_env_step",
+        "update"
+      ],
+      "local_path": "/home/qyw/MyHIMLoco/rsl_rl/rsl_rl/algorithms/him_ppo.py",
+      "reading_scope": "Selected source methods inspected; not a runtime validation."
+    },
+    {
+      "id": "H-RUN",
+      "title": "Local HIM runner",
+      "identifier": "/home/qyw/MyHIMLoco/rsl_rl/rsl_rl/runners/him_on_policy_runner.py",
+      "version": "working tree at 8342fe75b127af1268ab46cbf3120d5b0e4bfbc8; SHA256 a25e8963b4b0c374617817c5baad4099e702b1358641a61475d26fa112b327b6",
+      "read_level": "fulltext",
+      "anchors": [
+        "HIMOnPolicyRunner.learn"
+      ],
+      "local_path": "/home/qyw/MyHIMLoco/rsl_rl/rsl_rl/runners/him_on_policy_runner.py",
+      "reading_scope": "Selected source methods inspected; not a runtime validation."
+    },
+    {
+      "id": "P1",
+      "title": "SuperMimic: Scaling Humanoid Whole-Body Control with One Differentiable World Model",
+      "identifier": "https://arxiv.org/abs/2610.28480v2",
+      "version": "v2, 2026-11-09",
+      "read_level": "fulltext",
+      "anchors": [
+        "Section 3.1–3.3, Equations 1–3",
+        "Appendix A–D, Algorithm A.1, Tables A.4–A.6",
+        "Limitations"
+      ],
+      "reading_scope": "Method and training appendices read through local Zotero indexed full text; response capped, not claiming all 19 pages reviewed.",
+      "zotero_item_key": "EHB9TESP",
+      "citation_key": "liaoSuperMimicScalingHumanoid",
+      "status_note": "arXiv reports CoRL 2026 Oral acceptance; formal volume/pages not independently verified here."
+    }
+  ],
+  "search_log": [
+    {
+      "date": "2026-11-14",
+      "platform": "Local filesystem",
+      "query": "HIMLoco directories and targeted source files",
+      "result": "Found /home/qyw/MyHIMLoco; selected actual Isaac Lab migration and WBLWBL task"
+    },
+    {
+      "date": "2026-11-14",
+      "platform": "Zotero",
+      "query": "tags query SuperMimic; quicksearch SuperMimic",
+      "result": "Tags call returned generic first page (not a reliable filter); item search returned EHB9TESP; read indexed full text"
+    },
+    {
+      "date": "2026-11-14",
+      "platform": "paper-search arXiv",
+      "query": "ti:SuperMimic",
+      "result": "Empty result; does not establish absence. Used already verified arXiv URL and local indexed paper."
+    },
+    {
+      "date": "2026-11-14",
+      "platform": "GitHub via git",
+      "query": "Clone requested official and go2 repositories as submodules",
+      "result": "Both fetched and pinned; ordinary network DNS failed, network-enabled retry succeeded"
+    }
+  ],
+  "read_log": [
+    {
+      "source_id": "O-POL",
+      "anchors": [
+        "BpttPolicyLearner.update/_train_batch",
+        "ActorCriticPolicyLearner._bootstrap/_fit_critic",
+        "gae_returns"
+      ],
+      "level": "fulltext"
+    },
+    {
+      "source_id": "O-WM",
+      "anchors": [
+        "WorldModelLearnerCfg",
+        "_rollout",
+        "_compute_losses",
+        "update_normalization"
+      ],
+      "level": "fulltext"
+    },
+    {
+      "source_id": "O-RUN",
+      "anchors": [
+        "BaseRunnerCfg",
+        "build_world_model",
+        "_step_and_store",
+        "SuperMimicRunner.run"
+      ],
+      "level": "fulltext"
+    },
+    {
+      "source_id": "O-ENV",
+      "anchors": [
+        "_wm_step",
+        "_compute_term_prob",
+        "_synth_sensor",
+        "sample_initial_states"
+      ],
+      "level": "fulltext"
+    },
+    {
+      "source_id": "O-PROJECT",
+      "anchors": [
+        "project.requires-python",
+        "tool.uv.sources"
+      ],
+      "level": "fulltext"
+    },
+    {
+      "source_id": "G-WM",
+      "anchors": [
+        "WorldModel.forward",
+        "WorldModel.loss",
+        "RunningNorm"
+      ],
+      "level": "fulltext"
+    },
+    {
+      "source_id": "G-IM",
+      "anchors": [
+        "Imagination._step",
+        "_rewards",
+        "fall_prob",
+        "rollout",
+        "gae_targets"
+      ],
+      "level": "fulltext"
+    },
+    {
+      "source_id": "G-TRAIN",
+      "anchors": [
+        "TrainCfg",
+        "improve_policy",
+        "run"
+      ],
+      "level": "fulltext"
+    },
+    {
+      "source_id": "G-README",
+      "anchors": [
+        "Interfaces",
+        "How the released policies were trained",
+        "Limitations"
+      ],
+      "level": "fulltext"
+    },
+    {
+      "source_id": "H-MIGRATION",
+      "anchors": [
+        "当前运行环境",
+        "可视化训练与导出"
+      ],
+      "level": "fulltext"
+    },
+    {
+      "source_id": "H-ENTRY",
+      "anchors": [
+        "AppLauncher",
+        "stage/task parsing",
+        "Runner selection"
+      ],
+      "level": "fulltext"
+    },
+    {
+      "source_id": "H-CONFIG",
+      "anchors": [
+        "load_config",
+        "asset_contract"
+      ],
+      "level": "fulltext"
+    },
+    {
+      "source_id": "H-CFG",
+      "anchors": [
+        "WblwblDogV1Cfg",
+        "WblwblDogV1CfgPPO"
+      ],
+      "level": "fulltext"
+    },
+    {
+      "source_id": "H-BASE",
+      "anchors": [
+        "env",
+        "domain_rand",
+        "sim",
+        "normalization"
+      ],
+      "level": "fulltext"
+    },
+    {
+      "source_id": "H-ENV-CFG",
+      "anchors": [
+        "HIMEnvCfg",
+        "make_env_cfg"
+      ],
+      "level": "fulltext"
+    },
+    {
+      "source_id": "H-ENV",
+      "anchors": [
+        "sync_state",
+        "_pre_physics_step",
+        "_apply_action",
+        "_get_dones",
+        "_get_rewards",
+        "_reset_idx",
+        "_get_observations"
+      ],
+      "level": "fulltext"
+    },
+    {
+      "source_id": "H-CORE",
+      "anchors": [
+        "HIMCore.__init__",
+        "_push_robots",
+        "_disturbance_robots"
+      ],
+      "level": "fulltext"
+    },
+    {
+      "source_id": "H-LOGIC",
+      "anchors": [
+        "check_termination",
+        "reset_idx",
+        "compute_observations",
+        "compute_termination_observations",
+        "_post_physics_step_callback",
+        "_compute_torques",
+        "reward functions"
+      ],
+      "level": "fulltext"
+    },
+    {
+      "source_id": "H-ADAPTER",
+      "anchors": [
+        "LegacyRunnerAdapter.step/reset"
+      ],
+      "level": "fulltext"
+    },
+    {
+      "source_id": "H-ACTOR",
+      "anchors": [
+        "HIMActorCritic.__init__",
+        "update_distribution",
+        "act_inference"
+      ],
+      "level": "fulltext"
+    },
+    {
+      "source_id": "H-EST",
+      "anchors": [
+        "HIMEstimator.forward/encode",
+        "HIMEstimator.update"
+      ],
+      "level": "fulltext"
+    },
+    {
+      "source_id": "H-PPO",
+      "anchors": [
+        "act",
+        "process_env_step",
+        "update"
+      ],
+      "level": "fulltext"
+    },
+    {
+      "source_id": "H-RUN",
+      "anchors": [
+        "HIMOnPolicyRunner.learn"
+      ],
+      "level": "fulltext"
+    },
+    {
+      "source_id": "P1",
+      "anchors": [
+        "Section 3.1–3.3, Equations 1–3",
+        "Appendix A–D, Algorithm A.1, Tables A.4–A.6",
+        "Limitations"
+      ],
+      "level": "fulltext"
+    }
+  ],
+  "limitations": [
+    "No new Zotero writes or research scope created. Ledger stored in this repository.",
+    "Local source includes dirty and untracked files; hash manifest is not a portable source archive.",
+    "No simulator/training run; GPU access could not be verified in this tool session."
+  ]
+}

@@ -1,0 +1,809 @@
+{
+  "schema_version": "method-design.v1",
+  "persistence": "local_only",
+  "direction_id": "wblwbl-him-supermimic",
+  "revision": 1,
+  "user_idea": "Create my SuperMimic repo with official and Go2 submodules; explain principles and plan integration into existing HIMLoco; target WBLWBL Dog V1.",
+  "direction_decision": "局部微调：复用Isaac Lab迁移环境和HIM部署结构；新增动力学、观测桥、BPTT训练器。",
+  "outline_changes": [
+    {
+      "from": "Generic quadruped integration",
+      "to": "WBLWBL Dog V1 stage3 normal-height walking",
+      "reason": "User explicitly selected robot"
+    },
+    {
+      "from": "Directly reuse upstream runner",
+      "to": "Independent Python3.11 adapter and trainer",
+      "reason": "Upstream3.13/mjlab and local Lab lifecycle differ"
+    }
+  ],
+  "sources": [
+    {
+      "id": "O-POL",
+      "title": "Official policy learners",
+      "identifier": "https://github.com/HybridRobotics/supermimic/blob/abc124c1bd5976341034668af3d12c087f2f1f55/src/supermimic/learners/policy_learner.py",
+      "version": "abc124c1bd5976341034668af3d12c087f2f1f55",
+      "read_level": "fulltext",
+      "anchors": [
+        "BpttPolicyLearner.update/_train_batch",
+        "ActorCriticPolicyLearner._bootstrap/_fit_critic",
+        "gae_returns"
+      ],
+      "local_path": "third_party/supermimic_official/src/supermimic/learners/policy_learner.py",
+      "reading_scope": "Selected source methods inspected; not a runtime validation."
+    },
+    {
+      "id": "O-WM",
+      "title": "Official supervised world-model learner",
+      "identifier": "https://github.com/HybridRobotics/supermimic/blob/abc124c1bd5976341034668af3d12c087f2f1f55/src/supermimic/learners/wm_learner.py",
+      "version": "abc124c1bd5976341034668af3d12c087f2f1f55",
+      "read_level": "fulltext",
+      "anchors": [
+        "WorldModelLearnerCfg",
+        "_rollout",
+        "_compute_losses",
+        "update_normalization"
+      ],
+      "local_path": "third_party/supermimic_official/src/supermimic/learners/wm_learner.py",
+      "reading_scope": "Selected source methods inspected; not a runtime validation."
+    },
+    {
+      "id": "O-RUN",
+      "title": "Official runner",
+      "identifier": "https://github.com/HybridRobotics/supermimic/blob/abc124c1bd5976341034668af3d12c087f2f1f55/src/supermimic/runners/supermimic_runner.py",
+      "version": "abc124c1bd5976341034668af3d12c087f2f1f55",
+      "read_level": "fulltext",
+      "anchors": [
+        "BaseRunnerCfg",
+        "build_world_model",
+        "_step_and_store",
+        "SuperMimicRunner.run"
+      ],
+      "local_path": "third_party/supermimic_official/src/supermimic/runners/supermimic_runner.py",
+      "reading_scope": "Selected source methods inspected; not a runtime validation."
+    },
+    {
+      "id": "O-ENV",
+      "title": "Official differentiable world-model environment",
+      "identifier": "https://github.com/HybridRobotics/supermimic/blob/abc124c1bd5976341034668af3d12c087f2f1f55/src/supermimic/envs/world_model_env.py",
+      "version": "abc124c1bd5976341034668af3d12c087f2f1f55",
+      "read_level": "fulltext",
+      "anchors": [
+        "_wm_step",
+        "_compute_term_prob",
+        "_synth_sensor",
+        "sample_initial_states"
+      ],
+      "local_path": "third_party/supermimic_official/src/supermimic/envs/world_model_env.py",
+      "reading_scope": "Selected source methods inspected; not a runtime validation."
+    },
+    {
+      "id": "O-PROJECT",
+      "title": "Official dependency specification",
+      "identifier": "https://github.com/HybridRobotics/supermimic/blob/abc124c1bd5976341034668af3d12c087f2f1f55/pyproject.toml",
+      "version": "abc124c1bd5976341034668af3d12c087f2f1f55",
+      "read_level": "fulltext",
+      "anchors": [
+        "project.requires-python",
+        "tool.uv.sources"
+      ],
+      "local_path": "third_party/supermimic_official/pyproject.toml",
+      "reading_scope": "Selected source methods inspected; not a runtime validation."
+    },
+    {
+      "id": "G-WM",
+      "title": "Go2 residual world model",
+      "identifier": "https://github.com/Zhengtianjin/go2-supermimic/blob/d9eee9b3f248e5300e636c433255db2c1c3e086a/go2_supermimic/supermimic/world_model.py",
+      "version": "d9eee9b3f248e5300e636c433255db2c1c3e086a",
+      "read_level": "fulltext",
+      "anchors": [
+        "WorldModel.forward",
+        "WorldModel.loss",
+        "RunningNorm"
+      ],
+      "local_path": "third_party/go2_supermimic/go2_supermimic/supermimic/world_model.py",
+      "reading_scope": "Selected source methods inspected; not a runtime validation."
+    },
+    {
+      "id": "G-IM",
+      "title": "Go2 imagination",
+      "identifier": "https://github.com/Zhengtianjin/go2-supermimic/blob/d9eee9b3f248e5300e636c433255db2c1c3e086a/go2_supermimic/supermimic/imagine.py",
+      "version": "d9eee9b3f248e5300e636c433255db2c1c3e086a",
+      "read_level": "fulltext",
+      "anchors": [
+        "Imagination._step",
+        "_rewards",
+        "fall_prob",
+        "rollout",
+        "gae_targets"
+      ],
+      "local_path": "third_party/go2_supermimic/go2_supermimic/supermimic/imagine.py",
+      "reading_scope": "Selected source methods inspected; not a runtime validation."
+    },
+    {
+      "id": "G-TRAIN",
+      "title": "Go2 alternating trainer",
+      "identifier": "https://github.com/Zhengtianjin/go2-supermimic/blob/d9eee9b3f248e5300e636c433255db2c1c3e086a/go2_supermimic/supermimic/train.py",
+      "version": "d9eee9b3f248e5300e636c433255db2c1c3e086a",
+      "read_level": "fulltext",
+      "anchors": [
+        "TrainCfg",
+        "improve_policy",
+        "run"
+      ],
+      "local_path": "third_party/go2_supermimic/go2_supermimic/supermimic/train.py",
+      "reading_scope": "Selected source methods inspected; not a runtime validation."
+    },
+    {
+      "id": "G-README",
+      "title": "Go2 task and reproduction limitations",
+      "identifier": "https://github.com/Zhengtianjin/go2-supermimic/blob/d9eee9b3f248e5300e636c433255db2c1c3e086a/README.md",
+      "version": "d9eee9b3f248e5300e636c433255db2c1c3e086a",
+      "read_level": "fulltext",
+      "anchors": [
+        "Interfaces",
+        "How the released policies were trained",
+        "Limitations"
+      ],
+      "local_path": "third_party/go2_supermimic/README.md",
+      "reading_scope": "Selected source methods inspected; not a runtime validation."
+    },
+    {
+      "id": "H-MIGRATION",
+      "title": "Local runtime documentation",
+      "identifier": "/home/qyw/MyHIMLoco/isaaclab_migration/README.md",
+      "version": "working tree at 8342fe75b127af1268ab46cbf3120d5b0e4bfbc8; SHA256 8dba30813e97e0ee9b263670ec5b069b8c11e34d4b48471c0486505c565fb319",
+      "read_level": "fulltext",
+      "anchors": [
+        "当前运行环境",
+        "可视化训练与导出"
+      ],
+      "local_path": "/home/qyw/MyHIMLoco/isaaclab_migration/README.md",
+      "reading_scope": "Selected source methods inspected; not a runtime validation."
+    },
+    {
+      "id": "H-ENTRY",
+      "title": "Local training entry",
+      "identifier": "/home/qyw/MyHIMLoco/isaaclab_migration/scripts/train.py",
+      "version": "working tree at 8342fe75b127af1268ab46cbf3120d5b0e4bfbc8; SHA256 02312980ca77c4220f6f5ef8ad567089c06c22920773521ea951525f009cc379",
+      "read_level": "fulltext",
+      "anchors": [
+        "AppLauncher",
+        "stage/task parsing",
+        "Runner selection"
+      ],
+      "local_path": "/home/qyw/MyHIMLoco/isaaclab_migration/scripts/train.py",
+      "reading_scope": "Selected source methods inspected; not a runtime validation."
+    },
+    {
+      "id": "H-CONFIG",
+      "title": "Local configuration loading",
+      "identifier": "/home/qyw/MyHIMLoco/isaaclab_migration/himloco_lab/config.py",
+      "version": "working tree at 8342fe75b127af1268ab46cbf3120d5b0e4bfbc8; SHA256 248430c06a722b745a809baaa1d28abffaf61189e2ebdb232d459e4290df67c1",
+      "read_level": "fulltext",
+      "anchors": [
+        "load_config",
+        "asset_contract"
+      ],
+      "local_path": "/home/qyw/MyHIMLoco/isaaclab_migration/himloco_lab/config.py",
+      "reading_scope": "Selected source methods inspected; not a runtime validation."
+    },
+    {
+      "id": "H-CFG",
+      "title": "WBLWBL walking configuration",
+      "identifier": "/home/qyw/MyHIMLoco/isaaclab_migration/himloco_lab/legacy/wblwbl_dog_v1/wblwbl_dog_v1_config.py",
+      "version": "working tree at 8342fe75b127af1268ab46cbf3120d5b0e4bfbc8; SHA256 2138d9c67b6bb5954dacacb3e1525249026578f542e8323ad25fcf5f95b8b9b0",
+      "read_level": "fulltext",
+      "anchors": [
+        "WblwblDogV1Cfg",
+        "WblwblDogV1CfgPPO"
+      ],
+      "local_path": "/home/qyw/MyHIMLoco/isaaclab_migration/himloco_lab/legacy/wblwbl_dog_v1/wblwbl_dog_v1_config.py",
+      "reading_scope": "Selected source methods inspected; not a runtime validation."
+    },
+    {
+      "id": "H-BASE",
+      "title": "Inherited configuration",
+      "identifier": "/home/qyw/MyHIMLoco/isaaclab_migration/himloco_lab/legacy/base/legged_robot_config.py",
+      "version": "working tree at 8342fe75b127af1268ab46cbf3120d5b0e4bfbc8; SHA256 c11c5f341d5aae1762b9d4ca9cebbf0bed5168ef08ee6d92399f7ca4c398abbe",
+      "read_level": "fulltext",
+      "anchors": [
+        "env",
+        "domain_rand",
+        "sim",
+        "normalization"
+      ],
+      "local_path": "/home/qyw/MyHIMLoco/isaaclab_migration/himloco_lab/legacy/base/legged_robot_config.py",
+      "reading_scope": "Selected source methods inspected; not a runtime validation."
+    },
+    {
+      "id": "H-ENV-CFG",
+      "title": "Isaac Lab environment configuration",
+      "identifier": "/home/qyw/MyHIMLoco/isaaclab_migration/himloco_lab/env_cfg.py",
+      "version": "working tree at 8342fe75b127af1268ab46cbf3120d5b0e4bfbc8; SHA256 42b7130506dbbe7d14066ab0cf5313887d8cb0a707f1059be8695961cf12e182",
+      "read_level": "fulltext",
+      "anchors": [
+        "HIMEnvCfg",
+        "make_env_cfg"
+      ],
+      "local_path": "/home/qyw/MyHIMLoco/isaaclab_migration/himloco_lab/env_cfg.py",
+      "reading_scope": "Selected source methods inspected; not a runtime validation."
+    },
+    {
+      "id": "H-ENV",
+      "title": "Lab lifecycle and actuation",
+      "identifier": "/home/qyw/MyHIMLoco/isaaclab_migration/himloco_lab/env.py",
+      "version": "working tree at 8342fe75b127af1268ab46cbf3120d5b0e4bfbc8; SHA256 881269fdbc90559416da3a17a24d67086fd7cb1f61b1e23dcf923922daa55218",
+      "read_level": "fulltext",
+      "anchors": [
+        "sync_state",
+        "_pre_physics_step",
+        "_apply_action",
+        "_get_dones",
+        "_get_rewards",
+        "_reset_idx",
+        "_get_observations"
+      ],
+      "local_path": "/home/qyw/MyHIMLoco/isaaclab_migration/himloco_lab/env.py",
+      "reading_scope": "Selected source methods inspected; not a runtime validation."
+    },
+    {
+      "id": "H-CORE",
+      "title": "Core state and external events",
+      "identifier": "/home/qyw/MyHIMLoco/isaaclab_migration/himloco_lab/core.py",
+      "version": "working tree at 8342fe75b127af1268ab46cbf3120d5b0e4bfbc8; SHA256 e74aae7a619c2bf7ab66572e6d0379c54e26e1a56683b04100186609974e4826",
+      "read_level": "fulltext",
+      "anchors": [
+        "HIMCore.__init__",
+        "_push_robots",
+        "_disturbance_robots"
+      ],
+      "local_path": "/home/qyw/MyHIMLoco/isaaclab_migration/himloco_lab/core.py",
+      "reading_scope": "Selected source methods inspected; not a runtime validation."
+    },
+    {
+      "id": "H-LOGIC",
+      "title": "Legacy observations and rewards",
+      "identifier": "/home/qyw/MyHIMLoco/isaaclab_migration/himloco_lab/logic.py",
+      "version": "working tree at 8342fe75b127af1268ab46cbf3120d5b0e4bfbc8; SHA256 2e0e337f7c8bb676a9b070e88f83cf1ff317551c6349dc2ff5b778fbda9087ba",
+      "read_level": "fulltext",
+      "anchors": [
+        "check_termination",
+        "reset_idx",
+        "compute_observations",
+        "compute_termination_observations",
+        "_post_physics_step_callback",
+        "_compute_torques",
+        "reward functions"
+      ],
+      "local_path": "/home/qyw/MyHIMLoco/isaaclab_migration/himloco_lab/logic.py",
+      "reading_scope": "Selected source methods inspected; not a runtime validation."
+    },
+    {
+      "id": "H-ADAPTER",
+      "title": "Legacy Runner adapter",
+      "identifier": "/home/qyw/MyHIMLoco/isaaclab_migration/himloco_lab/adapter.py",
+      "version": "working tree at 8342fe75b127af1268ab46cbf3120d5b0e4bfbc8; SHA256 2ef4578058daf19c1572bfccf279eb28535c4df2f279a94c2585dae3e0145f36",
+      "read_level": "fulltext",
+      "anchors": [
+        "LegacyRunnerAdapter.step/reset"
+      ],
+      "local_path": "/home/qyw/MyHIMLoco/isaaclab_migration/himloco_lab/adapter.py",
+      "reading_scope": "Selected source methods inspected; not a runtime validation."
+    },
+    {
+      "id": "H-ACTOR",
+      "title": "Local HIM actor",
+      "identifier": "/home/qyw/MyHIMLoco/rsl_rl/rsl_rl/modules/him_actor_critic.py",
+      "version": "working tree at 8342fe75b127af1268ab46cbf3120d5b0e4bfbc8; SHA256 d864e00b30ce01efde3e78b8248055be3fc3f240b1bc2413a4e9e6aed4597964",
+      "read_level": "fulltext",
+      "anchors": [
+        "HIMActorCritic.__init__",
+        "update_distribution",
+        "act_inference"
+      ],
+      "local_path": "/home/qyw/MyHIMLoco/rsl_rl/rsl_rl/modules/him_actor_critic.py",
+      "reading_scope": "Selected source methods inspected; not a runtime validation."
+    },
+    {
+      "id": "H-EST",
+      "title": "Local HIM estimator",
+      "identifier": "/home/qyw/MyHIMLoco/rsl_rl/rsl_rl/modules/him_estimator.py",
+      "version": "working tree at 8342fe75b127af1268ab46cbf3120d5b0e4bfbc8; SHA256 a0cb97016fce9714168f357358dd50d0fb2eaba0017fe37ed5bbc469727024d2",
+      "read_level": "fulltext",
+      "anchors": [
+        "HIMEstimator.forward/encode",
+        "HIMEstimator.update"
+      ],
+      "local_path": "/home/qyw/MyHIMLoco/rsl_rl/rsl_rl/modules/him_estimator.py",
+      "reading_scope": "Selected source methods inspected; not a runtime validation."
+    },
+    {
+      "id": "H-PPO",
+      "title": "Local HIM PPO update",
+      "identifier": "/home/qyw/MyHIMLoco/rsl_rl/rsl_rl/algorithms/him_ppo.py",
+      "version": "working tree at 8342fe75b127af1268ab46cbf3120d5b0e4bfbc8; SHA256 35147cb44cb750afa6e07e915102490af845bfcdadf19c26a7c1a8985147ab52",
+      "read_level": "fulltext",
+      "anchors": [
+        "act",
+        "process_env_step",
+        "update"
+      ],
+      "local_path": "/home/qyw/MyHIMLoco/rsl_rl/rsl_rl/algorithms/him_ppo.py",
+      "reading_scope": "Selected source methods inspected; not a runtime validation."
+    },
+    {
+      "id": "H-RUN",
+      "title": "Local HIM runner",
+      "identifier": "/home/qyw/MyHIMLoco/rsl_rl/rsl_rl/runners/him_on_policy_runner.py",
+      "version": "working tree at 8342fe75b127af1268ab46cbf3120d5b0e4bfbc8; SHA256 a25e8963b4b0c374617817c5baad4099e702b1358641a61475d26fa112b327b6",
+      "read_level": "fulltext",
+      "anchors": [
+        "HIMOnPolicyRunner.learn"
+      ],
+      "local_path": "/home/qyw/MyHIMLoco/rsl_rl/rsl_rl/runners/him_on_policy_runner.py",
+      "reading_scope": "Selected source methods inspected; not a runtime validation."
+    },
+    {
+      "id": "P1",
+      "title": "SuperMimic: Scaling Humanoid Whole-Body Control with One Differentiable World Model",
+      "identifier": "https://arxiv.org/abs/2610.28480v2",
+      "version": "v2, 2026-11-09",
+      "read_level": "fulltext",
+      "anchors": [
+        "Section 3.1–3.3, Equations 1–3",
+        "Appendix A–D, Algorithm A.1, Tables A.4–A.6",
+        "Limitations"
+      ],
+      "reading_scope": "Method and training appendices read through local Zotero indexed full text; response capped, not claiming all 19 pages reviewed.",
+      "zotero_item_key": "EHB9TESP",
+      "citation_key": "liaoSuperMimicScalingHumanoid",
+      "status_note": "arXiv reports CoRL 2026 Oral acceptance; formal volume/pages not independently verified here."
+    }
+  ],
+  "schemes": [
+    {
+      "id": "A",
+      "title": "HIM Actor direct BPTT",
+      "status": "provisional",
+      "mechanism": "Directly update HIM Actor through learned dynamics while estimator uses real-data auxiliary losses",
+      "difference": "Changes the main Actor optimization without residual or distillation",
+      "algorithm": {
+        "details": "method-design.md",
+        "state_dim": 37,
+        "actor_history_dim": 270,
+        "action_dim": 12
+      },
+      "inference": {
+        "interface": "history270→action12, 50Hz; history managed with original reset convention",
+        "retained_modules": "HIM encoder+Actor"
+      },
+      "evaluation": "E0–E7 in method-design.md; 3 seeds, matched reward/randomization; physical performance determines quality",
+      "budget": "Measure collection/model/actor/value/estimator timings and peak memory; no verified GPU-hour estimate",
+      "risks": [
+        "Model exploitation and contact gradient bias",
+        "State/observation/action timing mismatch",
+        "Unverified GPU runtime and local dirty-source reproducibility"
+      ],
+      "steps": [
+        {
+          "id": "A0",
+          "stage": "baseline",
+          "operation": "Create untouched and matched controlled-flat HIM-PPO baseline",
+          "inputs": "WBLWBL local config and runtime",
+          "outputs": "config hashes, baseline metrics, walltime",
+          "objective": "Existing PPO clipped objective and HIM auxiliary losses",
+          "updates": "Existing PPO/estimator; no WM",
+          "initialization": "From scratch or separately accounted shared checkpoint",
+          "schedule": "3 seeds for final comparison; small launch first",
+          "validation": "50Hz, 270→12, joint map and GPU access verified",
+          "provenance": "adapted",
+          "source_refs": [
+            {
+              "source_id": "H-ENTRY",
+              "locator": "Runner selection",
+              "supports": "Existing launch flow",
+              "transfer": "Use independent new-repo launcher"
+            },
+            {
+              "source_id": "H-CFG",
+              "locator": "WblwblDogV1CfgPPO",
+              "supports": "Baseline task and hyperparameters",
+              "transfer": "Add separately named matched core_reward profile"
+            }
+          ],
+          "gap": "Current GPU and checkpoint quality not verified",
+          "test": "Run fixed physical evaluation; do not treat config parsing as runtime proof",
+          "status": "planned"
+        },
+        {
+          "id": "A1",
+          "stage": "data",
+          "operation": "Capture pre-reset transitions in a subclass and build episode-aware replay",
+          "inputs": "state37, actions, history270, context, termination events",
+          "outputs": "K actions / K+1 states, actual history seeds",
+          "objective": "No learning objective; data contract correctness",
+          "updates": "No model optimizer",
+          "initialization": "Empty replay; existing environment source read-only",
+          "schedule": "After A0; include partial resets, timeouts, command events",
+          "validation": "No reset jumps mislabeled as dynamics; event and action timestamps explicit",
+          "provenance": "adapted",
+          "source_refs": [
+            {
+              "source_id": "H-ENV",
+              "locator": "_get_rewards/_reset_idx",
+              "supports": "Available pre-reset hook",
+              "transfer": "Capture full state in new subclass"
+            },
+            {
+              "source_id": "O-RUN",
+              "locator": "_step_and_store",
+              "supports": "Store executed actions and boundaries",
+              "transfer": "Adapt to Lab lifecycle"
+            }
+          ],
+          "gap": "Actual event timing needs runtime check",
+          "test": "Replay terminal cases and compare pre/post state snapshots",
+          "status": "planned"
+        },
+        {
+          "id": "A2",
+          "stage": "bridge",
+          "operation": "Rebuild observations, commands and core rewards in pure Torch",
+          "inputs": "Predicted state, two prior actions, command clock",
+          "outputs": "history270, reward vector, command_next",
+          "objective": "No learning objective; numerical parity with original task",
+          "updates": "No optimizer",
+          "initialization": "Use runtime RobotSpec and exact joint names",
+          "schedule": "After A1; first noise-off then matched-noise checks",
+          "validation": "obs maxabs<=1e-5, rewards abs<=1e-4 or rel<=1e-3",
+          "provenance": "adapted",
+          "source_refs": [
+            {
+              "source_id": "H-LOGIC",
+              "locator": "compute_observations and reward functions",
+              "supports": "Task semantics",
+              "transfer": "Drop two terms only in matched core_reward experiment"
+            },
+            {
+              "source_id": "O-ENV",
+              "locator": "_synth_sensor",
+              "supports": "Observation reconstruction in imagination",
+              "transfer": "Use HIM 6-frame history"
+            }
+          ],
+          "gap": "Full foot/torque terms deferred to A6",
+          "test": "Compare at same recorded physical states, not just imagined reward",
+          "status": "planned"
+        },
+        {
+          "id": "A3",
+          "stage": "world_model",
+          "operation": "Train normalized autoregressive dynamics on real-sim windows",
+          "inputs": "Episode-disjoint replay windows and context",
+          "outputs": "dynamics weights, normalization, held-out report",
+          "objective": "L_WM=sum mask*weighted state error; optional auxiliary BCE/torque loss separately weighted",
+          "updates": "Update WM only; no Actor gradient",
+          "initialization": "Random MLP512×3; normalization from training split only",
+          "schedule": "K=8 transitions (paper); batch512, lr2e-4, updates2 (local starting proposals)",
+          "validation": "8-step motion error improves>=20% over persistence; per-channel thresholds in plan",
+          "provenance": "adapted",
+          "source_refs": [
+            {
+              "source_id": "P1",
+              "locator": "Section3.2 Eq1",
+              "supports": "Autoregressive supervised WM",
+              "transfer": "WBLWBL state and analytic reward"
+            },
+            {
+              "source_id": "G-WM",
+              "locator": "WorldModel.loss",
+              "supports": "Normalized residual prediction",
+              "transfer": "Use new robot schema"
+            }
+          ],
+          "gap": "Prediction accuracy does not prove useful action derivatives",
+          "test": "Held-out 1/8/16/32-step error plus later physical policy evaluation",
+          "status": "planned"
+        },
+        {
+          "id": "A4",
+          "stage": "gradient",
+          "operation": "Add differentiable HIM forward and independently warmed Critic",
+          "inputs": "Existing encoder/actor weights, real histories, trained WM",
+          "outputs": "Gradient-preserving wrapper and value model",
+          "objective": "HIM original velocity MSE+swapped contrastive loss on real data; value MSE on fixed TD(lambda) targets",
+          "updates": "Estimator auxiliary update separately; freeze estimator/WM during Actor path; Critic independent",
+          "initialization": "Reuse compatible actor/encoder weights; new Critic; no old PPO optimizer import",
+          "schedule": "Before Actor training; value warmup on frozen-policy imagination until finite calibrated targets",
+          "validation": "Forward<=1e-6 difference; estimator-input gradients nonzero; frozen parameters unchanged",
+          "provenance": "adapted",
+          "source_refs": [
+            {
+              "source_id": "H-EST",
+              "locator": "forward/encode/update",
+              "supports": "Detach locations and auxiliary losses",
+              "transfer": "Bypass detach only in new forward"
+            },
+            {
+              "source_id": "O-POL",
+              "locator": "_bootstrap/_fit_critic",
+              "supports": "Frozen value input gradients and value fit",
+              "transfer": "History-conditioned WBLWBL value"
+            }
+          ],
+          "gap": "Critic calibration and hidden-state sufficiency must be measured",
+          "test": "Path-specific gradient probes, not total-history gradient only",
+          "status": "planned"
+        },
+        {
+          "id": "A5",
+          "stage": "online",
+          "operation": "Alternate collection, model fit, HIM auxiliary learning, Actor BPTT and Critic regression",
+          "inputs": "Replay seeds, history, command, WM and policies",
+          "outputs": "Physical-evaluated checkpoints and timings",
+          "objective": "-J with discounted soft-survival reward+terminal value; Critic TD(lambda) MSE",
+          "updates": "Actor only during BPTT; freeze WM/estimator/value; separate steps for each module",
+          "initialization": "A3 model and A4 wrapper; Actor random or shared checkpoint logged",
+          "schedule": "H8→16→32, imag_batch512, actor_lr5e-5, gamma.99 lambda.95; all local scaling proposals",
+          "validation": "No NaN; physical performance improves alongside imagined objective; track model gap",
+          "provenance": "adapted",
+          "source_refs": [
+            {
+              "source_id": "P1",
+              "locator": "Eq2–3 and Algorithm A.1",
+              "supports": "Short-horizon analytic policy update",
+              "transfer": "Velocity control with HIM memory"
+            },
+            {
+              "source_id": "G-IM",
+              "locator": "rollout",
+              "supports": "Closed-loop observation reconstruction",
+              "transfer": "Replace target generator with command logic"
+            }
+          ],
+          "gap": "No prior WBLWBL acceleration result",
+          "test": "E1 vs E2 matched task and compute; halt actor if physical failures rise repeatedly",
+          "status": "planned"
+        },
+        {
+          "id": "A6",
+          "stage": "full_task",
+          "operation": "Restore foot/power rewards, delay, external events and later terrain",
+          "inputs": "Validated controlled-flat trainer and full local task specification",
+          "outputs": "full_reward_v1 and randomized trainer",
+          "objective": "Same Actor J plus calibrated auxiliary WM heads if used",
+          "updates": "Same optimizer isolation as A5",
+          "initialization": "A5 checkpoint; rewarm WM after changed state/context distribution",
+          "schedule": "One factor at a time; fully matched PPO controls",
+          "validation": "Reward component parity, event conditioning and held-out physical robustness",
+          "provenance": "proposed",
+          "source_refs": [],
+          "gap": "Combination of last-substep torque head, contact model and random event closure unverified",
+          "test": "Restore each term separately and compare physical/imagined rewards; matched full-task E0/E6",
+          "status": "planned"
+        },
+        {
+          "id": "A7",
+          "stage": "evaluation_export",
+          "operation": "Run fixed multi-seed evaluation and export HIM policy",
+          "inputs": "Checkpoints, evaluation scenarios, baseline thresholds",
+          "outputs": "time-to-quality table, policy.pt, schema metadata",
+          "objective": "No training objective for export; compare equal-quality total cost",
+          "updates": "No updates during evaluation",
+          "initialization": "Use locked best-validation checkpoint; final test held out",
+          "schedule": "3 seeds; include pretraining/compilation/evaluation cost separately",
+          "validation": "Forward export<=1e-5; no privilege leak; quality gate and timing confidence recorded",
+          "provenance": "proposed",
+          "source_refs": [],
+          "gap": "Speedup and sim-to-real performance are unknown",
+          "test": "E0–E6; deployment latency measured; hardware run outside this initial plan",
+          "status": "planned"
+        }
+      ]
+    },
+    {
+      "id": "B",
+      "title": "Frozen HIM plus bounded residual",
+      "status": "provisional",
+      "mechanism": "Learn only an additive bounded residual by BPTT over frozen base policy",
+      "difference": "Constrains the optimized action subspace; two networks deploy",
+      "algorithm": {
+        "details": "method-design.md",
+        "state_dim": 37,
+        "actor_history_dim": 270,
+        "action_dim": 12
+      },
+      "inference": {
+        "interface": "history270→action12, 50Hz; history managed with original reset convention",
+        "retained_modules": "frozen HIM+residual"
+      },
+      "evaluation": "E0–E7 in method-design.md; 3 seeds, matched reward/randomization; physical performance determines quality",
+      "budget": "Measure collection/model/actor/value/estimator timings and peak memory; no verified GPU-hour estimate",
+      "risks": [
+        "Model exploitation and contact gradient bias",
+        "State/observation/action timing mismatch",
+        "Unverified GPU runtime and local dirty-source reproducibility"
+      ],
+      "steps": [
+        {
+          "id": "B0",
+          "stage": "base",
+          "operation": "Evaluate and freeze a reliable HIM checkpoint",
+          "inputs": "WBLWBL environment and A1–A3 contracts",
+          "outputs": "Versioned module/checkpoint and evaluation report",
+          "objective": "No new learning; verify base quality",
+          "updates": "Freeze base actor and estimator",
+          "initialization": "Existing checkpoint, cost logged",
+          "schedule": "See method-design.md alternative section; proposed parameters, after A1–A3 validation",
+          "validation": "Baseline passes fixed physical evaluation",
+          "provenance": "proposed",
+          "source_refs": [],
+          "gap": "B combination has no verified WBLWBL result",
+          "test": "Matched physical evaluation, policy information audit and total-cost comparison",
+          "status": "planned"
+        },
+        {
+          "id": "B1",
+          "stage": "model",
+          "operation": "Collect base+perturbation data and train shared WM",
+          "inputs": "WBLWBL environment and A1–A3 contracts",
+          "outputs": "Versioned module/checkpoint and evaluation report",
+          "objective": "A3 autoregressive L_WM",
+          "updates": "Update WM only",
+          "initialization": "Random model or compatible A3 model",
+          "schedule": "See method-design.md alternative section; proposed parameters, after A1–A3 validation",
+          "validation": "A3 model gates pass",
+          "provenance": "proposed",
+          "source_refs": [],
+          "gap": "B combination has no verified WBLWBL result",
+          "test": "Matched physical evaluation, policy information audit and total-cost comparison",
+          "status": "planned"
+        },
+        {
+          "id": "B2",
+          "stage": "residual",
+          "operation": "Optimize a bounded residual through WM",
+          "inputs": "WBLWBL environment and A1–A3 contracts",
+          "outputs": "Versioned module/checkpoint and evaluation report",
+          "objective": "-J+beta||delta||²; a=clip(a0+alpha*tanh(delta))",
+          "updates": "Residual only; base weights frozen, preserve input Jacobian",
+          "initialization": "Zero-output residual; alpha .05, beta .001 proposed",
+          "schedule": "See method-design.md alternative section; proposed parameters, after A1–A3 validation",
+          "validation": "Compare residual PPO/BPTT; report saturation and physical falls",
+          "provenance": "proposed",
+          "source_refs": [],
+          "gap": "B combination has no verified WBLWBL result",
+          "test": "Matched physical evaluation, policy information audit and total-cost comparison",
+          "status": "planned"
+        },
+        {
+          "id": "B3",
+          "stage": "deploy",
+          "operation": "Evaluate and export combined base+residual graph",
+          "inputs": "WBLWBL environment and A1–A3 contracts",
+          "outputs": "Versioned module/checkpoint and evaluation report",
+          "objective": "No updates",
+          "updates": "Frozen inference",
+          "initialization": "Selected validation checkpoint",
+          "schedule": "See method-design.md alternative section; proposed parameters, after A1–A3 validation",
+          "validation": "Input270/output12; combined latency and 3-seed physical quality",
+          "provenance": "proposed",
+          "source_refs": [],
+          "gap": "B combination has no verified WBLWBL result",
+          "test": "Matched physical evaluation, policy information audit and total-cost comparison",
+          "status": "planned"
+        }
+      ]
+    },
+    {
+      "id": "C",
+      "title": "Privileged BPTT teacher and HIM student",
+      "status": "provisional",
+      "mechanism": "Optimize privileged teacher then distill onto student-visited physical states",
+      "difference": "Student does not receive direct model BPTT updates; information-gap and two-stage costs",
+      "algorithm": {
+        "details": "method-design.md",
+        "state_dim": 37,
+        "actor_history_dim": 270,
+        "action_dim": 12
+      },
+      "inference": {
+        "interface": "history270→action12, 50Hz; history managed with original reset convention",
+        "retained_modules": "HIM student"
+      },
+      "evaluation": "E0–E7 in method-design.md; 3 seeds, matched reward/randomization; physical performance determines quality",
+      "budget": "Measure collection/model/actor/value/estimator timings and peak memory; no verified GPU-hour estimate",
+      "risks": [
+        "Model exploitation and contact gradient bias",
+        "State/observation/action timing mismatch",
+        "Unverified GPU runtime and local dirty-source reproducibility"
+      ],
+      "steps": [
+        {
+          "id": "C0",
+          "stage": "model",
+          "operation": "Train physical WM on real-sim data",
+          "inputs": "WBLWBL environment and A1–A3 contracts",
+          "outputs": "Versioned module/checkpoint and evaluation report",
+          "objective": "A3 L_WM",
+          "updates": "WM only",
+          "initialization": "A3 initialization",
+          "schedule": "See method-design.md alternative section; proposed parameters, after A1–A3 validation",
+          "validation": "A3 gates",
+          "provenance": "proposed",
+          "source_refs": [],
+          "gap": "C combination has no verified WBLWBL result",
+          "test": "Matched physical evaluation, policy information audit and total-cost comparison",
+          "status": "planned"
+        },
+        {
+          "id": "C1",
+          "stage": "teacher",
+          "operation": "Train privileged teacher by BPTT",
+          "inputs": "WBLWBL environment and A1–A3 contracts",
+          "outputs": "Versioned module/checkpoint and evaluation report",
+          "objective": "-J on predicted state",
+          "updates": "Teacher only; WM and Critic frozen during Actor update",
+          "initialization": "New teacher; lr5e-5 H8 proposed",
+          "schedule": "See method-design.md alternative section; proposed parameters, after A1–A3 validation",
+          "validation": "Teacher improvement verified in physical simulation",
+          "provenance": "proposed",
+          "source_refs": [],
+          "gap": "C combination has no verified WBLWBL result",
+          "test": "Matched physical evaluation, policy information audit and total-cost comparison",
+          "status": "planned"
+        },
+        {
+          "id": "C2",
+          "stage": "student",
+          "operation": "Aggregate labels at student-visited real-sim states",
+          "inputs": "WBLWBL environment and A1–A3 contracts",
+          "outputs": "Versioned module/checkpoint and evaluation report",
+          "objective": "L_BC=||pi_HIM(h)-a_teacher||²; original HIM auxiliary loss separately",
+          "updates": "Actor BC step; estimator real-data auxiliary step; frozen teacher",
+          "initialization": "Existing or random HIM student, recorded explicitly",
+          "schedule": "See method-design.md alternative section; proposed parameters, after A1–A3 validation",
+          "validation": "No hidden privileged input; student-teacher gap measured",
+          "provenance": "proposed",
+          "source_refs": [],
+          "gap": "C combination has no verified WBLWBL result",
+          "test": "Matched physical evaluation, policy information audit and total-cost comparison",
+          "status": "planned"
+        },
+        {
+          "id": "C3",
+          "stage": "finetune_export",
+          "operation": "Optional real PPO refinement and export student",
+          "inputs": "WBLWBL environment and A1–A3 contracts",
+          "outputs": "Versioned module/checkpoint and evaluation report",
+          "objective": "Original PPO if refinement enabled",
+          "updates": "HIM/PPO only in refinement; no teacher update",
+          "initialization": "Distilled student",
+          "schedule": "See method-design.md alternative section; proposed parameters, after A1–A3 validation",
+          "validation": "Teacher+student+refinement costs included; deployed student evaluated",
+          "provenance": "proposed",
+          "source_refs": [],
+          "gap": "C combination has no verified WBLWBL result",
+          "test": "Matched physical evaluation, policy information audit and total-cost comparison",
+          "status": "planned"
+        }
+      ]
+    }
+  ],
+  "selected_scheme_id": null,
+  "recommended_scheme_id": "A",
+  "selection_reason": "A is a recommendation only; user selected the robot, not all algorithm tradeoffs.",
+  "unresolved": [
+    "Working-tree modifications must be preserved/versioned before portable reproduction",
+    "No WBLWBL checkpoint has been evaluated in this task",
+    "Current GPU/runtime availability not confirmed",
+    "Contact/last-substep torque proxy and policy-gradient utility require experiments"
+  ],
+  "search_log_file": "sources.json",
+  "read_log_file": "sources.json",
+  "review": {
+    "source_facts": "Reviewed named code methods and paper method sections by primary agent",
+    "feasibility": "Proposed integration; no claim of measured speedup or successful training"
+  }
+}
