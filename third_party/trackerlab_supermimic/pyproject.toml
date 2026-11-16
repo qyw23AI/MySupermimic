@@ -1,0 +1,35 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "trackerlab-supermimic"
+version = "0.2.0"
+description = "TrackerLab's multi-robot SuperMimic training workflow with IsaacLab and MuJoCo-Warp"
+readme = "README.md"
+requires-python = ">=3.11,<3.12"
+license = {file = "LICENSE"}
+dependencies = [
+  "torch==2.7.0",
+  "numpy==1.26.0",
+  "mujoco==3.3.7",
+  "scipy==1.15.3",
+]
+
+[project.optional-dependencies]
+test = ["pytest>=8.3,<9", "bvh==0.3"]
+render = ["matplotlib==3.10.3", "pillow==11.3.0", "imageio-ffmpeg==0.6.0", "opencv-python-headless==4.11.0.86"]
+
+[project.urls]
+Repository = "https://github.com/ZouYan93/trackerlab-supermimic"
+
+[tool.setuptools.packages.find]
+where = ["source/trackerLab", "source/trackerTask"]
+namespaces = false
+
+[tool.setuptools.package-data]
+"trackerLab.algorithms.supermimic" = ["LICENSE.upstream"]
+"trackerTask.supermimic" = ["**/*.json"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

@@ -1,18 +1,6 @@
-[submodule "third_party/supermimic_official"]
-	path = third_party/supermimic_official
-	url = https://github.com/HybridRobotics/supermimic.git
-[submodule "third_party/go2_supermimic"]
-	path = third_party/go2_supermimic
-	url = https://github.com/Zhengtianjin/go2-supermimic.git
 [submodule "third_party/MyHIMLoco"]
 	path = third_party/MyHIMLoco
 	url = https://github.com/qyw23AI/MyHIMLoco.git
-[submodule "third_party/trackerlab_supermimic"]
-	path = third_party/trackerlab_supermimic
-	url = https://github.com/Renforce-Dynamics/trackerlab-supermimic.git
 [submodule "third_party/AMP"]
 	path = third_party/AMP
 	url = https://github.com/qyw23AI/MyAMP.git
-[submodule "third_party/supermimic_quadruped"]
-	path = third_party/supermimic_quadruped
-	url = https://github.com/Houserz/supermimic-quadruped.git

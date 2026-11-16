@@ -1,0 +1,110 @@
+# G1 WASD Stealth Locomotion
+
+## Control Contract
+
+The exported policy accepts the existing body-frame velocity and yaw-rate
+goals. WASD maps to nine trained modes:
+
+| Keys | Mode | Target `(vx, vy, yaw rate)` |
+| --- | --- | --- |
+| W | Forward | `(0.25, 0, 0)` |
+| S | Backward | `(-0.20, 0, 0)` |
+| A / D | Turn in place | `(0, 0, +/-0.55)` |
+| W+A / W+D | Forward arc | `(0.25, 0, +/-0.45)` |
+| S+A / S+D | Reverse arc | `(-0.20, 0, +/-0.45)` |
+| No keys | Stealth idle | `(0, 0, 0)` |
+
+Releasing movement keys changes only the velocity and yaw-rate goals. The
+clearance goal remains crouched, and the entry clock continues to its completed
+value. The stealth policy has no stand-up command. An external state machine
+selects the standing policy when standing is requested.
+
+The command envelope, exported metadata, trainer, evaluator, and runtime mode
+table share the same versioned mapping. Opposing translation keys and opposing
+turn keys cancel independently.
+
+## AMP Experts
+
+`data/style-research-20261107/wasd-natural-audit-v1/` is a local-only,
+immutable G1 derivative. Its three equal-length Aiming2 clips retain original
+chronology:
+
+- Subject 5 `[2830, 2891)`: low-profile forward motion.
+- Subject 5 `[3620, 3681)`: low-profile backward motion.
+- Subject 3 `[560, 621)`: low-motion crouched idle.
+
+The AMP pool samples one third of its complete history windows from each
+training clip. The original Aiming1 test bytes are inherited unchanged from
+the prior verified pool. The expert preparation report distinguishes source
+kinematic screening from physical policy validation.
+
+Training uses `postural_end_effectors` features, including root-local tracked
+body positions and the G1 wrist-yaw link rotations. The training objective
+learns source-driven arms from these clips; it does not apply the previous
+static upper-body lock. LAFAN's Hand End Sites contain no measured fingers or
+thumb, and its zero-length endpoints leave palm roll unobserved. Wrist
+orientation remains a documented retarget convention and fixed robot-hand
+geometry remains a visual limitation.
+
+All 303 raw retargeted training frames passed the local geometry screen:
+no physical self-penetration or negative audited hand/body mesh distance.
+The largest normalized arm target is 14.794, within the existing action
+limit of 20. This checks expert poses, not learned rollout trajectories.
+
+## Training And Review
+
+`configs/command_stealth_wasd_natural.json` sets a 20,000-iteration run with a
+10,000-iteration G1 stealth actor warm start, 1,024 MuJoCo-Warp worlds,
+physical domain randomization, grounded standing starts, a 4.84-second
+velocity/clearance entry ramp, G1 sole-slip regularization, and command holds
+up to 20 seconds. AMP experts are training-only; the exported policy does not
+load motion files, the discriminator, or the world model at runtime.
+
+Training resets mix 50% grounded standing with 50% eligible expert states.
+Evaluation always starts grounded without reference initialization. The actor
+learning rate is 2e-5 while world-model and critic rates remain 2e-4.
+
+The initial 1,000-iteration adaptation is reviewed before a longer continuation.
+The locomotion actor transfers with its 14 arm decoder output rows reset to
+zero: those rows were hidden by the prior fixed-arm controller and produced
+large untrained targets when released. Leg and waist rows remain unchanged.
+Actor observation and goal means/variances are retained, with their prior
+counts capped at one million to permit adaptation to reverse and idle commands.
+The world model, critic, optimizers, and AMP discriminator start fresh.
+Learned arm targets are smoothly limited to 1.2 rad/s and 3 rad/s^2 in physical
+joint-angle units. The rate and acceleration maps use bounded arctan responses
+with braking near action limits, retaining actor gradients across the imagined
+horizon. The same limiter is embedded in physical collection, model rollouts,
+evaluation, and the exported policy; it has no pose reference.
+Old checkpoints retain limiter version 1 when their metadata omits a response
+version. New models record version 2, so changes to target filtering cannot
+silently alter old evaluations or exports.
+Review each saved milestone using fixed-mode and nine-mode-cycle evaluation.
+The command-switch trajectory exercises forward, release-to-idle, backward,
+forward arcs, and release-to-idle without resetting the entry clock. Render
+first attempts from every mode and inspect balance, self-contact, sole slip,
+entry continuity, idle posture, and upper-body style before selecting a
+deployment checkpoint.
+
+The runner accepts an explicit list of milestones:
+
+```sh
+bash scripts/rls/supermimic/run_g1_wasd.sh \
+  "$PYTHON" "$RUN" "$POOL" "$INITIAL_CHECKPOINT" 1000
+
+# After reviewing the first adaptation:
+bash scripts/rls/supermimic/run_g1_wasd.sh \
+  "$PYTHON" "$RUN" "$POOL" "$INITIAL_CHECKPOINT" 4000 10000 20000
+```
+
+`command_stealth_wasd_smooth.json` defines the next adaptation. It keeps
+learned arm decoder rows, selects reward version 2, and uses the original
+0.04 sole-slip weight. Moving-velocity and yaw reward widths are 0.30 m/s and
+0.40 rad/s; success tolerances remain 0.15 m/s (0.10 for stationary commands)
+and 0.20 rad/s. Reward maxima are unchanged. Set `WASD_CONFIG` to select this
+preset in the runner, and use a new run directory with a warm start.
+
+The target 2.5 iterations per second is measured after compilation with the
+trainer's completed-update speed probe. The historical tele result used
+different hardware and workload, so the measured rate and comparison need to
+remain explicit in each run report.

@@ -1,0 +1,9 @@
+.DS_Store
+__pycache__/
+*.ipynb
+.vscode
+*.pyc
+meshcat-env
+**trajopt_solutions**
+trajopt_solutions_batch/
+.conda/

@@ -1,0 +1,115 @@
+{
+  "assets": {
+    "repository": "https://github.com/Renforce-Dynamics/assetslib.git",
+    "revision": "9df792784e3642163f03390bf6ae16cf88b222a5",
+    "subdirectory": "unitree/unitree_g1",
+    "required": [
+      "urdf/g1_29dof_rev_1_0.urdf",
+      "mjcf/g1_29dof_rev_1_0.xml",
+      "usd/g1_29dof_rev_1_0.usd",
+      "usd/configuration/g1_29dof_rev_1_0_base.usd",
+      "usd/configuration/g1_29dof_rev_1_0_physics.usd"
+    ]
+  },
+  "go2_assets": {
+    "repository": "https://github.com/Renforce-Dynamics/assetslib.git",
+    "revision": "9df792784e3642163f03390bf6ae16cf88b222a5",
+    "subdirectory": "unitree/unitree_go2",
+    "required": [
+      "mjcf/go2.xml",
+      "usd/go2.usd",
+      "usd/configuration/go2_description_base.usd",
+      "usd/configuration/go2_description_physics.usd"
+    ]
+  },
+  "motions": {
+    "repository": "lvhaidong/LAFAN1_Retargeting_Dataset",
+    "revision": "ce1572906efe6157840e8474d5a0d7aa87481e74",
+    "subdirectory": "g1",
+    "motion_count": 40,
+    "frames": 264705,
+    "source_fps": 30,
+    "control_fps": 50
+  },
+  "go2_motions": {
+    "repository": "MIMUW-Robotics/kine2go",
+    "revision": "7f03a3fb7f6b2e684899530862ba103e81570363",
+    "pipeline_repository": "https://github.com/nomagiclab/kine2go-pipeline",
+    "pipeline_revision": "65b39f104706c1b4307dfc2a7df2aa8bed8d20aa",
+    "default_clips": ["ai4_dog_trot_00"],
+    "source_fps": 60,
+    "control_fps": 50,
+    "raw_joint_order": [
+      "FL_hip_joint", "FR_hip_joint", "RL_hip_joint", "RR_hip_joint",
+      "FL_thigh_joint", "FR_thigh_joint", "RL_thigh_joint", "RR_thigh_joint",
+      "FL_calf_joint", "FR_calf_joint", "RL_calf_joint", "RR_calf_joint"
+    ],
+    "raw_foot_order": ["FL", "RL", "FR", "RR"],
+    "raw_quaternion_order": "wxyz"
+  },
+  "a3": {
+    "repository": "https://github.com/AgibotTech/sonic_for_a3.git",
+    "revision": "c9df753d31ef63c930b825b1b6767cabd37c1549",
+    "sparse_paths": ["a3_data", "gear_sonic/data/assets/robot_description/mjcf", "gear_sonic/data/assets/robot_description/urdf/a3", "legal"],
+    "model": "gear_sonic/data/assets/robot_description/mjcf/a3_t2d5.xml",
+    "motions": "a3_data/agibot_a3",
+    "source_fps": 120,
+    "vendor": "agibot",
+    "data_name": "a3_sonic",
+    "fixed_joints": ["head_yaw_joint", "head_pitch_joint"]
+  },
+  "t1": {
+    "repository": "https://github.com/BoosterRobotics/booster_assets.git",
+    "revision": "12a97516f57469078707afb587a5f84c1cb110d1",
+    "sparse_paths": ["robots/T1", "motions/T1", "src/booster_assets"],
+    "model": "robots/T1/T1_23dof.xml",
+    "motions": "motions/T1",
+    "source_fps": 50,
+    "vendor": "booster",
+    "data_name": "t1_dance",
+    "fixed_joints": []
+  },
+  "bumi": {
+    "repository": "https://github.com/Noetix-Robotics/noetix_bumi_lab.git",
+    "revision": "2454535c967cd1d6f04dfe0f0289f3c6c608e596",
+    "sparse_paths": ["LICENSE.txt", "source/NoetixBumi/NoetixBumi/assets/robots/bumi", "source/NoetixBumi/NoetixBumi/assets/datasets/mimic_data/bumi", "scripts/motion"],
+    "model": "source/NoetixBumi/NoetixBumi/assets/robots/bumi/bumi.xml",
+    "motions": "source/NoetixBumi/NoetixBumi/assets/datasets/mimic_data/bumi",
+    "source_fps": 50,
+    "vendor": "noetix",
+    "data_name": "bumi_vendor",
+    "fixed_joints": [],
+    "project_joint_limits": true,
+    "source_joint_names": [
+      "l_leg_pitch_joint", "r_leg_pitch_joint", "waist_yaw_joint",
+      "l_leg_roll_joint", "r_leg_roll_joint", "l_arm_pitch_joint", "r_arm_pitch_joint",
+      "l_leg_yaw_joint", "r_leg_yaw_joint", "l_arm_roll_joint", "r_arm_roll_joint",
+      "l_knee_pitch_joint", "r_knee_pitch_joint", "l_arm_yaw_joint", "r_arm_yaw_joint",
+      "l_ankle_pitch_joint", "r_ankle_pitch_joint", "l_elbow_pitch_joint",
+      "r_elbow_pitch_joint", "l_ankle_roll_joint", "r_ankle_roll_joint"
+    ]
+  },
+  "pi_plus": {
+    "repository": "https://github.com/HighTorque-Robotics/Mini-Pi-Plus_BeyondMimic.git",
+    "revision": "df3fcf16bf2cf645b8e3c24ee1e395d453f78f80",
+    "sparse_paths": ["source/whole_body_tracking/whole_body_tracking/assets/hightorque/pi_plus", "source/whole_body_tracking/whole_body_tracking/robots", "source/motion/hightorque/pi_plus/csv", "scripts"],
+    "model": "source/whole_body_tracking/whole_body_tracking/assets/hightorque/pi_plus/mjcf/pi_20dof.xml",
+    "motions": "source/motion/hightorque/pi_plus/csv",
+    "source_fps": 30,
+    "vendor": "hightorque",
+    "data_name": "pi_plus_vendor",
+    "fixed_joints": []
+  },
+  "adaptation": {
+    "repository": "https://github.com/zita-ch/supermimic_vibed",
+    "revision": "a1508d42c9d1699a52e8233ab16d08c488441ab9",
+    "mdp_sha256": "f19186f70e259ee37b2d8dd6b9beb1ae0c2fd875b67902bb5544779b9792d074"
+  },
+  "runtime": {
+    "python": "3.11",
+    "isaaclab_revision": "37ddf626871758333d6ed89cf64ad702aef127d0",
+    "isaaclab_tag": "v2.3.2",
+    "isaacsim": "5.1.0.0",
+    "torch": "2.7.0+cu128"
+  }
+}

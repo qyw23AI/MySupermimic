@@ -1,0 +1,2591 @@
+{
+  "recorded_date": "2026-10-25",
+  "policy_simulator": "IsaacLab / PhysX",
+  "renderer": "MuJoCo replay of recorded PhysX states",
+  "playback_speed": 1.0,
+  "selection": "Editorial excerpts; full-library/trial measurements retained separately",
+  "comparison_cameras": "Policy and reference cameras are centered independently",
+  "gif_encoding": "480x270, 10 fps, 128-color palette, ordered dithering, infinite loop",
+  "mp4_encoding": "960x540 to 1280x720, 25 fps, H.264, yuv420p, faststart",
+  "evaluation_scope": "Simulation, training motion libraries and predefined obstacle trials",
+  "visual_review": "Sampled frames reviewed for existing G1/Go2/A3/T1/Bumi previews; Pi+ adds five-frame sheets for dance, kungfu and short right kick.",
+  "runs": {
+    "g1_032000": {
+      "task": "tracking/g1",
+      "iteration": 32000,
+      "num_envs": 8096,
+      "data": "G1-retargeted LAFAN1; 40 training clips",
+      "checkpoint_sha256": "51c0f4150e6baed82504f5d1ceb5f28332ae9cfb66b9bca9f4884b3be86dd0e0",
+      "source_evaluation_sha256": "8fb9ecf66bced94f3f396ed6b89fa4a5ad028fb52483001812f54fe3226c0d1a",
+      "norm_return": 0.8694663037746124,
+      "norm_return_framew": 0.8701766756758671,
+      "n_failed": 0,
+      "failed": [],
+      "reward_components": {
+        "action_smoothness": -0.011560233309864998,
+        "body_angular_velocity": 0.1852109730243683,
+        "body_linear_velocity": 0.19084393978118896,
+        "body_orientation": 0.18186606466770172,
+        "body_position": 0.19742202758789062,
+        "joint_limit_penalty": -0.0009666195255704224,
+        "root_orientation": 0.09828148782253265,
+        "root_position": 0.02836805395781994
+      },
+      "per_motion": {
+        "dance1_subject1": {
+          "failed": false,
+          "frames": 6573,
+          "normalized_return": 0.8590166633683725,
+          "reward_components": {
+            "action_smoothness": -0.016092028468847275,
+            "body_angular_velocity": 0.18248702585697174,
+            "body_linear_velocity": 0.1892423927783966,
+            "body_orientation": 0.18640971183776855,
+            "body_position": 0.1981400102376938,
+            "joint_limit_penalty": -0.000859456486068666,
+            "root_orientation": 0.09867394715547562,
+            "root_position": 0.02101575769484043
+          },
+          "reward_sum": 564.6316528320312,
+          "survival_normalized_return": 0.8590166633683725,
+          "survival_steps": 6573
+        },
+        "dance1_subject2": {
+          "failed": false,
+          "frames": 6573,
+          "normalized_return": 0.8224114482304502,
+          "reward_components": {
+            "action_smoothness": -0.027136342599987984,
+            "body_angular_velocity": 0.168255016207695,
+            "body_linear_velocity": 0.18715313076972961,
+            "body_orientation": 0.17893590033054352,
+            "body_position": 0.197981595993042,
+            "joint_limit_penalty": -0.0005043105920776725,
+            "root_orientation": 0.09799439460039139,
+            "root_position": 0.019732819870114326
+          },
+          "reward_sum": 540.571044921875,
+          "survival_normalized_return": 0.8224114482304502,
+          "survival_steps": 6573
+        },
+        "dance1_subject3": {
+          "failed": false,
+          "frames": 6573,
+          "normalized_return": 0.8977431125080823,
+          "reward_components": {
+            "action_smoothness": -0.010055480524897575,
+            "body_angular_velocity": 0.18888887763023376,
+            "body_linear_velocity": 0.19442182779312134,
+            "body_orientation": 0.18695005774497986,
+            "body_position": 0.19844448566436768,
+            "joint_limit_penalty": -0.00016854684508871287,
+            "root_orientation": 0.09899027645587921,
+            "root_position": 0.040271688252687454
+          },
+          "reward_sum": 590.0865478515625,
+          "survival_normalized_return": 0.8977431125080823,
+          "survival_steps": 6573
+        },
+        "dance2_subject1": {
+          "failed": false,
+          "frames": 11283,
+          "normalized_return": 0.8556935787834852,
+          "reward_components": {
+            "action_smoothness": -0.020800501108169556,
+            "body_angular_velocity": 0.17547985911369324,
+            "body_linear_velocity": 0.18699558079242706,
+            "body_orientation": 0.18225277960300446,
+            "body_position": 0.19764025509357452,
+            "joint_limit_penalty": -0.0009923063917085528,
+            "root_orientation": 0.09827810525894165,
+            "root_position": 0.03683997318148613
+          },
+          "reward_sum": 965.4790649414062,
+          "survival_normalized_return": 0.8556935787834852,
+          "survival_steps": 11283
+        },
+        "dance2_subject2": {
+          "failed": false,
+          "frames": 11283,
+          "normalized_return": 0.852140037660363,
+          "reward_components": {
+            "action_smoothness": -0.019056493416428566,
+            "body_angular_velocity": 0.1754388064146042,
+            "body_linear_velocity": 0.18992170691490173,
+            "body_orientation": 0.18024367094039917,
+            "body_position": 0.19801463186740875,
+            "joint_limit_penalty": -0.0006861296133138239,
+            "root_orientation": 0.09831138700246811,
+            "root_position": 0.029947252944111824
+          },
+          "reward_sum": 961.4696044921875,
+          "survival_normalized_return": 0.852140037660363,
+          "survival_steps": 11283
+        },
+        "dance2_subject3": {
+          "failed": false,
+          "frames": 11283,
+          "normalized_return": 0.8747066006554385,
+          "reward_components": {
+            "action_smoothness": -0.009841480292379856,
+            "body_angular_velocity": 0.18893548846244812,
+            "body_linear_velocity": 0.19453065097332,
+            "body_orientation": 0.18757599592208862,
+            "body_position": 0.19840900599956512,
+            "joint_limit_penalty": -0.00016457252786494792,
+            "root_orientation": 0.09916321188211441,
+            "root_position": 0.01609632931649685
+          },
+          "reward_sum": 986.9314575195312,
+          "survival_normalized_return": 0.8747066006554385,
+          "survival_steps": 11283
+        },
+        "dance2_subject4": {
+          "failed": false,
+          "frames": 11283,
+          "normalized_return": 0.84644082652691,
+          "reward_components": {
+            "action_smoothness": -0.019825147464871407,
+            "body_angular_velocity": 0.1756419986486435,
+            "body_linear_velocity": 0.18841494619846344,
+            "body_orientation": 0.18023525178432465,
+            "body_position": 0.1975383460521698,
+            "joint_limit_penalty": -0.00047881840146146715,
+            "root_orientation": 0.0984598770737648,
+            "root_position": 0.02645276114344597
+          },
+          "reward_sum": 955.0391845703125,
+          "survival_normalized_return": 0.84644082652691,
+          "survival_steps": 11283
+        },
+        "dance2_subject5": {
+          "failed": false,
+          "frames": 11283,
+          "normalized_return": 0.8731606796279525,
+          "reward_components": {
+            "action_smoothness": -0.011362562887370586,
+            "body_angular_velocity": 0.18655003607273102,
+            "body_linear_velocity": 0.19215907156467438,
+            "body_orientation": 0.18961410224437714,
+            "body_position": 0.19835849106311798,
+            "joint_limit_penalty": -0.00043026517960242927,
+            "root_orientation": 0.09867487102746964,
+            "root_position": 0.019595224410295486
+          },
+          "reward_sum": 985.1871948242188,
+          "survival_normalized_return": 0.8731606796279525,
+          "survival_steps": 11283
+        },
+        "fallAndGetUp1_subject1": {
+          "failed": false,
+          "frames": 8410,
+          "normalized_return": 0.8303475215517241,
+          "reward_components": {
+            "action_smoothness": -0.01116786990314722,
+            "body_angular_velocity": 0.17951065301895142,
+            "body_linear_velocity": 0.18717467784881592,
+            "body_orientation": 0.17257198691368103,
+            "body_position": 0.19596228003501892,
+            "joint_limit_penalty": -0.0020517020020633936,
+            "root_orientation": 0.09680911153554916,
+            "root_position": 0.011535932309925556
+          },
+          "reward_sum": 698.322265625,
+          "survival_normalized_return": 0.8303475215517241,
+          "survival_steps": 8410
+        },
+        "fallAndGetUp1_subject4": {
+          "failed": false,
+          "frames": 8410,
+          "normalized_return": 0.8393772411006243,
+          "reward_components": {
+            "action_smoothness": -0.010104618035256863,
+            "body_angular_velocity": 0.18137048184871674,
+            "body_linear_velocity": 0.1885097771883011,
+            "body_orientation": 0.16652455925941467,
+            "body_position": 0.1956227868795395,
+            "joint_limit_penalty": -0.0025606858544051647,
+            "root_orientation": 0.0953914076089859,
+            "root_position": 0.024623112753033638
+          },
+          "reward_sum": 705.916259765625,
+          "survival_normalized_return": 0.8393772411006243,
+          "survival_steps": 8410
+        },
+        "fallAndGetUp1_subject5": {
+          "failed": false,
+          "frames": 8410,
+          "normalized_return": 0.8636884655311757,
+          "reward_components": {
+            "action_smoothness": -0.01179376058280468,
+            "body_angular_velocity": 0.17851734161376953,
+            "body_linear_velocity": 0.18651150166988373,
+            "body_orientation": 0.17065685987472534,
+            "body_position": 0.19612230360507965,
+            "joint_limit_penalty": -0.003213637275621295,
+            "root_orientation": 0.09674527496099472,
+            "root_position": 0.05014399439096451
+          },
+          "reward_sum": 726.3619995117188,
+          "survival_normalized_return": 0.8636884655311757,
+          "survival_steps": 8410
+        },
+        "fallAndGetUp2_subject2": {
+          "failed": false,
+          "frames": 8195,
+          "normalized_return": 0.8781686146278218,
+          "reward_components": {
+            "action_smoothness": -0.009813659824430943,
+            "body_angular_velocity": 0.18198184669017792,
+            "body_linear_velocity": 0.18876664340496063,
+            "body_orientation": 0.1683850735425949,
+            "body_position": 0.19575953483581543,
+            "joint_limit_penalty": -0.0020285542123019695,
+            "root_orientation": 0.09628718346357346,
+            "root_position": 0.05882949382066727
+          },
+          "reward_sum": 719.6591796875,
+          "survival_normalized_return": 0.8781686146278218,
+          "survival_steps": 8195
+        },
+        "fallAndGetUp2_subject3": {
+          "failed": false,
+          "frames": 8195,
+          "normalized_return": 0.8747713509094722,
+          "reward_components": {
+            "action_smoothness": -0.005821009166538715,
+            "body_angular_velocity": 0.18386608362197876,
+            "body_linear_velocity": 0.1896347999572754,
+            "body_orientation": 0.1582002341747284,
+            "body_position": 0.19238731265068054,
+            "joint_limit_penalty": -0.0023006603587418795,
+            "root_orientation": 0.0956127718091011,
+            "root_position": 0.06319025903940201
+          },
+          "reward_sum": 716.8751220703125,
+          "survival_normalized_return": 0.8747713509094722,
+          "survival_steps": 8195
+        },
+        "fallAndGetUp3_subject1": {
+          "failed": false,
+          "frames": 5108,
+          "normalized_return": 0.8626518757341425,
+          "reward_components": {
+            "action_smoothness": -0.009598486125469208,
+            "body_angular_velocity": 0.18367451429367065,
+            "body_linear_velocity": 0.18949425220489502,
+            "body_orientation": 0.1769181489944458,
+            "body_position": 0.1969400942325592,
+            "joint_limit_penalty": -0.0014465302228927612,
+            "root_orientation": 0.09797713160514832,
+            "root_position": 0.02869459055364132
+          },
+          "reward_sum": 440.642578125,
+          "survival_normalized_return": 0.8626518757341425,
+          "survival_steps": 5108
+        },
+        "fight1_subject2": {
+          "failed": false,
+          "frames": 12243,
+          "normalized_return": 0.8641382647546048,
+          "reward_components": {
+            "action_smoothness": -0.01497532706707716,
+            "body_angular_velocity": 0.1809762418270111,
+            "body_linear_velocity": 0.18668219447135925,
+            "body_orientation": 0.18089595437049866,
+            "body_position": 0.197635680437088,
+            "joint_limit_penalty": -0.0010387217625975609,
+            "root_orientation": 0.09830328077077866,
+            "root_position": 0.03565860539674759
+          },
+          "reward_sum": 1057.9644775390625,
+          "survival_normalized_return": 0.8641382647546048,
+          "survival_steps": 12243
+        },
+        "fight1_subject3": {
+          "failed": false,
+          "frames": 12243,
+          "normalized_return": 0.8415104390008576,
+          "reward_components": {
+            "action_smoothness": -0.012694194912910461,
+            "body_angular_velocity": 0.1838391274213791,
+            "body_linear_velocity": 0.1889122575521469,
+            "body_orientation": 0.18248221278190613,
+            "body_position": 0.196910098195076,
+            "joint_limit_penalty": -0.0006689726142212749,
+            "root_orientation": 0.0984107181429863,
+            "root_position": 0.004317189566791058
+          },
+          "reward_sum": 1030.26123046875,
+          "survival_normalized_return": 0.8415104390008576,
+          "survival_steps": 12243
+        },
+        "fight1_subject5": {
+          "failed": false,
+          "frames": 12243,
+          "normalized_return": 0.8659271935685188,
+          "reward_components": {
+            "action_smoothness": -0.010061345994472504,
+            "body_angular_velocity": 0.18766868114471436,
+            "body_linear_velocity": 0.19097459316253662,
+            "body_orientation": 0.1856049746274948,
+            "body_position": 0.19828186929225922,
+            "joint_limit_penalty": -0.0004339054285082966,
+            "root_orientation": 0.09881439805030823,
+            "root_position": 0.015077685937285423
+          },
+          "reward_sum": 1060.1546630859375,
+          "survival_normalized_return": 0.8659271935685188,
+          "survival_steps": 12243
+        },
+        "fightAndSports1_subject1": {
+          "failed": false,
+          "frames": 12256,
+          "normalized_return": 0.8337209616877702,
+          "reward_components": {
+            "action_smoothness": -0.013823390938341618,
+            "body_angular_velocity": 0.18262869119644165,
+            "body_linear_velocity": 0.18738394975662231,
+            "body_orientation": 0.1803644299507141,
+            "body_position": 0.1968114972114563,
+            "joint_limit_penalty": -0.0007354103145189583,
+            "root_orientation": 0.09796949476003647,
+            "root_position": 0.0031205404084175825
+          },
+          "reward_sum": 1021.8084106445312,
+          "survival_normalized_return": 0.8337209616877702,
+          "survival_steps": 12256
+        },
+        "fightAndSports1_subject4": {
+          "failed": false,
+          "frames": 12256,
+          "normalized_return": 0.865865164575004,
+          "reward_components": {
+            "action_smoothness": -0.01089318748563528,
+            "body_angular_velocity": 0.18596762418746948,
+            "body_linear_velocity": 0.19104868173599243,
+            "body_orientation": 0.17996729910373688,
+            "body_position": 0.19761702418327332,
+            "joint_limit_penalty": -0.0007863215287216008,
+            "root_orientation": 0.09834054857492447,
+            "root_position": 0.024603186175227165
+          },
+          "reward_sum": 1061.204345703125,
+          "survival_normalized_return": 0.865865164575004,
+          "survival_steps": 12256
+        },
+        "jumps1_subject1": {
+          "failed": false,
+          "frames": 12221,
+          "normalized_return": 0.8670026715029456,
+          "reward_components": {
+            "action_smoothness": -0.013627732172608376,
+            "body_angular_velocity": 0.18315313756465912,
+            "body_linear_velocity": 0.18681082129478455,
+            "body_orientation": 0.1870337575674057,
+            "body_position": 0.1980125904083252,
+            "joint_limit_penalty": -0.0009965308709070086,
+            "root_orientation": 0.09855453670024872,
+            "root_position": 0.028061797842383385
+          },
+          "reward_sum": 1059.56396484375,
+          "survival_normalized_return": 0.8670026715029456,
+          "survival_steps": 12221
+        },
+        "jumps1_subject2": {
+          "failed": false,
+          "frames": 12221,
+          "normalized_return": 0.8305703117808229,
+          "reward_components": {
+            "action_smoothness": -0.009495673701167107,
+            "body_angular_velocity": 0.1839875429868698,
+            "body_linear_velocity": 0.18833602964878082,
+            "body_orientation": 0.17037749290466309,
+            "body_position": 0.19553866982460022,
+            "joint_limit_penalty": -0.0013683985453099012,
+            "root_orientation": 0.09623153507709503,
+            "root_position": 0.0069645983166992664
+          },
+          "reward_sum": 1015.0399780273438,
+          "survival_normalized_return": 0.8305703117808229,
+          "survival_steps": 12221
+        },
+        "jumps1_subject5": {
+          "failed": false,
+          "frames": 12221,
+          "normalized_return": 0.861302294558291,
+          "reward_components": {
+            "action_smoothness": -0.011889235116541386,
+            "body_angular_velocity": 0.1852291226387024,
+            "body_linear_velocity": 0.1890515238046646,
+            "body_orientation": 0.18355636298656464,
+            "body_position": 0.19748947024345398,
+            "joint_limit_penalty": -0.0010080524953082204,
+            "root_orientation": 0.09813253581523895,
+            "root_position": 0.020740851759910583
+          },
+          "reward_sum": 1052.5975341796875,
+          "survival_normalized_return": 0.861302294558291,
+          "survival_steps": 12221
+        },
+        "run1_subject2": {
+          "failed": false,
+          "frames": 11890,
+          "normalized_return": 0.8500557170383463,
+          "reward_components": {
+            "action_smoothness": -0.01585393212735653,
+            "body_angular_velocity": 0.18334831297397614,
+            "body_linear_velocity": 0.1885121613740921,
+            "body_orientation": 0.18310487270355225,
+            "body_position": 0.19821323454380035,
+            "joint_limit_penalty": -0.0007355092093348503,
+            "root_orientation": 0.09881649166345596,
+            "root_position": 0.014650948345661163
+          },
+          "reward_sum": 1010.7162475585938,
+          "survival_normalized_return": 0.8500557170383463,
+          "survival_steps": 11890
+        },
+        "run1_subject5": {
+          "failed": false,
+          "frames": 11890,
+          "normalized_return": 0.8498001804464098,
+          "reward_components": {
+            "action_smoothness": -0.01838434301316738,
+            "body_angular_velocity": 0.17993934452533722,
+            "body_linear_velocity": 0.1860787570476532,
+            "body_orientation": 0.1841851770877838,
+            "body_position": 0.19805899262428284,
+            "joint_limit_penalty": -0.0017720212927088141,
+            "root_orientation": 0.09828300029039383,
+            "root_position": 0.023412557318806648
+          },
+          "reward_sum": 1010.4124145507812,
+          "survival_normalized_return": 0.8498001804464098,
+          "survival_steps": 11890
+        },
+        "run2_subject1": {
+          "failed": false,
+          "frames": 12240,
+          "normalized_return": 0.8493030024509803,
+          "reward_components": {
+            "action_smoothness": -0.018273286521434784,
+            "body_angular_velocity": 0.18040446937084198,
+            "body_linear_velocity": 0.1872071474790573,
+            "body_orientation": 0.1850561946630478,
+            "body_position": 0.19803471863269806,
+            "joint_limit_penalty": -0.0010751391528174281,
+            "root_orientation": 0.09862196445465088,
+            "root_position": 0.01932666450738907
+          },
+          "reward_sum": 1039.546875,
+          "survival_normalized_return": 0.8493030024509803,
+          "survival_steps": 12240
+        },
+        "run2_subject4": {
+          "failed": false,
+          "frames": 12240,
+          "normalized_return": 0.8446032954197303,
+          "reward_components": {
+            "action_smoothness": -0.020762182772159576,
+            "body_angular_velocity": 0.17899887263774872,
+            "body_linear_velocity": 0.18591588735580444,
+            "body_orientation": 0.18266721069812775,
+            "body_position": 0.19752246141433716,
+            "joint_limit_penalty": -0.0011019175872206688,
+            "root_orientation": 0.09851083904504776,
+            "root_position": 0.022852076217532158
+          },
+          "reward_sum": 1033.79443359375,
+          "survival_normalized_return": 0.8446032954197303,
+          "survival_steps": 12240
+        },
+        "sprint1_subject2": {
+          "failed": false,
+          "frames": 13655,
+          "normalized_return": 0.8428059776638593,
+          "reward_components": {
+            "action_smoothness": -0.01446289848536253,
+            "body_angular_velocity": 0.18544189631938934,
+            "body_linear_velocity": 0.18958842754364014,
+            "body_orientation": 0.18056055903434753,
+            "body_position": 0.19755497574806213,
+            "joint_limit_penalty": -0.0005529451300390065,
+            "root_orientation": 0.09886742383241653,
+            "root_position": 0.005806119181215763
+          },
+          "reward_sum": 1150.8515625,
+          "survival_normalized_return": 0.8428059776638593,
+          "survival_steps": 13655
+        },
+        "sprint1_subject4": {
+          "failed": false,
+          "frames": 13655,
+          "normalized_return": 0.8414620867756774,
+          "reward_components": {
+            "action_smoothness": -0.019215494394302368,
+            "body_angular_velocity": 0.18172197043895721,
+            "body_linear_velocity": 0.18821194767951965,
+            "body_orientation": 0.1761782169342041,
+            "body_position": 0.19736462831497192,
+            "joint_limit_penalty": -0.0012582706985995173,
+            "root_orientation": 0.09860128909349442,
+            "root_position": 0.01984938606619835
+          },
+          "reward_sum": 1149.0164794921875,
+          "survival_normalized_return": 0.8414620867756774,
+          "survival_steps": 13655
+        },
+        "walk1_subject1": {
+          "failed": false,
+          "frames": 13065,
+          "normalized_return": 0.8948910607718619,
+          "reward_components": {
+            "action_smoothness": -0.0032721650786697865,
+            "body_angular_velocity": 0.1957167237997055,
+            "body_linear_velocity": 0.19715026021003723,
+            "body_orientation": 0.18860511481761932,
+            "body_position": 0.19863596558570862,
+            "joint_limit_penalty": -0.0002001406974159181,
+            "root_orientation": 0.099213607609272,
+            "root_position": 0.01904147118330002
+          },
+          "reward_sum": 1169.1751708984375,
+          "survival_normalized_return": 0.8948910607718619,
+          "survival_steps": 13065
+        },
+        "walk1_subject2": {
+          "failed": false,
+          "frames": 13065,
+          "normalized_return": 0.957626512120886,
+          "reward_components": {
+            "action_smoothness": -0.006782675627619028,
+            "body_angular_velocity": 0.19232125580310822,
+            "body_linear_velocity": 0.1952172964811325,
+            "body_orientation": 0.1913406252861023,
+            "body_position": 0.1989404559135437,
+            "joint_limit_penalty": -0.0003557463933248073,
+            "root_orientation": 0.09912940114736557,
+            "root_position": 0.08781310170888901
+          },
+          "reward_sum": 1251.1390380859375,
+          "survival_normalized_return": 0.957626512120886,
+          "survival_steps": 13065
+        },
+        "walk1_subject5": {
+          "failed": false,
+          "frames": 13065,
+          "normalized_return": 0.8899662033881075,
+          "reward_components": {
+            "action_smoothness": -0.006999017670750618,
+            "body_angular_velocity": 0.1907920092344284,
+            "body_linear_velocity": 0.1933128535747528,
+            "body_orientation": 0.1920454055070877,
+            "body_position": 0.19876433908939362,
+            "joint_limit_penalty": -0.0010996046476066113,
+            "root_orientation": 0.09883280843496323,
+            "root_position": 0.024316972121596336
+          },
+          "reward_sum": 1162.7408447265625,
+          "survival_normalized_return": 0.8899662033881075,
+          "survival_steps": 13065
+        },
+        "walk2_subject1": {
+          "failed": false,
+          "frames": 11908,
+          "normalized_return": 0.8881297958830199,
+          "reward_components": {
+            "action_smoothness": -0.008929049596190453,
+            "body_angular_velocity": 0.18918684124946594,
+            "body_linear_velocity": 0.19404485821723938,
+            "body_orientation": 0.18755941092967987,
+            "body_position": 0.19813598692417145,
+            "joint_limit_penalty": -0.0007319021970033646,
+            "root_orientation": 0.09893234074115753,
+            "root_position": 0.029932256788015366
+          },
+          "reward_sum": 1057.5849609375,
+          "survival_normalized_return": 0.8881297958830199,
+          "survival_steps": 11908
+        },
+        "walk2_subject3": {
+          "failed": false,
+          "frames": 11908,
+          "normalized_return": 0.9122062890690608,
+          "reward_components": {
+            "action_smoothness": -0.005508508067578077,
+            "body_angular_velocity": 0.19278937578201294,
+            "body_linear_velocity": 0.1955181062221527,
+            "body_orientation": 0.18659912049770355,
+            "body_position": 0.19802263379096985,
+            "joint_limit_penalty": -0.0010846423683688045,
+            "root_orientation": 0.09892656654119492,
+            "root_position": 0.04694560915231705
+          },
+          "reward_sum": 1086.2552490234375,
+          "survival_normalized_return": 0.9122062890690608,
+          "survival_steps": 11908
+        },
+        "walk2_subject4": {
+          "failed": false,
+          "frames": 11908,
+          "normalized_return": 0.9201021101557252,
+          "reward_components": {
+            "action_smoothness": -0.005708144977688789,
+            "body_angular_velocity": 0.19269387423992157,
+            "body_linear_velocity": 0.19596032798290253,
+            "body_orientation": 0.1886877715587616,
+            "body_position": 0.19853727519512177,
+            "joint_limit_penalty": -0.0002597354759927839,
+            "root_orientation": 0.09903522580862045,
+            "root_position": 0.05115682631731033
+          },
+          "reward_sum": 1095.6575927734375,
+          "survival_normalized_return": 0.9201021101557252,
+          "survival_steps": 11908
+        },
+        "walk3_subject1": {
+          "failed": false,
+          "frames": 12330,
+          "normalized_return": 0.8906166837743309,
+          "reward_components": {
+            "action_smoothness": -0.005357444752007723,
+            "body_angular_velocity": 0.1927466243505478,
+            "body_linear_velocity": 0.19581684470176697,
+            "body_orientation": 0.18745853006839752,
+            "body_position": 0.19816935062408447,
+            "joint_limit_penalty": -0.0006450150976888835,
+            "root_orientation": 0.09891650825738907,
+            "root_position": 0.023511623963713646
+          },
+          "reward_sum": 1098.13037109375,
+          "survival_normalized_return": 0.8906166837743309,
+          "survival_steps": 12330
+        },
+        "walk3_subject2": {
+          "failed": false,
+          "frames": 12330,
+          "normalized_return": 0.9386639745856143,
+          "reward_components": {
+            "action_smoothness": -0.00559795880690217,
+            "body_angular_velocity": 0.19381943345069885,
+            "body_linear_velocity": 0.19584722816944122,
+            "body_orientation": 0.19026494026184082,
+            "body_position": 0.1988660991191864,
+            "joint_limit_penalty": -0.00035343418130651116,
+            "root_orientation": 0.09920191019773483,
+            "root_position": 0.06661711633205414
+          },
+          "reward_sum": 1157.3726806640625,
+          "survival_normalized_return": 0.9386639745856143,
+          "survival_steps": 12330
+        },
+        "walk3_subject3": {
+          "failed": false,
+          "frames": 12330,
+          "normalized_return": 0.8580877670696472,
+          "reward_components": {
+            "action_smoothness": -0.0036543302703648806,
+            "body_angular_velocity": 0.19190683960914612,
+            "body_linear_velocity": 0.19369764626026154,
+            "body_orientation": 0.16283650696277618,
+            "body_position": 0.1904398500919342,
+            "joint_limit_penalty": -0.0004740839940495789,
+            "root_orientation": 0.09762653708457947,
+            "root_position": 0.02570882998406887
+          },
+          "reward_sum": 1058.022216796875,
+          "survival_normalized_return": 0.8580877670696472,
+          "survival_steps": 12330
+        },
+        "walk3_subject4": {
+          "failed": false,
+          "frames": 12330,
+          "normalized_return": 0.8917724411369627,
+          "reward_components": {
+            "action_smoothness": -0.004924648907035589,
+            "body_angular_velocity": 0.19334685802459717,
+            "body_linear_velocity": 0.19663166999816895,
+            "body_orientation": 0.18749845027923584,
+            "body_position": 0.19850870966911316,
+            "joint_limit_penalty": -0.0004064671811647713,
+            "root_orientation": 0.09879886358976364,
+            "root_position": 0.022316865622997284
+          },
+          "reward_sum": 1099.555419921875,
+          "survival_normalized_return": 0.8917724411369627,
+          "survival_steps": 12330
+        },
+        "walk3_subject5": {
+          "failed": false,
+          "frames": 12330,
+          "normalized_return": 0.8805946418162003,
+          "reward_components": {
+            "action_smoothness": -0.004930020775645971,
+            "body_angular_velocity": 0.19328497350215912,
+            "body_linear_velocity": 0.1948537528514862,
+            "body_orientation": 0.19118179380893707,
+            "body_position": 0.19870525598526,
+            "joint_limit_penalty": -0.0015932602109387517,
+            "root_orientation": 0.09927664697170258,
+            "root_position": 0.009814441204071045
+          },
+          "reward_sum": 1085.773193359375,
+          "survival_normalized_return": 0.8805946418162003,
+          "survival_steps": 12330
+        },
+        "walk4_subject1": {
+          "failed": false,
+          "frames": 8195,
+          "normalized_return": 0.9176090931732382,
+          "reward_components": {
+            "action_smoothness": -0.003863684134557843,
+            "body_angular_velocity": 0.19593104720115662,
+            "body_linear_velocity": 0.19806157052516937,
+            "body_orientation": 0.19305548071861267,
+            "body_position": 0.1987881362438202,
+            "joint_limit_penalty": -4.245655509294011e-05,
+            "root_orientation": 0.09954199939966202,
+            "root_position": 0.03613562509417534
+          },
+          "reward_sum": 751.9806518554688,
+          "survival_normalized_return": 0.9176090931732382,
+          "survival_steps": 8195
+        }
+      }
+    },
+    "go2_trot_010000": {
+      "task": "tracking/go2",
+      "iteration": 10000,
+      "num_envs": 8096,
+      "data": "Kine2Go / AI4Animation ai4_dog_trot_00",
+      "checkpoint_sha256": "10c85db23007c402682784a90511c77bbab1b276c0a4782340656348783b9368",
+      "source_evaluation_sha256": "2dfed1723e4e994a4d4b93e432c6c1db28ad69815938949624508bf4ed78ab8a",
+      "norm_return": 0.9272566575270432,
+      "norm_return_framew": 0.9272566575270432,
+      "n_failed": 0,
+      "failed": [],
+      "reward_components": {
+        "action_smoothness": -0.021327167749404907,
+        "body_angular_velocity": 0.18414455652236938,
+        "body_linear_velocity": 0.17940180003643036,
+        "body_orientation": 0.1946462094783783,
+        "body_position": 0.19888919591903687,
+        "joint_limit_penalty": 0.0,
+        "root_orientation": 0.09977070242166519,
+        "root_position": 0.09173127263784409
+      },
+      "per_motion": {
+        "ai4_dog_trot_00": {
+          "failed": false,
+          "frames": 455,
+          "normalized_return": 0.9272566575270432,
+          "reward_components": {
+            "action_smoothness": -0.021327167749404907,
+            "body_angular_velocity": 0.18414455652236938,
+            "body_linear_velocity": 0.17940180003643036,
+            "body_orientation": 0.1946462094783783,
+            "body_position": 0.19888919591903687,
+            "joint_limit_penalty": 0.0,
+            "root_orientation": 0.09977070242166519,
+            "root_position": 0.09173127263784409
+          },
+          "reward_sum": 42.19017791748047,
+          "survival_normalized_return": 0.9272566575270432,
+          "survival_steps": 455,
+          "tracking": {
+            "joint_position_rmse_rad": 0.08053954283478272,
+            "mean_forward_speed_m_s": 0.8411937355995178,
+            "measured_seconds": 9.1,
+            "reference_forward_speed_m_s": 0.8376733660697937,
+            "root_position_rmse_m": 0.060698736003284424,
+            "root_velocity_rmse_m_s": 0.1483538228643782,
+            "speed_axis": "world X; not heading-aligned"
+          }
+        }
+      }
+    },
+    "go2_adaptive_010000": {
+      "task": "locomotion/go2/adaptive",
+      "iteration": 10000,
+      "num_envs": 8096,
+      "data": "Gait-initialized task policy; simulated bar scenarios and velocity commands",
+      "checkpoint_sha256": "3420915249e5d80cbaead3ebe137f4f1b768339dfb378dba0161ba76074473ec",
+      "source_evaluation_sha256": "b9391740f59ac1dbc80eefd555ed318b701e0673abec417d5eea6ee1f3300482",
+      "difficulty": 1.0,
+      "overall": {
+        "trials": 16,
+        "completed_episodes": 16,
+        "survived_full_episode_trials": 16,
+        "completed_events_all_success_trials": 16,
+        "trials_with_completed_events": 16,
+        "sequence_successes": 0,
+        "sequence_success_rate": 0.0,
+        "fall_rate": 0.0,
+        "contact_rate": 0.0,
+        "active_steps": 12800,
+        "active_seconds": 256.0,
+        "vx_rmse_m_s": 0.46367000992321494,
+        "vy_rmse_m_s": 0.3782735050331698,
+        "velocity_rmse_m_s": 0.5983984648311472,
+        "yaw_rmse_rad_s": 0.07921790749134898,
+        "segments": 173,
+        "attempts": 173,
+        "successes": 157,
+        "failures": 16,
+        "success_rate": 0.9075144508670521,
+        "natural_completions": 157,
+        "timeouts": 16,
+        "contacts": 0,
+        "encounter_contact_rate": 0.0,
+        "falls": 0,
+        "encounter_fall_rate": 0.0,
+        "segment_falls": 0,
+        "deadline_misses": 0,
+        "terminal_deadline_misses": 0,
+        "expired_ahead": 0,
+        "lateral_bypasses": 0,
+        "censored_attempts": 16,
+        "failure_reason_counts": {
+          "episode_timeout": 16,
+          "no_crossing": 8
+        },
+        "successful_observed_maneuvers": {
+          "under": 71,
+          "airborne_over": 82,
+          "step_over": 4
+        },
+        "natural_completion_success_rate": 1.0,
+        "natural_encounter_elapsed_seconds": {
+          "count": 157,
+          "min": 1.019999623298645,
+          "p50": 1.5599991083145142,
+          "p90": 1.9079987764358521,
+          "p99": 1.9887986993789672,
+          "max": 1.999998688697815,
+          "mean": 1.543311226140162
+        },
+        "clearance_delay_seconds": {
+          "count": 173,
+          "min": 0.0,
+          "p50": 0.0,
+          "p90": 0.0,
+          "p99": 0.0,
+          "max": 0.0,
+          "mean": 0.0
+        },
+        "terminal_attempt_elapsed_seconds": {
+          "count": 16,
+          "min": 0.13999998569488525,
+          "p50": 1.0299995839595795,
+          "p90": 1.31999933719635,
+          "p99": 1.676998996734619,
+          "max": 1.7399989366531372,
+          "mean": 0.8562496267259121
+        },
+        "terminal_attempt_clearance_delay_seconds": {
+          "count": 16,
+          "min": 0.0,
+          "p50": 0.0,
+          "p90": 0.0,
+          "p99": 0.0,
+          "max": 0.0,
+          "mean": 0.0
+        },
+        "minimum_foot_calf_clearance_m": {
+          "count": 89,
+          "min": -0.09920565038919449,
+          "p50": 0.08187925070524216,
+          "p90": 0.144326314330101,
+          "p99": 0.15807783126831068,
+          "max": 0.18384477496147156,
+          "mean": 0.07871895476003711
+        },
+        "events_with_clearance_samples": 89,
+        "root_crossing_interval_seconds": {
+          "count": 149,
+          "min": 0.9399995803833008,
+          "p50": 1.5799999237060547,
+          "p90": 1.8399997234344483,
+          "p99": 2.1712000656127937,
+          "max": 2.2200002670288086,
+          "mean": 1.5408053374130455
+        },
+        "actual_natural_encounter_interval_seconds": {
+          "count": 157,
+          "min": 1.019999623298645,
+          "p50": 1.5599991083145142,
+          "p90": 1.9079987764358521,
+          "p99": 1.9887986993789672,
+          "max": 1.999998688697815,
+          "mean": 1.543311226140162
+        },
+        "max_bar_pose_error_m": 0.0,
+        "max_bar_rotation_error": 5.960464477539063e-08
+      },
+      "per_mode": {
+        "flat": {
+          "active_steps": 0,
+          "active_seconds": 0.0,
+          "vx_rmse_m_s": null,
+          "vy_rmse_m_s": null,
+          "velocity_rmse_m_s": null,
+          "yaw_rmse_rad_s": null,
+          "segments": 0,
+          "attempts": 0,
+          "successes": 0,
+          "failures": 0,
+          "success_rate": null,
+          "natural_completions": 0,
+          "timeouts": 0,
+          "contacts": 0,
+          "encounter_contact_rate": null,
+          "falls": 0,
+          "encounter_fall_rate": null,
+          "segment_falls": 0,
+          "deadline_misses": 0,
+          "terminal_deadline_misses": 0,
+          "expired_ahead": 0,
+          "lateral_bypasses": 0,
+          "censored_attempts": 0,
+          "failure_reason_counts": {},
+          "successful_observed_maneuvers": {},
+          "natural_completion_success_rate": null,
+          "natural_encounter_elapsed_seconds": {
+            "count": 0,
+            "min": null,
+            "p50": null,
+            "p90": null,
+            "p99": null,
+            "max": null,
+            "mean": null
+          },
+          "clearance_delay_seconds": {
+            "count": 0,
+            "min": null,
+            "p50": null,
+            "p90": null,
+            "p99": null,
+            "max": null,
+            "mean": null
+          },
+          "terminal_attempt_elapsed_seconds": {
+            "count": 0,
+            "min": null,
+            "p50": null,
+            "p90": null,
+            "p99": null,
+            "max": null,
+            "mean": null
+          },
+          "terminal_attempt_clearance_delay_seconds": {
+            "count": 0,
+            "min": null,
+            "p50": null,
+            "p90": null,
+            "p99": null,
+            "max": null,
+            "mean": null
+          },
+          "minimum_foot_calf_clearance_m": {
+            "count": 0,
+            "min": null,
+            "p50": null,
+            "p90": null,
+            "p99": null,
+            "max": null,
+            "mean": null
+          },
+          "events_with_clearance_samples": 0
+        },
+        "high_bar": {
+          "active_steps": 5895,
+          "active_seconds": 117.9,
+          "vx_rmse_m_s": 0.44028495532085876,
+          "vy_rmse_m_s": 0.36412877017114575,
+          "velocity_rmse_m_s": 0.5713498080407848,
+          "yaw_rmse_rad_s": 0.0639180638541848,
+          "segments": 82,
+          "attempts": 82,
+          "successes": 75,
+          "failures": 7,
+          "success_rate": 0.9146341463414634,
+          "natural_completions": 75,
+          "timeouts": 7,
+          "contacts": 0,
+          "encounter_contact_rate": 0.0,
+          "falls": 0,
+          "encounter_fall_rate": 0.0,
+          "segment_falls": 0,
+          "deadline_misses": 0,
+          "terminal_deadline_misses": 0,
+          "expired_ahead": 0,
+          "lateral_bypasses": 0,
+          "censored_attempts": 7,
+          "failure_reason_counts": {
+            "episode_timeout": 7,
+            "no_crossing": 6
+          },
+          "successful_observed_maneuvers": {
+            "under": 71,
+            "step_over": 4
+          },
+          "natural_completion_success_rate": 1.0,
+          "natural_encounter_elapsed_seconds": {
+            "count": 75,
+            "min": 1.019999623298645,
+            "p50": 1.5399991273880005,
+            "p90": 1.879998803138733,
+            "p99": 1.9799987077713013,
+            "max": 1.9799987077713013,
+            "mean": 1.5189324808120728
+          },
+          "clearance_delay_seconds": {
+            "count": 82,
+            "min": 0.0,
+            "p50": 0.0,
+            "p90": 0.0,
+            "p99": 0.0,
+            "max": 0.0,
+            "mean": 0.0
+          },
+          "terminal_attempt_elapsed_seconds": {
+            "count": 7,
+            "min": 0.13999998569488525,
+            "p50": 0.25999996066093445,
+            "p90": 1.0719995379447937,
+            "p99": 1.277199374437332,
+            "max": 1.2999993562698364,
+            "mean": 0.5685712248086929
+          },
+          "terminal_attempt_clearance_delay_seconds": {
+            "count": 7,
+            "min": 0.0,
+            "p50": 0.0,
+            "p90": 0.0,
+            "p99": 0.0,
+            "max": 0.0,
+            "mean": 0.0
+          },
+          "minimum_foot_calf_clearance_m": {
+            "count": 0,
+            "min": null,
+            "p50": null,
+            "p90": null,
+            "p99": null,
+            "max": null,
+            "mean": null
+          },
+          "events_with_clearance_samples": 0
+        },
+        "low_bar": {
+          "active_steps": 6905,
+          "active_seconds": 138.1,
+          "vx_rmse_m_s": 0.4827389462199886,
+          "vy_rmse_m_s": 0.3899434906504144,
+          "velocity_rmse_m_s": 0.6205584711356497,
+          "yaw_rmse_rad_s": 0.09025025153439223,
+          "segments": 91,
+          "attempts": 91,
+          "successes": 82,
+          "failures": 9,
+          "success_rate": 0.9010989010989011,
+          "natural_completions": 82,
+          "timeouts": 9,
+          "contacts": 0,
+          "encounter_contact_rate": 0.0,
+          "falls": 0,
+          "encounter_fall_rate": 0.0,
+          "segment_falls": 0,
+          "deadline_misses": 0,
+          "terminal_deadline_misses": 0,
+          "expired_ahead": 0,
+          "lateral_bypasses": 0,
+          "censored_attempts": 9,
+          "failure_reason_counts": {
+            "episode_timeout": 9,
+            "no_crossing": 2
+          },
+          "successful_observed_maneuvers": {
+            "airborne_over": 82
+          },
+          "natural_completion_success_rate": 1.0,
+          "natural_encounter_elapsed_seconds": {
+            "count": 82,
+            "min": 1.0599995851516724,
+            "p50": 1.5599991083145142,
+            "p90": 1.9199987649917603,
+            "p99": 1.999998688697815,
+            "max": 1.999998688697815,
+            "mean": 1.5656088590621948
+          },
+          "clearance_delay_seconds": {
+            "count": 91,
+            "min": 0.0,
+            "p50": 0.0,
+            "p90": 0.0,
+            "p99": 0.0,
+            "max": 0.0,
+            "mean": 0.0
+          },
+          "terminal_attempt_elapsed_seconds": {
+            "count": 9,
+            "min": 0.19999997317790985,
+            "p50": 1.1799994707107544,
+            "p90": 1.4039992570877076,
+            "p99": 1.7063989686965941,
+            "max": 1.7399989366531372,
+            "mean": 1.0799994948837492
+          },
+          "terminal_attempt_clearance_delay_seconds": {
+            "count": 9,
+            "min": 0.0,
+            "p50": 0.0,
+            "p90": 0.0,
+            "p99": 0.0,
+            "max": 0.0,
+            "mean": 0.0
+          },
+          "minimum_foot_calf_clearance_m": {
+            "count": 89,
+            "min": -0.09920565038919449,
+            "p50": 0.08187925070524216,
+            "p90": 0.144326314330101,
+            "p99": 0.15807783126831068,
+            "max": 0.18384477496147156,
+            "mean": 0.07871895476003711
+          },
+          "events_with_clearance_samples": 89
+        }
+      },
+      "displayed_trial": {
+        "trial": 0,
+        "completed_episode": true,
+        "fall": false,
+        "survived_full_episode": true,
+        "completed_events_all_success": true,
+        "completed_event_count": 10,
+        "censored_final_encounters": [
+          10
+        ],
+        "first_fall_s": null,
+        "contact": false,
+        "sequence_success": false,
+        "active_steps": 800,
+        "active_seconds": 16.0,
+        "vx_rmse_m_s": 0.507389960116916,
+        "vy_rmse_m_s": 0.363574691600155,
+        "velocity_rmse_m_s": 0.624204396011109,
+        "yaw_rmse_rad_s": 0.07111629003833714,
+        "segments": 11,
+        "attempts": 11,
+        "successes": 10,
+        "failures": 1,
+        "success_rate": 0.9090909090909091,
+        "natural_completions": 10,
+        "timeouts": 1,
+        "contacts": 0,
+        "encounter_contact_rate": 0.0,
+        "falls": 0,
+        "encounter_fall_rate": 0.0,
+        "segment_falls": 0,
+        "deadline_misses": 0,
+        "terminal_deadline_misses": 0,
+        "expired_ahead": 0,
+        "lateral_bypasses": 0,
+        "censored_attempts": 1,
+        "failure_reason_counts": {
+          "episode_timeout": 1,
+          "no_crossing": 1
+        },
+        "successful_observed_maneuvers": {
+          "under": 6,
+          "airborne_over": 4
+        },
+        "natural_completion_success_rate": 1.0,
+        "natural_encounter_elapsed_seconds": {
+          "count": 10,
+          "min": 1.1799994707107544,
+          "p50": 1.569999098777771,
+          "p90": 1.7259989500045776,
+          "p99": 1.9365987491607666,
+          "max": 1.9599987268447876,
+          "mean": 1.5619991064071654
+        },
+        "clearance_delay_seconds": {
+          "count": 11,
+          "min": 0.0,
+          "p50": 0.0,
+          "p90": 0.0,
+          "p99": 0.0,
+          "max": 0.0,
+          "mean": 0.0
+        },
+        "terminal_attempt_elapsed_seconds": {
+          "count": 1,
+          "min": 0.3800000250339508,
+          "p50": 0.3800000250339508,
+          "p90": 0.3800000250339508,
+          "p99": 0.3800000250339508,
+          "max": 0.3800000250339508,
+          "mean": 0.3800000250339508
+        },
+        "terminal_attempt_clearance_delay_seconds": {
+          "count": 1,
+          "min": 0.0,
+          "p50": 0.0,
+          "p90": 0.0,
+          "p99": 0.0,
+          "max": 0.0,
+          "mean": 0.0
+        },
+        "minimum_foot_calf_clearance_m": {
+          "count": 4,
+          "min": 0.11066582798957825,
+          "p50": 0.1384240910410881,
+          "p90": 0.1727485477924347,
+          "p99": 0.18273515224456785,
+          "max": 0.18384477496147156,
+          "mean": 0.1428396962583065
+        },
+        "events_with_clearance_samples": 4
+      }
+    },
+    "a3_010000": {
+      "task": "tracking/a3",
+      "iteration": 10000,
+      "num_envs": 4096,
+      "data": "AgibotTech/sonic_for_a3; 20 training clips",
+      "checkpoint_sha256": "f9690b365f46329f6c9acb6bbb8ea97c5f6b67413448178d049889481288a8a7",
+      "source_evaluation_sha256": "fdf921f0ea4c7166f762406a3f231b087564b55f6840d99a83d5ba0dab7d4605",
+      "norm_return": 0.9844662092508243,
+      "norm_return_framew": 0.9860583541423102,
+      "n_failed": 0,
+      "failed": [],
+      "reward_components": {
+        "action_smoothness": -0.0011312812566757202,
+        "body_angular_velocity": 0.19884216785430908,
+        "body_linear_velocity": 0.1991482973098755,
+        "body_orientation": 0.19537582993507385,
+        "body_position": 0.19914060831069946,
+        "joint_limit_penalty": -0.0001025359524646774,
+        "root_orientation": 0.09973438084125519,
+        "root_position": 0.0934588685631752
+      },
+      "per_motion": {
+        "001_walk_front_slow": {
+          "failed": false,
+          "frames": 1651,
+          "normalized_return": 0.9894116758072757,
+          "reward_components": {
+            "action_smoothness": -0.0005698853055946529,
+            "body_angular_velocity": 0.19914117455482483,
+            "body_linear_velocity": 0.19939696788787842,
+            "body_orientation": 0.1965944766998291,
+            "body_position": 0.1995755434036255,
+            "joint_limit_penalty": 0.0,
+            "root_orientation": 0.09980680048465729,
+            "root_position": 0.09546676278114319
+          },
+          "reward_sum": 163.35186767578125,
+          "survival_normalized_return": 0.9894116758072757,
+          "survival_steps": 1651,
+          "tracking": {
+            "joint_position_rmse_rad": 0.037661388492297464,
+            "mean_forward_speed_m_s": 0.014519544318318367,
+            "measured_seconds": 33.02,
+            "reference_forward_speed_m_s": 0.009281657636165619,
+            "root_position_rmse_m": 0.06518632195401247,
+            "root_velocity_rmse_m_s": 0.041907491213276415,
+            "speed_axis": "world X; not heading-aligned"
+          }
+        },
+        "004_walk_frontleft_slow": {
+          "failed": false,
+          "frames": 1403,
+          "normalized_return": 0.9851784410429102,
+          "reward_components": {
+            "action_smoothness": -0.0006541521288454533,
+            "body_angular_velocity": 0.1990904062986374,
+            "body_linear_velocity": 0.1994016170501709,
+            "body_orientation": 0.19713641703128815,
+            "body_position": 0.19957295060157776,
+            "joint_limit_penalty": -1.511917889729375e-05,
+            "root_orientation": 0.09987496584653854,
+            "root_position": 0.09077142179012299
+          },
+          "reward_sum": 138.2205352783203,
+          "survival_normalized_return": 0.9851784410429102,
+          "survival_steps": 1403,
+          "tracking": {
+            "joint_position_rmse_rad": 0.032478679308340336,
+            "mean_forward_speed_m_s": 0.012640487402677536,
+            "measured_seconds": 28.060000000000002,
+            "reference_forward_speed_m_s": -0.0008561036083847284,
+            "root_position_rmse_m": 0.09632762229707822,
+            "root_velocity_rmse_m_s": 0.04353990180890279,
+            "speed_axis": "world X; not heading-aligned"
+          }
+        },
+        "009_walk_left_fast": {
+          "failed": false,
+          "frames": 1176,
+          "normalized_return": 0.968556566303279,
+          "reward_components": {
+            "action_smoothness": -0.0014620915753766894,
+            "body_angular_velocity": 0.19814078509807587,
+            "body_linear_velocity": 0.19881971180438995,
+            "body_orientation": 0.19557510316371918,
+            "body_position": 0.19941498339176178,
+            "joint_limit_penalty": -9.391593266627751e-06,
+            "root_orientation": 0.09982433915138245,
+            "root_position": 0.07825341820716858
+          },
+          "reward_sum": 113.90225219726562,
+          "survival_normalized_return": 0.968556566303279,
+          "survival_steps": 1176,
+          "tracking": {
+            "joint_position_rmse_rad": 0.04602563257799306,
+            "mean_forward_speed_m_s": 0.012111327610909939,
+            "measured_seconds": 23.52,
+            "reference_forward_speed_m_s": -0.0010219123214483261,
+            "root_position_rmse_m": 0.1568699696482818,
+            "root_velocity_rmse_m_s": 0.06551382718484211,
+            "speed_axis": "world X; not heading-aligned"
+          }
+        },
+        "029_rotate_place_slow": {
+          "failed": false,
+          "frames": 2603,
+          "normalized_return": 0.9932189073830076,
+          "reward_components": {
+            "action_smoothness": -0.00030122147290967405,
+            "body_angular_velocity": 0.19947843253612518,
+            "body_linear_velocity": 0.1996758133172989,
+            "body_orientation": 0.19779960811138153,
+            "body_position": 0.19964264333248138,
+            "joint_limit_penalty": 0.0,
+            "root_orientation": 0.09983889758586884,
+            "root_position": 0.09708496928215027
+          },
+          "reward_sum": 258.5348815917969,
+          "survival_normalized_return": 0.9932189073830076,
+          "survival_steps": 2603,
+          "tracking": {
+            "joint_position_rmse_rad": 0.02695000870629645,
+            "mean_forward_speed_m_s": 0.002836668398231268,
+            "measured_seconds": 52.06,
+            "reference_forward_speed_m_s": 0.001502233906649053,
+            "root_position_rmse_m": 0.051790216037306235,
+            "root_velocity_rmse_m_s": 0.034054121911409774,
+            "speed_axis": "world X; not heading-aligned"
+          }
+        },
+        "042_squat_shallow_repeated": {
+          "failed": false,
+          "frames": 1156,
+          "normalized_return": 0.9592306407677673,
+          "reward_components": {
+            "action_smoothness": -0.0007393980631604791,
+            "body_angular_velocity": 0.1994302123785019,
+            "body_linear_velocity": 0.19905619323253632,
+            "body_orientation": 0.19620807468891144,
+            "body_position": 0.19887711107730865,
+            "joint_limit_penalty": 0.0,
+            "root_orientation": 0.09974372386932373,
+            "root_position": 0.0666537806391716
+          },
+          "reward_sum": 110.8870620727539,
+          "survival_normalized_return": 0.9592306407677673,
+          "survival_steps": 1156,
+          "tracking": {
+            "joint_position_rmse_rad": 0.04396501735142886,
+            "mean_forward_speed_m_s": 0.025326482951641083,
+            "measured_seconds": 23.12,
+            "reference_forward_speed_m_s": -0.0007240966078825295,
+            "root_position_rmse_m": 0.2383219652879843,
+            "root_velocity_rmse_m_s": 0.05662684437398546,
+            "speed_axis": "world X; not heading-aligned"
+          }
+        },
+        "043_squat_deep_repeated": {
+          "failed": false,
+          "frames": 639,
+          "normalized_return": 0.9815730063568258,
+          "reward_components": {
+            "action_smoothness": -0.0019194867927581072,
+            "body_angular_velocity": 0.19847065210342407,
+            "body_linear_velocity": 0.1988648623228073,
+            "body_orientation": 0.19463738799095154,
+            "body_position": 0.19879496097564697,
+            "joint_limit_penalty": -1.8173134321841644e-06,
+            "root_orientation": 0.09984859824180603,
+            "root_position": 0.09287746250629425
+          },
+          "reward_sum": 62.72251510620117,
+          "survival_normalized_return": 0.9815730063568258,
+          "survival_steps": 639,
+          "tracking": {
+            "joint_position_rmse_rad": 0.04849793371119994,
+            "mean_forward_speed_m_s": -0.00497136265039444,
+            "measured_seconds": 12.780000000000001,
+            "reference_forward_speed_m_s": -0.0016616331413388252,
+            "root_position_rmse_m": 0.08377056573454512,
+            "root_velocity_rmse_m_s": 0.05370806122794582,
+            "speed_axis": "world X; not heading-aligned"
+          }
+        },
+        "047_balance_left_singleleg": {
+          "failed": false,
+          "frames": 592,
+          "normalized_return": 0.9894456734528412,
+          "reward_components": {
+            "action_smoothness": -0.0009059064323082566,
+            "body_angular_velocity": 0.1991746425628662,
+            "body_linear_velocity": 0.19933973252773285,
+            "body_orientation": 0.19396764039993286,
+            "body_position": 0.19893333315849304,
+            "joint_limit_penalty": 0.0,
+            "root_orientation": 0.09963066875934601,
+            "root_position": 0.09930556267499924
+          },
+          "reward_sum": 58.5751838684082,
+          "survival_normalized_return": 0.9894456734528412,
+          "survival_steps": 592,
+          "tracking": {
+            "joint_position_rmse_rad": 0.0642802238514584,
+            "mean_forward_speed_m_s": 0.009261234663426876,
+            "measured_seconds": 11.84,
+            "reference_forward_speed_m_s": -0.0001825613435357809,
+            "root_position_rmse_m": 0.025077624852624013,
+            "root_velocity_rmse_m_s": 0.044930962493395565,
+            "speed_axis": "world X; not heading-aligned"
+          }
+        },
+        "048_balance_right_singleleg": {
+          "failed": false,
+          "frames": 637,
+          "normalized_return": 0.9893377834062561,
+          "reward_components": {
+            "action_smoothness": -0.0005258889286778867,
+            "body_angular_velocity": 0.1994876116514206,
+            "body_linear_velocity": 0.19968707859516144,
+            "body_orientation": 0.19304831326007843,
+            "body_position": 0.19867825508117676,
+            "joint_limit_penalty": 0.0,
+            "root_orientation": 0.09985874593257904,
+            "root_position": 0.0991038903594017
+          },
+          "reward_sum": 63.020816802978516,
+          "survival_normalized_return": 0.9893377834062561,
+          "survival_steps": 637,
+          "tracking": {
+            "joint_position_rmse_rad": 0.06439526446141694,
+            "mean_forward_speed_m_s": 0.003072113264352083,
+            "measured_seconds": 12.74,
+            "reference_forward_speed_m_s": -0.0017662473255768418,
+            "root_position_rmse_m": 0.028489844788761494,
+            "root_velocity_rmse_m_s": 0.027307090921251925,
+            "speed_axis": "world X; not heading-aligned"
+          }
+        },
+        "050_march_place_slow": {
+          "failed": false,
+          "frames": 882,
+          "normalized_return": 0.9951561648829453,
+          "reward_components": {
+            "action_smoothness": -0.0005643339827656746,
+            "body_angular_velocity": 0.19956284761428833,
+            "body_linear_velocity": 0.19971370697021484,
+            "body_orientation": 0.19785642623901367,
+            "body_position": 0.1996729075908661,
+            "joint_limit_penalty": 0.0,
+            "root_orientation": 0.09989593178033829,
+            "root_position": 0.09901804476976395
+          },
+          "reward_sum": 87.77277374267578,
+          "survival_normalized_return": 0.9951561648829453,
+          "survival_steps": 882,
+          "tracking": {
+            "joint_position_rmse_rad": 0.02982999697727717,
+            "mean_forward_speed_m_s": 0.007422727532684803,
+            "measured_seconds": 17.64,
+            "reference_forward_speed_m_s": 0.0018443767912685871,
+            "root_position_rmse_m": 0.02988035785653873,
+            "root_velocity_rmse_m_s": 0.02932809914205201,
+            "speed_axis": "world X; not heading-aligned"
+          }
+        },
+        "055_lunge_front_alternating": {
+          "failed": false,
+          "frames": 1459,
+          "normalized_return": 0.9800369858823466,
+          "reward_components": {
+            "action_smoothness": -0.0009057929273694754,
+            "body_angular_velocity": 0.19868849217891693,
+            "body_linear_velocity": 0.19896122813224792,
+            "body_orientation": 0.19583064317703247,
+            "body_position": 0.19928590953350067,
+            "joint_limit_penalty": 0.0,
+            "root_orientation": 0.09957007318735123,
+            "root_position": 0.0886065810918808
+          },
+          "reward_sum": 142.98739624023438,
+          "survival_normalized_return": 0.9800369858823466,
+          "survival_steps": 1459,
+          "tracking": {
+            "joint_position_rmse_rad": 0.041481724589752314,
+            "mean_forward_speed_m_s": 0.006213420536369085,
+            "measured_seconds": 29.18,
+            "reference_forward_speed_m_s": -0.0024355174973607063,
+            "root_position_rmse_m": 0.10687522514498013,
+            "root_velocity_rmse_m_s": 0.059874259477268835,
+            "speed_axis": "world X; not heading-aligned"
+          }
+        },
+        "056_lunge_side_alternating": {
+          "failed": false,
+          "frames": 1305,
+          "normalized_return": 0.9877749622096503,
+          "reward_components": {
+            "action_smoothness": -0.0010192663175985217,
+            "body_angular_velocity": 0.1985854208469391,
+            "body_linear_velocity": 0.19889044761657715,
+            "body_orientation": 0.1955472230911255,
+            "body_position": 0.1992451399564743,
+            "joint_limit_penalty": 0.0,
+            "root_orientation": 0.09959415346384048,
+            "root_position": 0.09693104773759842
+          },
+          "reward_sum": 128.90463256835938,
+          "survival_normalized_return": 0.9877749622096503,
+          "survival_steps": 1305,
+          "tracking": {
+            "joint_position_rmse_rad": 0.04511359755778161,
+            "mean_forward_speed_m_s": 0.001574504654854536,
+            "measured_seconds": 26.1,
+            "reference_forward_speed_m_s": -0.0031613712199032307,
+            "root_position_rmse_m": 0.05325078221063368,
+            "root_velocity_rmse_m_s": 0.05926670422037795,
+            "speed_axis": "world X; not heading-aligned"
+          }
+        },
+        "058_punch_front_alternating": {
+          "failed": false,
+          "frames": 677,
+          "normalized_return": 0.9741768773584633,
+          "reward_components": {
+            "action_smoothness": -0.007341291289776564,
+            "body_angular_velocity": 0.19553855061531067,
+            "body_linear_velocity": 0.19713780283927917,
+            "body_orientation": 0.19376587867736816,
+            "body_position": 0.1986536979675293,
+            "joint_limit_penalty": -3.373544677742757e-05,
+            "root_orientation": 0.09974540770053864,
+            "root_position": 0.09671032428741455
+          },
+          "reward_sum": 65.95177459716797,
+          "survival_normalized_return": 0.9741768773584633,
+          "survival_steps": 677,
+          "tracking": {
+            "joint_position_rmse_rad": 0.056754653114841104,
+            "mean_forward_speed_m_s": 0.013476595282554626,
+            "measured_seconds": 13.540000000000001,
+            "reference_forward_speed_m_s": 0.0010604100534692407,
+            "root_position_rmse_m": 0.05518189117900793,
+            "root_velocity_rmse_m_s": 0.054345219945002084,
+            "speed_axis": "world X; not heading-aligned"
+          }
+        },
+        "062_bend_side_alternating": {
+          "failed": false,
+          "frames": 1215,
+          "normalized_return": 0.9952027120707948,
+          "reward_components": {
+            "action_smoothness": -0.00025444175116717815,
+            "body_angular_velocity": 0.19969576597213745,
+            "body_linear_velocity": 0.19985276460647583,
+            "body_orientation": 0.19727443158626556,
+            "body_position": 0.1994343400001526,
+            "joint_limit_penalty": 0.0,
+            "root_orientation": 0.09987209737300873,
+            "root_position": 0.0993286743760109
+          },
+          "reward_sum": 120.91712951660156,
+          "survival_normalized_return": 0.9952027120707948,
+          "survival_steps": 1215,
+          "tracking": {
+            "joint_position_rmse_rad": 0.03140813706194587,
+            "mean_forward_speed_m_s": 0.00990646705031395,
+            "measured_seconds": 24.3,
+            "reference_forward_speed_m_s": -0.0005982592119835317,
+            "root_position_rmse_m": 0.0246410735279376,
+            "root_velocity_rmse_m_s": 0.020450722612683898,
+            "speed_axis": "world X; not heading-aligned"
+          }
+        },
+        "063_twist_torso_alternating": {
+          "failed": false,
+          "frames": 1582,
+          "normalized_return": 0.994028894397914,
+          "reward_components": {
+            "action_smoothness": -0.0002073968353215605,
+            "body_angular_velocity": 0.19966039061546326,
+            "body_linear_velocity": 0.1998329609632492,
+            "body_orientation": 0.19650223851203918,
+            "body_position": 0.19937659800052643,
+            "joint_limit_penalty": 0.0,
+            "root_orientation": 0.09979052096605301,
+            "root_position": 0.09907322376966476
+          },
+          "reward_sum": 157.25537109375,
+          "survival_normalized_return": 0.994028894397914,
+          "survival_steps": 1582,
+          "tracking": {
+            "joint_position_rmse_rad": 0.038531590701350364,
+            "mean_forward_speed_m_s": 0.007734780665487051,
+            "measured_seconds": 31.64,
+            "reference_forward_speed_m_s": -0.0005164219764992595,
+            "root_position_rmse_m": 0.028961216812996765,
+            "root_velocity_rmse_m_s": 0.02342407144857325,
+            "speed_axis": "world X; not heading-aligned"
+          }
+        },
+        "073_squat_leg_sweep": {
+          "failed": false,
+          "frames": 626,
+          "normalized_return": 0.9768155131477136,
+          "reward_components": {
+            "action_smoothness": -0.001790117472410202,
+            "body_angular_velocity": 0.19651946425437927,
+            "body_linear_velocity": 0.19672316312789917,
+            "body_orientation": 0.1909673511981964,
+            "body_position": 0.19822952151298523,
+            "joint_limit_penalty": -0.0015465683536604047,
+            "root_orientation": 0.09915655851364136,
+            "root_position": 0.09855608642101288
+          },
+          "reward_sum": 61.148651123046875,
+          "survival_normalized_return": 0.9768155131477136,
+          "survival_steps": 626,
+          "tracking": {
+            "joint_position_rmse_rad": 0.06894540273428137,
+            "mean_forward_speed_m_s": 0.00421869195997715,
+            "measured_seconds": 12.52,
+            "reference_forward_speed_m_s": 0.001983900321647525,
+            "root_position_rmse_m": 0.03626033953821996,
+            "root_velocity_rmse_m_s": 0.08299157320380746,
+            "speed_axis": "world X; not heading-aligned"
+          }
+        },
+        "077_reach_overhead_both": {
+          "failed": false,
+          "frames": 740,
+          "normalized_return": 0.9888593312856313,
+          "reward_components": {
+            "action_smoothness": -0.0007433934370055795,
+            "body_angular_velocity": 0.19929718971252441,
+            "body_linear_velocity": 0.19963917136192322,
+            "body_orientation": 0.19288697838783264,
+            "body_position": 0.19906510412693024,
+            "joint_limit_penalty": 0.0,
+            "root_orientation": 0.09942235052585602,
+            "root_position": 0.09929228574037552
+          },
+          "reward_sum": 73.17559051513672,
+          "survival_normalized_return": 0.9888593312856313,
+          "survival_steps": 740,
+          "tracking": {
+            "joint_position_rmse_rad": 0.06137000927001221,
+            "mean_forward_speed_m_s": 0.003371171187609434,
+            "measured_seconds": 14.8,
+            "reference_forward_speed_m_s": 0.00011315132724121213,
+            "root_position_rmse_m": 0.025301923924727947,
+            "root_velocity_rmse_m_s": 0.029949883771299275,
+            "speed_axis": "world X; not heading-aligned"
+          }
+        },
+        "080_reach_front_both": {
+          "failed": false,
+          "frames": 854,
+          "normalized_return": 0.9820344911526181,
+          "reward_components": {
+            "action_smoothness": -0.0009011306683532894,
+            "body_angular_velocity": 0.19940529763698578,
+            "body_linear_velocity": 0.1995711773633957,
+            "body_orientation": 0.1946427971124649,
+            "body_position": 0.19852831959724426,
+            "joint_limit_penalty": -0.00044408717076294124,
+            "root_orientation": 0.09975821524858475,
+            "root_position": 0.09147461503744125
+          },
+          "reward_sum": 83.8657455444336,
+          "survival_normalized_return": 0.9820344911526181,
+          "survival_steps": 854,
+          "tracking": {
+            "joint_position_rmse_rad": 0.04505688654555382,
+            "mean_forward_speed_m_s": 0.002904493361711502,
+            "measured_seconds": 17.080000000000002,
+            "reference_forward_speed_m_s": -0.00010599804227240384,
+            "root_position_rmse_m": 0.0908654162480517,
+            "root_velocity_rmse_m_s": 0.03739899627805208,
+            "speed_axis": "world X; not heading-aligned"
+          }
+        },
+        "088_shift_frontback_weight": {
+          "failed": false,
+          "frames": 2430,
+          "normalized_return": 0.9944076224119084,
+          "reward_components": {
+            "action_smoothness": -0.00015593835269100964,
+            "body_angular_velocity": 0.1997154951095581,
+            "body_linear_velocity": 0.19988620281219482,
+            "body_orientation": 0.1971689760684967,
+            "body_position": 0.19952400028705597,
+            "joint_limit_penalty": 0.0,
+            "root_orientation": 0.09986302256584167,
+            "root_position": 0.09840681403875351
+          },
+          "reward_sum": 241.64105224609375,
+          "survival_normalized_return": 0.9944076224119084,
+          "survival_steps": 2430,
+          "tracking": {
+            "joint_position_rmse_rad": 0.03429046288781542,
+            "mean_forward_speed_m_s": 0.006559143308550119,
+            "measured_seconds": 48.6,
+            "reference_forward_speed_m_s": 0.0004384389612823725,
+            "root_position_rmse_m": 0.038105120779488987,
+            "root_velocity_rmse_m_s": 0.01898129498919303,
+            "speed_axis": "world X; not heading-aligned"
+          }
+        },
+        "089_shift_leftright_weight": {
+          "failed": false,
+          "frames": 1722,
+          "normalized_return": 0.9913318027048852,
+          "reward_components": {
+            "action_smoothness": -0.00023612876248080283,
+            "body_angular_velocity": 0.19970154762268066,
+            "body_linear_velocity": 0.1997881680727005,
+            "body_orientation": 0.19575099647045135,
+            "body_position": 0.1989966481924057,
+            "joint_limit_penalty": 0.0,
+            "root_orientation": 0.09988051652908325,
+            "root_position": 0.0974506065249443
+          },
+          "reward_sum": 170.70733642578125,
+          "survival_normalized_return": 0.9913318027048852,
+          "survival_steps": 1722,
+          "tracking": {
+            "joint_position_rmse_rad": 0.044856248996967676,
+            "mean_forward_speed_m_s": 0.007618619129061699,
+            "measured_seconds": 34.44,
+            "reference_forward_speed_m_s": -0.0007254531956277788,
+            "root_position_rmse_m": 0.048374479100499496,
+            "root_velocity_rmse_m_s": 0.02597174097790114,
+            "speed_axis": "world X; not heading-aligned"
+          }
+        },
+        "091_step_threshold_forward": {
+          "failed": false,
+          "frames": 955,
+          "normalized_return": 0.9735461329914512,
+          "reward_components": {
+            "action_smoothness": -0.001428363029845059,
+            "body_angular_velocity": 0.19805872440338135,
+            "body_linear_velocity": 0.19872735440731049,
+            "body_orientation": 0.19435548782348633,
+            "body_position": 0.19931012392044067,
+            "joint_limit_penalty": 0.0,
+            "root_orientation": 0.09971193224191666,
+            "root_position": 0.0848117247223854
+          },
+          "reward_sum": 92.9736557006836,
+          "survival_normalized_return": 0.9735461329914512,
+          "survival_steps": 955,
+          "tracking": {
+            "joint_position_rmse_rad": 0.05529955046614495,
+            "mean_forward_speed_m_s": 0.011398376896977425,
+            "measured_seconds": 19.1,
+            "reference_forward_speed_m_s": 0.010303866118192673,
+            "root_position_rmse_m": 0.12680901637916278,
+            "root_velocity_rmse_m_s": 0.05886958681215091,
+            "speed_axis": "world X; not heading-aligned"
+          }
+        }
+      }
+    },
+    "t1_010000": {
+      "task": "tracking/t1",
+      "iteration": 10000,
+      "num_envs": 4096,
+      "data": "BoosterRobotics/booster_assets; one dance clip",
+      "checkpoint_sha256": "53d391d03d4b6e0f4d0f3c0c6dfc8dad44ce45d39c619a309f8674039ed59879",
+      "source_evaluation_sha256": "5a829c41857f85bc75c0426dafbea941152f05271bcf18af4c172f0fd3e5efb7",
+      "norm_return": 0.8702664509543299,
+      "norm_return_framew": 0.8702664509543299,
+      "n_failed": 0,
+      "failed": [],
+      "reward_components": {
+        "action_smoothness": -0.036648936569690704,
+        "body_angular_velocity": 0.176502525806427,
+        "body_linear_velocity": 0.19489683210849762,
+        "body_orientation": 0.15468332171440125,
+        "body_position": 0.19816216826438904,
+        "joint_limit_penalty": -0.00016229460015892982,
+        "root_orientation": 0.09911046177148819,
+        "root_position": 0.08372209221124649
+      },
+      "per_motion": {
+        "t1_dance": {
+          "failed": false,
+          "frames": 1634,
+          "normalized_return": 0.8702664509543299,
+          "reward_components": {
+            "action_smoothness": -0.036648936569690704,
+            "body_angular_velocity": 0.176502525806427,
+            "body_linear_velocity": 0.19489683210849762,
+            "body_orientation": 0.15468332171440125,
+            "body_position": 0.19816216826438904,
+            "joint_limit_penalty": -0.00016229460015892982,
+            "root_orientation": 0.09911046177148819,
+            "root_position": 0.08372209221124649
+          },
+          "reward_sum": 142.2015380859375,
+          "survival_normalized_return": 0.8702664509543299,
+          "survival_steps": 1634,
+          "tracking": {
+            "joint_position_rmse_rad": 0.317124434717597,
+            "mean_forward_speed_m_s": -0.001230197143740952,
+            "measured_seconds": 32.68,
+            "reference_forward_speed_m_s": -0.0060686166398227215,
+            "root_position_rmse_m": 0.12837569552663097,
+            "root_velocity_rmse_m_s": 0.09390706574503023,
+            "speed_axis": "world X; not heading-aligned"
+          }
+        }
+      }
+    },
+    "bumi_010000": {
+      "task": "tracking/bumi",
+      "iteration": 10000,
+      "num_envs": 4096,
+      "data": "Noetix-Robotics/noetix_bumi_lab; one Bumi V3 vendor clip (2)",
+      "data_revision": "2454535c967cd1d6f04dfe0f0289f3c6c608e596",
+      "checkpoint_sha256": "6ff8d1d427ae65af69201448065087645f03843d3ccbb31e5a4c270b9121b323",
+      "source_evaluation_sha256": "849ec8fda1dd246f47ed93b861c312525075e288d38bed2146dc6635df97c4e2",
+      "source_data_manifest_sha256": "5c2aa2080f8fb5abb356c649e0aa92a92fd017ee69d74b74b7f73502671a1a75",
+      "norm_return": 0.9372711181640625,
+      "norm_return_framew": 0.9372711181640625,
+      "n_failed": 0,
+      "failed": [],
+      "reward_components": {
+        "action_smoothness": -0.0273122638463974,
+        "body_angular_velocity": 0.1849426031112671,
+        "body_linear_velocity": 0.19401615858078003,
+        "body_orientation": 0.18848510086536407,
+        "body_position": 0.19927752017974854,
+        "joint_limit_penalty": -1.3972638043924235e-05,
+        "root_orientation": 0.09899583458900452,
+        "root_position": 0.098879873752594
+      },
+      "per_motion": {
+        "2": {
+          "failed": false,
+          "frames": 341,
+          "normalized_return": 0.9372711181640625,
+          "reward_components": {
+            "action_smoothness": -0.0273122638463974,
+            "body_angular_velocity": 0.1849426031112671,
+            "body_linear_velocity": 0.19401615858078003,
+            "body_orientation": 0.18848510086536407,
+            "body_position": 0.19927752017974854,
+            "joint_limit_penalty": -1.3972638043924235e-05,
+            "root_orientation": 0.09899583458900452,
+            "root_position": 0.098879873752594
+          },
+          "reward_sum": 31.96094512939453,
+          "survival_normalized_return": 0.9372711181640625,
+          "survival_steps": 341,
+          "tracking": {
+            "joint_position_rmse_rad": 0.08756909101360726,
+            "mean_forward_speed_m_s": -0.007917260751128197,
+            "measured_seconds": 6.82,
+            "reference_forward_speed_m_s": 0.0015990319661796093,
+            "root_position_rmse_m": 0.03187634808246793,
+            "root_velocity_rmse_m_s": 0.12914911424550565,
+            "speed_axis": "world X; not heading-aligned"
+          }
+        }
+      }
+    },
+    "pi_plus_010000": {
+      "task": "tracking/pi_plus",
+      "iteration": 10000,
+      "num_envs": 4096,
+      "data": "HighTorque-Robotics/Mini-Pi-Plus_BeyondMimic; four vendor motions",
+      "data_revision": "df3fcf16bf2cf645b8e3c24ee1e395d453f78f80",
+      "checkpoint_sha256": "85adf4f68b825f79f0421803fd0f4b147f7251bdb30450297891ae106c06e622",
+      "source_evaluation_sha256": "a737cf0b9ad41b929257b6aedcfe6300cad68fe7661f3a3d57c728b3c8e44001",
+      "norm_return": 0.8407056643148365,
+      "norm_return_framew": 0.8140474525934119,
+      "n_failed": 0,
+      "failed": [],
+      "reward_components": {
+        "action_smoothness": -0.02418428100645542,
+        "body_angular_velocity": 0.1609097719192505,
+        "body_linear_velocity": 0.1803978681564331,
+        "body_orientation": 0.14261342585086823,
+        "body_position": 0.1916598677635193,
+        "joint_limit_penalty": -0.00010668132017599419,
+        "root_orientation": 0.09254675358533859,
+        "root_position": 0.09686888009309769
+      },
+      "per_motion": {
+        "pi_plus_dance1_subject2": {
+          "failed": false,
+          "frames": 930,
+          "normalized_return": 0.8943961358839466,
+          "reward_components": {
+            "action_smoothness": -0.03737656772136688,
+            "body_angular_velocity": 0.1727084070444107,
+            "body_linear_velocity": 0.18216417729854584,
+            "body_orientation": 0.1811467856168747,
+            "body_position": 0.19927248358726501,
+            "joint_limit_penalty": -0.0001418920001015067,
+            "root_orientation": 0.0978291928768158,
+            "root_position": 0.09879376739263535
+          },
+          "reward_sum": 83.17884063720703,
+          "survival_normalized_return": 0.8943961358839466,
+          "survival_steps": 930,
+          "tracking": {
+            "joint_position_rmse_rad": 0.11789743829103674,
+            "mean_forward_speed_m_s": 0.0001409677934134379,
+            "measured_seconds": 18.6,
+            "reference_forward_speed_m_s": 8.547517791157588e-05,
+            "root_position_rmse_m": 0.03316491221124557,
+            "root_velocity_rmse_m_s": 0.3205905730743317,
+            "speed_axis": "world X; not heading-aligned"
+          }
+        },
+        "pi_plus_goal": {
+          "failed": false,
+          "frames": 245,
+          "normalized_return": 0.9192212941695233,
+          "reward_components": {
+            "action_smoothness": -0.021330691874027252,
+            "body_angular_velocity": 0.1805461198091507,
+            "body_linear_velocity": 0.19123688340187073,
+            "body_orientation": 0.17620469629764557,
+            "body_position": 0.1977212280035019,
+            "joint_limit_penalty": 0.0,
+            "root_orientation": 0.09666840732097626,
+            "root_position": 0.0981743186712265
+          },
+          "reward_sum": 22.52092170715332,
+          "survival_normalized_return": 0.9192212941695233,
+          "survival_steps": 245,
+          "tracking": {
+            "joint_position_rmse_rad": 0.12440064655832407,
+            "mean_forward_speed_m_s": 0.20917083323001862,
+            "measured_seconds": 4.9,
+            "reference_forward_speed_m_s": 0.21670512855052948,
+            "root_position_rmse_m": 0.040983111971340906,
+            "root_velocity_rmse_m_s": 0.1679151416219064,
+            "speed_axis": "world X; not heading-aligned"
+          }
+        },
+        "pi_plus_kungfu": {
+          "failed": false,
+          "frames": 603,
+          "normalized_return": 0.632397792430264,
+          "reward_components": {
+            "action_smoothness": -0.026953093707561493,
+            "body_angular_velocity": 0.11086147278547287,
+            "body_linear_velocity": 0.1548823118209839,
+            "body_orientation": 0.05180487409234047,
+            "body_position": 0.17131169140338898,
+            "joint_limit_penalty": -0.00028483328060247004,
+            "root_orientation": 0.07937003672122955,
+            "root_position": 0.09140519052743912
+          },
+          "reward_sum": 38.13358688354492,
+          "survival_normalized_return": 0.632397792430264,
+          "survival_steps": 603,
+          "tracking": {
+            "joint_position_rmse_rad": 0.6259569947610728,
+            "mean_forward_speed_m_s": 0.017193898558616638,
+            "measured_seconds": 12.06,
+            "reference_forward_speed_m_s": 0.009104148484766483,
+            "root_position_rmse_m": 0.09161165503108189,
+            "root_velocity_rmse_m_s": 0.310546910987708,
+            "speed_axis": "world X; not heading-aligned"
+          }
+        },
+        "pi_plus_right_big_kick_cut": {
+          "failed": false,
+          "frames": 88,
+          "normalized_return": 0.9168074347756126,
+          "reward_components": {
+            "action_smoothness": -0.011076769791543484,
+            "body_angular_velocity": 0.17952309548854828,
+            "body_linear_velocity": 0.19330814480781555,
+            "body_orientation": 0.16129735112190247,
+            "body_position": 0.19833411276340485,
+            "joint_limit_penalty": 0.0,
+            "root_orientation": 0.09631936997175217,
+            "root_position": 0.09910225123167038
+          },
+          "reward_sum": 8.06790542602539,
+          "survival_normalized_return": 0.9168074347756126,
+          "survival_steps": 88,
+          "tracking": {
+            "joint_position_rmse_rad": 0.17168591133267247,
+            "mean_forward_speed_m_s": 0.008202055469155312,
+            "measured_seconds": 1.76,
+            "reference_forward_speed_m_s": -0.0066589778289198875,
+            "root_position_rmse_m": 0.02850040158437986,
+            "root_velocity_rmse_m_s": 0.1603672684331855,
+            "speed_axis": "world X; not heading-aligned"
+          }
+        }
+      }
+    }
+  },
+  "previous_comparison": {
+    "tracking/a3": {
+      "iteration": 2000,
+      "norm_return": 0.9002951961054986,
+      "n_failed": 1,
+      "source_evaluation_sha256": "e60344245a766c948a13461c047b631fd44598b22e314f666dfada1e68e0d5cb"
+    },
+    "tracking/t1": {
+      "iteration": 2000,
+      "norm_return": 0.8099554801950256,
+      "n_failed": 0,
+      "source_evaluation_sha256": "854b3a06af3621da132648fddd0520b4384f2ec295034ba547312ffc462a685a"
+    },
+    "tracking/bumi": {
+      "iteration": 2000,
+      "norm_return": 0.90919656837441,
+      "n_failed": 0,
+      "source_evaluation_sha256": "2ec751c999debde97e4ce3e27a1b7976bb038ec4ed27adf8f8e10a5ca5b17bad"
+    },
+    "tracking/pi_plus": {
+      "iteration": 2000,
+      "norm_return": 0.6541101677810921,
+      "n_failed": 0,
+      "source_evaluation_sha256": "62ed011d213d957112946a0df8ee48bd47db7defb1f99d7b4740aa5d18f77f3f"
+    }
+  },
+  "clips": [
+    {
+      "id": "g1_dance_032000",
+      "title": "G1 dance",
+      "run": "g1_032000",
+      "motion_or_trial": "dance2_subject1",
+      "source_video_sha256": "3f40573d6e3740c4b0ab78c4b67370d4530d5dd2891ed874148fde0f11f65f66",
+      "source_render_metadata_sha256": "97b4aac1a10d16fac0ab594a95b9add3e551aff1e8917a3075956fafc47548ff",
+      "source_manifest_sha256": "89254d6153ddc8d8bbd4a70f91aa48176e6dd8251f67765025374cd5d6543c26",
+      "video_source_start_seconds": 0,
+      "gif_source_start_seconds": 2,
+      "playback_speed": 1.0,
+      "mp4": {
+        "sha256": "5540009e5bf8ac6b5490e0a236e658c52be6397cee92c28c97711314c8edc57c",
+        "bytes": 1480414,
+        "frames": 350,
+        "fps": 25.0,
+        "duration_seconds": 14,
+        "width": 960,
+        "height": 540,
+        "full_decode": "passed"
+      },
+      "gif": {
+        "sha256": "f3f0262628c01067daf44c6060979bb565cc4bde02c271ff7bcadfb3bff19f10",
+        "bytes": 2292439,
+        "frames": 60,
+        "fps": 10,
+        "duration_seconds": 6.0,
+        "loop": 0,
+        "width": 480,
+        "height": 270,
+        "full_decode": "passed",
+        "pixel_motion_check": "passed"
+      },
+      "source_reference": {
+        "clip": "dance2_subject1",
+        "start_seconds": 117.88,
+        "duration_seconds": 14.0,
+        "failed": false,
+        "observed_active_steps": 11283
+      }
+    },
+    {
+      "id": "g1_jump_032000",
+      "title": "G1 repeated jumps",
+      "run": "g1_032000",
+      "motion_or_trial": "jumps1_subject1",
+      "source_video_sha256": "6dd1b29e80685a631e37ae6737f7ebfaf3b6e77be2d02faac508037ceace23f0",
+      "source_render_metadata_sha256": "e913a9cba113b3c1de4825a2dcdcc099b910a8659465f025adfa2ace491003c7",
+      "source_manifest_sha256": "89254d6153ddc8d8bbd4a70f91aa48176e6dd8251f67765025374cd5d6543c26",
+      "video_source_start_seconds": 0,
+      "gif_source_start_seconds": 1,
+      "playback_speed": 1.0,
+      "mp4": {
+        "sha256": "197866df03b52a5329427f8a9e06b94d758341fa80b63f5e4b1d4433f87b3a23",
+        "bytes": 1669433,
+        "frames": 350,
+        "fps": 25.0,
+        "duration_seconds": 14,
+        "width": 960,
+        "height": 540,
+        "full_decode": "passed"
+      },
+      "gif": {
+        "sha256": "e9f898f98bad0c8dc705a45e775247969cfb313859d511bbe1c0272d53402ded",
+        "bytes": 2299624,
+        "frames": 60,
+        "fps": 10,
+        "duration_seconds": 6.0,
+        "loop": 0,
+        "width": 480,
+        "height": 270,
+        "full_decode": "passed",
+        "pixel_motion_check": "passed"
+      },
+      "source_reference": {
+        "clip": "jumps1_subject1",
+        "start_seconds": 8.56,
+        "duration_seconds": 14.0,
+        "failed": false,
+        "observed_active_steps": 12221
+      }
+    },
+    {
+      "id": "g1_getup_032000",
+      "title": "G1 reference-guided get-up",
+      "run": "g1_032000",
+      "motion_or_trial": "fallAndGetUp1_subject1",
+      "source_video_sha256": "5d15ccfc2dde84614a4ea29499243ec0870f5c474c86ad69526466e3a90ae5fa",
+      "source_render_metadata_sha256": "6ec219bf942802a623c7b92ffb2a9e4c872db506515db0bbc7e82fa1ac77da86",
+      "source_manifest_sha256": "89254d6153ddc8d8bbd4a70f91aa48176e6dd8251f67765025374cd5d6543c26",
+      "video_source_start_seconds": 0,
+      "gif_source_start_seconds": 0,
+      "playback_speed": 1.0,
+      "mp4": {
+        "sha256": "0634a491e705b5e4060f2f539c902b7b1f36c7b9c68217f49d7f3a4c544454e2",
+        "bytes": 1264405,
+        "frames": 400,
+        "fps": 25.0,
+        "duration_seconds": 16,
+        "width": 960,
+        "height": 540,
+        "full_decode": "passed"
+      },
+      "gif": {
+        "sha256": "32e26e6eb6c904b83dd7520c51ac82e79aae674d0a71524fdd07858cbde4c371",
+        "bytes": 2277842,
+        "frames": 80,
+        "fps": 10,
+        "duration_seconds": 8.0,
+        "loop": 0,
+        "width": 480,
+        "height": 270,
+        "full_decode": "passed",
+        "pixel_motion_check": "passed"
+      },
+      "source_reference": {
+        "clip": "fallAndGetUp1_subject1",
+        "start_seconds": 66.04,
+        "duration_seconds": 16.0,
+        "failed": false,
+        "observed_active_steps": 8410
+      }
+    },
+    {
+      "id": "go2_trot_010000",
+      "title": "Go2 trot tracking",
+      "run": "go2_trot_010000",
+      "motion_or_trial": "ai4_dog_trot_00",
+      "source_video_sha256": "6b7f769675935465dd88d817e8df6294291b51167195081172de338852615377",
+      "source_render_metadata_sha256": "70e2a6dc631c68c977119597494540fd719a22348c669ab4622204b6cdce8031",
+      "source_manifest_sha256": "28bf8cb3feb6611b29c5eaf626c0b60e9d356ede333639c625ea251383eeb3cb",
+      "video_source_start_seconds": 0,
+      "gif_source_start_seconds": 1,
+      "playback_speed": 1.0,
+      "mp4": {
+        "sha256": "a29cf23a6935be97f229078764156dcc52ade0e4b93af0314597331299fcaa60",
+        "bytes": 820127,
+        "frames": 225,
+        "fps": 25.0,
+        "duration_seconds": 9,
+        "width": 960,
+        "height": 540,
+        "full_decode": "passed"
+      },
+      "gif": {
+        "sha256": "b113ea12879b9ddc3aae613da9eb85b9a7f27f2f5be3b663406d024813011d42",
+        "bytes": 1751623,
+        "frames": 60,
+        "fps": 10,
+        "duration_seconds": 6.0,
+        "loop": 0,
+        "width": 480,
+        "height": 270,
+        "full_decode": "passed",
+        "pixel_motion_check": "passed"
+      },
+      "source_reference": {
+        "clip": "ai4_dog_trot_00",
+        "start_seconds": 0.0,
+        "duration_seconds": 9.0,
+        "failed": false,
+        "observed_active_steps": 455
+      }
+    },
+    {
+      "id": "go2_adaptive_010000",
+      "title": "Go2 mixed-height bar passage",
+      "run": "go2_adaptive_010000",
+      "motion_or_trial": "preselected trial 0",
+      "source_video_sha256": "9718a9589b24ab9c5a2ad419c4569113b2a7e421c9f1e378cb4173783bb2e402",
+      "source_render_metadata_sha256": "2568138b1c16053e86ed85585e71dee47a5fd9c6a1b1235cebe696ac111f3de7",
+      "source_manifest_sha256": "1383e8ab641b1f772f39be1a1f5a42247c220a779c6b481128d557c274c349ce",
+      "video_source_start_seconds": 0,
+      "gif_source_start_seconds": 1,
+      "playback_speed": 1.0,
+      "mp4": {
+        "sha256": "e7d2d034aeca4e8fd697e0afafbb218a55730c5159abe5e2dca7bb77a5ef7a11",
+        "bytes": 1352651,
+        "frames": 400,
+        "fps": 25.0,
+        "duration_seconds": 16,
+        "width": 960,
+        "height": 540,
+        "full_decode": "passed"
+      },
+      "gif": {
+        "sha256": "959498b44c08d497a4b990846113ee85762aa2077ed171da236842cd4a17ad5a",
+        "bytes": 2517523,
+        "frames": 100,
+        "fps": 10,
+        "duration_seconds": 10.0,
+        "loop": 0,
+        "width": 480,
+        "height": 270,
+        "full_decode": "passed",
+        "pixel_motion_check": "passed"
+      }
+    },
+    {
+      "id": "a3_walk_010000",
+      "title": "A3 walking",
+      "run": "a3_010000",
+      "motion_or_trial": "001_walk_front_slow",
+      "source_video_sha256": "75a0ec4371034a88dd0a51e839ac08ad23ce18b82760c5c3a30156512a5d1f3d",
+      "source_render_metadata_sha256": "38e1fd81f3e18eb5e1d333a8b70a41646501d2a9accd9527a77960af66c308cf",
+      "source_manifest_sha256": "2824338beddcaa973a3cfab5a382b8880f1367c284c27d91f0e6dacaba2b721b",
+      "video_source_start_seconds": 0,
+      "gif_source_start_seconds": 2,
+      "playback_speed": 1.0,
+      "mp4": {
+        "sha256": "83a21cdb47848adb2e30a1e2c68cf28dda775d50fa5aec3f3840594a1bce128a",
+        "bytes": 964412,
+        "frames": 300,
+        "fps": 25.0,
+        "duration_seconds": 12,
+        "width": 960,
+        "height": 540,
+        "full_decode": "passed"
+      },
+      "gif": {
+        "sha256": "2672509dc4dd25e139924c698f5bc95362f41fa27985d0159d516791290f6982",
+        "bytes": 2225145,
+        "frames": 60,
+        "fps": 10,
+        "duration_seconds": 6.0,
+        "loop": 0,
+        "width": 480,
+        "height": 270,
+        "full_decode": "passed",
+        "pixel_motion_check": "passed"
+      },
+      "source_reference": {
+        "clip": "001_walk_front_slow",
+        "start_seconds": 0.0,
+        "duration_seconds": 12.0,
+        "failed": false,
+        "observed_active_steps": 1651
+      }
+    },
+    {
+      "id": "a3_punch_010000",
+      "title": "A3 alternating punches",
+      "run": "a3_010000",
+      "motion_or_trial": "058_punch_front_alternating",
+      "source_video_sha256": "75a0ec4371034a88dd0a51e839ac08ad23ce18b82760c5c3a30156512a5d1f3d",
+      "source_render_metadata_sha256": "38e1fd81f3e18eb5e1d333a8b70a41646501d2a9accd9527a77960af66c308cf",
+      "source_manifest_sha256": "2824338beddcaa973a3cfab5a382b8880f1367c284c27d91f0e6dacaba2b721b",
+      "video_source_start_seconds": 24,
+      "gif_source_start_seconds": 25,
+      "playback_speed": 1.0,
+      "mp4": {
+        "sha256": "b601825406d5f2ec57c1a9b0b0f6ea93a8315a2914be148a17f389a459ee982c",
+        "bytes": 871278,
+        "frames": 300,
+        "fps": 25.0,
+        "duration_seconds": 12,
+        "width": 960,
+        "height": 540,
+        "full_decode": "passed"
+      },
+      "gif": {
+        "sha256": "acf826690faf00109c7730bcd22c881979b921bbd4f572a98bcfb010bad9690e",
+        "bytes": 1823022,
+        "frames": 60,
+        "fps": 10,
+        "duration_seconds": 6.0,
+        "loop": 0,
+        "width": 480,
+        "height": 270,
+        "full_decode": "passed",
+        "pixel_motion_check": "passed"
+      },
+      "source_reference": {
+        "clip": "058_punch_front_alternating",
+        "start_seconds": 0.0,
+        "duration_seconds": 12.0,
+        "failed": false,
+        "observed_active_steps": 677
+      }
+    },
+    {
+      "id": "t1_dance_010000",
+      "title": "T1 dance",
+      "run": "t1_010000",
+      "motion_or_trial": "t1_dance",
+      "source_video_sha256": "656618d611ad7d6c5762d56702e8b04287f68edbcb72b3911c4f66da1cdc3910",
+      "source_render_metadata_sha256": "894d17deead3cb8aa728ec64e4e74e7130b823d651680f0cc99a928c781157ab",
+      "source_manifest_sha256": "3f7956e29c4d25ce0fdef253c19a49b0e127f1336d70952c85aadf8004b73e42",
+      "video_source_start_seconds": 0,
+      "gif_source_start_seconds": 2,
+      "playback_speed": 1.0,
+      "mp4": {
+        "sha256": "ca69ded3ba8b0c27b4e6ffb0295dc7f93e7b295fdd98e3ade2de1cca20994a8c",
+        "bytes": 969329,
+        "frames": 300,
+        "fps": 25.0,
+        "duration_seconds": 12,
+        "width": 960,
+        "height": 540,
+        "full_decode": "passed"
+      },
+      "gif": {
+        "sha256": "49233bbffa2bd21096c705f3a2f41dad76f25a4749600c8de0c2db5f6768df67",
+        "bytes": 1953748,
+        "frames": 60,
+        "fps": 10,
+        "duration_seconds": 6.0,
+        "loop": 0,
+        "width": 480,
+        "height": 270,
+        "full_decode": "passed",
+        "pixel_motion_check": "passed"
+      },
+      "source_reference": {
+        "clip": "t1_dance",
+        "start_seconds": 0.0,
+        "duration_seconds": 12.0,
+        "failed": false,
+        "observed_active_steps": 1634
+      }
+    },
+    {
+      "id": "bumi_motion_010000",
+      "title": "Bumi vendor motion tracking",
+      "run": "bumi_010000",
+      "motion_or_trial": "2",
+      "source_video_sha256": "4110674cbcb680f91b1217f78284f5f51cc916350d51b4e4bfdf7b1c4718ae32",
+      "source_render_metadata_sha256": "057327443e6db4864e64539d0de950dcba1ab2ff15a8ccb0ce22f9becd962fff",
+      "source_manifest_sha256": "5a96d32f8c7eabb18f963a6885ee3067db71f9c60950b920ce73525facaf9dd3",
+      "video_source_start_seconds": 0,
+      "gif_source_start_seconds": 0,
+      "playback_speed": 1.0,
+      "mp4": {
+        "sha256": "4110674cbcb680f91b1217f78284f5f51cc916350d51b4e4bfdf7b1c4718ae32",
+        "bytes": 1448786,
+        "frames": 171,
+        "fps": 25.0,
+        "duration_seconds": 6.84,
+        "width": 1280,
+        "height": 720,
+        "full_decode": "passed"
+      },
+      "gif": {
+        "sha256": "5c3878c5d3ddefec3f639db3bb7e3a523dea0b76dca62e5f408f3fa81e8dc817",
+        "bytes": 1836580,
+        "frames": 68,
+        "fps": 10,
+        "duration_seconds": 6.8,
+        "loop": 0,
+        "width": 480,
+        "height": 270,
+        "full_decode": "passed",
+        "pixel_motion_check": "passed"
+      },
+      "source_reference": {
+        "clip": "2",
+        "start_seconds": 0.0,
+        "duration_seconds": 6.84,
+        "failed": false,
+        "observed_active_steps": 341
+      },
+      "visual_review": {
+        "source_frame_indices": [
+          0,
+          24,
+          49,
+          73,
+          97,
+          121,
+          146,
+          170
+        ],
+        "gif_frame_indices": [
+          0,
+          10,
+          20,
+          30,
+          40,
+          50,
+          60
+        ],
+        "findings": "Both robots visible and upright through changing arm gestures; residual arm and root tracking differences remain."
+      }
+    },
+    {
+      "id": "pi_plus_dance_010000",
+      "title": "Pi+ dance",
+      "run": "pi_plus_010000",
+      "motion_or_trial": "pi_plus_dance1_subject2",
+      "source_video_sha256": "955739e2ecf836ae2158de289b16877e808d4bf4b786d7151a868406e7fd41b3",
+      "source_render_metadata_sha256": "405fa265724f7900b418ee86f9a369ea78b5a9e1eb92b1822b73edc691574279",
+      "source_manifest_sha256": "ae6cb3a9ac4a03d4f219a67d6053f8b0c6ce24f8fccdec67bf87257ee5effc17",
+      "video_source_start_seconds": 0,
+      "gif_source_start_seconds": 0,
+      "playback_speed": 1.0,
+      "mp4": {
+        "sha256": "025ecabaf60f2a01b778e70551317629d013aa587c94233f6675f60359a17c98",
+        "bytes": 1692669,
+        "frames": 300,
+        "fps": 25.0,
+        "duration_seconds": 12.0,
+        "width": 960,
+        "height": 540,
+        "full_decode": "passed"
+      },
+      "gif": {
+        "sha256": "0f106ddbba54a23d89541cd616d6c725cd8f687c8922795a366bc74e26047070",
+        "bytes": 1648127,
+        "frames": 60,
+        "fps": 10,
+        "duration_seconds": 6.0,
+        "loop": 0,
+        "width": 480,
+        "height": 270,
+        "full_decode": "passed",
+        "pixel_motion_check": "passed"
+      },
+      "source_reference": {
+        "clip": "pi_plus_dance1_subject2",
+        "start_seconds": 0.0,
+        "duration_seconds": 12.0,
+        "failed": false,
+        "observed_active_steps": 930
+      }
+    },
+    {
+      "id": "pi_plus_kungfu_010000",
+      "title": "Pi+ kungfu",
+      "run": "pi_plus_010000",
+      "motion_or_trial": "pi_plus_kungfu",
+      "source_video_sha256": "955739e2ecf836ae2158de289b16877e808d4bf4b786d7151a868406e7fd41b3",
+      "source_render_metadata_sha256": "405fa265724f7900b418ee86f9a369ea78b5a9e1eb92b1822b73edc691574279",
+      "source_manifest_sha256": "ae6cb3a9ac4a03d4f219a67d6053f8b0c6ce24f8fccdec67bf87257ee5effc17",
+      "video_source_start_seconds": 12,
+      "gif_source_start_seconds": 12,
+      "playback_speed": 1.0,
+      "mp4": {
+        "sha256": "408a8379d3b8414dd8859c5e85e7d9b4b7371abebd0515576c60a5cd6d39b6c3",
+        "bytes": 1859000,
+        "frames": 300,
+        "fps": 25.0,
+        "duration_seconds": 12.0,
+        "width": 960,
+        "height": 540,
+        "full_decode": "passed"
+      },
+      "gif": {
+        "sha256": "58d59d4a12281385b436d435d81b72c731d91f9671122e1968006b8099479d1a",
+        "bytes": 2230265,
+        "frames": 80,
+        "fps": 10,
+        "duration_seconds": 8.0,
+        "loop": 0,
+        "width": 480,
+        "height": 270,
+        "full_decode": "passed",
+        "pixel_motion_check": "passed"
+      },
+      "source_reference": {
+        "clip": "pi_plus_kungfu",
+        "start_seconds": 0.0,
+        "duration_seconds": 12.0,
+        "failed": false,
+        "observed_active_steps": 603
+      }
+    },
+    {
+      "id": "pi_plus_kick_010000",
+      "title": "Pi+ short right kick",
+      "run": "pi_plus_010000",
+      "motion_or_trial": "pi_plus_right_big_kick_cut",
+      "source_video_sha256": "955739e2ecf836ae2158de289b16877e808d4bf4b786d7151a868406e7fd41b3",
+      "source_render_metadata_sha256": "405fa265724f7900b418ee86f9a369ea78b5a9e1eb92b1822b73edc691574279",
+      "source_manifest_sha256": "ae6cb3a9ac4a03d4f219a67d6053f8b0c6ce24f8fccdec67bf87257ee5effc17",
+      "video_source_start_seconds": 24,
+      "gif_source_start_seconds": 24,
+      "playback_speed": 1.0,
+      "mp4": {
+        "sha256": "ed2f33fbde84ebc42a874706a9e61349eb7c64d6645fe7019bb9d157884f759d",
+        "bytes": 238638,
+        "frames": 45,
+        "fps": 25.0,
+        "duration_seconds": 1.8,
+        "width": 960,
+        "height": 540,
+        "full_decode": "passed"
+      },
+      "gif": {
+        "sha256": "14cbfe2c3849d2418085f187226f1a0286fa1e53fa1edcec523b7e11ec79044d",
+        "bytes": 492247,
+        "frames": 18,
+        "fps": 10,
+        "duration_seconds": 1.8,
+        "loop": 0,
+        "width": 480,
+        "height": 270,
+        "full_decode": "passed",
+        "pixel_motion_check": "passed"
+      },
+      "source_reference": {
+        "clip": "pi_plus_right_big_kick_cut",
+        "start_seconds": 0.0,
+        "duration_seconds": 1.78,
+        "failed": false,
+        "observed_active_steps": 88
+      }
+    }
+  ]
+}

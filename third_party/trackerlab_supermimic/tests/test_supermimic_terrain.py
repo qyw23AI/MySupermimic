@@ -1,0 +1,613 @@
+"""CPU contracts for the SuperMimic terrain downstream path."""
+
+import json
+from dataclasses import replace
+from pathlib import Path
+import subprocess
+import sys
+import tempfile
+import unittest
+from unittest.mock import Mock, patch
+
+import numpy as np
+import torch
+
+REPO = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(REPO / "scripts/rls/supermimic"))
+from bootstrap import configure_paths
+configure_paths()
+
+from trackerTask.supermimic.registry import TASK_REGISTRY
+from trackerTask.supermimic.terrain import ROBOTS, PROFILES, TASKS, generate
+from trackerTask.supermimic.mujoco_terrain import _recompute_body_collision_masks, build_model
+from trackerTask.supermimic.robots import get_robot
+from trackerLab.algorithms.supermimic.buffer import ReplayBuffer
+from trackerLab.algorithms.supermimic.networks import WorldModel
+from trackerLab.algorithms.supermimic.terrain_networks import TerrainPolicy, TerrainWorldModel
+from trackerLab.tracker_env.mdp.supermimic import normalize_xi
+from trackerLab.tracker_env.mdp.supermimic_terrain import (
+    FALL_PENALTY, MAX_STEP_REWARD, OBJECTIVE_VERSION, HeightField, TerrainMDP,
+    success_terminal_value, terminal_masks, update_terrain_levels,
+)
+from train_terrain import (
+    can_transfer_world_model, load_terrain_initialization, migrate_terrain_checkpoint,
+    validate_resume_objective,
+)
+from queue_low_success_retrain import build_followup_plan
+from evaluate_terrain import FirstEpisodeRecorder
+from supervise_terrain import choose_checkpoint, evaluation_metrics, trusted_checkpoint
+from retrain_terrain import build_retrain_plan
+
+
+class SuperMimicTerrainTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.threads = torch.get_num_threads()
+        torch.set_num_threads(2)
+
+    @classmethod
+    def tearDownClass(cls):
+        torch.set_num_threads(cls.threads)
+
+    def test_exactly_eighteen_registered_supermimic_tasks(self):
+        expected = tuple(f"locomotion/{robot}/{profile}"
+                         for robot in ROBOTS for profile in PROFILES)
+        self.assertEqual(tuple(TASKS), expected)
+        self.assertEqual(sum(entry.runtime_task == "terrain" for entry in TASK_REGISTRY.values()), 18)
+        self.assertEqual(len(TASKS), 18)
+        for name, task in TASKS.items():
+            self.assertEqual(task.id, name)
+            self.assertEqual(task.describe()["algorithm"], "supermimic")
+
+    def test_demo_records_terminal_pose_and_never_shows_auto_reset(self):
+        pose = np.zeros((2, 9), dtype=np.float32)
+        scan = np.zeros((2, 187), dtype=np.float32)
+        recorder = FirstEpisodeRecorder(pose, scan, 0, np.array([8, 7]))
+        state = np.arange(34, dtype=np.float32).reshape(2, 17)
+        recorder.add(state, scan + 1, np.array([True, False]),
+                     np.array([False, False]), np.array([True, False]))
+        terminal = recorder.poses[-1][0].copy()
+        np.testing.assert_array_equal(terminal[:7], state[0, :7])
+        np.testing.assert_array_equal(terminal[[8, 7]], state[0, 13:15])
+        recorder.add(state + 100, scan + 2, np.array([False, True]),
+                     np.array([False, True]), np.array([False, False]))
+        np.testing.assert_array_equal(recorder.poses[-1][0], terminal)
+        np.testing.assert_array_equal(recorder.scans[-1][0], scan[0] + 1)
+        self.assertEqual(recorder.terminal_steps.tolist(), [1, 2])
+        self.assertEqual(recorder.outcomes.tolist(), ["fall", "success"])
+        recorder.add(state, scan, np.array([True, True]),
+                     np.array([True, True]), np.array([False, False]))
+        self.assertEqual(len(recorder.poses), 3)
+
+    def test_plan_has_one_ten_thousand_iteration_job_per_task(self):
+        result = subprocess.run(
+            [sys.executable, str(REPO / "scripts/rls/supermimic/supervise_terrain.py"),
+             "--run-dir", str(REPO / "unused-plan"), "--plan"],
+            capture_output=True, text=True, check=True,
+        )
+        plan = json.loads(result.stdout)
+        self.assertEqual(len(plan), 18)
+        self.assertEqual([row["task"] for row in plan], list(TASKS))
+        self.assertTrue(all(row["iterations"] == 10000 for row in plan))
+
+    def test_profile_preset_is_loaded_before_cli_overrides(self):
+        config = REPO / "scripts/rls/supermimic/configs/terrain_stairs.json"
+        result = subprocess.run(
+            [sys.executable, str(REPO / "scripts/rls/supermimic/train_terrain.py"),
+             "--task", "locomotion/g1/stairs", "--config", str(config),
+             "--run-dir", "unused-config-probe", "--iterations", "23", "--describe"],
+            capture_output=True, text=True, check=True,
+        )
+        value = json.loads(result.stdout)
+        self.assertEqual(value["iterations"], 23)
+        self.assertEqual(value["task"]["profile"], "stairs")
+
+    def test_world_model_transfer_requires_matching_collision_and_solver_contracts(self):
+        base = {"self_collisions": False, "solver_iterations": 50}
+        self.assertTrue(can_transfer_world_model(base, dict(base)))
+        self.assertFalse(can_transfer_world_model(
+            base, {"self_collisions": True, "solver_iterations": 50}))
+        self.assertFalse(can_transfer_world_model(
+            base, {"self_collisions": False, "solver_iterations": 80}))
+
+    def test_world_model_transfer_requires_matching_collision_mask_versions(self):
+        base = {"self_collisions": True, "solver_iterations": 50}
+        legacy = dict(base, collision_mask_version=1)
+        coherent = dict(base, collision_mask_version=2)
+        self.assertTrue(can_transfer_world_model(legacy, dict(legacy)))
+        self.assertTrue(can_transfer_world_model(coherent, dict(coherent)))
+        self.assertTrue(can_transfer_world_model(base, legacy))
+        self.assertFalse(can_transfer_world_model(legacy, coherent))
+        self.assertFalse(can_transfer_world_model(coherent, legacy))
+        self.assertFalse(can_transfer_world_model(base, coherent))
+        # The mask contract is part of dynamics even with self collision disabled.
+        self.assertFalse(can_transfer_world_model(
+            dict(legacy, self_collisions=False), dict(coherent, self_collisions=False)))
+
+    def test_changed_waist_physics_requires_dynamics_refit(self):
+        self.assertTrue(can_transfer_world_model({}, {"waist_pd_scale": 1.}))
+        self.assertFalse(can_transfer_world_model({}, {"waist_pd_scale": 3.}))
+        self.assertTrue(can_transfer_world_model(
+            {"waist_pd_scale": 3.}, {"waist_pd_scale": 3.}))
+
+    def test_seeded_profiles_scale_with_robot_height(self):
+        for profile in PROFILES:
+            full = generate(profile, .76, 42)
+            repeated = generate(profile, .76, 42)
+            half = generate(profile, .38, 42)
+            np.testing.assert_array_equal(full.heights, repeated.heights)
+            np.testing.assert_allclose(half.heights, full.heights * .5)
+            self.assertEqual(len(full.centers), 6)
+            self.assertEqual(half.goal_x, full.goal_x * .5)
+            self.assertTrue(np.isfinite(full.normalized).all())
+            self.assertGreater(float(np.ptp(full.heights)), .05)
+
+    def collision_fixture_parameters(self):
+        spec = get_robot("g1")
+        directory = tempfile.TemporaryDirectory()
+        self.addCleanup(directory.cleanup)
+        path = Path(directory.name) / "robot.xml"
+        path.write_text(
+            '<mujoco><compiler angle="radian"/>'
+            '<default><geom contype="1" conaffinity="0"/></default>'
+            '<worldbody><body name="pelvis" pos="0 0 .76"><freejoint/>'
+            '<geom type="sphere" size=".05" mass="1"/>'
+            '<geom name="visual_only" type="sphere" size=".06" mass="0" '
+            'contype="0" conaffinity="0"/>'
+            '<body name="left_leg" pos="0 .02 0">'
+            '<joint name="left_hip_pitch_joint" range="-1 1"/>'
+            '<geom name="left_sphere" type="sphere" size=".03" mass=".2"/></body>'
+            '<body name="right_leg" pos="0 -.02 0">'
+            '<joint name="right_hip_pitch_joint" range="-1 1"/>'
+            '<geom name="right_sphere" type="sphere" size=".03" mass=".2"/></body>'
+            '<body name="empty_mount" pos=".1 0 0"/>'
+            '</body></worldbody></mujoco>',
+            encoding="utf-8",
+        )
+        fixture = replace(
+            spec, mjcf_path=str(path), com_body="pelvis",
+            joint_names=("left_hip_pitch_joint", "right_hip_pitch_joint"),
+            tracked_bodies=("pelvis", "left_leg", "right_leg"),
+            default_q=(0., 0.), action_scale=(.25, .25),
+        )
+        return fixture, .76, [(20., 12., 25., .5, .01)] * 2
+
+    def test_collision_masks_with_self_contained_model(self):
+        import mujoco
+
+        with patch("trackerTask.supermimic.mujoco_terrain.robot_parameters",
+                   return_value=self.collision_fixture_parameters()):
+            terrain = generate("velocity", .76, 42)
+            default, *_, default_contract = build_model("g1", terrain, ground_plane=True)
+            colliding, *_, colliding_contract = build_model(
+                "g1", terrain, ground_plane=True, self_collisions=True)
+        self.assertEqual(default_contract["collision_mask_version"], 2)
+        self.assertEqual(colliding_contract["collision_mask_version"], 2)
+        self.assert_collision_masks(default, colliding)
+        visual = colliding.geom("visual_only").id
+        self.assertEqual(int(colliding.geom_contype[visual]), 0)
+        self.assertEqual(int(colliding.geom_conaffinity[visual]), 0)
+        for model in (default, colliding):
+            with self.subTest(self_collisions=model is colliding):
+                data = mujoco.MjData(model)
+                mujoco.mj_forward(model, data)
+                contacts = {
+                    tuple(sorted((int(contact.geom1), int(contact.geom2))))
+                    for contact in data.contact
+                }
+                if model is colliding:
+                    self.assertEqual(contacts, {
+                        tuple(sorted((model.geom("left_sphere").id, model.geom("right_sphere").id)))
+                    })
+                    self.assertEqual(data.ncon, 1)
+                    self.assertAlmostEqual(data.contact[0].dist, -.02)
+                    self.assertGreaterEqual(data.contact[0].efc_address, 0)
+                else:
+                    self.assertEqual(contacts, set())
+                    self.assertEqual(data.ncon, 0)
+
+    def test_collision_mask_v1_preserves_original_builder_setconst_output(self):
+        import mujoco
+
+        original_setconst = mujoco.mj_setConst
+        original = {}
+
+        def capture_original_algorithm(model, data):
+            # The original builder ends its model edits with this exact call.
+            # Preserve that runtime's result, including any automatic mask refresh.
+            original_setconst(model, data)
+            for name in ("body_contype", "body_conaffinity", "geom_contype", "geom_conaffinity"):
+                original[name] = getattr(model, name).copy()
+            mujoco.mj_forward(model, data)
+            original["contacts"] = [
+                (int(contact.geom1), int(contact.geom2), float(contact.dist), int(contact.efc_address))
+                for contact in data.contact
+            ]
+
+        with patch("trackerTask.supermimic.mujoco_terrain.robot_parameters",
+                   return_value=self.collision_fixture_parameters()):
+            terrain = generate("velocity", .76, 42)
+            for enabled in (False, True):
+                with self.subTest(self_collisions=enabled), patch(
+                    "mujoco.mj_setConst", side_effect=capture_original_algorithm
+                ) as setconst:
+                    legacy, *_, contract = build_model(
+                        "g1", terrain, ground_plane=True, self_collisions=enabled,
+                        collision_mask_version=1)
+                    setconst.assert_called_once()
+                    self.assertEqual(contract["collision_mask_version"], 1)
+                    for name in ("body_contype", "body_conaffinity", "geom_contype", "geom_conaffinity"):
+                        np.testing.assert_array_equal(getattr(legacy, name), original[name])
+                    data = mujoco.MjData(legacy)
+                    mujoco.mj_forward(legacy, data)
+                    contacts = [
+                        (int(contact.geom1), int(contact.geom2), float(contact.dist), int(contact.efc_address))
+                        for contact in data.contact
+                    ]
+                    self.assertEqual(contacts, original["contacts"])
+
+    def test_mask_refresh_restores_contacts_after_explicit_post_build_mutation(self):
+        import mujoco
+
+        with patch("trackerTask.supermimic.mujoco_terrain.robot_parameters",
+                   return_value=self.collision_fixture_parameters()):
+            model, *_ = build_model("g1", generate("velocity", .76, 42), ground_plane=True)
+        # This mutation happens AFTER build_model/mj_setConst. It is a separate
+        # failure mode, not evidence of stale aggregates in the original builder.
+        robot = (model.geom_bodyid != 0) & (model.geom_contype != 0)
+        body_affinity = model.body_conaffinity.copy()
+        model.geom_conaffinity[robot] = 3
+        data = mujoco.MjData(model)
+        mujoco.mj_forward(model, data)
+        np.testing.assert_array_equal(model.body_conaffinity, body_affinity)
+        self.assertEqual(data.ncon, 0)
+        self.assertEqual(int(model.body_conaffinity[model.body("left_leg").id]), 1)
+
+        _recompute_body_collision_masks(model)
+        self.assert_body_collision_masks(model)
+        mujoco.mj_forward(model, data)
+        self.assertEqual(data.ncon, 1)
+        self.assertEqual(
+            {int(data.contact[0].geom1), int(data.contact[0].geom2)},
+            {model.geom("left_sphere").id, model.geom("right_sphere").id})
+        self.assertAlmostEqual(data.contact[0].dist, -.02)
+        self.assertGreaterEqual(data.contact[0].efc_address, 0)
+
+    def test_collision_mask_version_rejects_invalid_values_before_loading_assets(self):
+        with patch("trackerTask.supermimic.mujoco_terrain.robot_parameters") as parameters:
+            for version in (None, False, True, 0, 3, -1, 1., 2., "1", "2"):
+                with self.subTest(version=version), self.assertRaisesRegex(
+                    ValueError, "collision_mask_version"):
+                    build_model("g1", None, collision_mask_version=version)
+            parameters.assert_not_called()
+
+    @unittest.skipUnless(
+        Path(get_robot("g1").mjcf_path).is_file(),
+        "G1 assets are unavailable; the self-contained collision-mask test still runs",
+    )
+    def test_g1_self_collision_mode_keeps_ground_contact_and_enables_robot_pairs(self):
+        terrain = generate("velocity", .76, 42)
+        default, *_ = build_model("g1", terrain)
+        colliding, *_ = build_model("g1", terrain, self_collisions=True)
+        self.assert_collision_masks(default, colliding)
+
+    def assert_body_collision_masks(self, model):
+        for body in range(model.nbody):
+            attached = model.geom_bodyid == body
+            for name in ("contype", "conaffinity"):
+                expected = np.bitwise_or.reduce(getattr(model, "geom_" + name)[attached], initial=0)
+                self.assertEqual(int(getattr(model, "body_" + name)[body]), int(expected),
+                                 f"{model.body(body).name}: body_{name}")
+
+    def assert_collision_masks(self, default, colliding):
+        for model in (default, colliding):
+            self.assert_body_collision_masks(model)
+        robot = (colliding.geom_bodyid != 0) & (colliding.geom_contype != 0)
+        ground = colliding.geom("supermimic_ground").id
+        self.assertTrue(np.all(colliding.geom_contype[robot] == 2))
+        self.assertTrue(np.all(colliding.geom_conaffinity[robot] == 3))
+        self.assertEqual(int(colliding.geom_contype[ground]), 1)
+        self.assertEqual(int(colliding.geom_conaffinity[ground]), 2)
+        default_robot = (default.geom_bodyid != 0) & (default.geom_contype != 0)
+        self.assertTrue(np.all(default.geom_conaffinity[default_robot] == 1))
+
+    def test_heightfield_sampler_and_sensor_observation_have_matching_contract(self):
+        data = generate("stairs", .76, 3)
+        field = HeightField(data, .76, "cpu")
+        x = torch.linspace(data.x_min, data.x_max, len(data.heights[0]))
+        y = torch.linspace(data.y_min, data.y_max, len(data.heights))
+        yy, xx = torch.meshgrid(y, x, indexing="ij")
+        points = torch.stack((xx, yy), -1)
+        sampled = field.sample(points)
+        torch.testing.assert_close(sampled, field.values, atol=2e-5, rtol=0)
+        root = torch.tensor([[.2, -2., .9]], requires_grad=True)
+        state = (root, torch.eye(3).unsqueeze(0), torch.zeros(1, 3), torch.zeros(1, 3),
+                 torch.zeros(1, 12), torch.zeros(1, 12))
+        scan = field.features(state)
+        self.assertEqual(scan.shape, (1, 187))
+        self.assertEqual(field.model_features(state).shape, (1, 54))
+        scan.square().sum().backward()
+        self.assertTrue(torch.isfinite(root.grad).all())
+        self.assertGreater(root.grad.abs().sum().item(), 0)
+
+    def test_world_model_perception_branch_and_reward_gradients(self):
+        data = generate("mountain", .76, 7)
+        field = HeightField(data, .76, "cpu")
+        default = torch.zeros(12)
+        mdp = TerrainMDP(field, default, torch.full((12,), -2.), torch.full((12,), 2.))
+        batch = 3
+        p = torch.tensor([[.5, -10., .85], [.6, -6., .9], [.7, -2., 1.0]], requires_grad=True)
+        R = torch.eye(3).expand(batch, 3, 3)
+        S = (p, R, torch.zeros(batch, 3), torch.zeros(batch, 3),
+             torch.zeros(batch, 12), torch.zeros(batch, 12))
+        xi = torch.zeros(batch, 16)
+        context = torch.zeros(batch, 2)
+        observation = mdp.obs(S, torch.zeros(batch, 12), xi, context)
+        self.assertEqual(observation.shape[-1], 238)
+        self.assertEqual(mdp.goal(S, context).shape, (batch, 6))
+        self.assertEqual(mdp.critic_features(S, xi, context).shape[-1],
+                         13 + 2 * 12 + 12 + 4 + 6 + 54)
+        wm = TerrainWorldModel(field, 12, hidden=(64, 64))
+        wm.update_terrain_norm(S)
+        next_state = wm.step(S, torch.zeros(batch, 12), normalize_xi(xi))
+        reward = mdp.reward(next_state, torch.zeros(batch, 12), torch.zeros(batch, 12), context)
+        self.assertTrue(torch.isfinite(reward).all())
+        reward.sum().backward(retain_graph=True)
+        self.assertTrue(torch.isfinite(p.grad).all())
+        error = WorldModel.state_error(next_state, S).square().mean()
+        error.backward()
+        self.assertTrue(all(parameter.grad is None or torch.isfinite(parameter.grad).all()
+                            for parameter in wm.parameters()))
+
+    def test_heightfield_uses_mujoco_main_diagonal_triangles(self):
+        data = replace(generate("mountain", .76), heights=np.array([[0., 0.], [0., 1.]],
+                                                                 dtype=np.float32),
+                       x_min=0., x_max=1., y_min=0., y_max=1.)
+        field = HeightField(data, .76, "cpu")
+        points = torch.tensor([[.75, .25], [.25, .75], [.5, .5]])
+        torch.testing.assert_close(field.sample(points), torch.tensor([.25, .25, .5]))
+
+    def test_constant_surface_matches_triangle_values_and_state_gradients(self):
+        for profile in ("velocity", "stealth"):
+            terrain = generate(profile, .76, 42)
+            for value in (0., .27):
+                data = replace(terrain, heights=np.full_like(terrain.heights, value))
+                fast = HeightField(data, .76, "cpu")
+                generic = HeightField(data, .76, "cpu")
+                generic.constant_surface = False
+                xyz = torch.tensor([[.2, .5, .83], [32., -32., .92], [33., -33., 1.2]],
+                                   requires_grad=True)
+                state = (xyz, torch.eye(3).expand(3, 3, 3), torch.zeros(3, 3),
+                         torch.zeros(3, 3), torch.zeros(3, 12), torch.zeros(3, 12))
+                a, b = fast.features(state), generic.features(state)
+                torch.testing.assert_close(a, b)
+                torch.testing.assert_close(
+                    torch.autograd.grad(a.square().sum(), xyz, retain_graph=True)[0],
+                    torch.autograd.grad(b.square().sum(), xyz)[0])
+                fast.values.fill_(.13)
+                torch.testing.assert_close(fast.sample(xyz[:, :2]), torch.full((3,), .13))
+
+    def test_replay_buffer_keeps_task_scenario_for_windows_and_histories(self):
+        buffer = ReplayBuffer(8, 2, "cpu", num_joints=12, scenario_dim=2)
+        self.assertEqual(buffer.data["c"].shape, (8, 2, 2))
+        self.assertEqual(buffer.fields["c"][0], 2)
+
+    def test_actor_receives_scan_gradients_and_keeps_sensor_normalization(self):
+        actor = TerrainPolicy(238, 6, hist=2, num_joints=12)
+        observations = torch.randn(3, 2, 238, requires_grad=True)
+        action = actor(observations, torch.randn(3, 6))
+        self.assertEqual(action.shape, (3, 12))
+        self.assertEqual(actor.obs_norm.mean.shape, (238,))
+        action.square().sum().backward()
+        self.assertTrue(torch.isfinite(observations.grad).all())
+        self.assertGreater(observations.grad[..., -187:].abs().sum().item(), 0)
+
+    def test_full_scan_checkpoint_migrates_weights_norms_and_adam_moments(self):
+        indices = torch.arange(0, 187, dtype=torch.long)[torch.tensor(
+            [index % 2 == 0 for index in range(187)])][:54]
+        world_weight = torch.arange(256 * 320, dtype=torch.float32).view(256, 320)
+        critic_weight = torch.arange(256 * 246, dtype=torch.float32).view(256, 246)
+        old_world_moment = world_weight.clone()
+        old_critic_moment = critic_weight.clone()
+        checkpoint = {
+            "world": {
+                "terrain_norm.mean": torch.arange(187, dtype=torch.float32),
+                "terrain_norm.var": torch.ones(187),
+                "terrain_adapter.0.weight": world_weight.clone(),
+            },
+            "critic": {
+                "norm.mean": torch.arange(246, dtype=torch.float32),
+                "norm.var": torch.ones(246),
+                "net.0.weight": critic_weight.clone(),
+            },
+            "opt_wm": {
+                "param_groups": [{"params": [10, 11]}],
+                "state": {11: {"exp_avg": old_world_moment, "exp_avg_sq": old_world_moment}},
+            },
+            "opt_v": {
+                "param_groups": [{"params": [20]}],
+                "state": {20: {"exp_avg": old_critic_moment, "exp_avg_sq": old_critic_moment}},
+            },
+        }
+        self.assertTrue(migrate_terrain_checkpoint(
+            checkpoint, indices, ("net.0.weight", "terrain_adapter.0.weight"),
+            ("net.0.weight",)))
+        torch.testing.assert_close(checkpoint["world"]["terrain_norm.mean"], indices.float())
+        torch.testing.assert_close(checkpoint["world"]["terrain_adapter.0.weight"][:, :133],
+                                   world_weight[:, :133])
+        torch.testing.assert_close(checkpoint["world"]["terrain_adapter.0.weight"][:, 133:],
+                                   world_weight[:, 133:].index_select(1, indices))
+        self.assertEqual(checkpoint["opt_wm"]["state"][11]["exp_avg"].shape, (256, 187))
+        self.assertEqual(checkpoint["opt_v"]["state"][20]["exp_avg"].shape, (256, 113))
+
+    def test_success_fall_timeout_masks_are_mutually_exclusive(self):
+        goal = torch.tensor([False, True, True, False])
+        fallen = torch.tensor([False, False, True, False])
+        timeout = torch.tensor([True, True, True, True])
+        success, done, truncated = terminal_masks(goal, fallen, timeout)
+        self.assertEqual(success.tolist(), [False, True, False, False])
+        self.assertEqual(done.tolist(), [True] * 4)
+        self.assertEqual(truncated.tolist(), [True, False, False, True])
+
+    def test_curriculum_demotes_late_falls_and_keeps_timeouts_at_current_level(self):
+        levels = torch.tensor([3, 3, 3, 0, 5])
+        success = torch.tensor([True, False, False, False, False])
+        fallen = torch.tensor([False, True, False, True, True])
+        updated = update_terrain_levels(levels, success, fallen)
+        self.assertEqual(updated.tolist(), [4, 2, 3, 0, 4])
+
+    def test_soft_terminal_reward_matches_success_and_fall_signals(self):
+        data = generate("stairs", .76, 42)
+        field = HeightField(data, .76, "cpu")
+        default = torch.zeros(12)
+        mdp = TerrainMDP(field, default, torch.full((12,), -2.), torch.full((12,), 2.))
+        center = float(data.centers[0])
+        xy = torch.tensor([[data.goal_x + 1., center],
+                           [3., center],
+                           [data.goal_x, center]], requires_grad=True)
+        ground = field.sample(xy.detach())
+        z = torch.stack((ground[0] + .76, ground[1] + .1, ground[2] + .76))
+        p = torch.cat((xy, z[:, None]), -1)
+        R = torch.eye(3).expand(3, 3, 3)
+        S = (p, R, torch.zeros(3, 3), torch.zeros(3, 3),
+             torch.zeros(3, 12), torch.zeros(3, 12))
+        c = torch.tensor([[center, .7]]).expand(3, 2)
+
+        reward = mdp.soft_terminal_reward(S, c)
+        self.assertGreater(reward[0].item(), mdp.success_reward * .9)
+        self.assertLess(reward[1].item(), -FALL_PENALTY * .9)
+        reward[2].backward()
+        self.assertGreater(xy.grad[2, 0].item(), 0)
+        self.assertTrue(torch.isfinite(xy.grad).all())
+
+        actions = torch.zeros(3, 12)
+        imagined, done = mdp.imagined_reward(S, actions, actions, c)
+        torch.testing.assert_close(imagined, mdp.reward(S, actions, actions, c) + reward)
+        torch.testing.assert_close(done, mdp.soft_termination(S, c))
+        self.assertTrue(((done >= 0) & (done <= 1)).all())
+        hard_success = torch.tensor([True, False])
+        hard_fall = torch.tensor([False, True])
+        torch.testing.assert_close(reward[:2], mdp.terminal_reward(hard_success, hard_fall),
+                                   atol=1e-3, rtol=1e-3)
+
+    def test_success_payout_dominates_delaying_with_maximum_running_reward(self):
+        for gamma in (.9, .99, .999):
+            success = success_terminal_value(gamma)
+            self.assertGreater(success, MAX_STEP_REWARD / (1 - gamma))
+            for delay in (1, 32, 500, 1000):
+                delayed = (MAX_STEP_REWARD * (1 - gamma ** delay) / (1 - gamma)
+                           + gamma ** delay * success)
+                self.assertGreater(success, delayed)
+        for gamma in (0, 1, -1, 1.1):
+            with self.assertRaises(ValueError):
+                success_terminal_value(gamma)
+
+    def test_resume_rejects_old_objective_and_changed_discount(self):
+        with self.assertRaisesRegex(ValueError, "warm-start"):
+            validate_resume_objective({"arguments": {"gamma": .99}}, .99)
+        ck = {"objective_version": OBJECTIVE_VERSION, "arguments": {"gamma": .99}}
+        validate_resume_objective(ck, .99)
+        with self.assertRaisesRegex(ValueError, "discount"):
+            validate_resume_objective(ck, .95)
+
+    def test_warm_start_transfers_only_policy_and_dynamics(self):
+        actor, world = Mock(), Mock()
+        world.field.model_indices = torch.arange(54)
+        world.named_parameters.return_value = ()
+        ck = {"task": "locomotion/g1/stairs", "robot": "g1", "training_stage": "terrain-after-qualified-gait",
+              "iteration": 10000,
+              "actor": {"policy": "weights"}, "world": {"terrain_norm.mean": torch.zeros(54)},
+              "critic": {"obsolete_value": "must not load"}}
+        receipt = load_terrain_initialization(actor, world, ck, "g1")
+        actor.load_state_dict.assert_called_once_with(ck["actor"])
+        world.load_state_dict.assert_called_once_with(ck["world"])
+        self.assertTrue(receipt["critic_reset"])
+        self.assertTrue(receipt["optimizers_reset"])
+        self.assertEqual(receipt["task_start_iteration"], 0)
+        with self.assertRaisesRegex(ValueError, "different robot"):
+            load_terrain_initialization(actor, world, ck, "go2")
+
+    def test_checkpoint_selection_balances_difficulty_and_requires_validation(self):
+        result = {"lanes": [{"episodes": n, "successes": s, "falls": n - s}
+                            for n, s in [(100, 100)] + [(10, 0)] * 5]}
+        metrics = evaluation_metrics(result)
+        self.assertAlmostEqual(metrics["macro_success"], 1 / 6)
+        self.assertAlmostEqual(metrics["success_fraction"], 2 / 3)
+        candidates = [
+            {"iteration": 2000, "metrics": {"macro_success": .8, "macro_fall": .1}},
+            {"iteration": 10000, "metrics": {"macro_success": .1, "macro_fall": .8}},
+        ]
+        self.assertEqual(choose_checkpoint(candidates)["iteration"], 2000)
+        job = {"best_checkpoint": "best.pt",
+               "validation_metrics": {"min_seed_macro_success": .1}}
+        self.assertIsNone(trusted_checkpoint(job, .5))
+        job["validation_metrics"]["min_seed_macro_success"] = .8
+        self.assertEqual(trusted_checkpoint(job, .5), Path("best.pt"))
+        result["lanes"][0]["episodes"] = 0
+        with self.assertRaisesRegex(ValueError, "six difficulty"):
+            evaluation_metrics(result)
+
+    def test_retrain_plan_retains_good_task_and_preserves_baseline(self):
+        with tempfile.TemporaryDirectory() as directory:
+            baseline = Path(directory)
+            good = baseline / "a3/stairs"
+            good.mkdir(parents=True)
+            (good / "last.pt").touch()
+            result = {"task": "locomotion/a3/stairs", "trained_iterations": 10000,
+                      "lanes": [{"episodes": 10, "successes": 9, "falls": 1}] * 6}
+            (good / "evaluation.json").write_text(json.dumps(result), encoding="utf-8")
+            partial = baseline / "bumi/stairs"
+            partial.mkdir(parents=True)
+            (partial / "last.pt").touch()
+            plan = build_retrain_plan(baseline)
+            self.assertEqual(list(plan["retained"]), ["locomotion/a3/stairs"])
+            self.assertEqual(len(plan["jobs"]), 17)
+            self.assertEqual(plan["initial_checkpoints"]["locomotion/a3/mountain"],
+                             str(good / "last.pt"))
+            self.assertEqual(plan["initial_checkpoints"]["locomotion/bumi/stairs"],
+                             str(partial / "last.pt"))
+            self.assertNotIn("locomotion/pi_plus/stairs", plan["initial_checkpoints"])
+            self.assertEqual(json.loads((good / "evaluation.json").read_text()), result)
+
+    def test_low_success_followup_plan_queues_only_completed_low_jobs(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            low = root / "g1/parkour/best.pt"
+            high = root / "g1/stairs/best.pt"
+            low.parent.mkdir(parents=True)
+            high.parent.mkdir(parents=True)
+            low.touch()
+            high.touch()
+            campaign = {
+                "phase": "completed",
+                "jobs": [
+                    {
+                        "task": "locomotion/g1/stairs",
+                        "phase": "completed",
+                        "best_checkpoint": str(high),
+                        "validation_metrics": {"min_seed_macro_success": .95},
+                    },
+                    {
+                        "task": "locomotion/g1/parkour",
+                        "phase": "completed",
+                        "best_checkpoint": str(low),
+                        "validation_metrics": {"min_seed_macro_success": .74},
+                    },
+                    {
+                        "task": "locomotion/go2/stairs",
+                        "phase": "training",
+                        "best_checkpoint": str(high),
+                        "validation_metrics": {"min_seed_macro_success": .2},
+                    },
+                ],
+            }
+            plan = build_followup_plan(campaign, iterations=10000, threshold=.9)
+            self.assertEqual([job["task"] for job in plan["jobs"]],
+                             ["locomotion/g1/parkour"])
+            self.assertEqual(plan["jobs"][0]["iterations"], 10000)
+            self.assertEqual(plan["initial_checkpoints"]["locomotion/g1/parkour"],
+                             str(low.resolve()))
+
+
+if __name__ == "__main__":
+    unittest.main()
