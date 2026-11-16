@@ -41,6 +41,7 @@ class RecordingHIMLabEnv(HIMLabEnv):
     def __init__(self, cfg, **kwargs):
         self.replay = None
         self._transition = None
+        self.command_override = None
         super().__init__(cfg, **kwargs)
         self.episode_id = torch.zeros(self.num_envs, dtype=torch.long, device=self.device)
         core = self.core
@@ -111,6 +112,8 @@ class RecordingHIMLabEnv(HIMLabEnv):
             self._transition["substep_actions"] = core.delayed_actions.clone()
 
     def _get_rewards(self):
+        if self.command_override is not None:
+            self.core.commands[:, :3] = self.command_override
         self._term_values.clear()
         reward = super()._get_rewards()
         if self._transition is not None:
@@ -136,6 +139,11 @@ class RecordingHIMLabEnv(HIMLabEnv):
                 pending_force_next_body=self.pending_force[:, core.base_body_id].clone(),
             )
         return reward
+
+    def _get_observations(self):
+        if self.command_override is not None:
+            self.core.commands[:, :3] = self.command_override
+        return super()._get_observations()
 
     def step(self, action):
         result = super().step(action)

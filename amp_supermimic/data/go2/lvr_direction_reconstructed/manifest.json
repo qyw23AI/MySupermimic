@@ -1,0 +1,73 @@
+{
+  "source_fps": 50,
+  "quaternion_order": "xyzw",
+  "joint_names": [
+    "FL_hip_joint",
+    "FR_hip_joint",
+    "RL_hip_joint",
+    "RR_hip_joint",
+    "FL_thigh_joint",
+    "FR_thigh_joint",
+    "RL_thigh_joint",
+    "RR_thigh_joint",
+    "FL_calf_joint",
+    "FR_calf_joint",
+    "RL_calf_joint",
+    "RR_calf_joint"
+  ],
+  "source_repository": "https://github.com/ruipengZ/Latent-Variation-Regularization",
+  "revision": "e68ab0622c550e0809f77af707cd7b2fefd43dbb",
+  "root_pose": "reconstructed from velocity and gravity, absolute position not recorded",
+  "files": [
+    {
+      "file": "lvr_backward.csv",
+      "sha256": "9feec6d9c0a278d3c8cdc072271c80b32001ce349a64a8b47b0165a3f1633f11",
+      "source": "amp_supermimic/data/go2/lvr_velocity_demos/isaac_go2_backward_traj-1_compact.hdf5",
+      "source_sha256": "479223a756f56c4ef6abcd8fa3578e69d00690d1ccc5c98530b8aa03791551aa",
+      "rows": [
+        50,
+        300
+      ],
+      "mirrored": false,
+      "donor_body_velocity_m_s": [
+        -1.0015984773635864,
+        0.03068157285451889,
+        0.02539820224046707
+      ]
+    },
+    {
+      "file": "lvr_left.csv",
+      "sha256": "e651026607894f74208edb7c1bb6c01ef0c31c5693aa9e7dedd892549624d16f",
+      "source": "amp_supermimic/data/go2/lvr_velocity_demos/isaac_go2_sideway_traj-1_compact.hdf5",
+      "source_sha256": "75f44791971f2c6936fdf46c66d29589dd09c3abe5aa5baa69d77916cd95f607",
+      "rows": [
+        50,
+        300
+      ],
+      "mirrored": false,
+      "donor_body_velocity_m_s": [
+        0.029550805687904358,
+        0.9898838400840759,
+        -0.02716951072216034
+      ]
+    },
+    {
+      "file": "lvr_right.csv",
+      "sha256": "ed9835f7b1845407966aa5ffe0fd06b3073fcb0cbe7dbad08d31f7d79b6371cd",
+      "source": "amp_supermimic/data/go2/lvr_velocity_demos/isaac_go2_sideway_traj-1_compact.hdf5",
+      "source_sha256": "75f44791971f2c6936fdf46c66d29589dd09c3abe5aa5baa69d77916cd95f607",
+      "rows": [
+        50,
+        300
+      ],
+      "mirrored": true,
+      "donor_body_velocity_m_s": [
+        0.029550805687904358,
+        -0.9898838400840759,
+        -0.02716951072216034
+      ]
+    }
+  ],
+  "joint_order_provenance": "Breadth-first order inferred from the official Go2 USD articulation tree; original HDF5 omits joint names.",
+  "status": "reconstructed_candidate"
+}

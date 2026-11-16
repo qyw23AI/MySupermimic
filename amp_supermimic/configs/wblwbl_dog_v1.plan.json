@@ -1,0 +1,102 @@
+{
+  "status": "a0_a2_smoke_verified",
+  "target_robot": "WBLWBL Dog V1",
+  "task": "wblwbl_dog_v1",
+  "recommended_scheme": "A",
+  "source_root_example": "third_party/MyHIMLoco",
+  "stage": 3,
+  "contract": {
+    "policy_input": 270,
+    "one_step_obs": 45,
+    "history_frames": 6,
+    "newest_frame_first": true,
+    "num_actions": 12,
+    "state_dim": 37,
+    "policy_joint_names": [
+      "RR_hip_joint",
+      "RR_thigh_joint",
+      "RR_calf_joint",
+      "RL_hip_joint",
+      "RL_thigh_joint",
+      "RL_calf_joint",
+      "FR_hip_joint",
+      "FR_thigh_joint",
+      "FR_calf_joint",
+      "FL_hip_joint",
+      "FL_thigh_joint",
+      "FL_calf_joint"
+    ],
+    "physics_dt": 0.005,
+    "control_dt": 0.02,
+    "action_scale": 0.25,
+    "default_kp": 40.0,
+    "default_kd": 1.0,
+    "source": "H-CFG/H-BASE/H-ENV-CFG"
+  },
+  "controlled_flat": {
+    "reward_profile": "core_reward_v1",
+    "omitted_terms": [
+      "foot_clearance",
+      "joint_power"
+    ],
+    "domain_rand_overrides": {
+      "delay": false,
+      "disturbance": false,
+      "push_robots": false,
+      "randomize_com_displacement": false,
+      "randomize_friction": false,
+      "randomize_initial_joint_pos": false,
+      "randomize_kd": false,
+      "randomize_kp": false,
+      "randomize_link_mass": false,
+      "randomize_motor_strength": false,
+      "randomize_payload_mass": false,
+      "randomize_restitution": false
+    },
+    "command_curriculum": false,
+    "cross_command_resampling_windows": false,
+    "fairness": "Apply exactly the same overrides to PPO and BPTT; keep untouched full-task baseline separately."
+  },
+  "initial_parameters": {
+    "provenance": "proposed, not validated on WBLWBL",
+    "num_envs": 512,
+    "replay_steps_per_env": 256,
+    "wm_hidden": [
+      512,
+      512,
+      512
+    ],
+    "wm_transition_window": 8,
+    "wm_state_window": 9,
+    "wm_batch": 512,
+    "wm_updates_per_collect": 2,
+    "imag_batch": 512,
+    "imag_horizon_schedule": [
+      8,
+      16,
+      32
+    ],
+    "wm_lr": 0.0002,
+    "actor_lr": 5e-05,
+    "critic_lr": 0.0002,
+    "gamma": 0.99,
+    "lambda": 0.95,
+    "actor_grad_norm": 1.0,
+    "actor_grad_element": 0.1,
+    "critic_epochs": 5,
+    "critic_minibatches": 4,
+    "compile": false,
+    "precision": "fp32",
+    "seeds": [
+      1,
+      2,
+      3
+    ]
+  },
+  "gates": {
+    "wm_motion_holdout_improvement_over_persistence": 0.2,
+    "obs_max_abs": 1e-05,
+    "actor_forward_max_abs": 1e-06
+  },
+  "runtime_status": "A0/A1 verified on Isaac Lab CUDA. A2 verified on A1 replays and fresh noise-off replay."
+}

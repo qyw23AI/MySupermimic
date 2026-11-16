@@ -1,0 +1,89 @@
+{
+  "source_sha256": "673b605bfdadd8ff122ba5c363ba46beb5a611f3eadaac0da5e4eec86abc6063",
+  "source_manifest_sha256": null,
+  "target_mjcf_sha256": "1f3a2b393e0c89104099a5165772a174f5c7996594182aae45b771ebbb7bfdf7",
+  "frames": 125,
+  "fps": 50,
+  "joint_names": [
+    "RR_hip_joint",
+    "RR_thigh_joint",
+    "RR_calf_joint",
+    "RL_hip_joint",
+    "RL_thigh_joint",
+    "RL_calf_joint",
+    "FR_hip_joint",
+    "FR_thigh_joint",
+    "FR_calf_joint",
+    "FL_hip_joint",
+    "FL_thigh_joint",
+    "FL_calf_joint"
+  ],
+  "scale": 1.2861286729795331,
+  "swing_boost_m": 0.0,
+  "foot_error_mean_m": 0.005224404412431769,
+  "foot_error_p95_m": 0.00370178991874439,
+  "foot_error_max_m": 0.2479436885000963,
+  "joint_limit_violation_rad": 0.0,
+  "joint_velocity_p99_rad_s": 18.32420739715023,
+  "csv_sha256": "819e16df06c11ca7ab430d702065d1c8332e4ccc4c9586f3dc37a9ca1fb3f7fa",
+  "playback_torque_limits_nm": [
+    23.7,
+    23.7,
+    23.7,
+    23.7,
+    23.7,
+    23.7,
+    23.7,
+    23.7,
+    23.7,
+    23.7,
+    23.7,
+    23.7
+  ],
+  "playback_kp": 40,
+  "playback_kd": 4,
+  "reference_displacement_xy_m": [
+    -0.5144514691918133,
+    0.0
+  ],
+  "playback_displacement_xy_m": [
+    -0.21776792665006184,
+    -0.025633913651198274
+  ],
+  "playback_progress_ratio": 0.42330120466400506,
+  "playback_joint_rmse_by_leg_rad": [
+    [
+      0.12183990574646418,
+      0.3733927592769998,
+      0.33525683846953647
+    ],
+    [
+      0.13785354744389391,
+      0.33964063604585426,
+      0.31193671633928316
+    ],
+    [
+      0.06502490244810794,
+      0.397926619930555,
+      0.3179106380271102
+    ],
+    [
+      0.07860331485461641,
+      0.37406500787697855,
+      0.27064971734678
+    ]
+  ],
+  "playback_foot_contact_fraction_by_leg": [
+    0.784,
+    0.824,
+    0.904,
+    0.936
+  ],
+  "playback_contact_frame_fraction": 0.96,
+  "playback_mean_support_feet": 3.448,
+  "playback_joint_rmse_rad": 0.285966712447008,
+  "playback_fall_frames": 0,
+  "playback_final_height_m": 0.29885183959981787,
+  "playback_pass": false,
+  "motion_usable_for_amp": true
+}

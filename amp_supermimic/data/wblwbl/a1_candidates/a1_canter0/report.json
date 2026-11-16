@@ -1,0 +1,48 @@
+{
+  "source_file": "amp_supermimic/data/raw/a1_amp_candidates/mocap_motions_a1/canter0.txt",
+  "source_sha256": "e7793a3da26c98e5e52774ec46e0aecfa609aa4ef5a7517fec2e8c7ffd310e8c",
+  "source_foot_fk_max_error_m": 9.7473553169703e-06,
+  "source_leg_order": [
+    "FL",
+    "FR",
+    "RL",
+    "RR"
+  ],
+  "source_kind": "A1_amp",
+  "source_time_stretch": 1.0,
+  "target_foot_fit_p95_m": 0.00014091247153650042,
+  "knee_median_rad": -1.6239665985,
+  "knee_most_extended_rad": -1.145380823,
+  "minimum_sole_height_m": 0.0019293302527885053,
+  "below_floor_frames": 0,
+  "min_lateral_foot_offset_ratio": 0.61647003158986,
+  "min_lateral_foot_offset_m": 0.13164824807448278,
+  "median_body_velocity_m_s": [
+    2.234674354026469,
+    -0.2751393365231912,
+    0.3871637298931938
+  ],
+  "joint_velocity_p99_rad_s": 11.978284272049999,
+  "frames": 42,
+  "fps": 50,
+  "joint_names": [
+    "RR_hip_joint",
+    "RR_thigh_joint",
+    "RR_calf_joint",
+    "RL_hip_joint",
+    "RL_thigh_joint",
+    "RL_calf_joint",
+    "FR_hip_joint",
+    "FR_thigh_joint",
+    "FR_calf_joint",
+    "FL_hip_joint",
+    "FL_thigh_joint",
+    "FL_calf_joint"
+  ],
+  "quaternion_order": "xyzw",
+  "csv_sha256": "8bb8137a3fcffa864e27227c610cfbbd138342e3eabbad1b6f3c83ed30aff11d",
+  "target_mjcf_sha256": "a6ae3a95bf71c63737bf7c913f2bb37429e78a6ac07f1b68593e5504723e3084",
+  "status": "kinematic_candidate",
+  "original_local_source": "/home/qyw/AMP/source/robot_lab/robot_lab/third_party/amp_utils/motion_files/mocap_motions_a1/canter0.txt",
+  "source_model_revision": "mujoco_menagerie@370c43965323c0944b433b202aac5058b5f907a9"
+}

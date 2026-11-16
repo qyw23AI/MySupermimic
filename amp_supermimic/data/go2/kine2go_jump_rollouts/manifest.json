@@ -1,0 +1,62 @@
+{
+  "source_fps": 60,
+  "dataset": "MIMUW-Robotics/kine2go",
+  "revision": "244dc58",
+  "representation": "Go2 policy rollout, WXYZ to XYZW, joints by name, start XY and yaw normalized",
+  "joint_names": [
+    "FL_hip_joint",
+    "FL_thigh_joint",
+    "FL_calf_joint",
+    "FR_hip_joint",
+    "FR_thigh_joint",
+    "FR_calf_joint",
+    "RL_hip_joint",
+    "RL_thigh_joint",
+    "RL_calf_joint",
+    "RR_hip_joint",
+    "RR_thigh_joint",
+    "RR_calf_joint"
+  ],
+  "quaternion_order": "xyzw",
+  "files": [
+    {
+      "file": "kine2go_rollout_jump_a.csv",
+      "sha256": "08644706c419565efdc1cdcb4a263f8a46d2b0180ba2360030db1028469f46a0",
+      "source": "https://huggingface.co/datasets/MIMUW-Robotics/kine2go/blob/244dc58/data/solo8_jump_forward_a/traj_0002/traj.pkl",
+      "source_sha256": "302159146fd35bc50f75cb997163f9229a2c4a30b7af0a93fb57e0c45b1ecf9c",
+      "license": "BSD-3-Clause (Solo8 subset per Kine2Go card)",
+      "source_rows_zero_based_half_open": [
+        201,
+        308
+      ],
+      "frames": 107,
+      "source_forward_displacement_m": 2.886342881513661,
+      "airborne_like_intervals_frames": [
+        11,
+        10,
+        6,
+        7
+      ]
+    },
+    {
+      "file": "kine2go_rollout_jump_b.csv",
+      "sha256": "024e25f0d1033b3845d0ce503881f17bb6e32ea8b8372c5c043262425d37c590",
+      "source": "https://huggingface.co/datasets/MIMUW-Robotics/kine2go/blob/244dc58/data/solo8_jump_forward_b/traj_0003/traj.pkl",
+      "source_sha256": "bdbf9e76d8c5997f4debbf57625565b55a1b39ed20630a582efbc96669e4ac58",
+      "license": "BSD-3-Clause (Solo8 subset per Kine2Go card)",
+      "source_rows_zero_based_half_open": [
+        395,
+        523
+      ],
+      "frames": 128,
+      "source_forward_displacement_m": 2.401048850299807,
+      "airborne_like_intervals_frames": [
+        13,
+        11,
+        12,
+        12,
+        13
+      ]
+    }
+  ]
+}

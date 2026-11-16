@@ -1,0 +1,249 @@
+{
+  "excluded_subtree": "wblwbl/rubbish",
+  "existing": [
+    {
+      "motion": "wblwbl/walk/ai4_dog_walk_03",
+      "motion_usable_for_amp": true,
+      "playback_pass": false,
+      "foot_error_p95_m": 8.79179034735992e-05,
+      "joint_velocity_p99_rad_s": 10.03358521540533,
+      "playback_fall_frames": 0,
+      "playback_progress_ratio": -0.020762126512828633
+    },
+    {
+      "motion": "wblwbl/walk/vhdc_horse1_s1_walk_01",
+      "motion_usable_for_amp": true,
+      "playback_pass": false,
+      "foot_error_p95_m": 0.0001285693900129264,
+      "joint_velocity_p99_rad_s": 3.670673281980173,
+      "playback_fall_frames": 0,
+      "playback_progress_ratio": -0.03269478754168927
+    },
+    {
+      "motion": "wblwbl/walk/vhdc_horse1_s1_walk_02",
+      "motion_usable_for_amp": true,
+      "playback_pass": false,
+      "foot_error_p95_m": 0.000158124131862584,
+      "joint_velocity_p99_rad_s": 4.446813344172505,
+      "playback_fall_frames": 259,
+      "playback_progress_ratio": 0.16580671741802044
+    },
+    {
+      "motion": "wblwbl/walk/vhdc_horse1_s1_walk_03",
+      "motion_usable_for_amp": true,
+      "playback_pass": false,
+      "foot_error_p95_m": 0.00016677978697408565,
+      "joint_velocity_p99_rad_s": 4.633084747500613,
+      "playback_fall_frames": 159,
+      "playback_progress_ratio": 0.16673085923090641
+    },
+    {
+      "motion": "wblwbl/turn/ai4_dog_synth_circle_walk",
+      "motion_usable_for_amp": true,
+      "playback_pass": false,
+      "foot_error_p95_m": 9.664188837854235e-05,
+      "joint_velocity_p99_rad_s": 9.166733088508877,
+      "playback_fall_frames": 0,
+      "playback_progress_ratio": 0.1946312093808416
+    },
+    {
+      "motion": "wblwbl/turn/ai4_dog_synth_eight_walk",
+      "motion_usable_for_amp": true,
+      "playback_pass": true,
+      "foot_error_p95_m": 0.026390336928388162,
+      "joint_velocity_p99_rad_s": 7.84150792954784,
+      "playback_fall_frames": 0,
+      "playback_progress_ratio": 0.5535856174478375
+    },
+    {
+      "motion": "wblwbl/turn/ai4_dog_synth_square_walk",
+      "motion_usable_for_amp": true,
+      "playback_pass": false,
+      "foot_error_p95_m": 0.007434396552632755,
+      "joint_velocity_p99_rad_s": 9.257340917875132,
+      "playback_fall_frames": 0,
+      "playback_progress_ratio": -0.12754094528679827
+    },
+    {
+      "motion": "wblwbl/turn/amp_a1_leftturn0",
+      "motion_usable_for_amp": false,
+      "playback_pass": false,
+      "foot_error_p95_m": 0.07185946445886346,
+      "joint_velocity_p99_rad_s": 4.28874691973547,
+      "playback_fall_frames": 0,
+      "playback_progress_ratio": 0.7794641077946033
+    },
+    {
+      "motion": "wblwbl/turn/amp_a1_rightturn0",
+      "motion_usable_for_amp": false,
+      "playback_pass": false,
+      "foot_error_p95_m": 0.06162261182992247,
+      "joint_velocity_p99_rad_s": 5.208517755576914,
+      "playback_fall_frames": 0,
+      "playback_progress_ratio": 0.49425663052592217
+    },
+    {
+      "motion": "wblwbl/turn/atomic_turn_left",
+      "motion_usable_for_amp": true,
+      "playback_pass": false,
+      "foot_error_p95_m": 3.495658042109125e-05,
+      "joint_velocity_p99_rad_s": 3.8812712041061688,
+      "playback_fall_frames": 0,
+      "playback_progress_ratio": -0.01535028341515562
+    },
+    {
+      "motion": "wblwbl/turn/atomic_turn_right",
+      "motion_usable_for_amp": true,
+      "playback_pass": false,
+      "foot_error_p95_m": 3.6254761052134435e-05,
+      "joint_velocity_p99_rad_s": 3.627096732165821,
+      "playback_fall_frames": 0,
+      "playback_progress_ratio": 0.012390392750820966
+    },
+    {
+      "motion": "wblwbl/jump/jump_1",
+      "motion_usable_for_amp": false,
+      "playback_pass": false,
+      "foot_error_p95_m": 0.09069045989941565,
+      "joint_velocity_p99_rad_s": 26.879753363493453,
+      "playback_fall_frames": 0,
+      "playback_progress_ratio": -0.1399780163097631
+    },
+    {
+      "motion": "wblwbl/jump/kine2go_rollout_jump_b",
+      "motion_usable_for_amp": true,
+      "playback_pass": false,
+      "foot_error_p95_m": 0.0024893420348362227,
+      "joint_velocity_p99_rad_s": 18.648386827989068,
+      "playback_fall_frames": 0,
+      "playback_progress_ratio": 0.25433229524748513
+    },
+    {
+      "motion": "wblwbl/jump/quad_backflip_50hz",
+      "motion_usable_for_amp": true,
+      "playback_pass": false,
+      "foot_error_p95_m": 0.00370178991874439,
+      "joint_velocity_p99_rad_s": 18.32420739715023,
+      "playback_fall_frames": 0,
+      "playback_progress_ratio": 0.42330120466400506
+    },
+    {
+      "motion": "wblwbl/jump/quad_frontflip_50hz",
+      "motion_usable_for_amp": true,
+      "playback_pass": false,
+      "foot_error_p95_m": 0.00023044967922365226,
+      "joint_velocity_p99_rad_s": 19.192102153730826,
+      "playback_fall_frames": 41,
+      "playback_progress_ratio": 1.9345888801645434
+    },
+    {
+      "motion": "wblwbl/jump/quad_jump_forward_1m_50hz",
+      "motion_usable_for_amp": true,
+      "playback_pass": false,
+      "foot_error_p95_m": 0.006071443470810343,
+      "joint_velocity_p99_rad_s": 14.825584283148377,
+      "playback_fall_frames": 7,
+      "playback_progress_ratio": 0.14164123046849378
+    },
+    {
+      "motion": "wblwbl/jump/quad_sideflip_50hz",
+      "motion_usable_for_amp": true,
+      "playback_pass": false,
+      "foot_error_p95_m": 0.0001681477641975533,
+      "joint_velocity_p99_rad_s": 14.751242383788625,
+      "playback_fall_frames": 2,
+      "playback_progress_ratio": 0.08910887122465386
+    },
+    {
+      "motion": "wblwbl/jump/quad_sideflip_right_50hz",
+      "motion_usable_for_amp": true,
+      "playback_pass": false,
+      "foot_error_p95_m": 0.0001740994113315292,
+      "joint_velocity_p99_rad_s": 14.068196209355966,
+      "playback_fall_frames": 0,
+      "playback_progress_ratio": 0.09365158419781468
+    },
+    {
+      "motion": "wblwbl/crawl/solo8_crawl_fast",
+      "motion_usable_for_amp": true,
+      "playback_pass": false,
+      "foot_error_p95_m": 0.00019837301291762428,
+      "joint_velocity_p99_rad_s": 19.634520774933428,
+      "playback_fall_frames": 0,
+      "playback_progress_ratio": -0.021484218180566467
+    },
+    {
+      "motion": "wblwbl/crawl/solo8_crawl_slow",
+      "motion_usable_for_amp": true,
+      "playback_pass": false,
+      "foot_error_p95_m": 0.00020960467608279883,
+      "joint_velocity_p99_rad_s": 11.845069600095654,
+      "playback_fall_frames": 0,
+      "playback_progress_ratio": -0.10762502448398249
+    },
+    {
+      "motion": "wblwbl/run/ai4_dog_run_02",
+      "motion_usable_for_amp": false,
+      "playback_pass": false,
+      "foot_error_p95_m": 0.141292888688421,
+      "joint_velocity_p99_rad_s": 32.2468768923832,
+      "playback_fall_frames": 0,
+      "playback_progress_ratio": -0.007341644294256198
+    },
+    {
+      "motion": "wblwbl/run/ai4_dog_trot_00",
+      "motion_usable_for_amp": true,
+      "playback_pass": false,
+      "foot_error_p95_m": 8.79179034735992e-05,
+      "joint_velocity_p99_rad_s": 10.03358521540533,
+      "playback_fall_frames": 0,
+      "playback_progress_ratio": -0.020762126512828633
+    },
+    {
+      "motion": "wblwbl/run/vhdc_horse1_s1_trot_01",
+      "motion_usable_for_amp": true,
+      "playback_pass": false,
+      "foot_error_p95_m": 0.0002522945289554111,
+      "joint_velocity_p99_rad_s": 6.39876324237938,
+      "playback_fall_frames": 0,
+      "playback_progress_ratio": -0.04735953384526157
+    },
+    {
+      "motion": "wblwbl/run/vhdc_horse1_s1_trot_02",
+      "motion_usable_for_amp": true,
+      "playback_pass": false,
+      "foot_error_p95_m": 9.522291700402918e-05,
+      "joint_velocity_p99_rad_s": 5.091759761235162,
+      "playback_fall_frames": 0,
+      "playback_progress_ratio": -0.06067828601685107
+    },
+    {
+      "motion": "wblwbl/run/vhdc_horse1_s2_trot_01",
+      "motion_usable_for_amp": true,
+      "playback_pass": false,
+      "foot_error_p95_m": 0.00017220408403982354,
+      "joint_velocity_p99_rad_s": 3.051965995224045,
+      "playback_fall_frames": 0,
+      "playback_progress_ratio": -0.04326316158126824
+    },
+    {
+      "motion": "wblwbl/run/vhdc_horse1_s2_trot_02",
+      "motion_usable_for_amp": true,
+      "playback_pass": false,
+      "foot_error_p95_m": 0.00010450719557678248,
+      "joint_velocity_p99_rad_s": 2.827573093592229,
+      "playback_fall_frames": 0,
+      "playback_progress_ratio": -0.05065998581719364
+    },
+    {
+      "motion": "wblwbl/strafe/ai4_dog_synth_wide_strafe",
+      "motion_usable_for_amp": false,
+      "playback_pass": false,
+      "foot_error_p95_m": 0.46842183529346654,
+      "joint_velocity_p99_rad_s": 16.742172814634703,
+      "playback_fall_frames": 863,
+      "playback_progress_ratio": 0.029601023770661115
+    }
+  ],
+  "training_whitelist": []
+}

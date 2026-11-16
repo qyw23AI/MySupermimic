@@ -1,0 +1,47 @@
+{
+  "source": "https://github.com/SafeRoboticsLab/go2_atomic_skills",
+  "revision": "ce0169d179525c72c712df8e62475e2a0536d124",
+  "source_fps": 50,
+  "model_sha256": "077fc7f70ce2ddcfdab814aa0800efa2c974db6c98594b2f7663f779509fb912",
+  "policy": "walker_actor.pt",
+  "capture": "MuJoCo flat ground, default pose at 0.32 m, one recorded state after each 20 ms step",
+  "joint_names": [
+    "FL_hip_joint",
+    "FL_thigh_joint",
+    "FL_calf_joint",
+    "FR_hip_joint",
+    "FR_thigh_joint",
+    "FR_calf_joint",
+    "RL_hip_joint",
+    "RL_thigh_joint",
+    "RL_calf_joint",
+    "RR_hip_joint",
+    "RR_thigh_joint",
+    "RR_calf_joint"
+  ],
+  "quaternion_order": "xyzw",
+  "files": [
+    {
+      "file": "atomic_turn_left.csv",
+      "sha256": "4f61d9493c9c29abc9e509397fd48888721cf5a560d4ce61f3393575df5ba594",
+      "command": [
+        0.2,
+        0,
+        0.85
+      ],
+      "frames": 150,
+      "nonfoot_ground_contact_frames": 0
+    },
+    {
+      "file": "atomic_turn_right.csv",
+      "sha256": "6f3e5358c592c96750ec50e5b2d060c89827d7913b6e9364f4fac28e7b7d0246",
+      "command": [
+        0.2,
+        0,
+        -0.85
+      ],
+      "frames": 150,
+      "nonfoot_ground_contact_frames": 0
+    }
+  ]
+}

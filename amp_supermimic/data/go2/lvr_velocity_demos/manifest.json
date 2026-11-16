@@ -1,0 +1,54 @@
+{
+  "source_repository": "https://github.com/ruipengZ/Latent-Variation-Regularization",
+  "dataset_description": "Official LVR Go2 forward, backward and sideways demonstrations. Simulation files are compacted to last_index+1 valid rows; real-world files are copied unchanged.",
+  "files": [
+    {
+      "task": "backward",
+      "kind": "Isaac Lab simulation demonstration",
+      "source": "amp_supermimic/data/raw/go2_lvr_backward_sideways/isaac_go2_backward/traj-1.hdf5",
+      "file": "amp_supermimic/data/go2/lvr_velocity_demos/isaac_go2_backward_traj-1_compact.hdf5",
+      "valid_rows": 1000,
+      "preallocated_rows": 1000000,
+      "sha256": "479223a756f56c4ef6abcd8fa3578e69d00690d1ccc5c98530b8aa03791551aa"
+    },
+    {
+      "task": "forward",
+      "kind": "Isaac Lab simulation demonstration",
+      "source": "amp_supermimic/data/raw/go2_lvr_backward_sideways/isaac_go2_forward/traj-1.hdf5",
+      "file": "amp_supermimic/data/go2/lvr_velocity_demos/isaac_go2_forward_traj-1_compact.hdf5",
+      "valid_rows": 1000,
+      "preallocated_rows": 1000000,
+      "sha256": "b8eae9b1aca299df32dded344cf33056827f026d1dcc28577b4e95a798de37f0"
+    },
+    {
+      "task": "sideway",
+      "kind": "Isaac Lab simulation demonstration",
+      "source": "amp_supermimic/data/raw/go2_lvr_backward_sideways/isaac_go2_sideway/traj-1.hdf5",
+      "file": "amp_supermimic/data/go2/lvr_velocity_demos/isaac_go2_sideway_traj-1_compact.hdf5",
+      "valid_rows": 1000,
+      "preallocated_rows": 1000000,
+      "sha256": "75f44791971f2c6936fdf46c66d29589dd09c3abe5aa5baa69d77916cd95f607"
+    },
+    {
+      "task": "backward",
+      "kind": "Real Go2 demonstration",
+      "source": "amp_supermimic/data/raw/go2_lvr_backward_sideways/unitree_go2_backward/step-250+250.hdf5",
+      "file": "amp_supermimic/data/go2/lvr_velocity_demos/unitree_go2_backward_step-250+250.hdf5",
+      "sha256": "55f8f0c8218095e199be2de8d29c6c38991a7e29462925a4e0dc53cd122c03d3"
+    },
+    {
+      "task": "forward",
+      "kind": "Real Go2 demonstration",
+      "source": "amp_supermimic/data/raw/go2_lvr_backward_sideways/unitree_go2_forward/step-250+250.hdf5",
+      "file": "amp_supermimic/data/go2/lvr_velocity_demos/unitree_go2_forward_step-250+250.hdf5",
+      "sha256": "f0a03988ed486c566109a70b5a28e7b48b7e751ff517f0922fa78a6faedbe8f5"
+    },
+    {
+      "task": "sideway",
+      "kind": "Real Go2 demonstration",
+      "source": "amp_supermimic/data/raw/go2_lvr_backward_sideways/unitree_go2_sideway/step-250+250.hdf5",
+      "file": "amp_supermimic/data/go2/lvr_velocity_demos/unitree_go2_sideway_step-250+250.hdf5",
+      "sha256": "6c0c63f2c1ff719221d74e1b807e488f05f81a0ee48efdc14966cb1609539a99"
+    }
+  ]
+}

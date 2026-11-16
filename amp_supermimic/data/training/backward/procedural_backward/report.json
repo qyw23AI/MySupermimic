@@ -1,0 +1,39 @@
+{
+  "source_kind": "procedural_diagonal_contact_plan",
+  "target_foot_fit_p95_m": 5.7150528442884476e-05,
+  "command_x_m_s": -0.45,
+  "cycle_s": 0.6,
+  "duty_factor": 0.6,
+  "knee_median_rad": -1.536529335,
+  "knee_most_extended_rad": -1.374664904,
+  "minimum_sole_height_m": 0.002957099074240896,
+  "below_floor_frames": 0,
+  "min_lateral_foot_offset_ratio": 0.9999492477011971,
+  "min_lateral_foot_offset_m": 0.2131901881332536,
+  "median_body_velocity_m_s": [
+    -0.4500000000000004,
+    0.0,
+    0.0
+  ],
+  "joint_velocity_p99_rad_s": 5.690266160000001,
+  "frames": 200,
+  "fps": 50,
+  "joint_names": [
+    "RR_hip_joint",
+    "RR_thigh_joint",
+    "RR_calf_joint",
+    "RL_hip_joint",
+    "RL_thigh_joint",
+    "RL_calf_joint",
+    "FR_hip_joint",
+    "FR_thigh_joint",
+    "FR_calf_joint",
+    "FL_hip_joint",
+    "FL_thigh_joint",
+    "FL_calf_joint"
+  ],
+  "quaternion_order": "xyzw",
+  "csv_sha256": "a7aaa6a7108486770c6c9ab6ee5df0f1e7e1ba13cd518ac74d288467fdf24dd0",
+  "target_mjcf_sha256": "a6ae3a95bf71c63737bf7c913f2bb37429e78a6ac07f1b68593e5504723e3084",
+  "status": "kinematic_candidate"
+}

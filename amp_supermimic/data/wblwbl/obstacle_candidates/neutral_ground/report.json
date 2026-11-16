@@ -1,0 +1,99 @@
+{
+  "source_sha256": "4618dd76ce810fe820a770661cc224f733c920f5488ccfa03af9d5320cad5b97",
+  "source_manifest_sha256": "a9b26cd69b2d833ed16a309a6c463060b2b65adec9a4b8b481d3765906984f88",
+  "target_mjcf_sha256": "a6ae3a95bf71c63737bf7c913f2bb37429e78a6ac07f1b68593e5504723e3084",
+  "frames": 476,
+  "fps": 50,
+  "joint_names": [
+    "RR_hip_joint",
+    "RR_thigh_joint",
+    "RR_calf_joint",
+    "RL_hip_joint",
+    "RL_thigh_joint",
+    "RL_calf_joint",
+    "FR_hip_joint",
+    "FR_thigh_joint",
+    "FR_calf_joint",
+    "FL_hip_joint",
+    "FL_thigh_joint",
+    "FL_calf_joint"
+  ],
+  "scale": 1.4150255942018535,
+  "swing_boost_m": 0.0,
+  "foot_error_mean_m": 0.00036972963876264874,
+  "foot_error_p95_m": 0.0014961282810449514,
+  "foot_error_max_m": 0.014421555244492073,
+  "joint_limit_violation_rad": 0.0,
+  "joint_velocity_p99_rad_s": 17.922144399928285,
+  "csv_sha256": "81dde19f877c9c993dabdf03630106162b3e68b0a6d5845839575f45ab303411",
+  "playback_torque_limits_nm": [
+    23.7,
+    23.7,
+    23.7,
+    23.7,
+    23.7,
+    23.7,
+    23.7,
+    23.7,
+    23.7,
+    23.7,
+    23.7,
+    23.7
+  ],
+  "playback_kp": 40,
+  "playback_kd": 4,
+  "flat_ground_height_shift_m": -0.0018194149328935455,
+  "foot_error_p95_by_leg_m": {
+    "RR": 0.0007574075911389644,
+    "RL": 0.005805490461677667,
+    "FR": 0.00021370079540889572,
+    "FL": 0.0003590274606304466
+  },
+  "foot_calibration": "torso_neutral",
+  "reference_displacement_xy_m": [
+    15.325900263075468,
+    1.8008880832598368
+  ],
+  "playback_displacement_xy_m": [
+    -0.1794383656928564,
+    -0.12497791559036808
+  ],
+  "playback_progress_ratio": -0.012493892006139012,
+  "playback_joint_rmse_by_leg_rad": [
+    [
+      0.0859313363619128,
+      0.17965540392523133,
+      0.43376866923419694
+    ],
+    [
+      0.07991814488822437,
+      0.1874363257351902,
+      0.47155883411858235
+    ],
+    [
+      0.09717552103124155,
+      0.2631561646520696,
+      0.4468614793725614
+    ],
+    [
+      0.0970642349732256,
+      0.2870822659552021,
+      0.4821432329652951
+    ]
+  ],
+  "playback_foot_contact_fraction_by_leg": [
+    0.012605042016806723,
+    0.004201680672268907,
+    0.6848739495798319,
+    0.680672268907563
+  ],
+  "playback_contact_frame_fraction": 0.7815126050420168,
+  "playback_mean_support_feet": 1.3823529411764706,
+  "playback_joint_rmse_rad": 0.3019908605295726,
+  "playback_fall_frames": 0,
+  "playback_final_height_m": 0.1805114851251691,
+  "playback_pass": false,
+  "motion_usable_for_amp": true,
+  "reference_heading_change_deg": 25.431843637915428,
+  "playback_heading_change_deg": 18.298840681305165
+}

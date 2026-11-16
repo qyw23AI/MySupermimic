@@ -1,0 +1,2037 @@
+{
+  "version": 1,
+  "dataset": "MIMUW-Robotics/kine2go",
+  "revision": "7f03a3fb7f6b2e684899530862ba103e81570363",
+  "pipeline_repository": "https://github.com/nomagiclab/kine2go-pipeline",
+  "pipeline_revision": "65b39f104706c1b4307dfc2a7df2aa8bed8d20aa",
+  "clips": [
+    "ai4_dog_canter",
+    "ai4_dog_left_turn",
+    "ai4_dog_pace",
+    "ai4_dog_right_turn",
+    "ai4_dog_run_00",
+    "ai4_dog_run_02",
+    "ai4_dog_run_04",
+    "ai4_dog_synth_circle_walk",
+    "ai4_dog_synth_eight_walk",
+    "ai4_dog_synth_ellipse_walk",
+    "ai4_dog_synth_half_flip_jump",
+    "ai4_dog_synth_square_walk",
+    "ai4_dog_synth_tight_strafe",
+    "ai4_dog_synth_wide_strafe",
+    "ai4_dog_trot_00",
+    "ai4_dog_trot_01",
+    "ai4_dog_walk_00",
+    "ai4_dog_walk_01",
+    "ai4_dog_walk_02",
+    "ai4_dog_walk_03",
+    "ai4_dog_walk_04",
+    "ai4_dog_walk_06",
+    "solo8_crawl_fast",
+    "solo8_crawl_slow",
+    "solo8_jump_forward_a",
+    "solo8_jump_forward_b",
+    "solo8_scoot_forward",
+    "solo8_walk",
+    "vhdc_horse1_s1_trot_01",
+    "vhdc_horse1_s1_trot_02",
+    "vhdc_horse1_s1_trot_03",
+    "vhdc_horse1_s1_walk_01",
+    "vhdc_horse1_s1_walk_02",
+    "vhdc_horse1_s1_walk_03",
+    "vhdc_horse1_s2_trot_01",
+    "vhdc_horse1_s2_trot_02",
+    "vhdc_horse1_s2_trot_03",
+    "vhdc_horse1_s2_walk_01",
+    "vhdc_horse1_s2_walk_02",
+    "vhdc_horse1_s2_walk_03"
+  ],
+  "source_fps": 60,
+  "joint_names": [
+    "FL_hip_joint",
+    "FL_thigh_joint",
+    "FL_calf_joint",
+    "FR_hip_joint",
+    "FR_thigh_joint",
+    "FR_calf_joint",
+    "RL_hip_joint",
+    "RL_thigh_joint",
+    "RL_calf_joint",
+    "RR_hip_joint",
+    "RR_thigh_joint",
+    "RR_calf_joint"
+  ],
+  "quaternion_order": "xyzw",
+  "reference_data_only": true,
+  "conversion": "Kine2Go Go2 reference rows; raw joint order and WXYZ quaternion converted to TrackerLab Go2 order; no smoothing or crop.",
+  "files": [
+    {
+      "file": "ai4_dog_canter.csv",
+      "frames": 567,
+      "duration_seconds": 9.433333333333334,
+      "raw_sha256": "c4de6861404d53b0fe5a09b3573d53b6f833c107f4689641544c697c43dd841c",
+      "sha256": "258a07d34053162dbc578e7a9241e16ba74956704d774588d86fa3c9f6c46adb",
+      "source": "AI4Animation - natural dog mocap (SIGGRAPH 2018 release)",
+      "source_url": "https://github.com/sebastianstarke/AI4Animation/tree/master/AI4Animation/SIGGRAPH_2018",
+      "license": "CC BY-NC 4.0",
+      "attribution": "H. Zhang et al., 'Mode-Adaptive Neural Networks for Quadruped Motion Control', SIGGRAPH 2018",
+      "description": "dog canter (AI4Animation paper eval set)",
+      "tags": [
+        "canter"
+      ],
+      "validation": {
+        "frames_checked": 567,
+        "foot_link_max_error_m": 1.335990591516436e-06,
+        "foot_link_mean_error_m": 7.433287003147678e-08,
+        "joint_limit_min_margin_rad": 0.17212069053649914,
+        "root_height_range_m": [
+          0.14518775045871735,
+          0.36859363317489624
+        ],
+        "joint_max_velocity_rad_s": 18.556255340576172,
+        "dynamic_feasibility": "FK validates geometry; physical execution is evaluated in PhysX"
+      }
+    },
+    {
+      "file": "ai4_dog_left_turn.csv",
+      "frames": 4336,
+      "duration_seconds": 72.25,
+      "raw_sha256": "b0a20467682ec31c9dfb2d7a1e71e7e6dd2020506ed2d8ea215fd018976e5664",
+      "sha256": "17cf31f673b4aefd28c281f02304c4233be47be8c99b75476d51bf3379b9b4e7",
+      "source": "AI4Animation - natural dog mocap (SIGGRAPH 2018 release)",
+      "source_url": "https://github.com/sebastianstarke/AI4Animation/tree/master/AI4Animation/SIGGRAPH_2018",
+      "license": "CC BY-NC 4.0",
+      "attribution": "H. Zhang et al., 'Mode-Adaptive Neural Networks for Quadruped Motion Control', SIGGRAPH 2018",
+      "description": "dog left turn (AI4Animation paper eval set)",
+      "tags": [
+        "turn",
+        "left"
+      ],
+      "validation": {
+        "frames_checked": 4336,
+        "foot_link_max_error_m": 4.155016831659777e-07,
+        "foot_link_mean_error_m": 6.896188297618244e-08,
+        "joint_limit_min_margin_rad": -2.8381347605410667e-08,
+        "root_height_range_m": [
+          0.14730800688266754,
+          0.3396443724632263
+        ],
+        "joint_max_velocity_rad_s": 13.554926872253418,
+        "dynamic_feasibility": "FK validates geometry; physical execution is evaluated in PhysX"
+      }
+    },
+    {
+      "file": "ai4_dog_pace.csv",
+      "frames": 593,
+      "duration_seconds": 9.866666666666667,
+      "raw_sha256": "6647cd55cfa65140f45c38c4e7dcedc5039e8f8c52523ece3f043d8c51b75fb8",
+      "sha256": "9e2ffe01989145a38f5764dc6c628c5b21ee7f63bea713bc08a6cd00cda7e54e",
+      "source": "AI4Animation - natural dog mocap (SIGGRAPH 2018 release)",
+      "source_url": "https://github.com/sebastianstarke/AI4Animation/tree/master/AI4Animation/SIGGRAPH_2018",
+      "license": "CC BY-NC 4.0",
+      "attribution": "H. Zhang et al., 'Mode-Adaptive Neural Networks for Quadruped Motion Control', SIGGRAPH 2018",
+      "description": "dog pace (AI4Animation paper eval set)",
+      "tags": [
+        "pace"
+      ],
+      "validation": {
+        "frames_checked": 593,
+        "foot_link_max_error_m": 1.1690392686974578e-06,
+        "foot_link_mean_error_m": 1.4484796327686974e-07,
+        "joint_limit_min_margin_rad": 0.09037634872436529,
+        "root_height_range_m": [
+          0.14741525053977966,
+          0.3376643657684326
+        ],
+        "joint_max_velocity_rad_s": 11.009500503540039,
+        "dynamic_feasibility": "FK validates geometry; physical execution is evaluated in PhysX"
+      }
+    },
+    {
+      "file": "ai4_dog_right_turn.csv",
+      "frames": 4336,
+      "duration_seconds": 72.25,
+      "raw_sha256": "b0a20467682ec31c9dfb2d7a1e71e7e6dd2020506ed2d8ea215fd018976e5664",
+      "sha256": "17cf31f673b4aefd28c281f02304c4233be47be8c99b75476d51bf3379b9b4e7",
+      "source": "AI4Animation - natural dog mocap (SIGGRAPH 2018 release)",
+      "source_url": "https://github.com/sebastianstarke/AI4Animation/tree/master/AI4Animation/SIGGRAPH_2018",
+      "license": "CC BY-NC 4.0",
+      "attribution": "H. Zhang et al., 'Mode-Adaptive Neural Networks for Quadruped Motion Control', SIGGRAPH 2018",
+      "description": "dog right turn (AI4Animation paper eval set)",
+      "tags": [
+        "turn",
+        "right"
+      ],
+      "validation": {
+        "frames_checked": 4336,
+        "foot_link_max_error_m": 4.155016831659777e-07,
+        "foot_link_mean_error_m": 6.896188297618244e-08,
+        "joint_limit_min_margin_rad": -2.8381347605410667e-08,
+        "root_height_range_m": [
+          0.14730800688266754,
+          0.3396443724632263
+        ],
+        "joint_max_velocity_rad_s": 13.554926872253418,
+        "dynamic_feasibility": "FK validates geometry; physical execution is evaluated in PhysX"
+      }
+    },
+    {
+      "file": "ai4_dog_run_00.csv",
+      "frames": 567,
+      "duration_seconds": 9.433333333333334,
+      "raw_sha256": "c4de6861404d53b0fe5a09b3573d53b6f833c107f4689641544c697c43dd841c",
+      "sha256": "258a07d34053162dbc578e7a9241e16ba74956704d774588d86fa3c9f6c46adb",
+      "source": "AI4Animation - natural dog mocap (SIGGRAPH 2018 release)",
+      "source_url": "https://github.com/sebastianstarke/AI4Animation/tree/master/AI4Animation/SIGGRAPH_2018",
+      "license": "CC BY-NC 4.0",
+      "attribution": "H. Zhang et al., 'Mode-Adaptive Neural Networks for Quadruped Motion Control', SIGGRAPH 2018",
+      "description": "dog run, take 0",
+      "tags": [
+        "run"
+      ],
+      "validation": {
+        "frames_checked": 567,
+        "foot_link_max_error_m": 1.335990591516436e-06,
+        "foot_link_mean_error_m": 7.433287003147678e-08,
+        "joint_limit_min_margin_rad": 0.17212069053649914,
+        "root_height_range_m": [
+          0.14518775045871735,
+          0.36859363317489624
+        ],
+        "joint_max_velocity_rad_s": 18.556255340576172,
+        "dynamic_feasibility": "FK validates geometry; physical execution is evaluated in PhysX"
+      }
+    },
+    {
+      "file": "ai4_dog_run_02.csv",
+      "frames": 203,
+      "duration_seconds": 3.3666666666666667,
+      "raw_sha256": "380dc3b0fefc2d8b02f91dc6b35120a00b7c3c0ebefdc2e153f8f026e9cb8113",
+      "sha256": "2cba4023c04385b17e0f1fb284aa0dc9ff0f5d4f6a260c3b06dccbd5cbbc26b3",
+      "source": "AI4Animation - natural dog mocap (SIGGRAPH 2018 release)",
+      "source_url": "https://github.com/sebastianstarke/AI4Animation/tree/master/AI4Animation/SIGGRAPH_2018",
+      "license": "CC BY-NC 4.0",
+      "attribution": "H. Zhang et al., 'Mode-Adaptive Neural Networks for Quadruped Motion Control', SIGGRAPH 2018",
+      "description": "dog run, take 2",
+      "tags": [
+        "run"
+      ],
+      "validation": {
+        "frames_checked": 203,
+        "foot_link_max_error_m": 1.2909699775671598e-06,
+        "foot_link_mean_error_m": 1.6679259833713473e-07,
+        "joint_limit_min_margin_rad": 0.25620219253540044,
+        "root_height_range_m": [
+          0.29153451323509216,
+          0.3640231192111969
+        ],
+        "joint_max_velocity_rad_s": 16.641712188720703,
+        "dynamic_feasibility": "FK validates geometry; physical execution is evaluated in PhysX"
+      }
+    },
+    {
+      "file": "ai4_dog_run_04.csv",
+      "frames": 1263,
+      "duration_seconds": 21.033333333333335,
+      "raw_sha256": "ce8c7b556cc4faefd6ea67fa93eacc82d71f7542db940238358909125264a4d5",
+      "sha256": "fc742789f8703a2409581f7f5aae3352184ef177a4b6aeecec0cd93def851772",
+      "source": "AI4Animation - natural dog mocap (SIGGRAPH 2018 release)",
+      "source_url": "https://github.com/sebastianstarke/AI4Animation/tree/master/AI4Animation/SIGGRAPH_2018",
+      "license": "CC BY-NC 4.0",
+      "attribution": "H. Zhang et al., 'Mode-Adaptive Neural Networks for Quadruped Motion Control', SIGGRAPH 2018",
+      "description": "dog run, take 4",
+      "tags": [
+        "run"
+      ],
+      "validation": {
+        "frames_checked": 1263,
+        "foot_link_max_error_m": 8.55347417005538e-07,
+        "foot_link_mean_error_m": 1.4226861377376035e-07,
+        "joint_limit_min_margin_rad": 0.08738029022216809,
+        "root_height_range_m": [
+          0.1458931267261505,
+          0.33903801441192627
+        ],
+        "joint_max_velocity_rad_s": 16.7260799407959,
+        "dynamic_feasibility": "FK validates geometry; physical execution is evaluated in PhysX"
+      }
+    },
+    {
+      "file": "ai4_dog_synth_circle_walk.csv",
+      "frames": 807,
+      "duration_seconds": 13.433333333333334,
+      "raw_sha256": "733d7d042116cf673788648535aebe452b28476a6395449d399dc978bdf3f89c",
+      "sha256": "6e0157cd56fe5ccd818198957fd146683e6fbbfe7d5ff6c99b6388dd04e2f979",
+      "source": "AI4Animation - synthetic, generated from the SIGGRAPH 2018 controller via a custom trajectory collector",
+      "source_url": "https://github.com/sebastianstarke/AI4Animation/tree/master/AI4Animation/SIGGRAPH_2018",
+      "license": "CC BY-NC 4.0",
+      "attribution": "H. Zhang et al., 'Mode-Adaptive Neural Networks for Quadruped Motion Control', SIGGRAPH 2018",
+      "description": "walk along a circular path",
+      "tags": [
+        "walk",
+        "circle"
+      ],
+      "validation": {
+        "frames_checked": 807,
+        "foot_link_max_error_m": 1.6763007846069936e-06,
+        "foot_link_mean_error_m": 4.2743974266122074e-07,
+        "joint_limit_min_margin_rad": 0.34325286888122564,
+        "root_height_range_m": [
+          0.30004024505615234,
+          0.3347975015640259
+        ],
+        "joint_max_velocity_rad_s": 10.555317878723145,
+        "dynamic_feasibility": "FK validates geometry; physical execution is evaluated in PhysX"
+      }
+    },
+    {
+      "file": "ai4_dog_synth_eight_walk.csv",
+      "frames": 1176,
+      "duration_seconds": 19.583333333333332,
+      "raw_sha256": "baf03c80803c6cc43703dcb9d3dda3840d4011b58d5ce2e36994e3c020746ff7",
+      "sha256": "67749968aae10f4fc1d398d95cb8c73263f2c18b4eb779b548c5b34318cd4c0a",
+      "source": "AI4Animation - synthetic, generated from the SIGGRAPH 2018 controller via a custom trajectory collector",
+      "source_url": "https://github.com/sebastianstarke/AI4Animation/tree/master/AI4Animation/SIGGRAPH_2018",
+      "license": "CC BY-NC 4.0",
+      "attribution": "H. Zhang et al., 'Mode-Adaptive Neural Networks for Quadruped Motion Control', SIGGRAPH 2018",
+      "description": "walk along a figure-eight path",
+      "tags": [
+        "walk",
+        "figure-eight"
+      ],
+      "validation": {
+        "frames_checked": 1176,
+        "foot_link_max_error_m": 1.7553020247000015e-06,
+        "foot_link_mean_error_m": 4.5399095374661234e-07,
+        "joint_limit_min_margin_rad": 0.12845805429458623,
+        "root_height_range_m": [
+          0.3122502565383911,
+          0.339759886264801
+        ],
+        "joint_max_velocity_rad_s": 10.314752578735352,
+        "dynamic_feasibility": "FK validates geometry; physical execution is evaluated in PhysX"
+      }
+    },
+    {
+      "file": "ai4_dog_synth_ellipse_walk.csv",
+      "frames": 1179,
+      "duration_seconds": 19.633333333333333,
+      "raw_sha256": "eb46d940244c0d7a0a1556b7230a1abc300bd48a640c30b076cb0f291035c276",
+      "sha256": "5f5e15ad6404cba56268ccdc61d91af54c73d8f31494e00b539faa088e5d30e8",
+      "source": "AI4Animation - synthetic, generated from the SIGGRAPH 2018 controller via a custom trajectory collector",
+      "source_url": "https://github.com/sebastianstarke/AI4Animation/tree/master/AI4Animation/SIGGRAPH_2018",
+      "license": "CC BY-NC 4.0",
+      "attribution": "H. Zhang et al., 'Mode-Adaptive Neural Networks for Quadruped Motion Control', SIGGRAPH 2018",
+      "description": "walk along an elliptical path",
+      "tags": [
+        "walk",
+        "ellipse"
+      ],
+      "validation": {
+        "frames_checked": 1179,
+        "foot_link_max_error_m": 3.2971706960471344e-06,
+        "foot_link_mean_error_m": 6.3511966809225e-07,
+        "joint_limit_min_margin_rad": 0.21473273777008062,
+        "root_height_range_m": [
+          0.3109426200389862,
+          0.3311674892902374
+        ],
+        "joint_max_velocity_rad_s": 10.29286003112793,
+        "dynamic_feasibility": "FK validates geometry; physical execution is evaluated in PhysX"
+      }
+    },
+    {
+      "file": "ai4_dog_synth_half_flip_jump.csv",
+      "frames": 1179,
+      "duration_seconds": 19.633333333333333,
+      "raw_sha256": "eb46d940244c0d7a0a1556b7230a1abc300bd48a640c30b076cb0f291035c276",
+      "sha256": "5f5e15ad6404cba56268ccdc61d91af54c73d8f31494e00b539faa088e5d30e8",
+      "source": "AI4Animation - synthetic, generated from the SIGGRAPH 2018 controller via a custom trajectory collector",
+      "source_url": "https://github.com/sebastianstarke/AI4Animation/tree/master/AI4Animation/SIGGRAPH_2018",
+      "license": "CC BY-NC 4.0",
+      "attribution": "H. Zhang et al., 'Mode-Adaptive Neural Networks for Quadruped Motion Control', SIGGRAPH 2018",
+      "description": "half-flipping forward jump",
+      "tags": [
+        "jump",
+        "flip"
+      ],
+      "validation": {
+        "frames_checked": 1179,
+        "foot_link_max_error_m": 3.2971706960471344e-06,
+        "foot_link_mean_error_m": 6.3511966809225e-07,
+        "joint_limit_min_margin_rad": 0.21473273777008062,
+        "root_height_range_m": [
+          0.3109426200389862,
+          0.3311674892902374
+        ],
+        "joint_max_velocity_rad_s": 10.29286003112793,
+        "dynamic_feasibility": "FK validates geometry; physical execution is evaluated in PhysX"
+      }
+    },
+    {
+      "file": "ai4_dog_synth_square_walk.csv",
+      "frames": 1116,
+      "duration_seconds": 18.583333333333332,
+      "raw_sha256": "1181e9f2e0900b5db6101b2aa94a09ea01aae4de4aa026fff9386d67d05216b7",
+      "sha256": "15eb16fef35cec2c333f2b6532aae8bd8c071ae4fba49965573f1f79f8c4886d",
+      "source": "AI4Animation - synthetic, generated from the SIGGRAPH 2018 controller via a custom trajectory collector",
+      "source_url": "https://github.com/sebastianstarke/AI4Animation/tree/master/AI4Animation/SIGGRAPH_2018",
+      "license": "CC BY-NC 4.0",
+      "attribution": "H. Zhang et al., 'Mode-Adaptive Neural Networks for Quadruped Motion Control', SIGGRAPH 2018",
+      "description": "walk along a square path",
+      "tags": [
+        "walk",
+        "square"
+      ],
+      "validation": {
+        "frames_checked": 1116,
+        "foot_link_max_error_m": 1.7880963553591205e-06,
+        "foot_link_mean_error_m": 4.966355824413786e-07,
+        "joint_limit_min_margin_rad": 0.17517694972991948,
+        "root_height_range_m": [
+          0.3069867491722107,
+          0.3383078873157501
+        ],
+        "joint_max_velocity_rad_s": 13.556313514709473,
+        "dynamic_feasibility": "FK validates geometry; physical execution is evaluated in PhysX"
+      }
+    },
+    {
+      "file": "ai4_dog_synth_tight_strafe.csv",
+      "frames": 1040,
+      "duration_seconds": 17.316666666666666,
+      "raw_sha256": "c0bd560963946000e2e03f9d5e5be50cb61878579be0041af9930dd29e197511",
+      "sha256": "cc8b7cba4fc3dcbd76a1ad6d1317f2caf5ee7f8b1abdc3bfb23af52366c202a9",
+      "source": "AI4Animation - synthetic, generated from the SIGGRAPH 2018 controller via a custom trajectory collector",
+      "source_url": "https://github.com/sebastianstarke/AI4Animation/tree/master/AI4Animation/SIGGRAPH_2018",
+      "license": "CC BY-NC 4.0",
+      "attribution": "H. Zhang et al., 'Mode-Adaptive Neural Networks for Quadruped Motion Control', SIGGRAPH 2018",
+      "description": "tight lateral strafing",
+      "tags": [
+        "strafe",
+        "lateral"
+      ],
+      "validation": {
+        "frames_checked": 1040,
+        "foot_link_max_error_m": 7.900565004255154e-07,
+        "foot_link_mean_error_m": 1.3478848745196828e-07,
+        "joint_limit_min_margin_rad": 0.209451766242981,
+        "root_height_range_m": [
+          0.3058193624019623,
+          0.33643925189971924
+        ],
+        "joint_max_velocity_rad_s": 9.808051109313965,
+        "dynamic_feasibility": "FK validates geometry; physical execution is evaluated in PhysX"
+      }
+    },
+    {
+      "file": "ai4_dog_synth_wide_strafe.csv",
+      "frames": 1169,
+      "duration_seconds": 19.466666666666665,
+      "raw_sha256": "b642bc12ad2f37b2ffc14111d584130700b475fe4d37b1af90d665b449fd961d",
+      "sha256": "548f8eea2b5e16528d4e836491ac3909565a2115c338a2585b480571e484be14",
+      "source": "AI4Animation - synthetic, generated from the SIGGRAPH 2018 controller via a custom trajectory collector",
+      "source_url": "https://github.com/sebastianstarke/AI4Animation/tree/master/AI4Animation/SIGGRAPH_2018",
+      "license": "CC BY-NC 4.0",
+      "attribution": "H. Zhang et al., 'Mode-Adaptive Neural Networks for Quadruped Motion Control', SIGGRAPH 2018",
+      "description": "wide lateral strafing",
+      "tags": [
+        "strafe",
+        "lateral"
+      ],
+      "validation": {
+        "frames_checked": 1169,
+        "foot_link_max_error_m": 1.6320160966284143e-06,
+        "foot_link_mean_error_m": 2.2259922801966133e-07,
+        "joint_limit_min_margin_rad": 0.28580102466583257,
+        "root_height_range_m": [
+          0.2991451323032379,
+          0.33854711055755615
+        ],
+        "joint_max_velocity_rad_s": 13.383667945861816,
+        "dynamic_feasibility": "FK validates geometry; physical execution is evaluated in PhysX"
+      }
+    },
+    {
+      "file": "ai4_dog_trot_00.csv",
+      "frames": 548,
+      "duration_seconds": 9.116666666666667,
+      "raw_sha256": "6d0f0ccc20917e2f34c19e8450bb6b08c11db93a9eb0e8c51773229a6a4c7382",
+      "sha256": "c08ce5b6946ecaa7431b8d2f5ab0359af05a337596bd35dabfa36df04aa21716",
+      "source": "AI4Animation - natural dog mocap (SIGGRAPH 2018 release)",
+      "source_url": "https://github.com/sebastianstarke/AI4Animation/tree/master/AI4Animation/SIGGRAPH_2018",
+      "license": "CC BY-NC 4.0",
+      "attribution": "H. Zhang et al., 'Mode-Adaptive Neural Networks for Quadruped Motion Control', SIGGRAPH 2018",
+      "description": "dog trot (AI4Animation paper eval set)",
+      "tags": [
+        "trot"
+      ],
+      "validation": {
+        "frames_checked": 548,
+        "foot_link_max_error_m": 6.983577955507628e-07,
+        "foot_link_mean_error_m": 1.0933992806792446e-07,
+        "joint_limit_min_margin_rad": 0.2535036518478394,
+        "root_height_range_m": [
+          0.2867000102996826,
+          0.34121599793434143
+        ],
+        "joint_max_velocity_rad_s": 13.33764362335205,
+        "dynamic_feasibility": "FK validates geometry; physical execution is evaluated in PhysX"
+      }
+    },
+    {
+      "file": "ai4_dog_trot_01.csv",
+      "frames": 1263,
+      "duration_seconds": 21.033333333333335,
+      "raw_sha256": "ce8c7b556cc4faefd6ea67fa93eacc82d71f7542db940238358909125264a4d5",
+      "sha256": "fc742789f8703a2409581f7f5aae3352184ef177a4b6aeecec0cd93def851772",
+      "source": "AI4Animation - natural dog mocap (SIGGRAPH 2018 release)",
+      "source_url": "https://github.com/sebastianstarke/AI4Animation/tree/master/AI4Animation/SIGGRAPH_2018",
+      "license": "CC BY-NC 4.0",
+      "attribution": "H. Zhang et al., 'Mode-Adaptive Neural Networks for Quadruped Motion Control', SIGGRAPH 2018",
+      "description": "dog trot, variant (AI4Animation paper eval set)",
+      "tags": [
+        "trot"
+      ],
+      "validation": {
+        "frames_checked": 1263,
+        "foot_link_max_error_m": 8.55347417005538e-07,
+        "foot_link_mean_error_m": 1.4226861377376035e-07,
+        "joint_limit_min_margin_rad": 0.08738029022216809,
+        "root_height_range_m": [
+          0.1458931267261505,
+          0.33903801441192627
+        ],
+        "joint_max_velocity_rad_s": 16.7260799407959,
+        "dynamic_feasibility": "FK validates geometry; physical execution is evaluated in PhysX"
+      }
+    },
+    {
+      "file": "ai4_dog_walk_00.csv",
+      "frames": 593,
+      "duration_seconds": 9.866666666666667,
+      "raw_sha256": "6647cd55cfa65140f45c38c4e7dcedc5039e8f8c52523ece3f043d8c51b75fb8",
+      "sha256": "9e2ffe01989145a38f5764dc6c628c5b21ee7f63bea713bc08a6cd00cda7e54e",
+      "source": "AI4Animation - natural dog mocap (SIGGRAPH 2018 release)",
+      "source_url": "https://github.com/sebastianstarke/AI4Animation/tree/master/AI4Animation/SIGGRAPH_2018",
+      "license": "CC BY-NC 4.0",
+      "attribution": "H. Zhang et al., 'Mode-Adaptive Neural Networks for Quadruped Motion Control', SIGGRAPH 2018",
+      "description": "dog walk, take 0",
+      "tags": [
+        "walk"
+      ],
+      "validation": {
+        "frames_checked": 593,
+        "foot_link_max_error_m": 1.1690392686974578e-06,
+        "foot_link_mean_error_m": 1.4484796327686974e-07,
+        "joint_limit_min_margin_rad": 0.09037634872436529,
+        "root_height_range_m": [
+          0.14741525053977966,
+          0.3376643657684326
+        ],
+        "joint_max_velocity_rad_s": 11.009500503540039,
+        "dynamic_feasibility": "FK validates geometry; physical execution is evaluated in PhysX"
+      }
+    },
+    {
+      "file": "ai4_dog_walk_01.csv",
+      "frames": 1072,
+      "duration_seconds": 17.85,
+      "raw_sha256": "6efa9429f3aff2f44c36467d04a9f2abef8dcd51618ecfdf2c39fad5f984e066",
+      "sha256": "3f98f809d1d41f608b286d087324efc0db7f485d589bfec9ed42b2bcd6aff340",
+      "source": "AI4Animation - natural dog mocap (SIGGRAPH 2018 release)",
+      "source_url": "https://github.com/sebastianstarke/AI4Animation/tree/master/AI4Animation/SIGGRAPH_2018",
+      "license": "CC BY-NC 4.0",
+      "attribution": "H. Zhang et al., 'Mode-Adaptive Neural Networks for Quadruped Motion Control', SIGGRAPH 2018",
+      "description": "dog walk, take 1",
+      "tags": [
+        "walk"
+      ],
+      "validation": {
+        "frames_checked": 1072,
+        "foot_link_max_error_m": 1.4382291793799221e-06,
+        "foot_link_mean_error_m": 1.3264636191699972e-07,
+        "joint_limit_min_margin_rad": 0.007420659255981565,
+        "root_height_range_m": [
+          0.13900025188922882,
+          0.3366619944572449
+        ],
+        "joint_max_velocity_rad_s": 10.138100624084473,
+        "dynamic_feasibility": "FK validates geometry; physical execution is evaluated in PhysX"
+      }
+    },
+    {
+      "file": "ai4_dog_walk_02.csv",
+      "frames": 911,
+      "duration_seconds": 15.166666666666666,
+      "raw_sha256": "b161cf8bfa3ef6ad8cf3d97fd40e9b604cff909d9213f600d6e167f6ddf4aa5c",
+      "sha256": "ce876910b4d410881223f09bfd4a248aca8b9bc52deb9229a619c899e1bd3d80",
+      "source": "AI4Animation - natural dog mocap (SIGGRAPH 2018 release)",
+      "source_url": "https://github.com/sebastianstarke/AI4Animation/tree/master/AI4Animation/SIGGRAPH_2018",
+      "license": "CC BY-NC 4.0",
+      "attribution": "H. Zhang et al., 'Mode-Adaptive Neural Networks for Quadruped Motion Control', SIGGRAPH 2018",
+      "description": "dog walk, take 2",
+      "tags": [
+        "walk"
+      ],
+      "validation": {
+        "frames_checked": 911,
+        "foot_link_max_error_m": 7.417123122283672e-07,
+        "foot_link_mean_error_m": 9.522037111683187e-08,
+        "joint_limit_min_margin_rad": 0.10002914213180547,
+        "root_height_range_m": [
+          0.15101225674152374,
+          0.3417604863643646
+        ],
+        "joint_max_velocity_rad_s": 13.639404296875,
+        "dynamic_feasibility": "FK validates geometry; physical execution is evaluated in PhysX"
+      }
+    },
+    {
+      "file": "ai4_dog_walk_03.csv",
+      "frames": 548,
+      "duration_seconds": 9.116666666666667,
+      "raw_sha256": "6d0f0ccc20917e2f34c19e8450bb6b08c11db93a9eb0e8c51773229a6a4c7382",
+      "sha256": "c08ce5b6946ecaa7431b8d2f5ab0359af05a337596bd35dabfa36df04aa21716",
+      "source": "AI4Animation - natural dog mocap (SIGGRAPH 2018 release)",
+      "source_url": "https://github.com/sebastianstarke/AI4Animation/tree/master/AI4Animation/SIGGRAPH_2018",
+      "license": "CC BY-NC 4.0",
+      "attribution": "H. Zhang et al., 'Mode-Adaptive Neural Networks for Quadruped Motion Control', SIGGRAPH 2018",
+      "description": "dog walk, take 3",
+      "tags": [
+        "walk"
+      ],
+      "validation": {
+        "frames_checked": 548,
+        "foot_link_max_error_m": 6.983577955507628e-07,
+        "foot_link_mean_error_m": 1.0933992806792446e-07,
+        "joint_limit_min_margin_rad": 0.2535036518478394,
+        "root_height_range_m": [
+          0.2867000102996826,
+          0.34121599793434143
+        ],
+        "joint_max_velocity_rad_s": 13.33764362335205,
+        "dynamic_feasibility": "FK validates geometry; physical execution is evaluated in PhysX"
+      }
+    },
+    {
+      "file": "ai4_dog_walk_04.csv",
+      "frames": 548,
+      "duration_seconds": 9.116666666666667,
+      "raw_sha256": "a5b2131b90409c1b12220edf44dc96f8f207b4e6f7cc51aa8b5697f962938102",
+      "sha256": "a818e8da0e8de7233b78e7e655d3dd339673dad4af163eab01ddfbe57867aaf0",
+      "source": "AI4Animation - natural dog mocap (SIGGRAPH 2018 release)",
+      "source_url": "https://github.com/sebastianstarke/AI4Animation/tree/master/AI4Animation/SIGGRAPH_2018",
+      "license": "CC BY-NC 4.0",
+      "attribution": "H. Zhang et al., 'Mode-Adaptive Neural Networks for Quadruped Motion Control', SIGGRAPH 2018",
+      "description": "dog walk, take 4",
+      "tags": [
+        "walk"
+      ],
+      "validation": {
+        "frames_checked": 548,
+        "foot_link_max_error_m": 1.4036106003793229e-06,
+        "foot_link_mean_error_m": 1.176082552759224e-07,
+        "joint_limit_min_margin_rad": 0.18086135406494153,
+        "root_height_range_m": [
+          0.14359137415885925,
+          0.3433733880519867
+        ],
+        "joint_max_velocity_rad_s": 16.443836212158203,
+        "dynamic_feasibility": "FK validates geometry; physical execution is evaluated in PhysX"
+      }
+    },
+    {
+      "file": "ai4_dog_walk_06.csv",
+      "frames": 1348,
+      "duration_seconds": 22.45,
+      "raw_sha256": "957573ee9d42ce6cfa342260189519278b8d110658355988a8ff8d0104759878",
+      "sha256": "93680299a91e4f86d29008e43de1173a39c1787ed011be688abfb156ce990cf1",
+      "source": "AI4Animation - natural dog mocap (SIGGRAPH 2018 release)",
+      "source_url": "https://github.com/sebastianstarke/AI4Animation/tree/master/AI4Animation/SIGGRAPH_2018",
+      "license": "CC BY-NC 4.0",
+      "attribution": "H. Zhang et al., 'Mode-Adaptive Neural Networks for Quadruped Motion Control', SIGGRAPH 2018",
+      "description": "dog walk, take 6",
+      "tags": [
+        "walk"
+      ],
+      "validation": {
+        "frames_checked": 1348,
+        "foot_link_max_error_m": 9.368861510013407e-07,
+        "foot_link_mean_error_m": 1.9154567534942518e-07,
+        "joint_limit_min_margin_rad": 0.0931030513763429,
+        "root_height_range_m": [
+          0.09590224921703339,
+          0.35217198729515076
+        ],
+        "joint_max_velocity_rad_s": 16.000213623046875,
+        "dynamic_feasibility": "FK validates geometry; physical execution is evaluated in PhysX"
+      }
+    },
+    {
+      "file": "solo8_crawl_fast.csv",
+      "frames": 120,
+      "duration_seconds": 1.9833333333333334,
+      "raw_sha256": "9e16a650962a5ff3d63b07bf458331348f5e0b2b34f35efef38301affdbc1fa9",
+      "sha256": "80d76750cf094200b852a06e54f6a47ea3e84ab40e544f8d443e4fc240edc6d3",
+      "source": "cassi - Solo8 robot motion data",
+      "source_url": "https://github.com/martius-lab/cassi",
+      "license": "BSD-3-Clause",
+      "attribution": "C. Li et al., 'Versatile Skill Control via Self-supervised Adversarial Imitation of Unlabeled Mixed Motions', ICRA 2023",
+      "description": "robot crawling fast forward",
+      "tags": [
+        "crawl",
+        "fast"
+      ],
+      "validation": {
+        "frames_checked": 120,
+        "foot_link_max_error_m": 3.606369087631219e-07,
+        "foot_link_mean_error_m": 6.753459123401746e-08,
+        "joint_limit_min_margin_rad": 0.34393322486877453,
+        "root_height_range_m": [
+          0.18378402292728424,
+          0.4196711778640747
+        ],
+        "joint_max_velocity_rad_s": 18.72231674194336,
+        "dynamic_feasibility": "FK validates geometry; physical execution is evaluated in PhysX"
+      }
+    },
+    {
+      "file": "solo8_crawl_slow.csv",
+      "frames": 120,
+      "duration_seconds": 1.9833333333333334,
+      "raw_sha256": "cb436fde82a44fb596d7e4b893612a537586e595ad693e8d4f87f1afcb410eca",
+      "sha256": "42fc449a3ea719ddc11b463ea1f4e3f3139375eee763ca24a17fb427ede6dfe8",
+      "source": "cassi - Solo8 robot motion data",
+      "source_url": "https://github.com/martius-lab/cassi",
+      "license": "BSD-3-Clause",
+      "attribution": "C. Li et al., 'Versatile Skill Control via Self-supervised Adversarial Imitation of Unlabeled Mixed Motions', ICRA 2023",
+      "description": "robot slowly crawling",
+      "tags": [
+        "crawl",
+        "slow"
+      ],
+      "validation": {
+        "frames_checked": 120,
+        "foot_link_max_error_m": 1.504180428169651e-07,
+        "foot_link_mean_error_m": 3.427086136728183e-08,
+        "joint_limit_min_margin_rad": 0.24534499664306653,
+        "root_height_range_m": [
+          0.11461562663316727,
+          0.43507814407348633
+        ],
+        "joint_max_velocity_rad_s": 13.305610656738281,
+        "dynamic_feasibility": "FK validates geometry; physical execution is evaluated in PhysX"
+      }
+    },
+    {
+      "file": "solo8_jump_forward_a.csv",
+      "frames": 120,
+      "duration_seconds": 1.9833333333333334,
+      "raw_sha256": "ea6fcb3464142dd82bc2e51023cc7b48d541371f0c511c1a342448b9bee494ec",
+      "sha256": "cadf028856abbabff2462452fde6989b8e971eef40fd572dbba320f39fb9c377",
+      "source": "cassi - Solo8 robot motion data",
+      "source_url": "https://github.com/martius-lab/cassi",
+      "license": "BSD-3-Clause",
+      "attribution": "C. Li et al., 'Versatile Skill Control via Self-supervised Adversarial Imitation of Unlabeled Mixed Motions', ICRA 2023",
+      "description": "robot jumping forward, variant A",
+      "tags": [
+        "jump"
+      ],
+      "validation": {
+        "frames_checked": 120,
+        "foot_link_max_error_m": 3.265583739284078e-07,
+        "foot_link_mean_error_m": 6.928086437646207e-08,
+        "joint_limit_min_margin_rad": 0.3285633327484132,
+        "root_height_range_m": [
+          0.15095719695091248,
+          0.4208427369594574
+        ],
+        "joint_max_velocity_rad_s": 22.519161224365234,
+        "dynamic_feasibility": "FK validates geometry; physical execution is evaluated in PhysX"
+      }
+    },
+    {
+      "file": "solo8_jump_forward_b.csv",
+      "frames": 120,
+      "duration_seconds": 1.9833333333333334,
+      "raw_sha256": "34ecfa8c89cf1eaec300b58da67be3a237b8f3794fd890f1947a8676844945c1",
+      "sha256": "d38a9d18ab07b14a5041b38417329ef5338ea01b48b19bb3916a1cc7ffb7a69d",
+      "source": "cassi - Solo8 robot motion data",
+      "source_url": "https://github.com/martius-lab/cassi",
+      "license": "BSD-3-Clause",
+      "attribution": "C. Li et al., 'Versatile Skill Control via Self-supervised Adversarial Imitation of Unlabeled Mixed Motions', ICRA 2023",
+      "description": "robot jumping forward, variant B",
+      "tags": [
+        "jump"
+      ],
+      "validation": {
+        "frames_checked": 120,
+        "foot_link_max_error_m": 3.413005753074132e-07,
+        "foot_link_mean_error_m": 6.499966411628474e-08,
+        "joint_limit_min_margin_rad": 0.36509296440124517,
+        "root_height_range_m": [
+          0.12971378862857819,
+          0.4111718237400055
+        ],
+        "joint_max_velocity_rad_s": 16.329402923583984,
+        "dynamic_feasibility": "FK validates geometry; physical execution is evaluated in PhysX"
+      }
+    },
+    {
+      "file": "solo8_scoot_forward.csv",
+      "frames": 120,
+      "duration_seconds": 1.9833333333333334,
+      "raw_sha256": "64a1428640d70ced94d6b96c6ff45a9e85c82ad898cc8568c2172d69cba9ac83",
+      "sha256": "21cc617692d416d75fd9b0d49baf7532ae87dc5fa88f912e5aa44529f181a48f",
+      "source": "cassi - Solo8 robot motion data",
+      "source_url": "https://github.com/martius-lab/cassi",
+      "license": "BSD-3-Clause",
+      "attribution": "C. Li et al., 'Versatile Skill Control via Self-supervised Adversarial Imitation of Unlabeled Mixed Motions', ICRA 2023",
+      "description": "robot scooting forward",
+      "tags": [
+        "scoot"
+      ],
+      "validation": {
+        "frames_checked": 120,
+        "foot_link_max_error_m": 3.3875610916561587e-07,
+        "foot_link_mean_error_m": 5.7507767547469346e-08,
+        "joint_limit_min_margin_rad": -2.8381347605410667e-08,
+        "root_height_range_m": [
+          0.16836930811405182,
+          0.4105149805545807
+        ],
+        "joint_max_velocity_rad_s": 27.70101547241211,
+        "dynamic_feasibility": "FK validates geometry; physical execution is evaluated in PhysX"
+      }
+    },
+    {
+      "file": "solo8_walk.csv",
+      "frames": 120,
+      "duration_seconds": 1.9833333333333334,
+      "raw_sha256": "f1317e33d35aa838cb6be1d5cccb049e5f33581324b67b728b1868017846512e",
+      "sha256": "76c190132b3c9a74e819bc75f7831d4b596a77f912b59fe38839defed37ec12b",
+      "source": "cassi - Solo8 robot motion data",
+      "source_url": "https://github.com/martius-lab/cassi",
+      "license": "BSD-3-Clause",
+      "attribution": "C. Li et al., 'Versatile Skill Control via Self-supervised Adversarial Imitation of Unlabeled Mixed Motions', ICRA 2023",
+      "description": "robot walking forward with erect legs",
+      "tags": [
+        "walk"
+      ],
+      "validation": {
+        "frames_checked": 120,
+        "foot_link_max_error_m": 1.7969675289835952e-07,
+        "foot_link_mean_error_m": 5.03439012395523e-08,
+        "joint_limit_min_margin_rad": 0.05486169599533086,
+        "root_height_range_m": [
+          0.28697142004966736,
+          0.39705702662467957
+        ],
+        "joint_max_velocity_rad_s": 19.613391876220703,
+        "dynamic_feasibility": "FK validates geometry; physical execution is evaluated in PhysX"
+      }
+    },
+    {
+      "file": "vhdc_horse1_s1_trot_01.csv",
+      "frames": 600,
+      "duration_seconds": 9.983333333333333,
+      "raw_sha256": "da64119b722ef5bd8a62886be9c39b4d226a2271728ec9a994a3a718ae297890",
+      "sha256": "e7a59e32d858a595f4b2b5537ecaf3423eff238b963488854cf0370afcca4b57",
+      "source": "Vienna Horse Data Collection",
+      "source_url": "https://horse.cs.uni-bonn.de/vhdc-home.html",
+      "license": "CC BY-SA 4.0",
+      "attribution": "Vienna Horse Data Collection",
+      "description": "Horse 1, session 1, trot repetition 1",
+      "tags": [
+        "trot"
+      ],
+      "validation": {
+        "frames_checked": 600,
+        "foot_link_max_error_m": 7.257575875940785e-07,
+        "foot_link_mean_error_m": 1.3380757483898634e-07,
+        "joint_limit_min_margin_rad": 0.13105437301635747,
+        "root_height_range_m": [
+          0.27542662620544434,
+          0.4024989902973175
+        ],
+        "joint_max_velocity_rad_s": 6.052493572235107,
+        "dynamic_feasibility": "FK validates geometry; physical execution is evaluated in PhysX"
+      }
+    },
+    {
+      "file": "vhdc_horse1_s1_trot_02.csv",
+      "frames": 600,
+      "duration_seconds": 9.983333333333333,
+      "raw_sha256": "ddb166c923e50e4496cb069a3bd1f86f420f5176a60f8aa7d67fa21da96e3a1e",
+      "sha256": "f1e55b0970c48b373fe0e1e2d0fffc36b3f1983e99e3677b860d8cc9545c7ded",
+      "source": "Vienna Horse Data Collection",
+      "source_url": "https://horse.cs.uni-bonn.de/vhdc-home.html",
+      "license": "CC BY-SA 4.0",
+      "attribution": "Vienna Horse Data Collection",
+      "description": "Horse 1, session 1, trot repetition 2",
+      "tags": [
+        "trot"
+      ],
+      "validation": {
+        "frames_checked": 600,
+        "foot_link_max_error_m": 9.446700886240829e-07,
+        "foot_link_mean_error_m": 1.3404669730484882e-07,
+        "joint_limit_min_margin_rad": 0.11554560207366948,
+        "root_height_range_m": [
+          0.27297601103782654,
+          0.39428287744522095
+        ],
+        "joint_max_velocity_rad_s": 5.967482089996338,
+        "dynamic_feasibility": "FK validates geometry; physical execution is evaluated in PhysX"
+      }
+    },
+    {
+      "file": "vhdc_horse1_s1_trot_03.csv",
+      "frames": 600,
+      "duration_seconds": 9.983333333333333,
+      "raw_sha256": "d57eb52023e293997f6f6425f5f878e71cf821c908940cdf0ee288fe080a4bae",
+      "sha256": "c34bfe2743852b84db519b71bf483ca3fbea40fb3b173ddde3df9a92ed2d7573",
+      "source": "Vienna Horse Data Collection",
+      "source_url": "https://horse.cs.uni-bonn.de/vhdc-home.html",
+      "license": "CC BY-SA 4.0",
+      "attribution": "Vienna Horse Data Collection",
+      "description": "Horse 1, session 1, trot repetition 3",
+      "tags": [
+        "trot"
+      ],
+      "validation": {
+        "frames_checked": 600,
+        "foot_link_max_error_m": 8.249903981847369e-07,
+        "foot_link_mean_error_m": 1.3450001637562044e-07,
+        "joint_limit_min_margin_rad": 0.11615225814819341,
+        "root_height_range_m": [
+          0.2765745222568512,
+          0.3944849371910095
+        ],
+        "joint_max_velocity_rad_s": 5.933925628662109,
+        "dynamic_feasibility": "FK validates geometry; physical execution is evaluated in PhysX"
+      }
+    },
+    {
+      "file": "vhdc_horse1_s1_walk_01.csv",
+      "frames": 600,
+      "duration_seconds": 9.983333333333333,
+      "raw_sha256": "ce34f735b7c6e586eebaf935c9f117cff854f6e1b4d6bffc1fd7e229a1e4ffcc",
+      "sha256": "8f7cd6edf78a0c8d423ccd0da3cfcbf195896f743e74ddc1ebd7fe68872e40e5",
+      "source": "Vienna Horse Data Collection",
+      "source_url": "https://horse.cs.uni-bonn.de/vhdc-home.html",
+      "license": "CC BY-SA 4.0",
+      "attribution": "Vienna Horse Data Collection",
+      "description": "Horse 1, session 1, walk repetition 1",
+      "tags": [
+        "walk"
+      ],
+      "validation": {
+        "frames_checked": 600,
+        "foot_link_max_error_m": 4.079595178272389e-07,
+        "foot_link_mean_error_m": 7.399212164698606e-08,
+        "joint_limit_min_margin_rad": 0.1469055130386353,
+        "root_height_range_m": [
+          0.27250760793685913,
+          0.31279122829437256
+        ],
+        "joint_max_velocity_rad_s": 4.655835151672363,
+        "dynamic_feasibility": "FK validates geometry; physical execution is evaluated in PhysX"
+      }
+    },
+    {
+      "file": "vhdc_horse1_s1_walk_02.csv",
+      "frames": 600,
+      "duration_seconds": 9.983333333333333,
+      "raw_sha256": "381f38d104090ff8f2f077da6b6ea0759e21c3d4302a8858e88bb97df8a8d68c",
+      "sha256": "a5d9d59223c5d2755b8b41c36480feece0a53006459cd9e57056c86e6981c17b",
+      "source": "Vienna Horse Data Collection",
+      "source_url": "https://horse.cs.uni-bonn.de/vhdc-home.html",
+      "license": "CC BY-SA 4.0",
+      "attribution": "Vienna Horse Data Collection",
+      "description": "Horse 1, session 1, walk repetition 2",
+      "tags": [
+        "walk"
+      ],
+      "validation": {
+        "frames_checked": 600,
+        "foot_link_max_error_m": 4.1243394651651864e-07,
+        "foot_link_mean_error_m": 7.508978283234562e-08,
+        "joint_limit_min_margin_rad": 0.1416487409973145,
+        "root_height_range_m": [
+          0.27122214436531067,
+          0.310702383518219
+        ],
+        "joint_max_velocity_rad_s": 4.493597030639648,
+        "dynamic_feasibility": "FK validates geometry; physical execution is evaluated in PhysX"
+      }
+    },
+    {
+      "file": "vhdc_horse1_s1_walk_03.csv",
+      "frames": 600,
+      "duration_seconds": 9.983333333333333,
+      "raw_sha256": "cf9d267cc705e0a58f4a7a3e65639e50e4b25470d7d1d52321d6791be32221cd",
+      "sha256": "5479e95350136e5ff9d997b09b61caa3dcf2dc26343e41985ec2085af75dadec",
+      "source": "Vienna Horse Data Collection",
+      "source_url": "https://horse.cs.uni-bonn.de/vhdc-home.html",
+      "license": "CC BY-SA 4.0",
+      "attribution": "Vienna Horse Data Collection",
+      "description": "Horse 1, session 1, walk repetition 3",
+      "tags": [
+        "walk"
+      ],
+      "validation": {
+        "frames_checked": 600,
+        "foot_link_max_error_m": 4.003262897270698e-07,
+        "foot_link_mean_error_m": 7.13562879553117e-08,
+        "joint_limit_min_margin_rad": 0.08756259225845342,
+        "root_height_range_m": [
+          0.2732265293598175,
+          0.31416890025138855
+        ],
+        "joint_max_velocity_rad_s": 4.639826774597168,
+        "dynamic_feasibility": "FK validates geometry; physical execution is evaluated in PhysX"
+      }
+    },
+    {
+      "file": "vhdc_horse1_s2_trot_01.csv",
+      "frames": 1200,
+      "duration_seconds": 19.983333333333334,
+      "raw_sha256": "a278d28edd5d095ad1d80b5d0469020bd437efe01aae4c40d40d02948227e51c",
+      "sha256": "8db32071b4713ce7237c36635fc674ac6dc25b37cea035b5b7c25cbf9ef2c886",
+      "source": "Vienna Horse Data Collection",
+      "source_url": "https://horse.cs.uni-bonn.de/vhdc-home.html",
+      "license": "CC BY-SA 4.0",
+      "attribution": "Vienna Horse Data Collection",
+      "description": "Horse 1, session 2, trot repetition 1",
+      "tags": [
+        "trot"
+      ],
+      "validation": {
+        "frames_checked": 1200,
+        "foot_link_max_error_m": 8.476212032493515e-07,
+        "foot_link_mean_error_m": 1.346547192039967e-07,
+        "joint_limit_min_margin_rad": 0.2265312387847901,
+        "root_height_range_m": [
+          0.27597126364707947,
+          0.34066957235336304
+        ],
+        "joint_max_velocity_rad_s": 3.1356630325317383,
+        "dynamic_feasibility": "FK validates geometry; physical execution is evaluated in PhysX"
+      }
+    },
+    {
+      "file": "vhdc_horse1_s2_trot_02.csv",
+      "frames": 1200,
+      "duration_seconds": 19.983333333333334,
+      "raw_sha256": "f5d65c8e2b0b1c8e4e0ed039017a7c50755c6c677a39ae9866f22a4145110500",
+      "sha256": "fa60528beaa50351fbd75ea2a95aea3ea538e1d6cc29eec864c917eef4f0303b",
+      "source": "Vienna Horse Data Collection",
+      "source_url": "https://horse.cs.uni-bonn.de/vhdc-home.html",
+      "license": "CC BY-SA 4.0",
+      "attribution": "Vienna Horse Data Collection",
+      "description": "Horse 1, session 2, trot repetition 2",
+      "tags": [
+        "trot"
+      ],
+      "validation": {
+        "frames_checked": 1200,
+        "foot_link_max_error_m": 8.26321151463551e-07,
+        "foot_link_mean_error_m": 1.3567850667084503e-07,
+        "joint_limit_min_margin_rad": 0.39864954494476323,
+        "root_height_range_m": [
+          0.2772587537765503,
+          0.3465977609157562
+        ],
+        "joint_max_velocity_rad_s": 3.129887342453003,
+        "dynamic_feasibility": "FK validates geometry; physical execution is evaluated in PhysX"
+      }
+    },
+    {
+      "file": "vhdc_horse1_s2_trot_03.csv",
+      "frames": 1200,
+      "duration_seconds": 19.983333333333334,
+      "raw_sha256": "ee3158b74dc2e1cbe50a6a598c5a20459a6d22d3a60f6356201b6d89d51bee06",
+      "sha256": "e35a652986f229afa08a3358936cb3cba364131d0b84df3d046457c43cb90be0",
+      "source": "Vienna Horse Data Collection",
+      "source_url": "https://horse.cs.uni-bonn.de/vhdc-home.html",
+      "license": "CC BY-SA 4.0",
+      "attribution": "Vienna Horse Data Collection",
+      "description": "Horse 1, session 2, trot repetition 3",
+      "tags": [
+        "trot"
+      ],
+      "validation": {
+        "frames_checked": 1200,
+        "foot_link_max_error_m": 8.102008945753794e-07,
+        "foot_link_mean_error_m": 1.3604619183177156e-07,
+        "joint_limit_min_margin_rad": 0.21189639114379888,
+        "root_height_range_m": [
+          0.27788686752319336,
+          0.34670576453208923
+        ],
+        "joint_max_velocity_rad_s": 3.0446431636810303,
+        "dynamic_feasibility": "FK validates geometry; physical execution is evaluated in PhysX"
+      }
+    },
+    {
+      "file": "vhdc_horse1_s2_walk_01.csv",
+      "frames": 1200,
+      "duration_seconds": 19.983333333333334,
+      "raw_sha256": "5c53f77a8846f8d8c8d9cf0f7e149c68557a9911ca7d03fc10dff0a1e9611391",
+      "sha256": "c8885d39ae9194cfd6bc80573b37a3a633788115f344f132305b181d1fc3f910",
+      "source": "Vienna Horse Data Collection",
+      "source_url": "https://horse.cs.uni-bonn.de/vhdc-home.html",
+      "license": "CC BY-SA 4.0",
+      "attribution": "Vienna Horse Data Collection",
+      "description": "Horse 1, session 2, walk repetition 1",
+      "tags": [
+        "walk"
+      ],
+      "validation": {
+        "frames_checked": 1200,
+        "foot_link_max_error_m": 4.1134932194803857e-07,
+        "foot_link_mean_error_m": 8.32124311664653e-08,
+        "joint_limit_min_margin_rad": 0.13762632154464727,
+        "root_height_range_m": [
+          0.27776265144348145,
+          0.30801209807395935
+        ],
+        "joint_max_velocity_rad_s": 2.600440502166748,
+        "dynamic_feasibility": "FK validates geometry; physical execution is evaluated in PhysX"
+      }
+    },
+    {
+      "file": "vhdc_horse1_s2_walk_02.csv",
+      "frames": 1200,
+      "duration_seconds": 19.983333333333334,
+      "raw_sha256": "396d699d8eb06c7b21d9652f8e277cdda0e75cfb103ff22e2820ef4955719cd3",
+      "sha256": "5be303ee733e306fde240a889d0a1fcfb16fb6c931415d2d47914689936690ef",
+      "source": "Vienna Horse Data Collection",
+      "source_url": "https://horse.cs.uni-bonn.de/vhdc-home.html",
+      "license": "CC BY-SA 4.0",
+      "attribution": "Vienna Horse Data Collection",
+      "description": "Horse 1, session 2, walk repetition 2",
+      "tags": [
+        "walk"
+      ],
+      "validation": {
+        "frames_checked": 1200,
+        "foot_link_max_error_m": 4.5163621308927427e-07,
+        "foot_link_mean_error_m": 8.127132252384713e-08,
+        "joint_limit_min_margin_rad": 0.15741029523849492,
+        "root_height_range_m": [
+          0.2783229649066925,
+          0.30879971385002136
+        ],
+        "joint_max_velocity_rad_s": 2.4960062503814697,
+        "dynamic_feasibility": "FK validates geometry; physical execution is evaluated in PhysX"
+      }
+    },
+    {
+      "file": "vhdc_horse1_s2_walk_03.csv",
+      "frames": 1200,
+      "duration_seconds": 19.983333333333334,
+      "raw_sha256": "4a3cdfe7ba915ab297b2062e86621aa956643d3bfbfd2175728dbab33b8f4a11",
+      "sha256": "8fe5b8582e4077a2f2b26c8367156c3a3806a581355f72496dcc5ca68ebbe22d",
+      "source": "Vienna Horse Data Collection",
+      "source_url": "https://horse.cs.uni-bonn.de/vhdc-home.html",
+      "license": "CC BY-SA 4.0",
+      "attribution": "Vienna Horse Data Collection",
+      "description": "Horse 1, session 2, walk repetition 3",
+      "tags": [
+        "walk"
+      ],
+      "validation": {
+        "frames_checked": 1200,
+        "foot_link_max_error_m": 4.37801169542849e-07,
+        "foot_link_mean_error_m": 8.03735307409896e-08,
+        "joint_limit_min_margin_rad": 0.197930188407898,
+        "root_height_range_m": [
+          0.2759782671928406,
+          0.3074142336845398
+        ],
+        "joint_max_velocity_rad_s": 2.901615858078003,
+        "dynamic_feasibility": "FK validates geometry; physical execution is evaluated in PhysX"
+      }
+    }
+  ],
+  "source_files": [
+    {
+      "file": "README.md",
+      "sha256": "ec9581fd669569f3932646a4811ed81ac5061c00e998b7e5990ffc468cd38a58",
+      "bytes": 7413,
+      "source_hash_algorithm": "git_blob_sha1",
+      "source_hash": "88107487ad723620f5d38e7657017fae3b39e79e"
+    },
+    {
+      "file": "LICENSE",
+      "sha256": "4b601e934c0112ebe6b72a54bcae756eba2731dde58f22acd01a0637a413b9e9",
+      "bytes": 1809,
+      "source_hash_algorithm": "git_blob_sha1",
+      "source_hash": "a4524a60102fb90ccfa11f8352bbd740b597b692"
+    },
+    {
+      "file": "LICENSES/AI4Animation_CC-BY-NC-4.0.txt",
+      "sha256": "41003d4a74749c0220e33dd415042164b5a1093ed401f36277234f772d22d3d0",
+      "bytes": 19347,
+      "source_hash_algorithm": "git_blob_sha1",
+      "source_hash": "fe463e0f7888bbf8b82e42d55f5743508ddafb7e"
+    },
+    {
+      "file": "data/ai4_dog_canter/motion.npy",
+      "sha256": "c4de6861404d53b0fe5a09b3573d53b6f833c107f4689641544c697c43dd841c",
+      "bytes": 138476,
+      "source_hash_algorithm": "sha256",
+      "source_hash": "c4de6861404d53b0fe5a09b3573d53b6f833c107f4689641544c697c43dd841c"
+    },
+    {
+      "file": "data/ai4_dog_canter/clip.json",
+      "sha256": "eed97009dc47a83cbbc2d930a95b9c18548515577f72585f52a950ce3f964fc8",
+      "bytes": 497,
+      "source_hash_algorithm": "git_blob_sha1",
+      "source_hash": "a0f8f63cd93a5575f68932c8a1195231eb2420ab"
+    },
+    {
+      "file": "data/ai4_dog_canter/config.json",
+      "sha256": "47940ec4b5e3cee63d2247c4822e9b541e5d319423c7a3506e2f5184b2a2b99a",
+      "bytes": 5155,
+      "source_hash_algorithm": "git_blob_sha1",
+      "source_hash": "ea585c471b3607cf622f7d6dff4d15a6eb54185f"
+    },
+    {
+      "file": "data/ai4_dog_left_turn/motion.npy",
+      "sha256": "b0a20467682ec31c9dfb2d7a1e71e7e6dd2020506ed2d8ea215fd018976e5664",
+      "bytes": 1058112,
+      "source_hash_algorithm": "sha256",
+      "source_hash": "b0a20467682ec31c9dfb2d7a1e71e7e6dd2020506ed2d8ea215fd018976e5664"
+    },
+    {
+      "file": "data/ai4_dog_left_turn/clip.json",
+      "sha256": "80801c2afcaa8ab5469afea2b1aac7bc4fbbbc96b7c20b5ac6d9aaf62af72087",
+      "bytes": 513,
+      "source_hash_algorithm": "git_blob_sha1",
+      "source_hash": "0940037ee1efcf8f76169c08b6e7d0dfdd38ae6d"
+    },
+    {
+      "file": "data/ai4_dog_left_turn/config.json",
+      "sha256": "83185c2be20e4cfe627f6ac64f5a8038e914c5176ad9b380673e08abb278d79f",
+      "bytes": 5161,
+      "source_hash_algorithm": "git_blob_sha1",
+      "source_hash": "562d7341be6afe4c38e036886a5de0480c863f7d"
+    },
+    {
+      "file": "data/ai4_dog_pace/motion.npy",
+      "sha256": "6647cd55cfa65140f45c38c4e7dcedc5039e8f8c52523ece3f043d8c51b75fb8",
+      "bytes": 144820,
+      "source_hash_algorithm": "sha256",
+      "source_hash": "6647cd55cfa65140f45c38c4e7dcedc5039e8f8c52523ece3f043d8c51b75fb8"
+    },
+    {
+      "file": "data/ai4_dog_pace/clip.json",
+      "sha256": "80934c1516447d62d94de68023dd7258d0b534b1a07f62f29a5abed57171191b",
+      "bytes": 491,
+      "source_hash_algorithm": "git_blob_sha1",
+      "source_hash": "9047b281cd054fe6f2f0efe8b38a518f3fa94802"
+    },
+    {
+      "file": "data/ai4_dog_pace/config.json",
+      "sha256": "c3e0b931ba10870552305f03e61a00a56ae3109c17049c8aa270b1a3c500980c",
+      "bytes": 5147,
+      "source_hash_algorithm": "git_blob_sha1",
+      "source_hash": "316184b4d506b4df5682460b3c8a3baeb2fc79b3"
+    },
+    {
+      "file": "data/ai4_dog_right_turn/motion.npy",
+      "sha256": "b0a20467682ec31c9dfb2d7a1e71e7e6dd2020506ed2d8ea215fd018976e5664",
+      "bytes": 1058112,
+      "source_hash_algorithm": "sha256",
+      "source_hash": "b0a20467682ec31c9dfb2d7a1e71e7e6dd2020506ed2d8ea215fd018976e5664"
+    },
+    {
+      "file": "data/ai4_dog_right_turn/clip.json",
+      "sha256": "9ddfc02dfe5e36ea5ecd7eecd54af701d7c955864e0b39386a7dbfcf322af6e1",
+      "bytes": 516,
+      "source_hash_algorithm": "git_blob_sha1",
+      "source_hash": "1fc08d2c0580bbb3a6f59f1389a312d6d4a2d8d3"
+    },
+    {
+      "file": "data/ai4_dog_right_turn/config.json",
+      "sha256": "c1dfef5f6fa8aca6eeb06951d3c25f5b2c3f85c018d2b2602f9d366acd6a1265",
+      "bytes": 5162,
+      "source_hash_algorithm": "git_blob_sha1",
+      "source_hash": "506c311e78f3db07b2583afb5190ad19b471b0c9"
+    },
+    {
+      "file": "data/ai4_dog_run_00/motion.npy",
+      "sha256": "c4de6861404d53b0fe5a09b3573d53b6f833c107f4689641544c697c43dd841c",
+      "bytes": 138476,
+      "source_hash_algorithm": "sha256",
+      "source_hash": "c4de6861404d53b0fe5a09b3573d53b6f833c107f4689641544c697c43dd841c"
+    },
+    {
+      "file": "data/ai4_dog_run_00/clip.json",
+      "sha256": "6243d2e098ab54ffb763d2b77afb26f94a5a5ec270aedae9e8ec9f3e0d0fb685",
+      "bytes": 469,
+      "source_hash_algorithm": "git_blob_sha1",
+      "source_hash": "784d39e5632c892429109b9ce884e9328ee20906"
+    },
+    {
+      "file": "data/ai4_dog_run_00/config.json",
+      "sha256": "373b209391e966b72d7a1b765d98bd104c7bdaa88319a9f08e66f65f4314ccae",
+      "bytes": 5148,
+      "source_hash_algorithm": "git_blob_sha1",
+      "source_hash": "938d5fe5810fde538a7cd13081809e4136f7eca8"
+    },
+    {
+      "file": "data/ai4_dog_run_02/motion.npy",
+      "sha256": "380dc3b0fefc2d8b02f91dc6b35120a00b7c3c0ebefdc2e153f8f026e9cb8113",
+      "bytes": 49660,
+      "source_hash_algorithm": "sha256",
+      "source_hash": "380dc3b0fefc2d8b02f91dc6b35120a00b7c3c0ebefdc2e153f8f026e9cb8113"
+    },
+    {
+      "file": "data/ai4_dog_run_02/clip.json",
+      "sha256": "fc85e2ad52da8fc5624e8afda3baa21dabaf952159831e822078b8020052b505",
+      "bytes": 469,
+      "source_hash_algorithm": "git_blob_sha1",
+      "source_hash": "1d11e8da692122b07ef3d61c6edd1e9513a61d3f"
+    },
+    {
+      "file": "data/ai4_dog_run_02/config.json",
+      "sha256": "60347b23cb6af25b02730c6151fab8e243655d1f5a0f4edcb908a9c1cba43bef",
+      "bytes": 5147,
+      "source_hash_algorithm": "git_blob_sha1",
+      "source_hash": "64fc1b2cfa5148f547b1053e5d6cd915072f67ab"
+    },
+    {
+      "file": "data/ai4_dog_run_04/motion.npy",
+      "sha256": "ce8c7b556cc4faefd6ea67fa93eacc82d71f7542db940238358909125264a4d5",
+      "bytes": 308300,
+      "source_hash_algorithm": "sha256",
+      "source_hash": "ce8c7b556cc4faefd6ea67fa93eacc82d71f7542db940238358909125264a4d5"
+    },
+    {
+      "file": "data/ai4_dog_run_04/clip.json",
+      "sha256": "3b6f01850c4ccf94cb25d8d574b699f46dea88be2efdba1c1826f5f91f7935c6",
+      "bytes": 469,
+      "source_hash_algorithm": "git_blob_sha1",
+      "source_hash": "8dec1e50322be53ea1af711ca1e1100d82961dee"
+    },
+    {
+      "file": "data/ai4_dog_run_04/config.json",
+      "sha256": "9936bfaf8f2ad3e0b2604e109c02328b99cb7d1d23643d59064ebc713d3506c2",
+      "bytes": 5142,
+      "source_hash_algorithm": "git_blob_sha1",
+      "source_hash": "703ee85ad47db22b8e6c68d0b7ad823249810793"
+    },
+    {
+      "file": "data/ai4_dog_synth_circle_walk/motion.npy",
+      "sha256": "733d7d042116cf673788648535aebe452b28476a6395449d399dc978bdf3f89c",
+      "bytes": 197036,
+      "source_hash_algorithm": "sha256",
+      "source_hash": "733d7d042116cf673788648535aebe452b28476a6395449d399dc978bdf3f89c"
+    },
+    {
+      "file": "data/ai4_dog_synth_circle_walk/clip.json",
+      "sha256": "5c326cb37f9a5a2b5d75f466046e95a379fbf94debac0f202ce228520af64243",
+      "bytes": 555,
+      "source_hash_algorithm": "git_blob_sha1",
+      "source_hash": "a99e3716ee9d4271f95358973f1ca5480987640f"
+    },
+    {
+      "file": "data/ai4_dog_synth_circle_walk/config.json",
+      "sha256": "a6628f3a51a0e093d6bd702263d982ab6c492ed3a59281c488f900e8bd10a699",
+      "bytes": 5263,
+      "source_hash_algorithm": "git_blob_sha1",
+      "source_hash": "622f146c0e836762bc1b7c149b7703558fef3c6f"
+    },
+    {
+      "file": "data/ai4_dog_synth_eight_walk/motion.npy",
+      "sha256": "baf03c80803c6cc43703dcb9d3dda3840d4011b58d5ce2e36994e3c020746ff7",
+      "bytes": 287072,
+      "source_hash_algorithm": "sha256",
+      "source_hash": "baf03c80803c6cc43703dcb9d3dda3840d4011b58d5ce2e36994e3c020746ff7"
+    },
+    {
+      "file": "data/ai4_dog_synth_eight_walk/clip.json",
+      "sha256": "bbdc640d2a119846327dd26e7f86677e260c9537bd26623164c173ebbe2823f1",
+      "bytes": 564,
+      "source_hash_algorithm": "git_blob_sha1",
+      "source_hash": "9ac04e1c4d82549fd12cd8a61e87060b55c581ea"
+    },
+    {
+      "file": "data/ai4_dog_synth_eight_walk/config.json",
+      "sha256": "200950cd272d9ccd8de6364cbacd31ec25d3561b0640a7c75452d7f9996884a6",
+      "bytes": 5260,
+      "source_hash_algorithm": "git_blob_sha1",
+      "source_hash": "4486cc1abab848529a072073093dc21547048cb1"
+    },
+    {
+      "file": "data/ai4_dog_synth_ellipse_walk/motion.npy",
+      "sha256": "eb46d940244c0d7a0a1556b7230a1abc300bd48a640c30b076cb0f291035c276",
+      "bytes": 287804,
+      "source_hash_algorithm": "sha256",
+      "source_hash": "eb46d940244c0d7a0a1556b7230a1abc300bd48a640c30b076cb0f291035c276"
+    },
+    {
+      "file": "data/ai4_dog_synth_ellipse_walk/clip.json",
+      "sha256": "a39cef7a3838b45b3ba2c996955606fa7876ab5ba1cb417af76396c085eeaa96",
+      "bytes": 560,
+      "source_hash_algorithm": "git_blob_sha1",
+      "source_hash": "4b8d6df1116addfab7bed78cac15f9a1a5a935ef"
+    },
+    {
+      "file": "data/ai4_dog_synth_ellipse_walk/config.json",
+      "sha256": "98486e74c552d693c069e3d7cead4bd21beb4d2ba1966a953649459eef7e97fa",
+      "bytes": 5285,
+      "source_hash_algorithm": "git_blob_sha1",
+      "source_hash": "c6229103242b5516e2fa41745becbd741e383c4f"
+    },
+    {
+      "file": "data/ai4_dog_synth_half_flip_jump/motion.npy",
+      "sha256": "eb46d940244c0d7a0a1556b7230a1abc300bd48a640c30b076cb0f291035c276",
+      "bytes": 287804,
+      "source_hash_algorithm": "sha256",
+      "source_hash": "eb46d940244c0d7a0a1556b7230a1abc300bd48a640c30b076cb0f291035c276"
+    },
+    {
+      "file": "data/ai4_dog_synth_half_flip_jump/clip.json",
+      "sha256": "dde6ff91b295226684f3ec70401f00da09f5753762f7da921ae512cfaad8f92e",
+      "bytes": 552,
+      "source_hash_algorithm": "git_blob_sha1",
+      "source_hash": "4f276d739072fa3d095644ca484ee22ccc4bd76d"
+    },
+    {
+      "file": "data/ai4_dog_synth_half_flip_jump/config.json",
+      "sha256": "98486e74c552d693c069e3d7cead4bd21beb4d2ba1966a953649459eef7e97fa",
+      "bytes": 5285,
+      "source_hash_algorithm": "git_blob_sha1",
+      "source_hash": "c6229103242b5516e2fa41745becbd741e383c4f"
+    },
+    {
+      "file": "data/ai4_dog_synth_square_walk/motion.npy",
+      "sha256": "1181e9f2e0900b5db6101b2aa94a09ea01aae4de4aa026fff9386d67d05216b7",
+      "bytes": 272432,
+      "source_hash_algorithm": "sha256",
+      "source_hash": "1181e9f2e0900b5db6101b2aa94a09ea01aae4de4aa026fff9386d67d05216b7"
+    },
+    {
+      "file": "data/ai4_dog_synth_square_walk/clip.json",
+      "sha256": "59a7113fa1c3a3773cc9d15324e98d415409edc3abe59d3152d96da8157c5df1",
+      "bytes": 553,
+      "source_hash_algorithm": "git_blob_sha1",
+      "source_hash": "3fb9004b3f4b31ce31ebf44a7e390bd7fdcbccf8"
+    },
+    {
+      "file": "data/ai4_dog_synth_square_walk/config.json",
+      "sha256": "c96b90d5c974e782cbb7b861330889ad8e0d6a779370275c8fa2cf63a36a0c4f",
+      "bytes": 5263,
+      "source_hash_algorithm": "git_blob_sha1",
+      "source_hash": "eb511702b68e7602a7c68b468fb98440ef175cd4"
+    },
+    {
+      "file": "data/ai4_dog_synth_tight_strafe/motion.npy",
+      "sha256": "c0bd560963946000e2e03f9d5e5be50cb61878579be0041af9930dd29e197511",
+      "bytes": 253888,
+      "source_hash_algorithm": "sha256",
+      "source_hash": "c0bd560963946000e2e03f9d5e5be50cb61878579be0041af9930dd29e197511"
+    },
+    {
+      "file": "data/ai4_dog_synth_tight_strafe/clip.json",
+      "sha256": "ee8985b5fc4ad3e1e94528b5c90fa0b507e54bb95cefc507707dd5d5240aaabb",
+      "bytes": 555,
+      "source_hash_algorithm": "git_blob_sha1",
+      "source_hash": "6c0045c67fc6a471d65397ea9415511d7cb4b91d"
+    },
+    {
+      "file": "data/ai4_dog_synth_tight_strafe/config.json",
+      "sha256": "9b103bf46d1e77e61b49ee3fe1ad513aa4f86899dde894ae7b5a8225d91ed1ac",
+      "bytes": 5262,
+      "source_hash_algorithm": "git_blob_sha1",
+      "source_hash": "e4229312a3011a0135acb650e45b563b821592a0"
+    },
+    {
+      "file": "data/ai4_dog_synth_wide_strafe/motion.npy",
+      "sha256": "b642bc12ad2f37b2ffc14111d584130700b475fe4d37b1af90d665b449fd961d",
+      "bytes": 285364,
+      "source_hash_algorithm": "sha256",
+      "source_hash": "b642bc12ad2f37b2ffc14111d584130700b475fe4d37b1af90d665b449fd961d"
+    },
+    {
+      "file": "data/ai4_dog_synth_wide_strafe/clip.json",
+      "sha256": "dd93215c55b547b0f4fc601cada5ddc29d2ce8f313f3981ad086a7b14767a8b2",
+      "bytes": 550,
+      "source_hash_algorithm": "git_blob_sha1",
+      "source_hash": "ed6eea7cd57b0d400aad609030e6b30087e170f8"
+    },
+    {
+      "file": "data/ai4_dog_synth_wide_strafe/config.json",
+      "sha256": "e981ca0aef68bbc088d786795d270d6601eab53318b3c801ba3809b1481b1a46",
+      "bytes": 5263,
+      "source_hash_algorithm": "git_blob_sha1",
+      "source_hash": "a473dec943b96af4730d91a70f11f49a17f25db6"
+    },
+    {
+      "file": "data/ai4_dog_trot_00/motion.npy",
+      "sha256": "6d0f0ccc20917e2f34c19e8450bb6b08c11db93a9eb0e8c51773229a6a4c7382",
+      "bytes": 133840,
+      "source_hash_algorithm": "sha256",
+      "source_hash": "6d0f0ccc20917e2f34c19e8450bb6b08c11db93a9eb0e8c51773229a6a4c7382"
+    },
+    {
+      "file": "data/ai4_dog_trot_00/clip.json",
+      "sha256": "020dcff53f02e9957d970bfb4f8788e3e494db90c49c2b63ab10fe942645f428",
+      "bytes": 494,
+      "source_hash_algorithm": "git_blob_sha1",
+      "source_hash": "f77a3cabb27e51b34457b335bab09a4bb6632bc2"
+    },
+    {
+      "file": "data/ai4_dog_trot_00/config.json",
+      "sha256": "d2e1cee692a7f0dee8f7bddb364edc611074d6ddd62e99c9a2bee6dd70cd61f2",
+      "bytes": 5153,
+      "source_hash_algorithm": "git_blob_sha1",
+      "source_hash": "f04e43c28b86e4e948cf11fd861adec66f1dbea5"
+    },
+    {
+      "file": "data/ai4_dog_trot_01/motion.npy",
+      "sha256": "ce8c7b556cc4faefd6ea67fa93eacc82d71f7542db940238358909125264a4d5",
+      "bytes": 308300,
+      "source_hash_algorithm": "sha256",
+      "source_hash": "ce8c7b556cc4faefd6ea67fa93eacc82d71f7542db940238358909125264a4d5"
+    },
+    {
+      "file": "data/ai4_dog_trot_01/clip.json",
+      "sha256": "217a6103456384559c725a4fe4e9f30bbd51123931165209a5baf27865d005fe",
+      "bytes": 503,
+      "source_hash_algorithm": "git_blob_sha1",
+      "source_hash": "e7d752ad72aa06fcc99b9d13ab3879e324349e55"
+    },
+    {
+      "file": "data/ai4_dog_trot_01/config.json",
+      "sha256": "b6aa9725abfa7ce0ab9560db3a0feed2357251cf1ca186b32552f9093c203e0b",
+      "bytes": 5154,
+      "source_hash_algorithm": "git_blob_sha1",
+      "source_hash": "09e45ccada9aaf5ca3c9896325629189d7636a70"
+    },
+    {
+      "file": "data/ai4_dog_walk_00/motion.npy",
+      "sha256": "6647cd55cfa65140f45c38c4e7dcedc5039e8f8c52523ece3f043d8c51b75fb8",
+      "bytes": 144820,
+      "source_hash_algorithm": "sha256",
+      "source_hash": "6647cd55cfa65140f45c38c4e7dcedc5039e8f8c52523ece3f043d8c51b75fb8"
+    },
+    {
+      "file": "data/ai4_dog_walk_00/clip.json",
+      "sha256": "6ec7e9d5de3e846734daab8ad6e95a2e91cedea7fd992495a5b8858b329ab943",
+      "bytes": 472,
+      "source_hash_algorithm": "git_blob_sha1",
+      "source_hash": "55a479ecff913c314e77c6ba807b45911bb9a68d"
+    },
+    {
+      "file": "data/ai4_dog_walk_00/config.json",
+      "sha256": "b7509371985cfac4ac4669a612104322f6a78162076e1ea798c1d74f835fcd72",
+      "bytes": 5143,
+      "source_hash_algorithm": "git_blob_sha1",
+      "source_hash": "7b15ddf95f5d6fe85195a52c7ca18666af07e579"
+    },
+    {
+      "file": "data/ai4_dog_walk_01/motion.npy",
+      "sha256": "6efa9429f3aff2f44c36467d04a9f2abef8dcd51618ecfdf2c39fad5f984e066",
+      "bytes": 261696,
+      "source_hash_algorithm": "sha256",
+      "source_hash": "6efa9429f3aff2f44c36467d04a9f2abef8dcd51618ecfdf2c39fad5f984e066"
+    },
+    {
+      "file": "data/ai4_dog_walk_01/clip.json",
+      "sha256": "3827914d2c273d490faf7d33786fc85cdddaaa6fdeb575457edd67b86e6e26f6",
+      "bytes": 472,
+      "source_hash_algorithm": "git_blob_sha1",
+      "source_hash": "1b7d2ec06598f4e5650b1fd14c9b7559053fc80a"
+    },
+    {
+      "file": "data/ai4_dog_walk_01/config.json",
+      "sha256": "a3f81a0698649a8ccfe343627051ec0614fc29ae3076e3f7fc47607e66d9363c",
+      "bytes": 5150,
+      "source_hash_algorithm": "git_blob_sha1",
+      "source_hash": "cff143c44be08d5875598644a63304b068a0b239"
+    },
+    {
+      "file": "data/ai4_dog_walk_02/motion.npy",
+      "sha256": "b161cf8bfa3ef6ad8cf3d97fd40e9b604cff909d9213f600d6e167f6ddf4aa5c",
+      "bytes": 222412,
+      "source_hash_algorithm": "sha256",
+      "source_hash": "b161cf8bfa3ef6ad8cf3d97fd40e9b604cff909d9213f600d6e167f6ddf4aa5c"
+    },
+    {
+      "file": "data/ai4_dog_walk_02/clip.json",
+      "sha256": "69ed757eef1fef859b8a4ded8cf83607470677c12e9f6501404be8406b4fb839",
+      "bytes": 472,
+      "source_hash_algorithm": "git_blob_sha1",
+      "source_hash": "a3774f514e0f4cf99120733bbe2d0567bcc47de9"
+    },
+    {
+      "file": "data/ai4_dog_walk_02/config.json",
+      "sha256": "68a5885c827047701ecbb26d43eedf60371e192c3698fea1bc69c69d9e466b6a",
+      "bytes": 5149,
+      "source_hash_algorithm": "git_blob_sha1",
+      "source_hash": "804a248bed2fa1474e5cca241d129991b4f6bbc3"
+    },
+    {
+      "file": "data/ai4_dog_walk_03/motion.npy",
+      "sha256": "6d0f0ccc20917e2f34c19e8450bb6b08c11db93a9eb0e8c51773229a6a4c7382",
+      "bytes": 133840,
+      "source_hash_algorithm": "sha256",
+      "source_hash": "6d0f0ccc20917e2f34c19e8450bb6b08c11db93a9eb0e8c51773229a6a4c7382"
+    },
+    {
+      "file": "data/ai4_dog_walk_03/clip.json",
+      "sha256": "575d44502de1d22e9579f27989f25e35a5ff2362b9158d29fa17dcc15549b10b",
+      "bytes": 472,
+      "source_hash_algorithm": "git_blob_sha1",
+      "source_hash": "e3d07f4ae0d49140645d3e4705b30bbeb3b45faa"
+    },
+    {
+      "file": "data/ai4_dog_walk_03/config.json",
+      "sha256": "a0201d9f0ace6e9cb3a0b2b44d5300af47a756a5baae4fbfc3cf7025e195a5bd",
+      "bytes": 5143,
+      "source_hash_algorithm": "git_blob_sha1",
+      "source_hash": "55749c3ad0565596c24ec99ab3bdbdaecad24982"
+    },
+    {
+      "file": "data/ai4_dog_walk_04/motion.npy",
+      "sha256": "a5b2131b90409c1b12220edf44dc96f8f207b4e6f7cc51aa8b5697f962938102",
+      "bytes": 133840,
+      "source_hash_algorithm": "sha256",
+      "source_hash": "a5b2131b90409c1b12220edf44dc96f8f207b4e6f7cc51aa8b5697f962938102"
+    },
+    {
+      "file": "data/ai4_dog_walk_04/clip.json",
+      "sha256": "e3889ebb87c5cda1070bb7d5484bcebd441e54db1852440161ba5c0ffc237b7e",
+      "bytes": 472,
+      "source_hash_algorithm": "git_blob_sha1",
+      "source_hash": "017938ef5354a61f910b6e0a014e1f8f4f4d14d6"
+    },
+    {
+      "file": "data/ai4_dog_walk_04/config.json",
+      "sha256": "edd1005fefb63c9b6ae704cc46c8d63ea1dcbd850a05ae7ddc7316ddf48a8c3d",
+      "bytes": 5143,
+      "source_hash_algorithm": "git_blob_sha1",
+      "source_hash": "33135de8712ce4810f0d58cb1bc3da168d96373a"
+    },
+    {
+      "file": "data/ai4_dog_walk_06/motion.npy",
+      "sha256": "957573ee9d42ce6cfa342260189519278b8d110658355988a8ff8d0104759878",
+      "bytes": 329040,
+      "source_hash_algorithm": "sha256",
+      "source_hash": "957573ee9d42ce6cfa342260189519278b8d110658355988a8ff8d0104759878"
+    },
+    {
+      "file": "data/ai4_dog_walk_06/clip.json",
+      "sha256": "ffec1f207d22b8d9ec60a916aadda8620899c0998394015763839de385ae85dc",
+      "bytes": 472,
+      "source_hash_algorithm": "git_blob_sha1",
+      "source_hash": "645cfea936182ede50f72a354b9294176c62ab10"
+    },
+    {
+      "file": "data/ai4_dog_walk_06/config.json",
+      "sha256": "47240462e6678ef24d3466feed78201105c5db3451d89cf3a9acb907a8475dd3",
+      "bytes": 5143,
+      "source_hash_algorithm": "git_blob_sha1",
+      "source_hash": "c467b77255b373749a2424ef426016d463123290"
+    },
+    {
+      "file": "data/solo8_crawl_fast/motion.npy",
+      "sha256": "9e16a650962a5ff3d63b07bf458331348f5e0b2b34f35efef38301affdbc1fa9",
+      "bytes": 29408,
+      "source_hash_algorithm": "sha256",
+      "source_hash": "9e16a650962a5ff3d63b07bf458331348f5e0b2b34f35efef38301affdbc1fa9"
+    },
+    {
+      "file": "data/solo8_crawl_fast/clip.json",
+      "sha256": "d504659b42584a4b92e75cd8d2c2c55573ce30502cf8c1b1caee2aad33445eef",
+      "bytes": 449,
+      "source_hash_algorithm": "git_blob_sha1",
+      "source_hash": "f7deea14a2353cb76ef61cec6a8ac14e3ab5008a"
+    },
+    {
+      "file": "data/solo8_crawl_fast/config.json",
+      "sha256": "5512d2c48b544cc052423ed0c029f59b0a9bf8bb43446e43f50c9edbdbf3676b",
+      "bytes": 5147,
+      "source_hash_algorithm": "git_blob_sha1",
+      "source_hash": "aa80658a9d9c4f706c5a75a4b246ad3240205340"
+    },
+    {
+      "file": "data/solo8_crawl_slow/motion.npy",
+      "sha256": "cb436fde82a44fb596d7e4b893612a537586e595ad693e8d4f87f1afcb410eca",
+      "bytes": 29408,
+      "source_hash_algorithm": "sha256",
+      "source_hash": "cb436fde82a44fb596d7e4b893612a537586e595ad693e8d4f87f1afcb410eca"
+    },
+    {
+      "file": "data/solo8_crawl_slow/clip.json",
+      "sha256": "f4a9c26d82f4fcbc7fa6ef5ae93f19508b45820d66190a6364beefd3a2d72094",
+      "bytes": 443,
+      "source_hash_algorithm": "git_blob_sha1",
+      "source_hash": "168a6d666d54269b8fa4d49c043a91487646b6a7"
+    },
+    {
+      "file": "data/solo8_crawl_slow/config.json",
+      "sha256": "1d16e67bf38a65a19be5b79d4e482fb42637eedbbf9e21e0bb601a23e5b3dce0",
+      "bytes": 5128,
+      "source_hash_algorithm": "git_blob_sha1",
+      "source_hash": "c664508656b2d62249d222496304d4885d3c4589"
+    },
+    {
+      "file": "data/solo8_jump_forward_a/motion.npy",
+      "sha256": "ea6fcb3464142dd82bc2e51023cc7b48d541371f0c511c1a342448b9bee494ec",
+      "bytes": 29408,
+      "source_hash_algorithm": "sha256",
+      "source_hash": "ea6fcb3464142dd82bc2e51023cc7b48d541371f0c511c1a342448b9bee494ec"
+    },
+    {
+      "file": "data/solo8_jump_forward_a/clip.json",
+      "sha256": "6e992f87c5236d8ff8ec6986c466be89b42a1722280dee62585e24822c7cb867",
+      "bytes": 445,
+      "source_hash_algorithm": "git_blob_sha1",
+      "source_hash": "66bf72e2e99c47ecfaf0aea888f6753f0731a76a"
+    },
+    {
+      "file": "data/solo8_jump_forward_a/config.json",
+      "sha256": "56ae4e1588724628364ffb0eed84bf65ea09a4fca19b34aae073b588f249157c",
+      "bytes": 5148,
+      "source_hash_algorithm": "git_blob_sha1",
+      "source_hash": "82c4956766dafde70da249d55ce208ace60aaf53"
+    },
+    {
+      "file": "data/solo8_jump_forward_b/motion.npy",
+      "sha256": "34ecfa8c89cf1eaec300b58da67be3a237b8f3794fd890f1947a8676844945c1",
+      "bytes": 29408,
+      "source_hash_algorithm": "sha256",
+      "source_hash": "34ecfa8c89cf1eaec300b58da67be3a237b8f3794fd890f1947a8676844945c1"
+    },
+    {
+      "file": "data/solo8_jump_forward_b/clip.json",
+      "sha256": "8ed0876dea30df1c2d366483d71890c77b714e413ad81d2f0b1d3b152108938f",
+      "bytes": 445,
+      "source_hash_algorithm": "git_blob_sha1",
+      "source_hash": "a7fef0207073a597779d77173852c8969bc138bf"
+    },
+    {
+      "file": "data/solo8_jump_forward_b/config.json",
+      "sha256": "f78371a9bb6ca392b32c04fe9c535f3db6fb423f1a39fefd63c4f3da501748cb",
+      "bytes": 5148,
+      "source_hash_algorithm": "git_blob_sha1",
+      "source_hash": "fa75da5885ce871f93e82dc1cb6632591e869837"
+    },
+    {
+      "file": "data/solo8_scoot_forward/motion.npy",
+      "sha256": "64a1428640d70ced94d6b96c6ff45a9e85c82ad898cc8568c2172d69cba9ac83",
+      "bytes": 29408,
+      "source_hash_algorithm": "sha256",
+      "source_hash": "64a1428640d70ced94d6b96c6ff45a9e85c82ad898cc8568c2172d69cba9ac83"
+    },
+    {
+      "file": "data/solo8_scoot_forward/clip.json",
+      "sha256": "2c49c7e41e630573e61ce594fa4628f6b9a474558750a19ec6153414f068752a",
+      "bytes": 435,
+      "source_hash_algorithm": "git_blob_sha1",
+      "source_hash": "cfa15c8ba58b309d7917865b95648266aeae124e"
+    },
+    {
+      "file": "data/solo8_scoot_forward/config.json",
+      "sha256": "1050701096429857ae098378985e58ff753359c4aa81869dfedc70c1d0870ce4",
+      "bytes": 5147,
+      "source_hash_algorithm": "git_blob_sha1",
+      "source_hash": "03f31f7f6ff576eb1adc0b435d037726b7ce1256"
+    },
+    {
+      "file": "data/solo8_walk/motion.npy",
+      "sha256": "f1317e33d35aa838cb6be1d5cccb049e5f33581324b67b728b1868017846512e",
+      "bytes": 29408,
+      "source_hash_algorithm": "sha256",
+      "source_hash": "f1317e33d35aa838cb6be1d5cccb049e5f33581324b67b728b1868017846512e"
+    },
+    {
+      "file": "data/solo8_walk/clip.json",
+      "sha256": "221164ff545da5acd5fddcc9166c1135825e3280e0d918d6086263f58866586f",
+      "bytes": 440,
+      "source_hash_algorithm": "git_blob_sha1",
+      "source_hash": "d273273f40d905d5e9b1e88ee3beb978d27c27fc"
+    },
+    {
+      "file": "data/solo8_walk/config.json",
+      "sha256": "91fd9bfd4f211a2a0be609ba71febed9fc1fa0d69b5e9a1c3e521b64005f9626",
+      "bytes": 5146,
+      "source_hash_algorithm": "git_blob_sha1",
+      "source_hash": "62a29f3b214182f62438957f184d065a342942a5"
+    },
+    {
+      "file": "data/vhdc_horse1_s1_trot_01/motion.npy",
+      "sha256": "da64119b722ef5bd8a62886be9c39b4d226a2271728ec9a994a3a718ae297890",
+      "bytes": 146528,
+      "source_hash_algorithm": "sha256",
+      "source_hash": "da64119b722ef5bd8a62886be9c39b4d226a2271728ec9a994a3a718ae297890"
+    },
+    {
+      "file": "data/vhdc_horse1_s1_trot_01/clip.json",
+      "sha256": "35ad60ef6cdc14c2f2df89fa6da90bb4fb21d8663fac16543816a91eab35a935",
+      "bytes": 365,
+      "source_hash_algorithm": "git_blob_sha1",
+      "source_hash": "3027b277c1ae93e02749474a847e385fbf83554e"
+    },
+    {
+      "file": "data/vhdc_horse1_s1_trot_01/config.json",
+      "sha256": "daaa5dfefb7e0580dd03f79a86191af64e344581a6156af981894431c016e788",
+      "bytes": 5146,
+      "source_hash_algorithm": "git_blob_sha1",
+      "source_hash": "036f7c8020f1496cb12c9939beb99fcd7d93ba96"
+    },
+    {
+      "file": "data/vhdc_horse1_s1_trot_02/motion.npy",
+      "sha256": "ddb166c923e50e4496cb069a3bd1f86f420f5176a60f8aa7d67fa21da96e3a1e",
+      "bytes": 146528,
+      "source_hash_algorithm": "sha256",
+      "source_hash": "ddb166c923e50e4496cb069a3bd1f86f420f5176a60f8aa7d67fa21da96e3a1e"
+    },
+    {
+      "file": "data/vhdc_horse1_s1_trot_02/clip.json",
+      "sha256": "970b11d783f0aae9227d7a7d8856c938ea539fc514fbb95562c769be34ac61ca",
+      "bytes": 365,
+      "source_hash_algorithm": "git_blob_sha1",
+      "source_hash": "5649ee4657cb71bc8eec66eaf2743badcb195d48"
+    },
+    {
+      "file": "data/vhdc_horse1_s1_trot_02/config.json",
+      "sha256": "c380f5d2b0fc1dc616feefab4a571047443a6c03bc12888b201cb7a891bfaf29",
+      "bytes": 5145,
+      "source_hash_algorithm": "git_blob_sha1",
+      "source_hash": "ea265e661b6757c95e5867dc070b11e3b4a32fb7"
+    },
+    {
+      "file": "data/vhdc_horse1_s1_trot_03/motion.npy",
+      "sha256": "d57eb52023e293997f6f6425f5f878e71cf821c908940cdf0ee288fe080a4bae",
+      "bytes": 146528,
+      "source_hash_algorithm": "sha256",
+      "source_hash": "d57eb52023e293997f6f6425f5f878e71cf821c908940cdf0ee288fe080a4bae"
+    },
+    {
+      "file": "data/vhdc_horse1_s1_trot_03/clip.json",
+      "sha256": "bde5485839d02de55ee83f7e159ae697c33b49dde5603d6818ae549555ae6803",
+      "bytes": 365,
+      "source_hash_algorithm": "git_blob_sha1",
+      "source_hash": "e8602600116d67f4c411aeddf3c5458164bd32a0"
+    },
+    {
+      "file": "data/vhdc_horse1_s1_trot_03/config.json",
+      "sha256": "7ba361d7565c5416d5fb698a8678d37d13c140655e6076a78d3ecdda546bbd7f",
+      "bytes": 5146,
+      "source_hash_algorithm": "git_blob_sha1",
+      "source_hash": "fc814b6bbdfb61fd5ea892b5620289de5f997dba"
+    },
+    {
+      "file": "data/vhdc_horse1_s1_walk_01/motion.npy",
+      "sha256": "ce34f735b7c6e586eebaf935c9f117cff854f6e1b4d6bffc1fd7e229a1e4ffcc",
+      "bytes": 146528,
+      "source_hash_algorithm": "sha256",
+      "source_hash": "ce34f735b7c6e586eebaf935c9f117cff854f6e1b4d6bffc1fd7e229a1e4ffcc"
+    },
+    {
+      "file": "data/vhdc_horse1_s1_walk_01/clip.json",
+      "sha256": "068020765e84cac859303b94b6a211ad8a749eccdaf248db9abf221ac5acb190",
+      "bytes": 365,
+      "source_hash_algorithm": "git_blob_sha1",
+      "source_hash": "df66abe133eb0a4c98033a85143417255d3f399c"
+    },
+    {
+      "file": "data/vhdc_horse1_s1_walk_01/config.json",
+      "sha256": "477471b47e32cf443cf9fcbedcd8556011aacebee3c5ee699eb3105a82ec1a9c",
+      "bytes": 5145,
+      "source_hash_algorithm": "git_blob_sha1",
+      "source_hash": "60ce86ef3d1ead76b74c896ca9979ff38cc2cb6d"
+    },
+    {
+      "file": "data/vhdc_horse1_s1_walk_02/motion.npy",
+      "sha256": "381f38d104090ff8f2f077da6b6ea0759e21c3d4302a8858e88bb97df8a8d68c",
+      "bytes": 146528,
+      "source_hash_algorithm": "sha256",
+      "source_hash": "381f38d104090ff8f2f077da6b6ea0759e21c3d4302a8858e88bb97df8a8d68c"
+    },
+    {
+      "file": "data/vhdc_horse1_s1_walk_02/clip.json",
+      "sha256": "e3795d1b93c2672112812b89447aca1d3add45b5d94763106da047788ac3b86f",
+      "bytes": 365,
+      "source_hash_algorithm": "git_blob_sha1",
+      "source_hash": "6632b506a9e16dfd78ac9544e4932a452c517e24"
+    },
+    {
+      "file": "data/vhdc_horse1_s1_walk_02/config.json",
+      "sha256": "c60f20b07f84b6566d470512c8d7132c329122449792a98daed0123d498a6387",
+      "bytes": 5145,
+      "source_hash_algorithm": "git_blob_sha1",
+      "source_hash": "96f1040c44398b8a66dafed9375784ddcde87052"
+    },
+    {
+      "file": "data/vhdc_horse1_s1_walk_03/motion.npy",
+      "sha256": "cf9d267cc705e0a58f4a7a3e65639e50e4b25470d7d1d52321d6791be32221cd",
+      "bytes": 146528,
+      "source_hash_algorithm": "sha256",
+      "source_hash": "cf9d267cc705e0a58f4a7a3e65639e50e4b25470d7d1d52321d6791be32221cd"
+    },
+    {
+      "file": "data/vhdc_horse1_s1_walk_03/clip.json",
+      "sha256": "03a6c8e3f49e196e015344f9cdff000395a01f95ba313d8d43046a159d1a6550",
+      "bytes": 365,
+      "source_hash_algorithm": "git_blob_sha1",
+      "source_hash": "73c4e7334c47562e05a7bb99ab84b8fbff415778"
+    },
+    {
+      "file": "data/vhdc_horse1_s1_walk_03/config.json",
+      "sha256": "c57193d4269937c135274e58bb1ef5cfe74ab1ae2d2dfb3dff8d28f1925823de",
+      "bytes": 5145,
+      "source_hash_algorithm": "git_blob_sha1",
+      "source_hash": "b29c780b4214a2449df6bde69ee35c4bbe4020b3"
+    },
+    {
+      "file": "data/vhdc_horse1_s2_trot_01/motion.npy",
+      "sha256": "a278d28edd5d095ad1d80b5d0469020bd437efe01aae4c40d40d02948227e51c",
+      "bytes": 292928,
+      "source_hash_algorithm": "sha256",
+      "source_hash": "a278d28edd5d095ad1d80b5d0469020bd437efe01aae4c40d40d02948227e51c"
+    },
+    {
+      "file": "data/vhdc_horse1_s2_trot_01/clip.json",
+      "sha256": "9e6ee51823f071fd822035de80422a2d736fc770435a39d9eddb83973ddd6bc3",
+      "bytes": 365,
+      "source_hash_algorithm": "git_blob_sha1",
+      "source_hash": "3e672eb432f4ecef9f5346e2255e19022dd13425"
+    },
+    {
+      "file": "data/vhdc_horse1_s2_trot_01/config.json",
+      "sha256": "3a1c7bf3c701782a27367b2eb4cb68a9fd99f48497144b41c8b16e7ea48667e0",
+      "bytes": 5146,
+      "source_hash_algorithm": "git_blob_sha1",
+      "source_hash": "175ecd82abe057268a32757ff07820313880549a"
+    },
+    {
+      "file": "data/vhdc_horse1_s2_trot_02/motion.npy",
+      "sha256": "f5d65c8e2b0b1c8e4e0ed039017a7c50755c6c677a39ae9866f22a4145110500",
+      "bytes": 292928,
+      "source_hash_algorithm": "sha256",
+      "source_hash": "f5d65c8e2b0b1c8e4e0ed039017a7c50755c6c677a39ae9866f22a4145110500"
+    },
+    {
+      "file": "data/vhdc_horse1_s2_trot_02/clip.json",
+      "sha256": "8fac22050ea8c54a501e3841f1f1b7ec3cb03106e8d27f7162d2613cefa24b2f",
+      "bytes": 365,
+      "source_hash_algorithm": "git_blob_sha1",
+      "source_hash": "c0c807c3539c9c527a40773cc20e8264f93cbb26"
+    },
+    {
+      "file": "data/vhdc_horse1_s2_trot_02/config.json",
+      "sha256": "00bf119a532b5a043398c952e568d90dee085c729bcf452dae7ac48236dc4e94",
+      "bytes": 5146,
+      "source_hash_algorithm": "git_blob_sha1",
+      "source_hash": "df05d1fbea41988e112c7bd5a59974bb226c4919"
+    },
+    {
+      "file": "data/vhdc_horse1_s2_trot_03/motion.npy",
+      "sha256": "ee3158b74dc2e1cbe50a6a598c5a20459a6d22d3a60f6356201b6d89d51bee06",
+      "bytes": 292928,
+      "source_hash_algorithm": "sha256",
+      "source_hash": "ee3158b74dc2e1cbe50a6a598c5a20459a6d22d3a60f6356201b6d89d51bee06"
+    },
+    {
+      "file": "data/vhdc_horse1_s2_trot_03/clip.json",
+      "sha256": "7eda10c4ae250209a7059827a76d8b8221ae1b1ac5855e780c52439026cd7610",
+      "bytes": 365,
+      "source_hash_algorithm": "git_blob_sha1",
+      "source_hash": "942d933cc1504e570ba04efd4da1cc1a997d3326"
+    },
+    {
+      "file": "data/vhdc_horse1_s2_trot_03/config.json",
+      "sha256": "c852bfb36479fea70c06b8bd93792f42b996c1824d0e71dafe8f47b1324b52dd",
+      "bytes": 5147,
+      "source_hash_algorithm": "git_blob_sha1",
+      "source_hash": "e4fafd6f01d122d1899469d796f95964c3b4b308"
+    },
+    {
+      "file": "data/vhdc_horse1_s2_walk_01/motion.npy",
+      "sha256": "5c53f77a8846f8d8c8d9cf0f7e149c68557a9911ca7d03fc10dff0a1e9611391",
+      "bytes": 292928,
+      "source_hash_algorithm": "sha256",
+      "source_hash": "5c53f77a8846f8d8c8d9cf0f7e149c68557a9911ca7d03fc10dff0a1e9611391"
+    },
+    {
+      "file": "data/vhdc_horse1_s2_walk_01/clip.json",
+      "sha256": "67164dfe7dc5f9be7825230f66553806f483e00c5ec4e81f42a7522a578e2219",
+      "bytes": 365,
+      "source_hash_algorithm": "git_blob_sha1",
+      "source_hash": "79659d8c187e1dbead0484751df4af72056b9d62"
+    },
+    {
+      "file": "data/vhdc_horse1_s2_walk_01/config.json",
+      "sha256": "10b6f83fd909c74ac0f68abe0e6adfa9af79448cacffc7fa62a5dc0f967d5019",
+      "bytes": 5147,
+      "source_hash_algorithm": "git_blob_sha1",
+      "source_hash": "9ab565dc179b5d3e0ae8a93f9b3db48f74b5e96f"
+    },
+    {
+      "file": "data/vhdc_horse1_s2_walk_02/motion.npy",
+      "sha256": "396d699d8eb06c7b21d9652f8e277cdda0e75cfb103ff22e2820ef4955719cd3",
+      "bytes": 292928,
+      "source_hash_algorithm": "sha256",
+      "source_hash": "396d699d8eb06c7b21d9652f8e277cdda0e75cfb103ff22e2820ef4955719cd3"
+    },
+    {
+      "file": "data/vhdc_horse1_s2_walk_02/clip.json",
+      "sha256": "4ea3a16eca8bd3bf4dd05596beba51713f95ca177cdf5d6d331e74ef5949d6b2",
+      "bytes": 365,
+      "source_hash_algorithm": "git_blob_sha1",
+      "source_hash": "2dd43dc01f1e3ded57e95513d320cda6b397aa90"
+    },
+    {
+      "file": "data/vhdc_horse1_s2_walk_02/config.json",
+      "sha256": "34b08b8dac2ff4eaee03235fdf459cc432950eec45ac8ac428806fed3d41dc02",
+      "bytes": 5147,
+      "source_hash_algorithm": "git_blob_sha1",
+      "source_hash": "919d8e0dd15c0e079aa57b0c2a699cb4523ee8ca"
+    },
+    {
+      "file": "data/vhdc_horse1_s2_walk_03/motion.npy",
+      "sha256": "4a3cdfe7ba915ab297b2062e86621aa956643d3bfbfd2175728dbab33b8f4a11",
+      "bytes": 292928,
+      "source_hash_algorithm": "sha256",
+      "source_hash": "4a3cdfe7ba915ab297b2062e86621aa956643d3bfbfd2175728dbab33b8f4a11"
+    },
+    {
+      "file": "data/vhdc_horse1_s2_walk_03/clip.json",
+      "sha256": "aeeaf469a54251d1c56520e153723846a96bac54785bf4cb16300f24dbf2f589",
+      "bytes": 365,
+      "source_hash_algorithm": "git_blob_sha1",
+      "source_hash": "f7561e4e1126f4e5371e3bfe363e9a4f06bc742d"
+    },
+    {
+      "file": "data/vhdc_horse1_s2_walk_03/config.json",
+      "sha256": "0016d8b518235f47c491d0c6ad53c54d7fbdacf224d0474446f6cd8e23ca08b9",
+      "bytes": 5147,
+      "source_hash_algorithm": "git_blob_sha1",
+      "source_hash": "9ac44272c8cdaeff2a72ca06c1377c6a2ad79965"
+    },
+    {
+      "file": "LICENSES/VHDC_CC-BY-SA-4.0.txt",
+      "sha256": "28a9529c7d0bb4dc51f4bf5c116a3d16ef247a052f7591466768ddf563fd1cf5",
+      "bytes": 20138,
+      "source_hash_algorithm": "git_blob_sha1",
+      "source_hash": "2d58298e6eda10e7204abb52722efbc840db2390"
+    },
+    {
+      "file": "LICENSES/cassi_BSD-3-Clause.txt",
+      "sha256": "16c201f8200c2f8b3893a043f14c713336459c4528b87473a29c5aa7cfa6a163",
+      "bytes": 1527,
+      "source_hash_algorithm": "git_blob_sha1",
+      "source_hash": "06ea6718c19091f4a65bf0c27a630169ac0f881b"
+    }
+  ]
+}

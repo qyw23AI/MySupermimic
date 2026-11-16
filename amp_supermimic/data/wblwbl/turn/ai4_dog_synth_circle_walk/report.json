@@ -1,0 +1,89 @@
+{
+  "source_sha256": "6e0157cd56fe5ccd818198957fd146683e6fbbfe7d5ff6c99b6388dd04e2f979",
+  "source_manifest_sha256": "c5f43db4d620d76c20d7adeebbaf5eb03c05925638c8ab93e1d9257452286d46",
+  "target_mjcf_sha256": "1f3a2b393e0c89104099a5165772a174f5c7996594182aae45b771ebbb7bfdf7",
+  "frames": 672,
+  "fps": 50,
+  "joint_names": [
+    "RR_hip_joint",
+    "RR_thigh_joint",
+    "RR_calf_joint",
+    "RL_hip_joint",
+    "RL_thigh_joint",
+    "RL_calf_joint",
+    "FR_hip_joint",
+    "FR_thigh_joint",
+    "FR_calf_joint",
+    "FL_hip_joint",
+    "FL_thigh_joint",
+    "FL_calf_joint"
+  ],
+  "scale": 1.2244201510123138,
+  "swing_boost_m": 0.0,
+  "foot_error_mean_m": 0.00016293857761229215,
+  "foot_error_p95_m": 9.664188837854235e-05,
+  "foot_error_max_m": 0.013565841410532407,
+  "joint_limit_violation_rad": 0.0,
+  "joint_velocity_p99_rad_s": 9.166733088508877,
+  "csv_sha256": "890704c77aa8dc1480e14ad162096c53bcb637b1269f634bb9ebfa52bd9307fa",
+  "playback_torque_limits_nm": [
+    23.7,
+    23.7,
+    23.7,
+    23.7,
+    23.7,
+    23.7,
+    23.7,
+    23.7,
+    23.7,
+    23.7,
+    23.7,
+    23.7
+  ],
+  "playback_kp": 40,
+  "playback_kd": 4,
+  "reference_displacement_xy_m": [
+    0.3624138899964341,
+    -1.3084990814186144
+  ],
+  "playback_displacement_xy_m": [
+    -0.2588078165323638,
+    -0.3458931303869063
+  ],
+  "playback_progress_ratio": 0.1946312093808416,
+  "playback_joint_rmse_by_leg_rad": [
+    [
+      0.1774861255200031,
+      0.3509892394819171,
+      0.3683211312424744
+    ],
+    [
+      0.20777225169165012,
+      0.2858583384194519,
+      0.37031746770515644
+    ],
+    [
+      0.1464521101410562,
+      0.29656226797629964,
+      0.19997663795875015
+    ],
+    [
+      0.11611635787694108,
+      0.23663067133759294,
+      0.24037906110649526
+    ]
+  ],
+  "playback_foot_contact_fraction_by_leg": [
+    0.9910714285714286,
+    0.9330357142857143,
+    0.5461309523809523,
+    0.6711309523809523
+  ],
+  "playback_contact_frame_fraction": 1.0,
+  "playback_mean_support_feet": 3.1413690476190474,
+  "playback_joint_rmse_rad": 0.2628405383327292,
+  "playback_fall_frames": 0,
+  "playback_final_height_m": 0.2834558984453414,
+  "playback_pass": false,
+  "motion_usable_for_amp": true
+}

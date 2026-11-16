@@ -11,3 +11,5 @@ datasets/
 *.onnx
 .env
 configs/*.local.json
+
+/amp_supermimic/data/raw/

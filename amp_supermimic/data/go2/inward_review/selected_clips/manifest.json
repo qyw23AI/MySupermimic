@@ -1,0 +1,116 @@
+{
+  "dataset": "MIMUW-Robotics/kine2go",
+  "revision": "7f03a3fb7f6b2e684899530862ba103e81570363",
+  "pipeline_repository": "https://github.com/nomagiclab/kine2go-pipeline",
+  "pipeline_revision": "65b39f104706c1b4307dfc2a7df2aa8bed8d20aa",
+  "source_fps": 60,
+  "joint_names": [
+    "FL_hip_joint",
+    "FL_thigh_joint",
+    "FL_calf_joint",
+    "FR_hip_joint",
+    "FR_thigh_joint",
+    "FR_calf_joint",
+    "RL_hip_joint",
+    "RL_thigh_joint",
+    "RL_calf_joint",
+    "RR_hip_joint",
+    "RR_thigh_joint",
+    "RR_calf_joint"
+  ],
+  "columns": [
+    "root_x",
+    "root_y",
+    "root_z",
+    "root_qx",
+    "root_qy",
+    "root_qz",
+    "root_qw",
+    "FL_hip_joint",
+    "FL_thigh_joint",
+    "FL_calf_joint",
+    "FR_hip_joint",
+    "FR_thigh_joint",
+    "FR_calf_joint",
+    "RL_hip_joint",
+    "RL_thigh_joint",
+    "RL_calf_joint",
+    "RR_hip_joint",
+    "RR_thigh_joint",
+    "RR_calf_joint"
+  ],
+  "frame_range_convention": "source ranges from motion_ranges.txt; start and end are inclusive; end null means through final frame",
+  "license": "CC BY-NC 4.0 for all selected ai4_dog clips; retain attribution in each clip.json",
+  "clips": [
+    {
+      "file": "ai4_dog_walk_00.csv",
+      "source_file": "dog_walk00_joint_pos.txt",
+      "source_start_frame": 101,
+      "source_end_frame_inclusive": 580,
+      "frames": 480,
+      "duration_seconds": 7.983,
+      "downloaded_reference_frames": 593,
+      "sha256": "3db0f194a5d1ac27d4837b47a3d4358bfafcf13c0ce0c6c6053f8db562d8d75d"
+    },
+    {
+      "file": "ai4_dog_walk_01.csv",
+      "source_file": "dog_walk01_joint_pos.txt",
+      "source_start_frame": 377,
+      "source_end_frame_inclusive": 1050,
+      "frames": 674,
+      "duration_seconds": 11.217,
+      "downloaded_reference_frames": 1072,
+      "sha256": "e243adcd8deb89e4cf6abf49be15b71377c3292988f72cecd7e3ccaab79a559f"
+    },
+    {
+      "file": "ai4_dog_pace.csv",
+      "source_file": "dog_walk00_joint_pos.txt",
+      "source_start_frame": 162,
+      "source_end_frame_inclusive": 201,
+      "frames": 40,
+      "duration_seconds": 0.65,
+      "downloaded_reference_frames": 593,
+      "sha256": "a64b311e81c69ff49702e20bb7f0cb75916624b337823d856cc31969514a2c4a"
+    },
+    {
+      "file": "ai4_dog_left_turn.csv",
+      "source_file": "dog_walk09_joint_pos.txt",
+      "source_start_frame": 1085,
+      "source_end_frame_inclusive": 1124,
+      "frames": 40,
+      "duration_seconds": 0.65,
+      "downloaded_reference_frames": 4336,
+      "sha256": "bf50ad8141a365554109b2360309898d542cfdc24ebd3c3e8152d3af69e6b09d"
+    },
+    {
+      "file": "ai4_dog_right_turn.csv",
+      "source_file": "dog_walk09_joint_pos.txt",
+      "source_start_frame": 2404,
+      "source_end_frame_inclusive": 2450,
+      "frames": 47,
+      "duration_seconds": 0.767,
+      "downloaded_reference_frames": 4336,
+      "sha256": "361eb610efdb21dc34e33e60e3887c2398fe9afd72fb67b29e7f7ab7befab7ca"
+    },
+    {
+      "file": "ai4_dog_synth_circle_walk.csv",
+      "source_file": "circle_walk.txt",
+      "source_start_frame": 446,
+      "source_end_frame_inclusive": 806,
+      "frames": 361,
+      "duration_seconds": 6.0,
+      "downloaded_reference_frames": 807,
+      "sha256": "0e54cd6bacc0a6c09ef1f91efcb4c9e59c1ec26c9fe6aebb71677bc36101de9e"
+    },
+    {
+      "file": "ai4_dog_synth_eight_walk.csv",
+      "source_file": "eight_walk.txt",
+      "source_start_frame": 0,
+      "source_end_frame_inclusive": null,
+      "frames": 1176,
+      "duration_seconds": 19.583,
+      "downloaded_reference_frames": 1176,
+      "sha256": "67749968aae10f4fc1d398d95cb8c73263f2c18b4eb779b548c5b34318cd4c0a"
+    }
+  ]
+}

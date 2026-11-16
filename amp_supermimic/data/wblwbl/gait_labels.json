@@ -1,0 +1,2081 @@
+{
+  "method": "WBL forward kinematics; inferred flat support from sole height and XY speed, not measured forces",
+  "foot_order": [
+    "RR",
+    "RL",
+    "FR",
+    "FL"
+  ],
+  "motions": {
+    "ai4_dog_trot_00.csv": {
+      "gait": "walk",
+      "touchdown_counts": {
+        "RR": 11,
+        "RL": 11,
+        "FR": 11,
+        "FL": 12
+      },
+      "touchdown_separation_cycles": {
+        "RR-RL": 0.482,
+        "RR-FR": 0.286,
+        "RR-FL": 0.321,
+        "RL-FR": 0.321,
+        "RL-FL": 0.179,
+        "FR-FL": 0.5
+      },
+      "duty_factor": [
+        0.23,
+        0.52,
+        0.592,
+        0.623
+      ],
+      "body_velocity_m_s": [
+        1.286,
+        -0.0,
+        -0.005
+      ],
+      "yaw_abs_median_rad_s": 0.143,
+      "penetration_over_1cm_frames": 0,
+      "ik_pass": true,
+      "pd_pass": false
+    },
+    "crawl/solo8_crawl_fast/solo8_crawl_fast.csv": {
+      "gait": "walk",
+      "touchdown_counts": {
+        "RR": 6,
+        "RL": 6,
+        "FR": 7,
+        "FL": 6
+      },
+      "touchdown_separation_cycles": {
+        "RR-RL": 0.412,
+        "RR-FR": 0.235,
+        "RR-FL": 0.235,
+        "RL-FR": 0.353,
+        "RL-FL": 0.176,
+        "FR-FL": 0.471
+      },
+      "duty_factor": [
+        0.44,
+        0.35,
+        0.45,
+        0.54
+      ],
+      "body_velocity_m_s": [
+        2.14,
+        0.009,
+        0.11
+      ],
+      "yaw_abs_median_rad_s": 0.065,
+      "penetration_over_1cm_frames": 0,
+      "ik_pass": true,
+      "pd_pass": false
+    },
+    "crawl/solo8_crawl_slow/solo8_crawl_slow.csv": {
+      "gait": "uncertain",
+      "touchdown_counts": {
+        "RR": 4,
+        "RL": 3,
+        "FR": 4,
+        "FL": 6
+      },
+      "touchdown_separation_cycles": {
+        "RR-RL": 0.571,
+        "RR-FR": 0.321,
+        "RR-FL": 0.107,
+        "RL-FR": 0.107,
+        "RL-FL": 0.25,
+        "FR-FL": 0.321
+      },
+      "duty_factor": [
+        0.63,
+        0.57,
+        0.59,
+        0.61
+      ],
+      "body_velocity_m_s": [
+        0.584,
+        0.027,
+        0.001
+      ],
+      "yaw_abs_median_rad_s": 0.008,
+      "penetration_over_1cm_frames": 0,
+      "ik_pass": true,
+      "pd_pass": false
+    },
+    "direction_candidates/lvr_backward_065/lvr_backward.csv": {
+      "gait": "uncertain",
+      "touchdown_counts": {
+        "RR": 22,
+        "RL": 19,
+        "FR": 13,
+        "FL": 23
+      },
+      "touchdown_separation_cycles": {
+        "RR-RL": 0.429,
+        "RR-FR": 0.429,
+        "RR-FL": 0.071,
+        "RL-FR": 0.214,
+        "RL-FL": 0.286,
+        "FR-FL": 0.321
+      },
+      "duty_factor": [
+        0.424,
+        0.328,
+        0.152,
+        0.304
+      ],
+      "body_velocity_m_s": [
+        -0.793,
+        0.03,
+        0.01
+      ],
+      "yaw_abs_median_rad_s": 0.271,
+      "penetration_over_1cm_frames": 0,
+      "ik_pass": null,
+      "pd_pass": null
+    },
+    "direction_candidates/lvr_backward_100/lvr_backward.csv": {
+      "gait": "trot",
+      "touchdown_counts": {
+        "RR": 19,
+        "RL": 17,
+        "FR": 11,
+        "FL": 23
+      },
+      "touchdown_separation_cycles": {
+        "RR-RL": 0.429,
+        "RR-FR": 0.357,
+        "RR-FL": 0.0,
+        "RL-FR": 0.107,
+        "RL-FL": 0.429,
+        "FR-FL": 0.429
+      },
+      "duty_factor": [
+        0.308,
+        0.284,
+        0.104,
+        0.26
+      ],
+      "body_velocity_m_s": [
+        -1.221,
+        0.045,
+        0.023
+      ],
+      "yaw_abs_median_rad_s": 0.271,
+      "penetration_over_1cm_frames": 0,
+      "ik_pass": null,
+      "pd_pass": null
+    },
+    "direction_candidates/lvr_left_065/lvr_left.csv": {
+      "gait": "uncertain",
+      "touchdown_counts": {
+        "RR": 15,
+        "RL": 12,
+        "FR": 22,
+        "FL": 15
+      },
+      "touchdown_separation_cycles": {
+        "RR-RL": 0.125,
+        "RR-FR": 0.312,
+        "RR-FL": 0.062,
+        "RL-FR": 0.281,
+        "RL-FL": 0.438,
+        "FR-FL": 0.25
+      },
+      "duty_factor": [
+        0.2,
+        0.112,
+        0.264,
+        0.152
+      ],
+      "body_velocity_m_s": [
+        0.027,
+        0.787,
+        -0.028
+      ],
+      "yaw_abs_median_rad_s": 0.248,
+      "penetration_over_1cm_frames": 0,
+      "ik_pass": null,
+      "pd_pass": null
+    },
+    "direction_candidates/lvr_left_100/lvr_left.csv": {
+      "gait": "uncertain",
+      "touchdown_counts": {
+        "RR": 2,
+        "RL": 1,
+        "FR": 6,
+        "FL": 1
+      },
+      "touchdown_separation_cycles": {},
+      "duty_factor": [
+        0.012,
+        0.016,
+        0.036,
+        0.012
+      ],
+      "body_velocity_m_s": [
+        0.038,
+        1.212,
+        -0.034
+      ],
+      "yaw_abs_median_rad_s": 0.248,
+      "penetration_over_1cm_frames": 0,
+      "ik_pass": null,
+      "pd_pass": null
+    },
+    "direction_candidates/lvr_right_065/lvr_right.csv": {
+      "gait": "uncertain",
+      "touchdown_counts": {
+        "RR": 11,
+        "RL": 13,
+        "FR": 10,
+        "FL": 23
+      },
+      "touchdown_separation_cycles": {
+        "RR-RL": 0.294,
+        "RR-FR": 0.765,
+        "RR-FL": 0.235,
+        "RL-FR": 0.176,
+        "RL-FL": 0.265,
+        "FR-FL": 0.294
+      },
+      "duty_factor": [
+        0.1,
+        0.156,
+        0.064,
+        0.276
+      ],
+      "body_velocity_m_s": [
+        0.027,
+        -0.789,
+        -0.023
+      ],
+      "yaw_abs_median_rad_s": 0.248,
+      "penetration_over_1cm_frames": 0,
+      "ik_pass": null,
+      "pd_pass": null
+    },
+    "direction_candidates/lvr_right_100/lvr_right.csv": {
+      "gait": "uncertain",
+      "touchdown_counts": {
+        "RR": 1,
+        "RL": 2,
+        "FR": 0,
+        "FL": 7
+      },
+      "touchdown_separation_cycles": {},
+      "duty_factor": [
+        0.016,
+        0.012,
+        0.0,
+        0.044
+      ],
+      "body_velocity_m_s": [
+        0.039,
+        -1.212,
+        -0.039
+      ],
+      "yaw_abs_median_rad_s": 0.248,
+      "penetration_over_1cm_frames": 0,
+      "ik_pass": null,
+      "pd_pass": null
+    },
+    "jump/jump_1/jump_1.csv": {
+      "gait": "uncertain",
+      "touchdown_counts": {
+        "RR": 0,
+        "RL": 1,
+        "FR": 1,
+        "FL": 1
+      },
+      "touchdown_separation_cycles": {},
+      "duty_factor": [
+        0.0,
+        0.056,
+        0.037,
+        0.074
+      ],
+      "body_velocity_m_s": [
+        2.249,
+        0.233,
+        0.172
+      ],
+      "yaw_abs_median_rad_s": 0.409,
+      "penetration_over_1cm_frames": 0,
+      "ik_pass": false,
+      "pd_pass": false
+    },
+    "jump/kine2go_rollout_jump_b/kine2go_rollout_jump_b.csv": {
+      "gait": "uncertain",
+      "touchdown_counts": {
+        "RR": 5,
+        "RL": 5,
+        "FR": 5,
+        "FL": 5
+      },
+      "touchdown_separation_cycles": {
+        "RR-RL": 0.048,
+        "RR-FR": 0.0,
+        "RR-FL": 0.048,
+        "RL-FR": 0.0,
+        "RL-FL": 0.0,
+        "FR-FL": 0.048
+      },
+      "duty_factor": [
+        0.311,
+        0.208,
+        0.245,
+        0.217
+      ],
+      "body_velocity_m_s": [
+        1.644,
+        -0.015,
+        0.11
+      ],
+      "yaw_abs_median_rad_s": 0.134,
+      "penetration_over_1cm_frames": 0,
+      "ik_pass": true,
+      "pd_pass": false
+    },
+    "jump/quad_backflip_50hz/quad_backflip_50hz.csv": {
+      "gait": "uncertain",
+      "touchdown_counts": {
+        "RR": 1,
+        "RL": 1,
+        "FR": 1,
+        "FL": 1
+      },
+      "touchdown_separation_cycles": {},
+      "duty_factor": [
+        0.784,
+        0.784,
+        0.784,
+        0.784
+      ],
+      "body_velocity_m_s": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "yaw_abs_median_rad_s": 0.0,
+      "penetration_over_1cm_frames": 0,
+      "ik_pass": true,
+      "pd_pass": false
+    },
+    "jump/quad_frontflip_50hz/quad_frontflip_50hz.csv": {
+      "gait": "uncertain",
+      "touchdown_counts": {
+        "RR": 1,
+        "RL": 1,
+        "FR": 1,
+        "FL": 1
+      },
+      "touchdown_separation_cycles": {},
+      "duty_factor": [
+        0.752,
+        0.752,
+        0.752,
+        0.784
+      ],
+      "body_velocity_m_s": [
+        -0.002,
+        0.0,
+        -0.018
+      ],
+      "yaw_abs_median_rad_s": 0.0,
+      "penetration_over_1cm_frames": 0,
+      "ik_pass": true,
+      "pd_pass": false
+    },
+    "jump/quad_jump_forward_1m_50hz/quad_jump_forward_1m_50hz.csv": {
+      "gait": "uncertain",
+      "touchdown_counts": {
+        "RR": 1,
+        "RL": 1,
+        "FR": 1,
+        "FL": 1
+      },
+      "touchdown_separation_cycles": {},
+      "duty_factor": [
+        0.817,
+        0.817,
+        0.817,
+        0.817
+      ],
+      "body_velocity_m_s": [
+        0.07,
+        0.0,
+        -0.065
+      ],
+      "yaw_abs_median_rad_s": 0.0,
+      "penetration_over_1cm_frames": 0,
+      "ik_pass": true,
+      "pd_pass": false
+    },
+    "jump/quad_sideflip_50hz/quad_sideflip_50hz.csv": {
+      "gait": "uncertain",
+      "touchdown_counts": {
+        "RR": 1,
+        "RL": 1,
+        "FR": 1,
+        "FL": 1
+      },
+      "touchdown_separation_cycles": {},
+      "duty_factor": [
+        0.772,
+        0.772,
+        0.772,
+        0.772
+      ],
+      "body_velocity_m_s": [
+        -0.009,
+        0.001,
+        -0.004
+      ],
+      "yaw_abs_median_rad_s": 0.041,
+      "penetration_over_1cm_frames": 0,
+      "ik_pass": true,
+      "pd_pass": false
+    },
+    "jump/quad_sideflip_right_50hz/quad_sideflip_right_50hz.csv": {
+      "gait": "uncertain",
+      "touchdown_counts": {
+        "RR": 1,
+        "RL": 1,
+        "FR": 1,
+        "FL": 1
+      },
+      "touchdown_separation_cycles": {},
+      "duty_factor": [
+        0.772,
+        0.772,
+        0.772,
+        0.772
+      ],
+      "body_velocity_m_s": [
+        -0.006,
+        -0.0,
+        -0.001
+      ],
+      "yaw_abs_median_rad_s": 0.027,
+      "penetration_over_1cm_frames": 0,
+      "ik_pass": true,
+      "pd_pass": false
+    },
+    "obstacle_candidates/baseline/solo8_jump_b_rollout_0001.csv": {
+      "gait": "uncertain",
+      "touchdown_counts": {
+        "RR": 23,
+        "RL": 23,
+        "FR": 23,
+        "FL": 23
+      },
+      "touchdown_separation_cycles": {
+        "RR-RL": 0.0,
+        "RR-FR": 0.048,
+        "RR-FL": 0.048,
+        "RL-FR": 0.048,
+        "RL-FL": 0.048,
+        "FR-FL": 0.0
+      },
+      "duty_factor": [
+        0.359,
+        0.279,
+        0.244,
+        0.242
+      ],
+      "body_velocity_m_s": [
+        1.482,
+        -0.066,
+        0.043
+      ],
+      "yaw_abs_median_rad_s": 0.15,
+      "penetration_over_1cm_frames": 0,
+      "ik_pass": true,
+      "pd_pass": false
+    },
+    "obstacle_candidates/neutral_ground/solo8_jump_b_rollout_0001.csv": {
+      "gait": "uncertain",
+      "touchdown_counts": {
+        "RR": 23,
+        "RL": 23,
+        "FR": 23,
+        "FL": 23
+      },
+      "touchdown_separation_cycles": {
+        "RR-RL": 0.048,
+        "RR-FR": 0.048,
+        "RR-FL": 0.048,
+        "RL-FR": 0.0,
+        "RL-FL": 0.0,
+        "FR-FL": 0.0
+      },
+      "duty_factor": [
+        0.347,
+        0.218,
+        0.229,
+        0.223
+      ],
+      "body_velocity_m_s": [
+        1.685,
+        -0.075,
+        0.049
+      ],
+      "yaw_abs_median_rad_s": 0.15,
+      "penetration_over_1cm_frames": 0,
+      "ik_pass": true,
+      "pd_pass": false
+    },
+    "pools/flat_trot_phase/run__vhdc_horse1_s1_trot_01.csv": {
+      "gait": "trot",
+      "touchdown_counts": {
+        "RR": 5,
+        "RL": 4,
+        "FR": 3,
+        "FL": 5
+      },
+      "touchdown_separation_cycles": {
+        "RR-RL": 0.5,
+        "RR-FR": 0.441,
+        "RR-FL": 0.059,
+        "RL-FR": 0.059,
+        "RL-FL": 0.471,
+        "FR-FL": 0.515
+      },
+      "duty_factor": [
+        0.172,
+        0.148,
+        0.12,
+        0.204
+      ],
+      "body_velocity_m_s": [
+        0.815,
+        0.02,
+        0.006
+      ],
+      "yaw_abs_median_rad_s": 0.165,
+      "penetration_over_1cm_frames": 0
+    },
+    "pools/flat_trot_phase/run__vhdc_horse1_s2_trot_01.csv": {
+      "gait": "trot",
+      "touchdown_counts": {
+        "RR": 5,
+        "RL": 11,
+        "FR": 10,
+        "FL": 8
+      },
+      "touchdown_separation_cycles": {
+        "RR-RL": 0.489,
+        "RR-FR": 0.474,
+        "RR-FL": 0.059,
+        "RL-FR": 0.03,
+        "RL-FL": 0.489,
+        "FR-FL": 0.481
+      },
+      "duty_factor": [
+        0.168,
+        0.368,
+        0.341,
+        0.231
+      ],
+      "body_velocity_m_s": [
+        0.418,
+        0.01,
+        0.018
+      ],
+      "yaw_abs_median_rad_s": 0.085,
+      "penetration_over_1cm_frames": 0
+    },
+    "pools/turn_walk_trot5/run__vhdc_horse1_s1_trot_02.csv": {
+      "gait": "uncertain",
+      "touchdown_counts": {
+        "RR": 3,
+        "RL": 1,
+        "FR": 1,
+        "FL": 6
+      },
+      "touchdown_separation_cycles": {},
+      "duty_factor": [
+        0.096,
+        0.054,
+        0.056,
+        0.222
+      ],
+      "body_velocity_m_s": [
+        0.843,
+        0.019,
+        0.002
+      ],
+      "yaw_abs_median_rad_s": 0.157,
+      "penetration_over_1cm_frames": 0
+    },
+    "pools/turn_walk_trot5/turn__ai4_dog_synth_square_walk.csv": {
+      "gait": "pace",
+      "touchdown_counts": {
+        "RR": 31,
+        "RL": 31,
+        "FR": 31,
+        "FL": 32
+      },
+      "touchdown_separation_cycles": {
+        "RR-RL": 0.467,
+        "RR-FR": 0.033,
+        "RR-FL": 0.467,
+        "RL-FR": 0.467,
+        "RL-FL": 0.033,
+        "FR-FL": 0.467
+      },
+      "duty_factor": [
+        0.486,
+        0.517,
+        0.522,
+        0.48
+      ],
+      "body_velocity_m_s": [
+        1.114,
+        0.025,
+        -0.003
+      ],
+      "yaw_abs_median_rad_s": 0.335,
+      "penetration_over_1cm_frames": 42
+    },
+    "pools/turn_walk_trot5/turn__atomic_turn_left.csv": {
+      "gait": "uncertain",
+      "touchdown_counts": {
+        "RR": 6,
+        "RL": 9,
+        "FR": 6,
+        "FL": 7
+      },
+      "touchdown_separation_cycles": {
+        "RR-RL": 0.214,
+        "RR-FR": 0.536,
+        "RR-FL": 0.107,
+        "RL-FR": 0.036,
+        "RL-FL": 0.286,
+        "FR-FL": 0.464
+      },
+      "duty_factor": [
+        0.573,
+        0.82,
+        0.627,
+        0.707
+      ],
+      "body_velocity_m_s": [
+        0.171,
+        0.006,
+        0.009
+      ],
+      "yaw_abs_median_rad_s": 0.836,
+      "penetration_over_1cm_frames": 0
+    },
+    "pools/turn_walk_trot5/turn__atomic_turn_right.csv": {
+      "gait": "trot",
+      "touchdown_counts": {
+        "RR": 5,
+        "RL": 5,
+        "FR": 5,
+        "FL": 6
+      },
+      "touchdown_separation_cycles": {
+        "RR-RL": 0.467,
+        "RR-FR": 0.5,
+        "RR-FL": 0.033,
+        "RL-FR": 0.033,
+        "RL-FL": 0.467,
+        "FR-FL": 0.467
+      },
+      "duty_factor": [
+        0.627,
+        0.56,
+        0.6,
+        0.587
+      ],
+      "body_velocity_m_s": [
+        0.224,
+        -0.009,
+        0.009
+      ],
+      "yaw_abs_median_rad_s": 0.845,
+      "penetration_over_1cm_frames": 0
+    },
+    "pools/turn_walk_trot5/walk__ai4_dog_walk_03.csv": {
+      "gait": "walk",
+      "touchdown_counts": {
+        "RR": 11,
+        "RL": 11,
+        "FR": 11,
+        "FL": 12
+      },
+      "touchdown_separation_cycles": {
+        "RR-RL": 0.482,
+        "RR-FR": 0.286,
+        "RR-FL": 0.357,
+        "RL-FR": 0.357,
+        "RL-FL": 0.179,
+        "FR-FL": 0.464
+      },
+      "duty_factor": [
+        0.583,
+        0.57,
+        0.651,
+        0.638
+      ],
+      "body_velocity_m_s": [
+        1.286,
+        -0.0,
+        -0.005
+      ],
+      "yaw_abs_median_rad_s": 0.143,
+      "penetration_over_1cm_frames": 0
+    },
+    "pools/turn_walk_trot5/walk__vhdc_horse1_s1_walk_03.csv": {
+      "gait": "uncertain",
+      "touchdown_counts": {
+        "RR": 6,
+        "RL": 11,
+        "FR": 9,
+        "FL": 8
+      },
+      "touchdown_separation_cycles": {
+        "RR-RL": 0.481,
+        "RR-FR": 0.241,
+        "RR-FL": 0.296,
+        "RL-FR": 0.139,
+        "RL-FL": 0.241,
+        "FR-FL": 0.444
+      },
+      "duty_factor": [
+        0.31,
+        0.598,
+        0.344,
+        0.456
+      ],
+      "body_velocity_m_s": [
+        0.472,
+        0.016,
+        -0.011
+      ],
+      "yaw_abs_median_rad_s": 0.137,
+      "penetration_over_1cm_frames": 0
+    },
+    "pools/walk_turn/turn__ai4_dog_synth_circle_walk.csv": {
+      "gait": "pace",
+      "touchdown_counts": {
+        "RR": 22,
+        "RL": 21,
+        "FR": 22,
+        "FL": 22
+      },
+      "touchdown_separation_cycles": {
+        "RR-RL": 0.467,
+        "RR-FR": 0.067,
+        "RR-FL": 0.433,
+        "RL-FR": 0.433,
+        "RL-FL": 0.067,
+        "FR-FL": 0.5
+      },
+      "duty_factor": [
+        0.451,
+        0.467,
+        0.473,
+        0.53
+      ],
+      "body_velocity_m_s": [
+        1.088,
+        -0.385,
+        -0.027
+      ],
+      "yaw_abs_median_rad_s": 0.465,
+      "penetration_over_1cm_frames": 0
+    },
+    "pools/walk_turn/turn__ai4_dog_synth_eight_walk.csv": {
+      "gait": "uncertain",
+      "touchdown_counts": {
+        "RR": 54,
+        "RL": 30,
+        "FR": 32,
+        "FL": 33
+      },
+      "touchdown_separation_cycles": {
+        "RR-RL": 0.3,
+        "RR-FR": 0.133,
+        "RR-FL": 0.3,
+        "RL-FR": 0.333,
+        "RL-FL": 0.167,
+        "FR-FL": 0.4
+      },
+      "duty_factor": [
+        0.451,
+        0.462,
+        0.335,
+        0.439
+      ],
+      "body_velocity_m_s": [
+        0.634,
+        0.242,
+        0.014
+      ],
+      "yaw_abs_median_rad_s": 2.001,
+      "penetration_over_1cm_frames": 0
+    },
+    "pools/walk_turn/turn__ai4_dog_synth_square_walk.csv": {
+      "gait": "pace",
+      "touchdown_counts": {
+        "RR": 31,
+        "RL": 31,
+        "FR": 31,
+        "FL": 32
+      },
+      "touchdown_separation_cycles": {
+        "RR-RL": 0.467,
+        "RR-FR": 0.033,
+        "RR-FL": 0.467,
+        "RL-FR": 0.467,
+        "RL-FL": 0.033,
+        "FR-FL": 0.467
+      },
+      "duty_factor": [
+        0.486,
+        0.517,
+        0.522,
+        0.48
+      ],
+      "body_velocity_m_s": [
+        1.114,
+        0.025,
+        -0.003
+      ],
+      "yaw_abs_median_rad_s": 0.335,
+      "penetration_over_1cm_frames": 42,
+      "duplicate_of": "pools/turn_walk_trot5/turn__ai4_dog_synth_square_walk.csv"
+    },
+    "pools/walk_turn/turn__atomic_turn_left.csv": {
+      "gait": "uncertain",
+      "touchdown_counts": {
+        "RR": 6,
+        "RL": 9,
+        "FR": 6,
+        "FL": 7
+      },
+      "touchdown_separation_cycles": {
+        "RR-RL": 0.214,
+        "RR-FR": 0.536,
+        "RR-FL": 0.107,
+        "RL-FR": 0.036,
+        "RL-FL": 0.286,
+        "FR-FL": 0.464
+      },
+      "duty_factor": [
+        0.573,
+        0.82,
+        0.627,
+        0.707
+      ],
+      "body_velocity_m_s": [
+        0.171,
+        0.006,
+        0.009
+      ],
+      "yaw_abs_median_rad_s": 0.836,
+      "penetration_over_1cm_frames": 0,
+      "duplicate_of": "pools/turn_walk_trot5/turn__atomic_turn_left.csv"
+    },
+    "pools/walk_turn/turn__atomic_turn_right.csv": {
+      "gait": "trot",
+      "touchdown_counts": {
+        "RR": 5,
+        "RL": 5,
+        "FR": 5,
+        "FL": 6
+      },
+      "touchdown_separation_cycles": {
+        "RR-RL": 0.467,
+        "RR-FR": 0.5,
+        "RR-FL": 0.033,
+        "RL-FR": 0.033,
+        "RL-FL": 0.467,
+        "FR-FL": 0.467
+      },
+      "duty_factor": [
+        0.627,
+        0.56,
+        0.6,
+        0.587
+      ],
+      "body_velocity_m_s": [
+        0.224,
+        -0.009,
+        0.009
+      ],
+      "yaw_abs_median_rad_s": 0.845,
+      "penetration_over_1cm_frames": 0,
+      "duplicate_of": "pools/turn_walk_trot5/turn__atomic_turn_right.csv"
+    },
+    "pools/walk_turn/walk__ai4_dog_walk_03.csv": {
+      "gait": "walk",
+      "touchdown_counts": {
+        "RR": 11,
+        "RL": 11,
+        "FR": 11,
+        "FL": 12
+      },
+      "touchdown_separation_cycles": {
+        "RR-RL": 0.482,
+        "RR-FR": 0.286,
+        "RR-FL": 0.357,
+        "RL-FR": 0.357,
+        "RL-FL": 0.179,
+        "FR-FL": 0.464
+      },
+      "duty_factor": [
+        0.583,
+        0.57,
+        0.651,
+        0.638
+      ],
+      "body_velocity_m_s": [
+        1.286,
+        -0.0,
+        -0.005
+      ],
+      "yaw_abs_median_rad_s": 0.143,
+      "penetration_over_1cm_frames": 0,
+      "duplicate_of": "pools/turn_walk_trot5/walk__ai4_dog_walk_03.csv"
+    },
+    "pools/walk_turn/walk__vhdc_horse1_s1_walk_01.csv": {
+      "gait": "walk",
+      "touchdown_counts": {
+        "RR": 12,
+        "RL": 9,
+        "FR": 10,
+        "FL": 8
+      },
+      "touchdown_separation_cycles": {
+        "RR-RL": 0.473,
+        "RR-FR": 0.182,
+        "RR-FL": 0.291,
+        "RL-FR": 0.236,
+        "RL-FL": 0.218,
+        "FR-FL": 0.473
+      },
+      "duty_factor": [
+        0.496,
+        0.582,
+        0.458,
+        0.552
+      ],
+      "body_velocity_m_s": [
+        0.437,
+        0.015,
+        -0.005
+      ],
+      "yaw_abs_median_rad_s": 0.13,
+      "penetration_over_1cm_frames": 0
+    },
+    "pools/walk_turn/walk__vhdc_horse1_s1_walk_02.csv": {
+      "gait": "uncertain",
+      "touchdown_counts": {
+        "RR": 8,
+        "RL": 10,
+        "FR": 10,
+        "FL": 8
+      },
+      "touchdown_separation_cycles": {
+        "RR-RL": 0.481,
+        "RR-FR": 0.333,
+        "RR-FL": 0.278,
+        "RL-FR": 0.13,
+        "RL-FL": 0.241,
+        "FR-FL": 0.426
+      },
+      "duty_factor": [
+        0.44,
+        0.678,
+        0.388,
+        0.55
+      ],
+      "body_velocity_m_s": [
+        0.468,
+        0.012,
+        -0.012
+      ],
+      "yaw_abs_median_rad_s": 0.136,
+      "penetration_over_1cm_frames": 0
+    },
+    "pools/walk_turn/walk__vhdc_horse1_s1_walk_03.csv": {
+      "gait": "uncertain",
+      "touchdown_counts": {
+        "RR": 6,
+        "RL": 11,
+        "FR": 9,
+        "FL": 8
+      },
+      "touchdown_separation_cycles": {
+        "RR-RL": 0.481,
+        "RR-FR": 0.241,
+        "RR-FL": 0.296,
+        "RL-FR": 0.139,
+        "RL-FL": 0.241,
+        "FR-FL": 0.444
+      },
+      "duty_factor": [
+        0.31,
+        0.598,
+        0.344,
+        0.456
+      ],
+      "body_velocity_m_s": [
+        0.472,
+        0.016,
+        -0.011
+      ],
+      "yaw_abs_median_rad_s": 0.137,
+      "penetration_over_1cm_frames": 0,
+      "duplicate_of": "pools/turn_walk_trot5/walk__vhdc_horse1_s1_walk_03.csv"
+    },
+    "run/ai4_dog_run_02/ai4_dog_run_02.csv": {
+      "gait": "uncertain",
+      "touchdown_counts": {
+        "RR": 8,
+        "RL": 8,
+        "FR": 7,
+        "FL": 7
+      },
+      "touchdown_separation_cycles": {
+        "RR-RL": 0.136,
+        "RR-FR": 0.409,
+        "RR-FL": 0.273,
+        "RL-FR": 0.455,
+        "RL-FL": 0.182,
+        "FR-FL": 0.273
+      },
+      "duty_factor": [
+        0.201,
+        0.178,
+        0.13,
+        0.16
+      ],
+      "body_velocity_m_s": [
+        3.756,
+        -0.3,
+        -0.112
+      ],
+      "yaw_abs_median_rad_s": 0.306,
+      "penetration_over_1cm_frames": 0,
+      "ik_pass": false,
+      "pd_pass": false
+    },
+    "run/ai4_dog_trot_00/ai4_dog_trot_00.csv": {
+      "gait": "walk",
+      "touchdown_counts": {
+        "RR": 11,
+        "RL": 11,
+        "FR": 11,
+        "FL": 12
+      },
+      "touchdown_separation_cycles": {
+        "RR-RL": 0.482,
+        "RR-FR": 0.286,
+        "RR-FL": 0.357,
+        "RL-FR": 0.357,
+        "RL-FL": 0.179,
+        "FR-FL": 0.464
+      },
+      "duty_factor": [
+        0.583,
+        0.57,
+        0.651,
+        0.638
+      ],
+      "body_velocity_m_s": [
+        1.286,
+        -0.0,
+        -0.005
+      ],
+      "yaw_abs_median_rad_s": 0.143,
+      "penetration_over_1cm_frames": 0,
+      "duplicate_of": "pools/turn_walk_trot5/walk__ai4_dog_walk_03.csv",
+      "ik_pass": true,
+      "pd_pass": false
+    },
+    "run/vhdc_horse1_s1_trot_01/vhdc_horse1_s1_trot_01.csv": {
+      "gait": "trot",
+      "touchdown_counts": {
+        "RR": 5,
+        "RL": 4,
+        "FR": 3,
+        "FL": 5
+      },
+      "touchdown_separation_cycles": {
+        "RR-RL": 0.5,
+        "RR-FR": 0.441,
+        "RR-FL": 0.059,
+        "RL-FR": 0.059,
+        "RL-FL": 0.471,
+        "FR-FL": 0.515
+      },
+      "duty_factor": [
+        0.172,
+        0.148,
+        0.12,
+        0.204
+      ],
+      "body_velocity_m_s": [
+        0.815,
+        0.02,
+        0.006
+      ],
+      "yaw_abs_median_rad_s": 0.165,
+      "penetration_over_1cm_frames": 0,
+      "duplicate_of": "pools/flat_trot_phase/run__vhdc_horse1_s1_trot_01.csv",
+      "ik_pass": true,
+      "pd_pass": false
+    },
+    "run/vhdc_horse1_s1_trot_02/vhdc_horse1_s1_trot_02.csv": {
+      "gait": "uncertain",
+      "touchdown_counts": {
+        "RR": 3,
+        "RL": 1,
+        "FR": 1,
+        "FL": 6
+      },
+      "touchdown_separation_cycles": {},
+      "duty_factor": [
+        0.096,
+        0.054,
+        0.056,
+        0.222
+      ],
+      "body_velocity_m_s": [
+        0.843,
+        0.019,
+        0.002
+      ],
+      "yaw_abs_median_rad_s": 0.157,
+      "penetration_over_1cm_frames": 0,
+      "duplicate_of": "pools/turn_walk_trot5/run__vhdc_horse1_s1_trot_02.csv",
+      "ik_pass": true,
+      "pd_pass": false
+    },
+    "run/vhdc_horse1_s2_trot_01/vhdc_horse1_s2_trot_01.csv": {
+      "gait": "trot",
+      "touchdown_counts": {
+        "RR": 5,
+        "RL": 11,
+        "FR": 10,
+        "FL": 8
+      },
+      "touchdown_separation_cycles": {
+        "RR-RL": 0.489,
+        "RR-FR": 0.474,
+        "RR-FL": 0.059,
+        "RL-FR": 0.03,
+        "RL-FL": 0.489,
+        "FR-FL": 0.481
+      },
+      "duty_factor": [
+        0.168,
+        0.368,
+        0.341,
+        0.231
+      ],
+      "body_velocity_m_s": [
+        0.418,
+        0.01,
+        0.018
+      ],
+      "yaw_abs_median_rad_s": 0.085,
+      "penetration_over_1cm_frames": 0,
+      "duplicate_of": "pools/flat_trot_phase/run__vhdc_horse1_s2_trot_01.csv",
+      "ik_pass": true,
+      "pd_pass": false
+    },
+    "run/vhdc_horse1_s2_trot_02/vhdc_horse1_s2_trot_02.csv": {
+      "gait": "pace",
+      "touchdown_counts": {
+        "RR": 6,
+        "RL": 3,
+        "FR": 11,
+        "FL": 6
+      },
+      "touchdown_separation_cycles": {
+        "RR-RL": 0.478,
+        "RR-FR": 0.03,
+        "RR-FL": 0.463,
+        "RL-FR": 0.963,
+        "RL-FL": 0.06,
+        "FR-FL": 0.478
+      },
+      "duty_factor": [
+        0.222,
+        0.123,
+        0.438,
+        0.187
+      ],
+      "body_velocity_m_s": [
+        0.447,
+        0.011,
+        0.02
+      ],
+      "yaw_abs_median_rad_s": 0.09,
+      "penetration_over_1cm_frames": 0,
+      "ik_pass": true,
+      "pd_pass": false
+    },
+    "strafe/ai4_dog_synth_wide_strafe/ai4_dog_synth_wide_strafe.csv": {
+      "gait": "pace",
+      "touchdown_counts": {
+        "RR": 32,
+        "RL": 33,
+        "FR": 33,
+        "FL": 32
+      },
+      "touchdown_separation_cycles": {
+        "RR-RL": 0.467,
+        "RR-FR": 0.067,
+        "RR-FL": 0.4,
+        "RL-FR": 0.433,
+        "RL-FL": 0.1,
+        "FR-FL": 0.467
+      },
+      "duty_factor": [
+        0.378,
+        0.351,
+        0.463,
+        0.473
+      ],
+      "body_velocity_m_s": [
+        1.286,
+        -0.024,
+        0.002
+      ],
+      "yaw_abs_median_rad_s": 0.416,
+      "penetration_over_1cm_frames": 0,
+      "ik_pass": true,
+      "pd_pass": false
+    },
+    "turn/ai4_dog_synth_circle_walk/ai4_dog_synth_circle_walk.csv": {
+      "gait": "pace",
+      "touchdown_counts": {
+        "RR": 22,
+        "RL": 21,
+        "FR": 22,
+        "FL": 22
+      },
+      "touchdown_separation_cycles": {
+        "RR-RL": 0.467,
+        "RR-FR": 0.067,
+        "RR-FL": 0.433,
+        "RL-FR": 0.433,
+        "RL-FL": 0.067,
+        "FR-FL": 0.5
+      },
+      "duty_factor": [
+        0.451,
+        0.467,
+        0.473,
+        0.53
+      ],
+      "body_velocity_m_s": [
+        1.088,
+        -0.385,
+        -0.027
+      ],
+      "yaw_abs_median_rad_s": 0.465,
+      "penetration_over_1cm_frames": 0,
+      "duplicate_of": "pools/walk_turn/turn__ai4_dog_synth_circle_walk.csv",
+      "ik_pass": true,
+      "pd_pass": false
+    },
+    "turn/ai4_dog_synth_eight_walk/ai4_dog_synth_eight_walk.csv": {
+      "gait": "uncertain",
+      "touchdown_counts": {
+        "RR": 54,
+        "RL": 30,
+        "FR": 32,
+        "FL": 33
+      },
+      "touchdown_separation_cycles": {
+        "RR-RL": 0.3,
+        "RR-FR": 0.133,
+        "RR-FL": 0.3,
+        "RL-FR": 0.333,
+        "RL-FL": 0.167,
+        "FR-FL": 0.4
+      },
+      "duty_factor": [
+        0.451,
+        0.462,
+        0.335,
+        0.439
+      ],
+      "body_velocity_m_s": [
+        0.634,
+        0.242,
+        0.014
+      ],
+      "yaw_abs_median_rad_s": 2.001,
+      "penetration_over_1cm_frames": 0,
+      "duplicate_of": "pools/walk_turn/turn__ai4_dog_synth_eight_walk.csv",
+      "ik_pass": true,
+      "pd_pass": true
+    },
+    "turn/ai4_dog_synth_square_walk/ai4_dog_synth_square_walk.csv": {
+      "gait": "pace",
+      "touchdown_counts": {
+        "RR": 31,
+        "RL": 31,
+        "FR": 31,
+        "FL": 32
+      },
+      "touchdown_separation_cycles": {
+        "RR-RL": 0.467,
+        "RR-FR": 0.033,
+        "RR-FL": 0.467,
+        "RL-FR": 0.467,
+        "RL-FL": 0.033,
+        "FR-FL": 0.467
+      },
+      "duty_factor": [
+        0.486,
+        0.517,
+        0.522,
+        0.48
+      ],
+      "body_velocity_m_s": [
+        1.114,
+        0.025,
+        -0.003
+      ],
+      "yaw_abs_median_rad_s": 0.335,
+      "penetration_over_1cm_frames": 42,
+      "duplicate_of": "pools/turn_walk_trot5/turn__ai4_dog_synth_square_walk.csv",
+      "ik_pass": true,
+      "pd_pass": false
+    },
+    "turn/amp_a1_leftturn0/leftturn0.csv": {
+      "gait": "uncertain",
+      "touchdown_counts": {
+        "RR": 2,
+        "RL": 1,
+        "FR": 1,
+        "FL": 2
+      },
+      "touchdown_separation_cycles": {},
+      "duty_factor": [
+        0.438,
+        0.708,
+        0.625,
+        0.479
+      ],
+      "body_velocity_m_s": [
+        -0.035,
+        0.021,
+        -0.006
+      ],
+      "yaw_abs_median_rad_s": 2.251,
+      "penetration_over_1cm_frames": 15,
+      "ik_pass": false,
+      "pd_pass": false
+    },
+    "turn/amp_a1_rightturn0/rightturn0.csv": {
+      "gait": "uncertain",
+      "touchdown_counts": {
+        "RR": 2,
+        "RL": 1,
+        "FR": 3,
+        "FL": 2
+      },
+      "touchdown_separation_cycles": {},
+      "duty_factor": [
+        0.792,
+        0.872,
+        0.408,
+        0.68
+      ],
+      "body_velocity_m_s": [
+        0.216,
+        -0.185,
+        0.013
+      ],
+      "yaw_abs_median_rad_s": 0.782,
+      "penetration_over_1cm_frames": 26,
+      "ik_pass": false,
+      "pd_pass": false
+    },
+    "turn/atomic_turn_left/atomic_turn_left.csv": {
+      "gait": "uncertain",
+      "touchdown_counts": {
+        "RR": 6,
+        "RL": 9,
+        "FR": 6,
+        "FL": 7
+      },
+      "touchdown_separation_cycles": {
+        "RR-RL": 0.214,
+        "RR-FR": 0.536,
+        "RR-FL": 0.107,
+        "RL-FR": 0.036,
+        "RL-FL": 0.286,
+        "FR-FL": 0.464
+      },
+      "duty_factor": [
+        0.573,
+        0.82,
+        0.627,
+        0.707
+      ],
+      "body_velocity_m_s": [
+        0.171,
+        0.006,
+        0.009
+      ],
+      "yaw_abs_median_rad_s": 0.836,
+      "penetration_over_1cm_frames": 0,
+      "duplicate_of": "pools/turn_walk_trot5/turn__atomic_turn_left.csv",
+      "ik_pass": true,
+      "pd_pass": false
+    },
+    "turn/atomic_turn_right/atomic_turn_right.csv": {
+      "gait": "trot",
+      "touchdown_counts": {
+        "RR": 5,
+        "RL": 5,
+        "FR": 5,
+        "FL": 6
+      },
+      "touchdown_separation_cycles": {
+        "RR-RL": 0.467,
+        "RR-FR": 0.5,
+        "RR-FL": 0.033,
+        "RL-FR": 0.033,
+        "RL-FL": 0.467,
+        "FR-FL": 0.467
+      },
+      "duty_factor": [
+        0.627,
+        0.56,
+        0.6,
+        0.587
+      ],
+      "body_velocity_m_s": [
+        0.224,
+        -0.009,
+        0.009
+      ],
+      "yaw_abs_median_rad_s": 0.845,
+      "penetration_over_1cm_frames": 0,
+      "duplicate_of": "pools/turn_walk_trot5/turn__atomic_turn_right.csv",
+      "ik_pass": true,
+      "pd_pass": false
+    },
+    "walk/ai4_dog_walk_03/ai4_dog_walk_03.csv": {
+      "gait": "walk",
+      "touchdown_counts": {
+        "RR": 11,
+        "RL": 11,
+        "FR": 11,
+        "FL": 12
+      },
+      "touchdown_separation_cycles": {
+        "RR-RL": 0.482,
+        "RR-FR": 0.286,
+        "RR-FL": 0.357,
+        "RL-FR": 0.357,
+        "RL-FL": 0.179,
+        "FR-FL": 0.464
+      },
+      "duty_factor": [
+        0.583,
+        0.57,
+        0.651,
+        0.638
+      ],
+      "body_velocity_m_s": [
+        1.286,
+        -0.0,
+        -0.005
+      ],
+      "yaw_abs_median_rad_s": 0.143,
+      "penetration_over_1cm_frames": 0,
+      "duplicate_of": "pools/turn_walk_trot5/walk__ai4_dog_walk_03.csv",
+      "ik_pass": true,
+      "pd_pass": false
+    },
+    "walk/vhdc_horse1_s1_walk_01/vhdc_horse1_s1_walk_01.csv": {
+      "gait": "walk",
+      "touchdown_counts": {
+        "RR": 12,
+        "RL": 9,
+        "FR": 10,
+        "FL": 8
+      },
+      "touchdown_separation_cycles": {
+        "RR-RL": 0.473,
+        "RR-FR": 0.182,
+        "RR-FL": 0.291,
+        "RL-FR": 0.236,
+        "RL-FL": 0.218,
+        "FR-FL": 0.473
+      },
+      "duty_factor": [
+        0.496,
+        0.582,
+        0.458,
+        0.552
+      ],
+      "body_velocity_m_s": [
+        0.437,
+        0.015,
+        -0.005
+      ],
+      "yaw_abs_median_rad_s": 0.13,
+      "penetration_over_1cm_frames": 0,
+      "duplicate_of": "pools/walk_turn/walk__vhdc_horse1_s1_walk_01.csv",
+      "ik_pass": true,
+      "pd_pass": false
+    },
+    "walk/vhdc_horse1_s1_walk_02/vhdc_horse1_s1_walk_02.csv": {
+      "gait": "uncertain",
+      "touchdown_counts": {
+        "RR": 8,
+        "RL": 10,
+        "FR": 10,
+        "FL": 8
+      },
+      "touchdown_separation_cycles": {
+        "RR-RL": 0.481,
+        "RR-FR": 0.333,
+        "RR-FL": 0.278,
+        "RL-FR": 0.13,
+        "RL-FL": 0.241,
+        "FR-FL": 0.426
+      },
+      "duty_factor": [
+        0.44,
+        0.678,
+        0.388,
+        0.55
+      ],
+      "body_velocity_m_s": [
+        0.468,
+        0.012,
+        -0.012
+      ],
+      "yaw_abs_median_rad_s": 0.136,
+      "penetration_over_1cm_frames": 0,
+      "duplicate_of": "pools/walk_turn/walk__vhdc_horse1_s1_walk_02.csv",
+      "ik_pass": true,
+      "pd_pass": false
+    },
+    "walk/vhdc_horse1_s1_walk_03/vhdc_horse1_s1_walk_03.csv": {
+      "gait": "uncertain",
+      "touchdown_counts": {
+        "RR": 6,
+        "RL": 11,
+        "FR": 9,
+        "FL": 8
+      },
+      "touchdown_separation_cycles": {
+        "RR-RL": 0.481,
+        "RR-FR": 0.241,
+        "RR-FL": 0.296,
+        "RL-FR": 0.139,
+        "RL-FL": 0.241,
+        "FR-FL": 0.444
+      },
+      "duty_factor": [
+        0.31,
+        0.598,
+        0.344,
+        0.456
+      ],
+      "body_velocity_m_s": [
+        0.472,
+        0.016,
+        -0.011
+      ],
+      "yaw_abs_median_rad_s": 0.137,
+      "penetration_over_1cm_frames": 0,
+      "duplicate_of": "pools/turn_walk_trot5/walk__vhdc_horse1_s1_walk_03.csv",
+      "ik_pass": true,
+      "pd_pass": false
+    },
+    "a1_candidates/a1_canter0/a1_canter0.csv": {
+      "gait": "uncertain",
+      "touchdown_counts": {
+        "RR": 1,
+        "RL": 2,
+        "FR": 2,
+        "FL": 3
+      },
+      "touchdown_separation_cycles": {},
+      "duty_factor": [
+        0.238,
+        0.286,
+        0.119,
+        0.19
+      ],
+      "body_velocity_m_s": [
+        2.235,
+        -0.275,
+        0.387
+      ],
+      "yaw_abs_median_rad_s": 0.246,
+      "penetration_over_1cm_frames": 0,
+      "ik_pass": null,
+      "pd_pass": null
+    },
+    "a1_candidates/a1_canter1/a1_canter1.csv": {
+      "gait": "uncertain",
+      "touchdown_counts": {
+        "RR": 2,
+        "RL": 1,
+        "FR": 2,
+        "FL": 1
+      },
+      "touchdown_separation_cycles": {},
+      "duty_factor": [
+        0.262,
+        0.357,
+        0.333,
+        0.476
+      ],
+      "body_velocity_m_s": [
+        1.423,
+        -0.013,
+        0.268
+      ],
+      "yaw_abs_median_rad_s": 0.245,
+      "penetration_over_1cm_frames": 0,
+      "ik_pass": null,
+      "pd_pass": null
+    },
+    "a1_candidates/a1_canter2/a1_canter2.csv": {
+      "gait": "uncertain",
+      "touchdown_counts": {
+        "RR": 4,
+        "RL": 3,
+        "FR": 3,
+        "FL": 3
+      },
+      "touchdown_separation_cycles": {
+        "RR-RL": 0.227,
+        "RR-FR": 0.5,
+        "RR-FL": 0.318,
+        "RL-FR": 0.318,
+        "RL-FL": 0.136,
+        "FR-FL": 0.182
+      },
+      "duty_factor": [
+        0.25,
+        0.194,
+        0.236,
+        0.25
+      ],
+      "body_velocity_m_s": [
+        2.322,
+        -0.367,
+        0.195
+      ],
+      "yaw_abs_median_rad_s": 0.317,
+      "penetration_over_1cm_frames": 0,
+      "ik_pass": null,
+      "pd_pass": null
+    },
+    "a1_candidates/a1_left_turn0/a1_left_turn0.csv": {
+      "gait": "uncertain",
+      "touchdown_counts": {
+        "RR": 1,
+        "RL": 2,
+        "FR": 1,
+        "FL": 1
+      },
+      "touchdown_separation_cycles": {},
+      "duty_factor": [
+        0.684,
+        0.579,
+        0.395,
+        0.5
+      ],
+      "body_velocity_m_s": [
+        -0.035,
+        0.021,
+        -0.013
+      ],
+      "yaw_abs_median_rad_s": 2.847,
+      "penetration_over_1cm_frames": 0,
+      "ik_pass": null,
+      "pd_pass": null
+    },
+    "a1_candidates/a1_left_turn1/a1_left_turn1.csv": {
+      "gait": "uncertain",
+      "touchdown_counts": {
+        "RR": 1,
+        "RL": 2,
+        "FR": 2,
+        "FL": 2
+      },
+      "touchdown_separation_cycles": {},
+      "duty_factor": [
+        0.583,
+        0.702,
+        0.738,
+        0.56
+      ],
+      "body_velocity_m_s": [
+        0.22,
+        -0.035,
+        0.012
+      ],
+      "yaw_abs_median_rad_s": 1.247,
+      "penetration_over_1cm_frames": 0,
+      "ik_pass": null,
+      "pd_pass": null
+    },
+    "a1_candidates/a1_pace0/a1_pace0.csv": {
+      "gait": "uncertain",
+      "touchdown_counts": {
+        "RR": 1,
+        "RL": 1,
+        "FR": 1,
+        "FL": 1
+      },
+      "touchdown_separation_cycles": {},
+      "duty_factor": [
+        0.594,
+        0.594,
+        0.656,
+        0.625
+      ],
+      "body_velocity_m_s": [
+        0.745,
+        -0.042,
+        0.081
+      ],
+      "yaw_abs_median_rad_s": 0.194,
+      "penetration_over_1cm_frames": 0,
+      "ik_pass": null,
+      "pd_pass": null
+    },
+    "a1_candidates/a1_pace1/a1_pace1.csv": {
+      "gait": "pace",
+      "touchdown_counts": {
+        "RR": 5,
+        "RL": 6,
+        "FR": 5,
+        "FL": 6
+      },
+      "touchdown_separation_cycles": {
+        "RR-RL": 0.484,
+        "RR-FR": 0.032,
+        "RR-FL": 0.484,
+        "RL-FR": 0.452,
+        "RL-FL": 0.032,
+        "FR-FL": 0.484
+      },
+      "duty_factor": [
+        0.593,
+        0.563,
+        0.635,
+        0.599
+      ],
+      "body_velocity_m_s": [
+        0.774,
+        -0.075,
+        0.07
+      ],
+      "yaw_abs_median_rad_s": 0.277,
+      "penetration_over_1cm_frames": 0,
+      "ik_pass": null,
+      "pd_pass": null
+    },
+    "a1_candidates/a1_pace2/a1_pace2.csv": {
+      "gait": "pace",
+      "touchdown_counts": {
+        "RR": 5,
+        "RL": 5,
+        "FR": 5,
+        "FL": 5
+      },
+      "touchdown_separation_cycles": {
+        "RR-RL": 0.5,
+        "RR-FR": 0.0,
+        "RR-FL": 0.5,
+        "RL-FR": 0.5,
+        "RL-FL": 0.031,
+        "FR-FL": 0.484
+      },
+      "duty_factor": [
+        0.59,
+        0.559,
+        0.646,
+        0.621
+      ],
+      "body_velocity_m_s": [
+        0.744,
+        -0.074,
+        0.073
+      ],
+      "yaw_abs_median_rad_s": 0.286,
+      "penetration_over_1cm_frames": 0,
+      "ik_pass": null,
+      "pd_pass": null
+    },
+    "a1_candidates/a1_pace_reverse0/a1_pace_reverse0.csv": {
+      "gait": "uncertain",
+      "touchdown_counts": {
+        "RR": 1,
+        "RL": 1,
+        "FR": 1,
+        "FL": 1
+      },
+      "touchdown_separation_cycles": {},
+      "duty_factor": [
+        0.627,
+        0.608,
+        0.667,
+        0.647
+      ],
+      "body_velocity_m_s": [
+        -0.466,
+        0.031,
+        -0.047
+      ],
+      "yaw_abs_median_rad_s": 0.133,
+      "penetration_over_1cm_frames": 0,
+      "ik_pass": null,
+      "pd_pass": null
+    },
+    "a1_candidates/a1_right_turn0/a1_right_turn0.csv": {
+      "gait": "uncertain",
+      "touchdown_counts": {
+        "RR": 1,
+        "RL": 1,
+        "FR": 1,
+        "FL": 1
+      },
+      "touchdown_separation_cycles": {},
+      "duty_factor": [
+        0.656,
+        0.594,
+        0.469,
+        0.656
+      ],
+      "body_velocity_m_s": [
+        0.579,
+        -0.111,
+        0.021
+      ],
+      "yaw_abs_median_rad_s": 1.069,
+      "penetration_over_1cm_frames": 0,
+      "ik_pass": null,
+      "pd_pass": null
+    },
+    "a1_candidates/a1_right_turn1/a1_right_turn1.csv": {
+      "gait": "uncertain",
+      "touchdown_counts": {
+        "RR": 1,
+        "RL": 2,
+        "FR": 2,
+        "FL": 2
+      },
+      "touchdown_separation_cycles": {},
+      "duty_factor": [
+        0.543,
+        0.674,
+        0.63,
+        0.337
+      ],
+      "body_velocity_m_s": [
+        0.164,
+        -0.167,
+        0.01
+      ],
+      "yaw_abs_median_rad_s": 1.107,
+      "penetration_over_1cm_frames": 0,
+      "ik_pass": null,
+      "pd_pass": null
+    },
+    "a1_candidates/a1_trot0/a1_trot0.csv": {
+      "gait": "uncertain",
+      "touchdown_counts": {
+        "RR": 0,
+        "RL": 1,
+        "FR": 1,
+        "FL": 0
+      },
+      "touchdown_separation_cycles": {},
+      "duty_factor": [
+        0.444,
+        0.407,
+        0.444,
+        0.333
+      ],
+      "body_velocity_m_s": [
+        1.251,
+        0.105,
+        -0.006
+      ],
+      "yaw_abs_median_rad_s": 0.143,
+      "penetration_over_1cm_frames": 0,
+      "ik_pass": null,
+      "pd_pass": null
+    },
+    "a1_candidates/a1_trot1/a1_trot1.csv": {
+      "gait": "uncertain",
+      "touchdown_counts": {
+        "RR": 4,
+        "RL": 5,
+        "FR": 4,
+        "FL": 5
+      },
+      "touchdown_separation_cycles": {
+        "RR-RL": 0.444,
+        "RR-FR": 0.389,
+        "RR-FL": 0.111,
+        "RL-FR": 0.185,
+        "RL-FL": 0.333,
+        "FR-FL": 0.444
+      },
+      "duty_factor": [
+        0.333,
+        0.447,
+        0.382,
+        0.463
+      ],
+      "body_velocity_m_s": [
+        1.193,
+        0.067,
+        0.069
+      ],
+      "yaw_abs_median_rad_s": 0.323,
+      "penetration_over_1cm_frames": 0,
+      "ik_pass": null,
+      "pd_pass": null
+    },
+    "a1_candidates/a1_trot2/a1_trot2.csv": {
+      "gait": "trot",
+      "touchdown_counts": {
+        "RR": 6,
+        "RL": 7,
+        "FR": 7,
+        "FL": 6
+      },
+      "touchdown_separation_cycles": {
+        "RR-RL": 0.478,
+        "RR-FR": 0.435,
+        "RR-FL": 0.087,
+        "RL-FR": 0.043,
+        "RL-FL": 0.391,
+        "FR-FL": 0.435
+      },
+      "duty_factor": [
+        0.359,
+        0.386,
+        0.412,
+        0.477
+      ],
+      "body_velocity_m_s": [
+        1.482,
+        -0.106,
+        0.129
+      ],
+      "yaw_abs_median_rad_s": 0.171,
+      "penetration_over_1cm_frames": 0,
+      "ik_pass": null,
+      "pd_pass": null
+    },
+    "a1_candidates/a1_trot_reverse0/a1_trot_reverse0.csv": {
+      "gait": "uncertain",
+      "touchdown_counts": {
+        "RR": 1,
+        "RL": 1,
+        "FR": 1,
+        "FL": 1
+      },
+      "touchdown_separation_cycles": {},
+      "duty_factor": [
+        0.512,
+        0.512,
+        0.488,
+        0.372
+      ],
+      "body_velocity_m_s": [
+        -0.752,
+        -0.064,
+        -0.015
+      ],
+      "yaw_abs_median_rad_s": 0.113,
+      "penetration_over_1cm_frames": 0,
+      "ik_pass": null,
+      "pd_pass": null
+    },
+    "a1_candidates/procedural_strafe_left/procedural_strafe_left.csv": {
+      "gait": "trot",
+      "touchdown_counts": {
+        "RR": 6,
+        "RL": 7,
+        "FR": 7,
+        "FL": 6
+      },
+      "touchdown_separation_cycles": {
+        "RR-RL": 0.5,
+        "RR-FR": 0.5,
+        "RR-FL": 0.0,
+        "RL-FR": 0.0,
+        "RL-FL": 0.5,
+        "FR-FL": 0.5
+      },
+      "duty_factor": [
+        0.79,
+        0.755,
+        0.755,
+        0.79
+      ],
+      "body_velocity_m_s": [
+        0.0,
+        0.33,
+        0.0
+      ],
+      "yaw_abs_median_rad_s": 0.0,
+      "penetration_over_1cm_frames": 0,
+      "ik_pass": null,
+      "pd_pass": null
+    },
+    "a1_candidates/procedural_strafe_right/procedural_strafe_right.csv": {
+      "gait": "trot",
+      "touchdown_counts": {
+        "RR": 6,
+        "RL": 7,
+        "FR": 7,
+        "FL": 6
+      },
+      "touchdown_separation_cycles": {
+        "RR-RL": 0.5,
+        "RR-FR": 0.5,
+        "RR-FL": 0.0,
+        "RL-FR": 0.0,
+        "RL-FL": 0.5,
+        "FR-FL": 0.5
+      },
+      "duty_factor": [
+        0.79,
+        0.755,
+        0.755,
+        0.79
+      ],
+      "body_velocity_m_s": [
+        0.0,
+        -0.33,
+        0.0
+      ],
+      "yaw_abs_median_rad_s": 0.0,
+      "penetration_over_1cm_frames": 0,
+      "ik_pass": null,
+      "pd_pass": null
+    }
+  }
+}

@@ -1,0 +1,123 @@
+{
+  "version": 1,
+  "task": "go2",
+  "dataset": "MIMUW-Robotics/kine2go",
+  "revision": "7f03a3fb7f6b2e684899530862ba103e81570363",
+  "source": "Kine2Go Go2-retargeted AI4Animation reference motion",
+  "source_pipeline": "https://github.com/nomagiclab/kine2go-pipeline",
+  "pipeline_revision": "65b39f104706c1b4307dfc2a7df2aa8bed8d20aa",
+  "retargeted_from_mocap": true,
+  "clips": [
+    "ai4_dog_trot_00"
+  ],
+  "source_fps": 60,
+  "quaternion_order": "xyzw",
+  "joint_names": [
+    "FL_hip_joint",
+    "FL_thigh_joint",
+    "FL_calf_joint",
+    "FR_hip_joint",
+    "FR_thigh_joint",
+    "FR_calf_joint",
+    "RL_hip_joint",
+    "RL_thigh_joint",
+    "RL_calf_joint",
+    "RR_hip_joint",
+    "RR_thigh_joint",
+    "RR_calf_joint"
+  ],
+  "raw_joint_order": [
+    "FL_hip_joint",
+    "FR_hip_joint",
+    "RL_hip_joint",
+    "RR_hip_joint",
+    "FL_thigh_joint",
+    "FR_thigh_joint",
+    "RL_thigh_joint",
+    "RR_thigh_joint",
+    "FL_calf_joint",
+    "FR_calf_joint",
+    "RL_calf_joint",
+    "RR_calf_joint"
+  ],
+  "raw_foot_order": [
+    "FL",
+    "RL",
+    "FR",
+    "RR"
+  ],
+  "mjcf_sha256": "e563f470d852037714a74c809f8fba7926bb4b5255381ca15e5d47e8c953bd34",
+  "importer_sha256": "1eac4fa40c07b71380ebec201c57c5fce5cfdfeec8015915a803eb20d103741e",
+  "files": [
+    {
+      "file": "ai4_dog_trot_00.csv",
+      "frames": 548,
+      "duration_seconds": 9.116666666666667,
+      "sha256": "c08ce5b6946ecaa7431b8d2f5ab0359af05a337596bd35dabfa36df04aa21716",
+      "raw_sha256": "6d0f0ccc20917e2f34c19e8450bb6b08c11db93a9eb0e8c51773229a6a4c7382",
+      "publisher_metadata_frames": 571,
+      "source": "AI4Animation - natural dog mocap (SIGGRAPH 2018 release)",
+      "source_url": "https://github.com/sebastianstarke/AI4Animation/tree/master/AI4Animation/SIGGRAPH_2018",
+      "license": "CC BY-NC 4.0",
+      "attribution": "H. Zhang et al., 'Mode-Adaptive Neural Networks for Quadruped Motion Control', SIGGRAPH 2018",
+      "validation": {
+        "frames_checked": 548,
+        "foot_link_max_error_m": 6.983577955507628e-07,
+        "foot_link_mean_error_m": 1.0933992806792446e-07,
+        "joint_limit_min_margin_rad": 0.2535036518478394,
+        "root_height_range_m": [
+          0.2867000102996826,
+          0.34121599793434143
+        ],
+        "joint_max_velocity_rad_s": 13.33764362335205,
+        "dynamic_feasibility": "FK validates geometry; physical execution is evaluated in PhysX"
+      }
+    }
+  ],
+  "source_files": [
+    {
+      "file": "README.md",
+      "sha256": "ec9581fd669569f3932646a4811ed81ac5061c00e998b7e5990ffc468cd38a58",
+      "bytes": 7413,
+      "source_hash_algorithm": "git_blob_sha1",
+      "source_hash": "88107487ad723620f5d38e7657017fae3b39e79e"
+    },
+    {
+      "file": "LICENSE",
+      "sha256": "4b601e934c0112ebe6b72a54bcae756eba2731dde58f22acd01a0637a413b9e9",
+      "bytes": 1809,
+      "source_hash_algorithm": "git_blob_sha1",
+      "source_hash": "a4524a60102fb90ccfa11f8352bbd740b597b692"
+    },
+    {
+      "file": "LICENSES/AI4Animation_CC-BY-NC-4.0.txt",
+      "sha256": "41003d4a74749c0220e33dd415042164b5a1093ed401f36277234f772d22d3d0",
+      "bytes": 19347,
+      "source_hash_algorithm": "git_blob_sha1",
+      "source_hash": "fe463e0f7888bbf8b82e42d55f5743508ddafb7e"
+    },
+    {
+      "file": "data/ai4_dog_trot_00/motion.npy",
+      "sha256": "6d0f0ccc20917e2f34c19e8450bb6b08c11db93a9eb0e8c51773229a6a4c7382",
+      "bytes": 133840,
+      "source_hash_algorithm": "sha256",
+      "source_hash": "6d0f0ccc20917e2f34c19e8450bb6b08c11db93a9eb0e8c51773229a6a4c7382"
+    },
+    {
+      "file": "data/ai4_dog_trot_00/clip.json",
+      "sha256": "020dcff53f02e9957d970bfb4f8788e3e494db90c49c2b63ab10fe942645f428",
+      "bytes": 494,
+      "source_hash_algorithm": "git_blob_sha1",
+      "source_hash": "f77a3cabb27e51b34457b335bab09a4bb6632bc2"
+    },
+    {
+      "file": "data/ai4_dog_trot_00/config.json",
+      "sha256": "d2e1cee692a7f0dee8f7bddb364edc611074d6ddd62e99c9a2bee6dd70cd61f2",
+      "bytes": 5153,
+      "source_hash_algorithm": "git_blob_sha1",
+      "source_hash": "f04e43c28b86e4e948cf11fd861adec66f1dbea5"
+    }
+  ],
+  "conversion": "Full NPY clip; reorder joints and WXYZ->XYZW. No smoothing, cropping or IK rerun.",
+  "metadata_note": "Actual NPY row count is authoritative; publisher clip.json frame counts can differ."
+}

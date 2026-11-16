@@ -4,9 +4,10 @@ import torch
 
 
 class EpisodeReplay:
-    def __init__(self, capacity: int, num_envs: int):
+    def __init__(self, capacity: int, num_envs: int, *, fields=None):
         if min(capacity, num_envs) < 1:
             raise ValueError("capacity and num_envs must be positive")
+        self.fields = fields
         self.capacity = capacity
         self.num_envs = num_envs
         self.total_steps = 0
@@ -19,6 +20,8 @@ class EpisodeReplay:
     @torch.inference_mode(False)
     @torch.no_grad()
     def append(self, transition: dict[str, torch.Tensor]) -> None:
+        if self.fields is not None:
+            transition = {name: transition[name] for name in self.fields}
         if any(value.shape[0] != self.num_envs for value in transition.values()):
             raise ValueError("Every field must have a row for each environment")
         if not self.data:

@@ -1,0 +1,71 @@
+{
+  "frames": 250,
+  "fps": 50,
+  "joint_names": [
+    "RR_hip_joint",
+    "RR_thigh_joint",
+    "RR_calf_joint",
+    "RL_hip_joint",
+    "RL_thigh_joint",
+    "RL_calf_joint",
+    "FR_hip_joint",
+    "FR_thigh_joint",
+    "FR_calf_joint",
+    "FL_hip_joint",
+    "FL_thigh_joint",
+    "FL_calf_joint"
+  ],
+  "quaternion_order": "xyzw",
+  "csv_sha256": "b1d16eac7d5ac17857236a3b80398d428fe6266616743e7f427a37bb87e650b6",
+  "target_mjcf_sha256": "a6ae3a95bf71c63737bf7c913f2bb37429e78a6ac07f1b68593e5504723e3084",
+  "source_csv": "amp_supermimic/data/go2/lvr_direction_reconstructed/lvr_left.csv",
+  "source_sha256": "e651026607894f74208edb7c1bb6c01ef0c31c5693aa9e7dedd892549624d16f",
+  "source_joint_order": [
+    "FL_hip_joint",
+    "FR_hip_joint",
+    "RL_hip_joint",
+    "RR_hip_joint",
+    "FL_thigh_joint",
+    "FR_thigh_joint",
+    "RL_thigh_joint",
+    "RR_thigh_joint",
+    "FL_calf_joint",
+    "FR_calf_joint",
+    "RL_calf_joint",
+    "RR_calf_joint"
+  ],
+  "source_joint_order_evidence": "Breadth-first order inferred from the official Go2 USD articulation tree; original HDF5 omits joint names.",
+  "motion_scale_multiplier": 0.65,
+  "scale": 0.7944968061140549,
+  "fitted_left_or_backward_foot_error_p95_m": 0.0007974138826925951,
+  "mirrored_from_wbl_left": true,
+  "status": "kinematic_reference_only",
+  "before": {
+    "knee_median_rad": -1.146010625,
+    "knee_most_extended_rad": -0.773921696,
+    "minimum_sole_height_m": -0.0007673839739062022,
+    "below_floor_frames": 1,
+    "min_lateral_foot_offset_ratio": 0.15647627119797555,
+    "min_lateral_foot_offset_m": 0.03341578002634567,
+    "median_body_velocity_m_s": [
+      0.027585389579134395,
+      -0.912483684741243,
+      -0.023026633831676795
+    ],
+    "joint_velocity_p99_rad_s": 6.228517421450002
+  },
+  "after": {
+    "knee_median_rad": -1.4271649315000001,
+    "knee_most_extended_rad": -1.307311666,
+    "minimum_sole_height_m": 0.0019999998795336843,
+    "below_floor_frames": 0,
+    "min_lateral_foot_offset_ratio": 0.7754984061589305,
+    "min_lateral_foot_offset_m": 0.16612021348539985,
+    "median_body_velocity_m_s": [
+      0.02673283265270016,
+      -0.7886372547444851,
+      -0.022850407481965512
+    ],
+    "joint_velocity_p99_rad_s": 2.296713824447001
+  }
+}

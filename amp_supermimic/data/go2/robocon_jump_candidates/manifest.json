@@ -1,0 +1,28 @@
+{
+  "source_fps": 60,
+  "joint_names": [
+    "FR_hip_joint",
+    "FR_thigh_joint",
+    "FR_calf_joint",
+    "FL_hip_joint",
+    "FL_thigh_joint",
+    "FL_calf_joint",
+    "RR_hip_joint",
+    "RR_thigh_joint",
+    "RR_calf_joint",
+    "RL_hip_joint",
+    "RL_thigh_joint",
+    "RL_calf_joint"
+  ],
+  "quaternion_order": "xyzw",
+  "files": [
+    {
+      "file": "solo8_jump_b_rollout_0001.csv",
+      "sha256": "4618dd76ce810fe820a770661cc224f733c920f5488ccfa03af9d5320cad5b97",
+      "source": "https://huggingface.co/datasets/MIMUW-Robotics/kine2go/blob/244dc58/data/solo8_jump_forward_b/traj_0001/traj.pkl",
+      "source_sha256": "88290831d1d6e4788df233bc64c7b3a7891939b9f8444fa370fe49d52c65935d",
+      "frames": 571,
+      "status": "candidate_not_expert"
+    }
+  ]
+}

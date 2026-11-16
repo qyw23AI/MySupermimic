@@ -1,0 +1,446 @@
+{
+  "fps": 50,
+  "motions": [
+    {
+      "category": "run",
+      "source": "amp_supermimic/data/go2/kine2go_all40/ai4_dog_canter.csv",
+      "motion": "run/ai4_dog_canter/ai4_dog_canter.csv",
+      "report": "run/ai4_dog_canter/report.json",
+      "frames": 472,
+      "ik_screen_pass": false,
+      "flat_floor_joint_pd_pass": false
+    },
+    {
+      "category": "turn",
+      "source": "amp_supermimic/data/go2/kine2go_all40/ai4_dog_left_turn.csv",
+      "motion": "turn/ai4_dog_left_turn/ai4_dog_left_turn.csv",
+      "report": "turn/ai4_dog_left_turn/report.json",
+      "frames": 3613,
+      "ik_screen_pass": false,
+      "flat_floor_joint_pd_pass": false
+    },
+    {
+      "category": "walk",
+      "source": "amp_supermimic/data/go2/kine2go_all40/ai4_dog_pace.csv",
+      "motion": "walk/ai4_dog_pace/ai4_dog_pace.csv",
+      "report": "walk/ai4_dog_pace/report.json",
+      "frames": 494,
+      "ik_screen_pass": false,
+      "flat_floor_joint_pd_pass": false
+    },
+    {
+      "category": "turn",
+      "source": "amp_supermimic/data/go2/kine2go_all40/ai4_dog_right_turn.csv",
+      "motion": "turn/ai4_dog_right_turn/ai4_dog_right_turn.csv",
+      "report": "turn/ai4_dog_right_turn/report.json",
+      "frames": 3613,
+      "ik_screen_pass": false,
+      "flat_floor_joint_pd_pass": false
+    },
+    {
+      "category": "run",
+      "source": "amp_supermimic/data/go2/kine2go_all40/ai4_dog_run_00.csv",
+      "motion": "run/ai4_dog_run_00/ai4_dog_run_00.csv",
+      "report": "run/ai4_dog_run_00/report.json",
+      "frames": 472,
+      "ik_screen_pass": false,
+      "flat_floor_joint_pd_pass": false
+    },
+    {
+      "category": "run",
+      "source": "amp_supermimic/data/go2/kine2go_all40/ai4_dog_run_02.csv",
+      "motion": "run/ai4_dog_run_02/ai4_dog_run_02.csv",
+      "report": "run/ai4_dog_run_02/report.json",
+      "frames": 169,
+      "ik_screen_pass": false,
+      "flat_floor_joint_pd_pass": false
+    },
+    {
+      "category": "run",
+      "source": "amp_supermimic/data/go2/kine2go_all40/ai4_dog_run_04.csv",
+      "motion": "run/ai4_dog_run_04/ai4_dog_run_04.csv",
+      "report": "run/ai4_dog_run_04/report.json",
+      "frames": 1052,
+      "ik_screen_pass": false,
+      "flat_floor_joint_pd_pass": false
+    },
+    {
+      "category": "turn",
+      "source": "amp_supermimic/data/go2/kine2go_all40/ai4_dog_synth_circle_walk.csv",
+      "motion": "turn/ai4_dog_synth_circle_walk/ai4_dog_synth_circle_walk.csv",
+      "report": "turn/ai4_dog_synth_circle_walk/report.json",
+      "frames": 672,
+      "ik_screen_pass": true,
+      "flat_floor_joint_pd_pass": false
+    },
+    {
+      "category": "turn",
+      "source": "amp_supermimic/data/go2/kine2go_all40/ai4_dog_synth_eight_walk.csv",
+      "motion": "turn/ai4_dog_synth_eight_walk/ai4_dog_synth_eight_walk.csv",
+      "report": "turn/ai4_dog_synth_eight_walk/report.json",
+      "frames": 980,
+      "ik_screen_pass": true,
+      "flat_floor_joint_pd_pass": true
+    },
+    {
+      "category": "turn",
+      "source": "amp_supermimic/data/go2/kine2go_all40/ai4_dog_synth_ellipse_walk.csv",
+      "motion": "turn/ai4_dog_synth_ellipse_walk/ai4_dog_synth_ellipse_walk.csv",
+      "report": "turn/ai4_dog_synth_ellipse_walk/report.json",
+      "frames": 982,
+      "ik_screen_pass": true,
+      "flat_floor_joint_pd_pass": false
+    },
+    {
+      "category": "jump",
+      "source": "amp_supermimic/data/go2/kine2go_all40/ai4_dog_synth_half_flip_jump.csv",
+      "motion": "jump/ai4_dog_synth_half_flip_jump/ai4_dog_synth_half_flip_jump.csv",
+      "report": "jump/ai4_dog_synth_half_flip_jump/report.json",
+      "frames": 982,
+      "ik_screen_pass": true,
+      "flat_floor_joint_pd_pass": false
+    },
+    {
+      "category": "turn",
+      "source": "amp_supermimic/data/go2/kine2go_all40/ai4_dog_synth_square_walk.csv",
+      "motion": "turn/ai4_dog_synth_square_walk/ai4_dog_synth_square_walk.csv",
+      "report": "turn/ai4_dog_synth_square_walk/report.json",
+      "frames": 930,
+      "ik_screen_pass": true,
+      "flat_floor_joint_pd_pass": false
+    },
+    {
+      "category": "strafe",
+      "source": "amp_supermimic/data/go2/kine2go_all40/ai4_dog_synth_tight_strafe.csv",
+      "motion": "strafe/ai4_dog_synth_tight_strafe/ai4_dog_synth_tight_strafe.csv",
+      "report": "strafe/ai4_dog_synth_tight_strafe/report.json",
+      "frames": 866,
+      "ik_screen_pass": true,
+      "flat_floor_joint_pd_pass": false
+    },
+    {
+      "category": "strafe",
+      "source": "amp_supermimic/data/go2/kine2go_all40/ai4_dog_synth_wide_strafe.csv",
+      "motion": "strafe/ai4_dog_synth_wide_strafe/ai4_dog_synth_wide_strafe.csv",
+      "report": "strafe/ai4_dog_synth_wide_strafe/report.json",
+      "frames": 974,
+      "ik_screen_pass": true,
+      "flat_floor_joint_pd_pass": false
+    },
+    {
+      "category": "run",
+      "source": "amp_supermimic/data/go2/kine2go_all40/ai4_dog_trot_00.csv",
+      "motion": "run/ai4_dog_trot_00/ai4_dog_trot_00.csv",
+      "report": "run/ai4_dog_trot_00/report.json",
+      "frames": 456,
+      "ik_screen_pass": true,
+      "flat_floor_joint_pd_pass": false
+    },
+    {
+      "category": "run",
+      "source": "amp_supermimic/data/go2/kine2go_all40/ai4_dog_trot_01.csv",
+      "motion": "run/ai4_dog_trot_01/ai4_dog_trot_01.csv",
+      "report": "run/ai4_dog_trot_01/report.json",
+      "frames": 1052,
+      "ik_screen_pass": false,
+      "flat_floor_joint_pd_pass": false
+    },
+    {
+      "category": "walk",
+      "source": "amp_supermimic/data/go2/kine2go_all40/ai4_dog_walk_00.csv",
+      "motion": "walk/ai4_dog_walk_00/ai4_dog_walk_00.csv",
+      "report": "walk/ai4_dog_walk_00/report.json",
+      "frames": 494,
+      "ik_screen_pass": false,
+      "flat_floor_joint_pd_pass": false
+    },
+    {
+      "category": "walk",
+      "source": "amp_supermimic/data/go2/kine2go_all40/ai4_dog_walk_01.csv",
+      "motion": "walk/ai4_dog_walk_01/ai4_dog_walk_01.csv",
+      "report": "walk/ai4_dog_walk_01/report.json",
+      "frames": 893,
+      "ik_screen_pass": false,
+      "flat_floor_joint_pd_pass": false
+    },
+    {
+      "category": "walk",
+      "source": "amp_supermimic/data/go2/kine2go_all40/ai4_dog_walk_02.csv",
+      "motion": "walk/ai4_dog_walk_02/ai4_dog_walk_02.csv",
+      "report": "walk/ai4_dog_walk_02/report.json",
+      "frames": 759,
+      "ik_screen_pass": false,
+      "flat_floor_joint_pd_pass": false
+    },
+    {
+      "category": "walk",
+      "source": "amp_supermimic/data/go2/kine2go_all40/ai4_dog_walk_03.csv",
+      "motion": "walk/ai4_dog_walk_03/ai4_dog_walk_03.csv",
+      "report": "walk/ai4_dog_walk_03/report.json",
+      "frames": 456,
+      "ik_screen_pass": true,
+      "flat_floor_joint_pd_pass": false
+    },
+    {
+      "category": "walk",
+      "source": "amp_supermimic/data/go2/kine2go_all40/ai4_dog_walk_04.csv",
+      "motion": "walk/ai4_dog_walk_04/ai4_dog_walk_04.csv",
+      "report": "walk/ai4_dog_walk_04/report.json",
+      "frames": 456,
+      "ik_screen_pass": false,
+      "flat_floor_joint_pd_pass": false
+    },
+    {
+      "category": "walk",
+      "source": "amp_supermimic/data/go2/kine2go_all40/ai4_dog_walk_06.csv",
+      "motion": "walk/ai4_dog_walk_06/ai4_dog_walk_06.csv",
+      "report": "walk/ai4_dog_walk_06/report.json",
+      "frames": 1123,
+      "ik_screen_pass": false,
+      "flat_floor_joint_pd_pass": false
+    },
+    {
+      "category": "crawl",
+      "source": "amp_supermimic/data/go2/kine2go_all40/solo8_crawl_fast.csv",
+      "motion": "crawl/solo8_crawl_fast/solo8_crawl_fast.csv",
+      "report": "crawl/solo8_crawl_fast/report.json",
+      "frames": 100,
+      "ik_screen_pass": true,
+      "flat_floor_joint_pd_pass": false
+    },
+    {
+      "category": "crawl",
+      "source": "amp_supermimic/data/go2/kine2go_all40/solo8_crawl_slow.csv",
+      "motion": "crawl/solo8_crawl_slow/solo8_crawl_slow.csv",
+      "report": "crawl/solo8_crawl_slow/report.json",
+      "frames": 100,
+      "ik_screen_pass": true,
+      "flat_floor_joint_pd_pass": false
+    },
+    {
+      "category": "jump",
+      "source": "amp_supermimic/data/go2/kine2go_all40/solo8_jump_forward_a.csv",
+      "motion": "jump/solo8_jump_forward_a/solo8_jump_forward_a.csv",
+      "report": "jump/solo8_jump_forward_a/report.json",
+      "frames": 100,
+      "ik_screen_pass": true,
+      "flat_floor_joint_pd_pass": false
+    },
+    {
+      "category": "jump",
+      "source": "amp_supermimic/data/go2/kine2go_all40/solo8_jump_forward_b.csv",
+      "motion": "jump/solo8_jump_forward_b/solo8_jump_forward_b.csv",
+      "report": "jump/solo8_jump_forward_b/report.json",
+      "frames": 100,
+      "ik_screen_pass": false,
+      "flat_floor_joint_pd_pass": false
+    },
+    {
+      "category": "crawl",
+      "source": "amp_supermimic/data/go2/kine2go_all40/solo8_scoot_forward.csv",
+      "motion": "crawl/solo8_scoot_forward/solo8_scoot_forward.csv",
+      "report": "crawl/solo8_scoot_forward/report.json",
+      "frames": 100,
+      "ik_screen_pass": true,
+      "flat_floor_joint_pd_pass": false
+    },
+    {
+      "category": "walk",
+      "source": "amp_supermimic/data/go2/kine2go_all40/solo8_walk.csv",
+      "motion": "walk/solo8_walk/solo8_walk.csv",
+      "report": "walk/solo8_walk/report.json",
+      "frames": 100,
+      "ik_screen_pass": true,
+      "flat_floor_joint_pd_pass": false
+    },
+    {
+      "category": "run",
+      "source": "amp_supermimic/data/go2/kine2go_all40/vhdc_horse1_s1_trot_01.csv",
+      "motion": "run/vhdc_horse1_s1_trot_01/vhdc_horse1_s1_trot_01.csv",
+      "report": "run/vhdc_horse1_s1_trot_01/report.json",
+      "frames": 500,
+      "ik_screen_pass": true,
+      "flat_floor_joint_pd_pass": false
+    },
+    {
+      "category": "run",
+      "source": "amp_supermimic/data/go2/kine2go_all40/vhdc_horse1_s1_trot_02.csv",
+      "motion": "run/vhdc_horse1_s1_trot_02/vhdc_horse1_s1_trot_02.csv",
+      "report": "run/vhdc_horse1_s1_trot_02/report.json",
+      "frames": 500,
+      "ik_screen_pass": true,
+      "flat_floor_joint_pd_pass": false
+    },
+    {
+      "category": "run",
+      "source": "amp_supermimic/data/go2/kine2go_all40/vhdc_horse1_s1_trot_03.csv",
+      "motion": "run/vhdc_horse1_s1_trot_03/vhdc_horse1_s1_trot_03.csv",
+      "report": "run/vhdc_horse1_s1_trot_03/report.json",
+      "frames": 500,
+      "ik_screen_pass": true,
+      "flat_floor_joint_pd_pass": false
+    },
+    {
+      "category": "walk",
+      "source": "amp_supermimic/data/go2/kine2go_all40/vhdc_horse1_s1_walk_01.csv",
+      "motion": "walk/vhdc_horse1_s1_walk_01/vhdc_horse1_s1_walk_01.csv",
+      "report": "walk/vhdc_horse1_s1_walk_01/report.json",
+      "frames": 500,
+      "ik_screen_pass": true,
+      "flat_floor_joint_pd_pass": false
+    },
+    {
+      "category": "walk",
+      "source": "amp_supermimic/data/go2/kine2go_all40/vhdc_horse1_s1_walk_02.csv",
+      "motion": "walk/vhdc_horse1_s1_walk_02/vhdc_horse1_s1_walk_02.csv",
+      "report": "walk/vhdc_horse1_s1_walk_02/report.json",
+      "frames": 500,
+      "ik_screen_pass": true,
+      "flat_floor_joint_pd_pass": false
+    },
+    {
+      "category": "walk",
+      "source": "amp_supermimic/data/go2/kine2go_all40/vhdc_horse1_s1_walk_03.csv",
+      "motion": "walk/vhdc_horse1_s1_walk_03/vhdc_horse1_s1_walk_03.csv",
+      "report": "walk/vhdc_horse1_s1_walk_03/report.json",
+      "frames": 500,
+      "ik_screen_pass": true,
+      "flat_floor_joint_pd_pass": false
+    },
+    {
+      "category": "run",
+      "source": "amp_supermimic/data/go2/kine2go_all40/vhdc_horse1_s2_trot_01.csv",
+      "motion": "run/vhdc_horse1_s2_trot_01/vhdc_horse1_s2_trot_01.csv",
+      "report": "run/vhdc_horse1_s2_trot_01/report.json",
+      "frames": 1000,
+      "ik_screen_pass": true,
+      "flat_floor_joint_pd_pass": false
+    },
+    {
+      "category": "run",
+      "source": "amp_supermimic/data/go2/kine2go_all40/vhdc_horse1_s2_trot_02.csv",
+      "motion": "run/vhdc_horse1_s2_trot_02/vhdc_horse1_s2_trot_02.csv",
+      "report": "run/vhdc_horse1_s2_trot_02/report.json",
+      "frames": 1000,
+      "ik_screen_pass": true,
+      "flat_floor_joint_pd_pass": false
+    },
+    {
+      "category": "run",
+      "source": "amp_supermimic/data/go2/kine2go_all40/vhdc_horse1_s2_trot_03.csv",
+      "motion": "run/vhdc_horse1_s2_trot_03/vhdc_horse1_s2_trot_03.csv",
+      "report": "run/vhdc_horse1_s2_trot_03/report.json",
+      "frames": 1000,
+      "ik_screen_pass": true,
+      "flat_floor_joint_pd_pass": false
+    },
+    {
+      "category": "walk",
+      "source": "amp_supermimic/data/go2/kine2go_all40/vhdc_horse1_s2_walk_01.csv",
+      "motion": "walk/vhdc_horse1_s2_walk_01/vhdc_horse1_s2_walk_01.csv",
+      "report": "walk/vhdc_horse1_s2_walk_01/report.json",
+      "frames": 1000,
+      "ik_screen_pass": true,
+      "flat_floor_joint_pd_pass": false
+    },
+    {
+      "category": "walk",
+      "source": "amp_supermimic/data/go2/kine2go_all40/vhdc_horse1_s2_walk_02.csv",
+      "motion": "walk/vhdc_horse1_s2_walk_02/vhdc_horse1_s2_walk_02.csv",
+      "report": "walk/vhdc_horse1_s2_walk_02/report.json",
+      "frames": 1000,
+      "ik_screen_pass": true,
+      "flat_floor_joint_pd_pass": false
+    },
+    {
+      "category": "walk",
+      "source": "amp_supermimic/data/go2/kine2go_all40/vhdc_horse1_s2_walk_03.csv",
+      "motion": "walk/vhdc_horse1_s2_walk_03/vhdc_horse1_s2_walk_03.csv",
+      "report": "walk/vhdc_horse1_s2_walk_03/report.json",
+      "frames": 1000,
+      "ik_screen_pass": true,
+      "flat_floor_joint_pd_pass": false
+    },
+    {
+      "category": "jump",
+      "source": "third_party/go2_flip_TO/datasets/go2/mocap_motions_go2/quad_backflip_50hz.txt",
+      "motion": "jump/quad_backflip_50hz/quad_backflip_50hz.csv",
+      "report": "jump/quad_backflip_50hz/report.json",
+      "frames": 125,
+      "ik_screen_pass": true,
+      "flat_floor_joint_pd_pass": false
+    },
+    {
+      "category": "jump",
+      "source": "third_party/go2_flip_TO/datasets/go2/mocap_motions_go2/quad_frontflip_50hz.txt",
+      "motion": "jump/quad_frontflip_50hz/quad_frontflip_50hz.csv",
+      "report": "jump/quad_frontflip_50hz/report.json",
+      "frames": 125,
+      "ik_screen_pass": true,
+      "flat_floor_joint_pd_pass": false
+    },
+    {
+      "category": "jump",
+      "source": "third_party/go2_flip_TO/datasets/go2/mocap_motions_go2/quad_jump_forward_1m_50hz.txt",
+      "motion": "jump/quad_jump_forward_1m_50hz/quad_jump_forward_1m_50hz.csv",
+      "report": "jump/quad_jump_forward_1m_50hz/report.json",
+      "frames": 120,
+      "ik_screen_pass": true,
+      "flat_floor_joint_pd_pass": false
+    },
+    {
+      "category": "jump",
+      "source": "third_party/go2_flip_TO/datasets/go2/mocap_motions_go2/quad_sideflip_50hz.txt",
+      "motion": "jump/quad_sideflip_50hz/quad_sideflip_50hz.csv",
+      "report": "jump/quad_sideflip_50hz/report.json",
+      "frames": 127,
+      "ik_screen_pass": true,
+      "flat_floor_joint_pd_pass": false
+    },
+    {
+      "category": "jump",
+      "source": "third_party/go2_flip_TO/datasets/go2/mocap_motions_go2/quad_sideflip_right_50hz.txt",
+      "motion": "jump/quad_sideflip_right_50hz/quad_sideflip_right_50hz.csv",
+      "report": "jump/quad_sideflip_right_50hz/report.json",
+      "frames": 127,
+      "ik_screen_pass": true,
+      "flat_floor_joint_pd_pass": false
+    },
+    {
+      "category": "jump",
+      "source": "amp_supermimic/data/raw/nju_agility_jump/jump_0.json",
+      "motion": "jump/jump_0/jump_0.csv",
+      "report": "jump/jump_0/report.json",
+      "frames": 51,
+      "ik_screen_pass": false,
+      "flat_floor_joint_pd_pass": false
+    },
+    {
+      "category": "jump",
+      "source": "amp_supermimic/data/raw/nju_agility_jump/jump_1.json",
+      "motion": "jump/jump_1/jump_1.csv",
+      "report": "jump/jump_1/report.json",
+      "frames": 54,
+      "ik_screen_pass": false,
+      "flat_floor_joint_pd_pass": false
+    },
+    {
+      "category": "jump",
+      "source": "amp_supermimic/data/raw/nju_agility_jump/jump_3.json",
+      "motion": "jump/jump_3/jump_3.csv",
+      "report": "jump/jump_3/report.json",
+      "frames": 54,
+      "ik_screen_pass": false,
+      "flat_floor_joint_pd_pass": false
+    },
+    {
+      "category": "jump",
+      "source": "amp_supermimic/data/raw/nju_agility_jump/jump_4.json",
+      "motion": "jump/jump_4/jump_4.csv",
+      "report": "jump/jump_4/report.json",
+      "frames": 54,
+      "ik_screen_pass": false,
+      "flat_floor_joint_pd_pass": false
+    }
+  ]
+}
