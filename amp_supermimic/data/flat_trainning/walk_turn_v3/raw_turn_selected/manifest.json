@@ -1,0 +1,31 @@
+{
+  "source_fps": 60,
+  "joint_names": [
+    "FL_hip_joint",
+    "FL_thigh_joint",
+    "FL_calf_joint",
+    "FR_hip_joint",
+    "FR_thigh_joint",
+    "FR_calf_joint",
+    "RL_hip_joint",
+    "RL_thigh_joint",
+    "RL_calf_joint",
+    "RR_hip_joint",
+    "RR_thigh_joint",
+    "RR_calf_joint"
+  ],
+  "quaternion_order": "xyzw",
+  "files": [
+    {
+      "file": "ai4_dog_left_turn.csv",
+      "sha256": "bf50ad8141a365554109b2360309898d542cfdc24ebd3c3e8152d3af69e6b09d",
+      "frames": 40
+    },
+    {
+      "file": "ai4_dog_right_turn.csv",
+      "sha256": "361eb610efdb21dc34e33e60e3887c2398fe9afd72fb67b29e7f7ab7befab7ca",
+      "frames": 47
+    }
+  ],
+  "source_dataset": "Kine2Go selected_clips; exact inclusive turn ranges"
+}

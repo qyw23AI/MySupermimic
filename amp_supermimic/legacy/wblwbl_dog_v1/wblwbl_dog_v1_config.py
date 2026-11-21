@@ -22,7 +22,7 @@ class WblwblDogV1Cfg(SuperMimicRobotCfg):
         profile = "open_terrain"
 
     class amp(SuperMimicRobotCfg.amp):
-        motion_config = "amp_supermimic/data/training/pool/train.json"
+        motion_config = "amp_supermimic/data/flat_trainning/pool/train.json"
         amp_weight = 0.25
         amp_batch = 2048
         amp_updates = 2

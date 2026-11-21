@@ -39,7 +39,6 @@ class TerrainSim:
         self.robot = task.robot
         self.num_envs, self.device = num_envs, str(torch.device(device))
         self.mw, self.wp, self.max_episode_steps = mw, wp, max_episode_steps
-        self.curriculum = True
         self.physical_ray_validation = physical_ray_validation
         self.physical_domain_randomization = physical_domain_randomization
         self.self_collisions = self_collisions
@@ -47,15 +46,29 @@ class TerrainSim:
         self.spec = get_robot(self.robot)
         self.height = ROBOT_HEIGHTS[self.robot]
         self.scale = self.height / .76
-        self.terrain = generate(task.profile, self.height, seed)
+        field_terrain = mdp.field.terrain
+        mixed_lanes = getattr(field_terrain, "lane_centers", None)
+        self.terrain = field_terrain if mixed_lanes is not None else generate(task.profile, self.height, seed)
+        self.curriculum = getattr(self.terrain, "curriculum", True)
+        self.num_terrain_levels = len(self.terrain.centers)
+        self.max_init_terrain_level = getattr(self.terrain, "max_init_terrain_level", 1)
         self.max_episode_steps = max_episode_steps
         self.ep_step = torch.zeros(num_envs, dtype=torch.int32, device=device)
         self.ep_return = torch.zeros(num_envs, device=device)
         self.a_prev = torch.zeros(num_envs, self.spec.num_joints, device=device)
         self.xi = torch.zeros(num_envs, self.spec.context_dim, device=device)
         self.c = torch.zeros(num_envs, scenario_dim, device=device)
-        self.levels = torch.randint(0, 2, (num_envs,), device=device)
+        self.levels = torch.randint(self.max_init_terrain_level + 1, (num_envs,), device=device)
         self.centers = torch.tensor(self.terrain.centers, device=device, dtype=torch.float32)
+        self._mixed_lane_centers = None
+        if mixed_lanes is not None:
+            self._mixed_lane_centers = torch.as_tensor(mixed_lanes, device=device, dtype=torch.float32)
+            cutoffs = torch.as_tensor(self.terrain.lane_weights, device=device).cumsum(0)[:-1]
+            # Assign each environment a fixed type, with counts proportional to the weights.
+            quantiles = (torch.arange(num_envs, device=device) + .5) / num_envs
+            columns = torch.bucketize(quantiles, cutoffs, right=True)
+            generator = torch.Generator(device=device).manual_seed(seed)
+            self.terrain_columns = columns[torch.randperm(num_envs, device=device, generator=generator)]
         self.default_q = torch.tensor(self.spec.default_q, device=device)
         self.action_scale = torch.tensor(self.spec.action_scale, device=device)
         model_result = build_model(
@@ -133,7 +146,8 @@ class TerrainSim:
         self.reset(torch.arange(num_envs, device=device))
         self.contract.update(
             num_envs=num_envs, physics="four 5ms MuJoCo-Warp steps per 20ms action",
-            terrain_curriculum_levels=6, max_episode_steps=max_episode_steps,
+            terrain_curriculum_levels=self.num_terrain_levels if self.curriculum else 0,
+            max_episode_steps=max_episode_steps,
             perception={"heightfield_scan_samples": mdp.field.offsets.shape[0],
                         "runtime": "analytic_heightfield_sampler",
                         "physical_rays_validation_only": True},
@@ -141,6 +155,9 @@ class TerrainSim:
             physical_domain_randomization=command_domain_randomization_contract(
                 self.physical_domain_randomization),
         )
+        if mixed_lanes is not None:
+            self.contract["terrain_types"] = dict(zip(self.terrain.lane_types, self.terrain.lane_weights))
+            self.contract["terrain_levels"] = self.num_terrain_levels
 
     @contextmanager
     def _warp_context(self):
@@ -210,12 +227,17 @@ class TerrainSim:
                 base_actuator_forcerange=self.base_actuator_forcerange,
             )
 
+    def _lane_center(self, ids):
+        if self._mixed_lane_centers is not None:
+            return self._mixed_lane_centers[self.levels[ids], self.terrain_columns[ids]]
+        return self.centers[self.levels[ids]]
+
     def _reset_state(self, ids):
         self.mw.reset_data(self.model, self.data, self.wp.from_torch(
             torch.zeros(self.num_envs, dtype=torch.bool, device=self.device).scatter_(0, ids, True)))
         count = len(ids)
-        center = self.centers[self.levels[ids]]
-        x = torch.zeros(count, device=self.device)
+        center = self._lane_center(ids)
+        x = torch.full((count,), getattr(self.terrain, "spawn_x", 0.), device=self.device)
         y = center + (torch.rand(count, device=self.device) - .5) * .15 * self.scale
         xy = torch.stack((x, y), -1)
         ground = self.mdp.field.sample(xy)
@@ -238,7 +260,7 @@ class TerrainSim:
         if ids is None:
             ids = torch.arange(self.num_envs, device=self.device)
         ids = ids.to(device=self.device, dtype=torch.long)
-        self.levels[ids] = (torch.randint(0, 2, (len(ids),), device=self.device)
+        self.levels[ids] = (torch.randint(self.max_init_terrain_level + 1, (len(ids),), device=self.device)
                             if levels is None else levels.to(device=self.device, dtype=torch.long))
         with self._warp_context():
             self._randomize(ids)
@@ -325,8 +347,8 @@ class TerrainSim:
             transition["term"] = fallen
             if self.curriculum:
                 self.levels[ids] = update_terrain_levels(
-                    self.levels[ids], success[ids], fallen[ids])
-            self.c[ids, 0] = self.centers[self.levels[ids]]
+                    self.levels[ids], success[ids], fallen[ids], self.num_terrain_levels - 1)
+            self.c[ids, 0] = self._lane_center(ids)
             with self._warp_context():
                 self._randomize(ids)
                 self._reset_state(ids)

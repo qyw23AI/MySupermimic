@@ -95,14 +95,15 @@ class CommandSim(TerrainSim):
                          physical_domain_randomization=physical_domain_randomization,
                          collision_mask_version=collision_mask_version,
                          waist_pd_scale=waist_pd_scale)
-        self.curriculum = mdp.terrain_navigation
+        self.curriculum = mdp.terrain_navigation and self.curriculum
         self.contract.update(
             objective="command-driven-locomotion", objective_version=COMMAND_VERSION,
             scenario_dim=SCENARIO_DIM, scenario_fields=COMMAND_FIELDS,
             obs_dim=mdp.obs_dim, goal_dim=mdp.goal_dim, action_limit=self.action_limit,
             target_clearance_m=self.target_clearance_m, jump_height_m=self.jump_height,
             jump_probability=self.jump_probability, min_success_steps=self.min_success_steps,
-            runtime_reference_motion=False, terrain_curriculum_levels=6 if self.curriculum else 0,
+            runtime_reference_motion=False,
+            terrain_curriculum_levels=self.num_terrain_levels if self.curriculum else 0,
             contact_constraints={
                 "ground": "finite MuJoCo heightfield",
                 "robot_geom_contype": 2,
@@ -152,7 +153,7 @@ class CommandSim(TerrainSim):
             self._ground_start(ids)
         self.c[ids] = 0
         if self.mdp.terrain_navigation:
-            self.c[ids, 0] = self.centers[self.levels[ids]]
+            self.c[ids, 0] = self._lane_center(ids)
         self.sample_commands(ids)
         for value in (self._episode_tracking, self._episode_velocity_error,
                       self._episode_yaw_error, self._episode_clearance_error):
@@ -695,7 +696,8 @@ class CommandSim(TerrainSim):
         self.a_prev.copy_(a)
         if len(ids):
             if self.curriculum:
-                self.levels[ids] = update_terrain_levels(self.levels[ids], success[ids], fallen[ids])
+                self.levels[ids] = update_terrain_levels(
+                    self.levels[ids], success[ids], fallen[ids], self.num_terrain_levels - 1)
             with self._warp_context():
                 self._randomize(ids)
                 self._reset_state(ids)

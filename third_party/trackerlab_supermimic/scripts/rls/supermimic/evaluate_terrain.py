@@ -523,7 +523,7 @@ def main():
     if sequence_plan is not None:
         env.set_fixed_keyboard_mode(sequence_plan["stages"][0]["mode"])
     env.curriculum = False
-    levels = torch.arange(args.num_envs, device=device) % 6
+    levels = torch.arange(args.num_envs, device=device) % env.num_terrain_levels
     env.reset(levels=levels)
     actor = TerrainPolicy(mdp.obs_dim, mdp.goal_dim, hist=ck["arguments"]["hist"],
                           num_joints=spec.num_joints,

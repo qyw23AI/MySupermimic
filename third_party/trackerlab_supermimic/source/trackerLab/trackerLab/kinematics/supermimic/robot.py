@@ -12,7 +12,7 @@ import numpy as np
 import torch
 
 from trackerTask.supermimic.robots import get_robot
-from .rotations import axis_angle_to_mat, quat_to_mat
+from .rotations import axis_angle_to_mat, cross3, quat_to_mat
 
 
 class RobotKinematics:
@@ -94,7 +94,7 @@ class RobotKinematics:
             R_off = Rp @ self.off_R[i]
             if j < 0:
                 Ri, wi = R_off, W[par]
-                vi = V[par] + torch.cross(W[par], pi - P[par], dim=-1)
+                vi = V[par] + cross3(W[par], pi - P[par])
             else:
                 Ri = R_off @ axis_angle_to_mat(self.axes[i], q[..., j] - self.qrefs[i])
                 anchor_w = pi + (R_off @ self.anchors[i].unsqueeze(-1)).squeeze(-1)
@@ -103,8 +103,8 @@ class RobotKinematics:
                 axis_w = (R_off @ self.axes[i].unsqueeze(-1)).squeeze(-1)
                 wi = W[par] + axis_w * qd[..., j : j + 1]
                 vi = (
-                    V[par] + torch.cross(W[par], anchor_w - P[par], dim=-1)
-                    - torch.cross(wi, arm_w, dim=-1)
+                    V[par] + cross3(W[par], anchor_w - P[par])
+                    - cross3(wi, arm_w)
                 )
             P[i], Rs[i], V[i], W[i] = pi, Ri, vi, wi
         idx = range(self.num_bodies) if all_bodies else self.tracked_idx

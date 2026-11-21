@@ -248,6 +248,12 @@ def make_env_cfg(a: SuperMimicEnvCfgArgs) -> ManagerBasedRlEnvCfg:
         "motion_body_lin_vel": RewardTermCfg(func=track_mdp.motion_global_body_linear_velocity_error_exp, weight=rc.w_body_lin_vel, params={"command_name": "motion", "std": rc.std_body_lin_vel}),
         "motion_body_ang_vel": RewardTermCfg(func=track_mdp.motion_global_body_angular_velocity_error_exp, weight=rc.w_body_ang_vel, params={"command_name": "motion", "std": rc.std_body_ang_vel}),
     }
+    if rc.launch_velocity_weight:
+        rewards["jump_launch_velocity"] = RewardTermCfg(func=sm_rewards.motion_jump_launch,
+            weight=rc.launch_velocity_weight, params={"command_name": "motion"})
+    if rc.placement_weight:
+        rewards["jump_placement"] = RewardTermCfg(func=sm_rewards.motion_jump_placement,
+            weight=rc.placement_weight, params={"command_name": "motion", "indices": rc.placement_indices})
     if rc.w_joint_pos != 0.0:
         rewards["motion_joint_pos"] = RewardTermCfg(func=sm_rewards.motion_joint_pos_error_exp, weight=rc.w_joint_pos, params={"command_name": "motion", "std": rc.std_joint_pos})
     if rc.w_joint_vel != 0.0:
@@ -305,6 +311,8 @@ def make_env_cfg(a: SuperMimicEnvCfgArgs) -> ManagerBasedRlEnvCfg:
         episode_length_s=a.episode_length_s,
         seed=a.seed,
     )
+    if spec.scene_setup is not None:
+        spec.scene_setup(cfg.scene)
     return cfg
 
 

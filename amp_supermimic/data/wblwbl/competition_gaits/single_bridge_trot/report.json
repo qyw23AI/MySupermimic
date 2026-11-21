@@ -1,0 +1,53 @@
+{
+  "frames": 675,
+  "fps": 50,
+  "duration_s": 13.48,
+  "body_forward_travel_m": 4.3136,
+  "obstacle_length_width_height_m": [
+    3.0,
+    0.4,
+    0.1
+  ],
+  "nominal_step_width_m": 0.28,
+  "planned_support_frames_on_top_by_leg": [
+    324,
+    297,
+    297,
+    324
+  ],
+  "maximum_foot_fit_error_m": 3.08761612064263e-09,
+  "max_planned_stance_foot_speed_m_s": 3.4564951898541854e-08,
+  "minimum_planted_foot_edge_margin_m": 0.020199999989124293,
+  "minimum_top_lateral_margin_m": 0.03619999995841096,
+  "worst_geometry_penetration_m": -0.0,
+  "collision_audit_rate_hz": 200,
+  "min_planned_support_count": 2,
+  "min_static_projected_com_margin_m": null,
+  "peak_joint_speed_rad_s": 17.476070108462693,
+  "knee_most_extended_rad": -1.0158322464988734,
+  "status": "kinematic_candidate",
+  "phases": [
+    {
+      "name": "Approach and step onto deck",
+      "start_frame": 0,
+      "stop_frame_exclusive": 147
+    },
+    {
+      "name": "Bridge deck - diagonal trot",
+      "start_frame": 147,
+      "stop_frame_exclusive": 483
+    },
+    {
+      "name": "Trot off the far end",
+      "start_frame": 483,
+      "stop_frame_exclusive": 675
+    }
+  ],
+  "support_labels": {
+    "0": "swing",
+    "1": "floor",
+    "2": "obstacle_top"
+  },
+  "csv_sha256": "770f35d1898f8148e3a43daf1a514cd628e4382824d8254765b075ef3c36154f",
+  "mjcf_sha256": "a6ae3a95bf71c63737bf7c913f2bb37429e78a6ac07f1b68593e5504723e3084"
+}

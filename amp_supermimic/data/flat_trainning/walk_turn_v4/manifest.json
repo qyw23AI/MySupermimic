@@ -1,0 +1,34 @@
+{
+  "schema": "wblwbl-amp-walk-turn-v4",
+  "style": "flat_walk_and_turn",
+  "source_pool": "outputs/physx/repro-warp-amp-pool",
+  "selection_reason": "Controlled second experiment: retain only the forward walk and left/right turn expert clips already used in the successful PhysX 10k baseline; remove trot, reverse and strafe experts.",
+  "training_command_modes": [
+    "forward",
+    "turn",
+    "forward_turn"
+  ],
+  "amp_weight": 0.2,
+  "reference_reset_probability": 0.7,
+  "files": [
+    {
+      "file": "forward__ai4_dog_walk_03.csv",
+      "frames": 456,
+      "sha256": "ce129215b7eaacda85622be7bf2e4a4d561e945bec222d1dd2fe376f6bc9f1ef",
+      "source_manifest_sha256": "640349e314673c263e2c2b648734d167424a935e29d545ab5bfcc79ea0f7fbe1"
+    },
+    {
+      "file": "turn_left__procedural_turn_left.csv",
+      "frames": 200,
+      "sha256": "72e93cdca472b0ae58c461de1acce7df84f52fdbe3aa3d4bffec076101bcef8e",
+      "source_manifest_sha256": "640349e314673c263e2c2b648734d167424a935e29d545ab5bfcc79ea0f7fbe1"
+    },
+    {
+      "file": "turn_right__procedural_turn_right.csv",
+      "frames": 200,
+      "sha256": "24967fe2b6c90f9a199dc4adc07f5a724ce0f9c36aa72ecefe1ffd36e0114494",
+      "source_manifest_sha256": "640349e314673c263e2c2b648734d167424a935e29d545ab5bfcc79ea0f7fbe1"
+    }
+  ],
+  "note": "This is an immutable subset of the known-good baseline pool, not a newly retargeted dataset. The retargeted-v3 diagnostics are kept separately and are not used in this run."
+}

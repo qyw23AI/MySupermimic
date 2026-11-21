@@ -1,0 +1,184 @@
+{
+  "frames": 119,
+  "fps": 50,
+  "duration_s": 2.36,
+  "body_forward_travel_m": 1.036,
+  "obstacle_length_width_height_m": [
+    0.08,
+    0.8,
+    0.3
+  ],
+  "nominal_step_width_m": 0.368,
+  "planned_support_frames_on_top_by_leg": [
+    0,
+    0,
+    37,
+    37
+  ],
+  "maximum_foot_fit_error_m": 1.930353169721187e-09,
+  "max_planned_stance_foot_speed_m_s": 9.651762406661963e-08,
+  "minimum_planted_foot_edge_margin_m": 0.015199999156225504,
+  "minimum_top_lateral_margin_m": 0.1961999987088241,
+  "worst_geometry_penetration_m": -0.0,
+  "collision_audit_rate_hz": 200,
+  "min_planned_support_count": 0,
+  "min_static_projected_com_margin_m": null,
+  "peak_joint_speed_rad_s": 12.504498378376727,
+  "knee_most_extended_rad": -1.3279054627072142,
+  "status": "kinematic_candidate",
+  "route": "direct",
+  "max_body_root_height_m": 0.6050679999999999,
+  "planned_front_pair_crest_support_s": 0.74,
+  "planned_flight_intervals_s": [
+    [
+      0.38,
+      0.58
+    ],
+    [
+      1.48,
+      1.8
+    ]
+  ],
+  "phase_labels": {
+    "0": "swing_or_flight",
+    "1": "floor_support",
+    "2": "crest_support"
+  },
+  "source_mjcf_sha256": "a6ae3a95bf71c63737bf7c913f2bb37429e78a6ac07f1b68593e5504723e3084",
+  "free_base_pd_tracking": [
+    {
+      "kp": 40.0,
+      "kd": 1.0,
+      "body_max_x_m": -0.33871170705166953,
+      "max_lower_front_sole_height_m": 0.04978243920319615,
+      "front_pair_simultaneous_crest_contact_s": 0.0,
+      "final_body_xyz_m": [
+        -0.44701848552988177,
+        -0.012178106528919994,
+        0.3124966761640083
+      ],
+      "final_feet_x_m": [
+        -0.4677947340540805,
+        -0.4887810302275795,
+        -0.2287469137989874,
+        -0.21774664051819362
+      ],
+      "completed_two_phase_crossing": false
+    },
+    {
+      "kp": 60.0,
+      "kd": 2.0,
+      "body_max_x_m": -0.27890851133127403,
+      "max_lower_front_sole_height_m": 0.059731118160498156,
+      "front_pair_simultaneous_crest_contact_s": 0.0,
+      "final_body_xyz_m": [
+        -0.5475035918529061,
+        -0.019934422083971896,
+        0.33178250032748374
+      ],
+      "final_feet_x_m": [
+        -0.5772282203911859,
+        -0.5913388686208138,
+        -0.33428988990281816,
+        -0.3458404543269029
+      ],
+      "completed_two_phase_crossing": false
+    },
+    {
+      "kp": 90.0,
+      "kd": 2.8,
+      "body_max_x_m": -0.2746525438402527,
+      "max_lower_front_sole_height_m": 0.0488118729342069,
+      "front_pair_simultaneous_crest_contact_s": 0.0,
+      "final_body_xyz_m": [
+        -0.5059306260924804,
+        0.007830161280977624,
+        0.36552271486479015
+      ],
+      "final_feet_x_m": [
+        -0.5816675128183115,
+        -0.5790024695776594,
+        -0.30293649124572636,
+        -0.30273109797058306
+      ],
+      "completed_two_phase_crossing": false
+    },
+    {
+      "kp": 120.0,
+      "kd": 3.5,
+      "body_max_x_m": -0.273833845320124,
+      "max_lower_front_sole_height_m": 0.055410892627326305,
+      "front_pair_simultaneous_crest_contact_s": 0.0,
+      "final_body_xyz_m": [
+        -0.5275850685210676,
+        0.012417330880601546,
+        0.37421674589929244
+      ],
+      "final_feet_x_m": [
+        -0.63462882972483,
+        -0.6288748728575302,
+        -0.3457092119644706,
+        -0.34350328917574624
+      ],
+      "completed_two_phase_crossing": false
+    }
+  ],
+  "phases": [
+    {
+      "name": "Crouch and load rear legs",
+      "start_frame": 0,
+      "stop_frame_exclusive": 12
+    },
+    {
+      "name": "First rear-pair push",
+      "start_frame": 12,
+      "stop_frame_exclusive": 19
+    },
+    {
+      "name": "Front pair jumps onto wall",
+      "start_frame": 19,
+      "stop_frame_exclusive": 29
+    },
+    {
+      "name": "Brace front pair on crest",
+      "start_frame": 29,
+      "stop_frame_exclusive": 43
+    },
+    {
+      "name": "Reset rear pair for second push",
+      "start_frame": 43,
+      "stop_frame_exclusive": 57
+    },
+    {
+      "name": "Compress for second jump",
+      "start_frame": 57,
+      "stop_frame_exclusive": 65
+    },
+    {
+      "name": "Second rear-pair push",
+      "start_frame": 65,
+      "stop_frame_exclusive": 74
+    },
+    {
+      "name": "Second jump - both pairs clear the wall",
+      "start_frame": 74,
+      "stop_frame_exclusive": 90
+    },
+    {
+      "name": "Rear pair lands on far floor",
+      "start_frame": 90,
+      "stop_frame_exclusive": 106
+    },
+    {
+      "name": "Settle on far side",
+      "start_frame": 106,
+      "stop_frame_exclusive": 118
+    },
+    {
+      "name": "Complete",
+      "start_frame": 118,
+      "stop_frame_exclusive": 119
+    }
+  ],
+  "csv_sha256": "d01bb2718c93b3ca2a38c6adc16b2367722ee3420838fd5da61b3f33594c1174"
+}

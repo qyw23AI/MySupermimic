@@ -24,7 +24,8 @@ def _save_png(path: Path, rgb) -> None:
     path.write_bytes(png)
 
 
-def _build_scene(profile: str, seed: int, level: int, mjcf: Path, source_config: Path, render_size=(1280, 720)):
+def _build_scene(profile: str, seed: int | None, level: int, mjcf: Path, source_config: Path,
+                 render_size=(1280, 720)):
     sys.path.insert(0, str(ROOT / "amp_supermimic/scripts"))
     import train as wblwbl_train
 
@@ -36,14 +37,25 @@ def _build_scene(profile: str, seed: int, level: int, mjcf: Path, source_config:
     from trackerTask.supermimic.mujoco_terrain import build_model
     from trackerLab.tracker_env.mdp.supermimic_terrain import HeightField
 
-    terrain = generate(profile, ROBOT_HEIGHTS[spec.name], seed=seed)
+    from wmp_parkour import PARKOUR_PROFILES, generate_wmp_parkour
+
+    if profile in PARKOUR_PROFILES:
+        from amp_supermimic.legacy import load_task_config
+
+        cfg, _ = load_task_config(profile)
+        terrain = generate_wmp_parkour(cfg.terrain, cfg.env.seed if seed is None else seed,
+                                       preview_level=level, profile=profile)
+    else:
+        terrain = generate(profile, ROBOT_HEIGHTS[spec.name], seed=0 if seed is None else seed)
     model, _, height, qpos_ids, _, _, _, _, _ = build_model(
         spec.name, terrain, ground_plane=False, render_size=render_size
     )
     data = mujoco.MjData(model)
     hf = HeightField(terrain, height, "cpu")
     level = max(0, min(level, len(terrain.centers) - 1))
-    if hasattr(terrain, "block_centers"):
+    if profile in PARKOUR_PROFILES:
+        x, y = terrain.spawn_x, float(terrain.lane_centers[0, 0])
+    elif hasattr(terrain, "block_centers"):
         x, y = terrain.block_centers[level]
     else:
         x, y = 0.0, float(terrain.centers[level])
@@ -60,7 +72,7 @@ def main():
 
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--profile", choices=wblwbl_train.PROFILES, default="mountain")
-    parser.add_argument("--seed", type=int, default=0)
+    parser.add_argument("--seed", type=int, default=None)
     parser.add_argument("--level", type=int, default=3)
     parser.add_argument("--mjcf", type=Path, default=wblwbl_train.MJCF)
     parser.add_argument("--source-config", type=Path, default=wblwbl_train.DEFAULT_SOURCE_CONFIG)
@@ -75,16 +87,29 @@ def main():
 
     import mujoco
 
-    model, data, terrain = _build_scene(
-        args.profile, args.seed, args.level, args.mjcf.resolve(), args.source_config.resolve()
-    )
+    try:
+        model, data, terrain = _build_scene(
+            args.profile, args.seed, args.level, args.mjcf.resolve(), args.source_config.resolve()
+        )
+    except ValueError as error:
+        parser.error(str(error))
+    from wmp_parkour import PARKOUR_PROFILES
+
+    if args.profile in PARKOUR_PROFILES:
+        print("Lanes in increasing Y: " + ", ".join(terrain.lane_types))
+        distance = 1.4 * max(terrain.x_max - terrain.x_min, terrain.y_max - terrain.y_min)
 
     if args.snapshot_dir is not None:
         args.snapshot_dir.mkdir(parents=True, exist_ok=True)
         opt = mujoco.MjvOption()
         opt.geomgroup[:] = 1
         renderer = mujoco.Renderer(model, height=720, width=1280)
-        if args.profile == "open_terrain":
+        if args.profile in PARKOUR_PROFILES:
+            views = [
+                (f"{args.profile}_L{args.level}_overview.png", [0., 0., 0.], distance, -42, 140),
+                (f"{args.profile}_L{args.level}_topdown.png", [0., 0., 0.], distance, -89, 0),
+            ]
+        elif args.profile == "open_terrain":
             cx5, cy5 = terrain.block_centers[-1]
             views = [
                 (f"{args.profile}_overview.png", [0.0, 0.0, 0.0], 34.0, -34, 135),
@@ -115,7 +140,10 @@ def main():
 
     with mujoco.viewer.launch_passive(model, data) as viewer:
         viewer.opt.geomgroup[:] = 1
-        if args.profile == "open_terrain":
+        if args.profile in PARKOUR_PROFILES:
+            viewer.cam.lookat[:] = [0.0, 0.0, 0.0]
+            viewer.cam.distance = distance
+        elif args.profile == "open_terrain":
             viewer.cam.lookat[:] = [0.0, 0.0, 0.0]
             viewer.cam.distance = 32.0
         else:

@@ -1,0 +1,137 @@
+{
+  "configs": {
+    "test": {
+      "file": "test.json",
+      "sha256": "c1ec45042bc06632a71ec931215fbbc27e62de8282cd5c3b99d95ef7eec81031"
+    },
+    "train": {
+      "file": "train.json",
+      "sha256": "5b101ec02d54f658dbff8aeb0c5a8594f14c4817253ec5b9af08d595adfd1b4d"
+    }
+  },
+  "files": [
+    {
+      "category": "hop",
+      "duration_seconds": 11.0,
+      "file": "hop__hop1.csv",
+      "fps": 50,
+      "frames": 551,
+      "hip_recentered": true,
+      "original_sha256": "8321ad28130b9733c59155ea8224475e8060903c792ec5a34b1df56764e51d96",
+      "sha256": "fe32880180625d7953e561d53973f6c0f7e0cf2741cf60b77038b1cf416f52bd",
+      "source_file": "/home/qyw/WMP/datasets/mocap_motions_wblwbl/hop1.txt",
+      "source_group": "hop/hop1",
+      "split": "train"
+    },
+    {
+      "category": "hop",
+      "duration_seconds": 11.0,
+      "file": "hop__hop2.csv",
+      "fps": 50,
+      "frames": 551,
+      "hip_recentered": true,
+      "original_sha256": "f7422e6c9246b4adb51758a85abe58d15b8beff84adb2868ecbe2fc10d5aa7ce",
+      "sha256": "3bff367aeb641d4bfce06fd01f58831eb86a1e1aad6e0538986927e9f60ed80c",
+      "source_file": "/home/qyw/WMP/datasets/mocap_motions_wblwbl/hop2.txt",
+      "source_group": "hop/hop2",
+      "split": "train"
+    },
+    {
+      "category": "trot",
+      "duration_seconds": 11.0,
+      "file": "trot__trot1.csv",
+      "fps": 50,
+      "frames": 551,
+      "hip_recentered": false,
+      "original_sha256": "50d4e82f95fdab285ba4d442aa8446e4007bfa1c33870e5aee0e880270534db4",
+      "sha256": "2b3008d77d0ae0c9e78a79e5106cde63666d29089d78e24e2804222f18a2548d",
+      "source_file": "/home/qyw/WMP/datasets/mocap_motions_wblwbl/trot1.txt",
+      "source_group": "trot/trot1",
+      "split": "train"
+    },
+    {
+      "category": "trot",
+      "duration_seconds": 11.0,
+      "file": "trot__trot2.csv",
+      "fps": 50,
+      "frames": 551,
+      "hip_recentered": false,
+      "original_sha256": "cb8da7f905b1853ae5defcf6cbc05b76b119c92aaa9819e73e4d280d4e3c2139",
+      "sha256": "533ecd62f9e50761106f8da2b89f093f98e3b67b5338b14c46bdc218bb6e5dcb",
+      "source_file": "/home/qyw/WMP/datasets/mocap_motions_wblwbl/trot2.txt",
+      "source_group": "trot/trot2",
+      "split": "train"
+    },
+    {
+      "category": "turn_left",
+      "duration_seconds": 3.98,
+      "file": "turn_left__procedural_turn_left.csv",
+      "fps": 50,
+      "frames": 200,
+      "original_sha256": "72e93cdca472b0ae58c461de1acce7df84f52fdbe3aa3d4bffec076101bcef8e",
+      "sha256": "72e93cdca472b0ae58c461de1acce7df84f52fdbe3aa3d4bffec076101bcef8e",
+      "source_file": "amp_supermimic/data/flat_trainning/pool/turn_left__procedural_turn_left.csv",
+      "source_group": "turn_left/turn_left",
+      "split": "train"
+    },
+    {
+      "category": "turn_right",
+      "duration_seconds": 3.98,
+      "file": "turn_right__procedural_turn_right.csv",
+      "fps": 50,
+      "frames": 200,
+      "original_sha256": "24967fe2b6c90f9a199dc4adc07f5a724ce0f9c36aa72ecefe1ffd36e0114494",
+      "sha256": "24967fe2b6c90f9a199dc4adc07f5a724ce0f9c36aa72ecefe1ffd36e0114494",
+      "source_file": "amp_supermimic/data/flat_trainning/pool/turn_right__procedural_turn_right.csv",
+      "source_group": "turn_right/turn_right",
+      "split": "train"
+    },
+    {
+      "category": "forward",
+      "duration_seconds": 3.98,
+      "file": "forward__procedural_forward.csv",
+      "fps": 50,
+      "frames": 200,
+      "original_sha256": "3d4ef8fa3b54b5aed8c6231ae033d9f09772b86d1618ca2e840d6ff5726d582b",
+      "sha256": "3d4ef8fa3b54b5aed8c6231ae033d9f09772b86d1618ca2e840d6ff5726d582b",
+      "source_file": "amp_supermimic/data/flat_trainning/pool/forward__procedural_forward.csv",
+      "source_group": "forward/procedural_forward",
+      "split": "test"
+    }
+  ],
+  "fps": 50,
+  "joint_names": [
+    "RR_hip_joint",
+    "RR_thigh_joint",
+    "RR_calf_joint",
+    "RL_hip_joint",
+    "RL_thigh_joint",
+    "RL_calf_joint",
+    "FR_hip_joint",
+    "FR_thigh_joint",
+    "FR_calf_joint",
+    "FL_hip_joint",
+    "FL_thigh_joint",
+    "FL_calf_joint"
+  ],
+  "model_sha256": "b7481b286a22e75df340b47832c38cdad43777118b06bd4ace1aff9fa9e41cb0",
+  "quaternion_order": "xyzw",
+  "recipe": {
+    "robot": "wblwbl_dog_v1",
+    "sources": [
+      "hop/hop1",
+      "hop/hop2",
+      "trot/trot1",
+      "trot/trot2",
+      "turn_left/turn_left",
+      "turn_right/turn_right",
+      "forward/procedural_forward"
+    ],
+    "style": "parkour_wmp_turn"
+  },
+  "recipe_sha256": "3ad0144ce128f6395d51c1611ab1e794c724924c3786c29480dc66cbcd0128b5",
+  "robot": "wblwbl_dog_v1",
+  "schema": "style-campaign-pool-v1",
+  "status": "ready",
+  "style": "parkour_wmp_turn"
+}

@@ -34,6 +34,7 @@ class PolicyTrainerCfg:
     use_critic: bool = True
     obs_noise: bool = True
     compile: str | None = "default"
+    demonstration_weight: float = 0.0
     anchor_obs: bool = False  # None | "default" | "reduce-overhead" | "max-autotune-no-cudagraphs"
 
 
@@ -46,6 +47,10 @@ class PolicyTrainer:
 
         self.step_fn = ImagStep(wm, lib.default_joint_pos, compile_mode=cfg.compile)
         self.nan_skips = 0
+        self.demonstration = None
+
+    def set_demonstration(self, policy_obs: torch.Tensor, goal: torch.Tensor, action: torch.Tensor) -> None:
+        self.demonstration = (policy_obs.detach(), goal.detach(), action.detach())
 
     def set_lr(self, lr: float) -> None:
         for g in self.opt.param_groups:
@@ -75,6 +80,13 @@ class PolicyTrainer:
             v_H = None
         J = policy_objective(ro, v_H, cfg.gamma)
         loss = -J / cfg.horizon
+        demonstration_loss = None
+        if self.demonstration is not None and cfg.demonstration_weight:
+            demo_obs, demo_goal, demo_action = self.demonstration
+            index = torch.randint(len(demo_action), (cfg.batch_size,), device=demo_action.device)
+            prediction = self.policy(demo_obs[index], demo_goal[index])
+            demonstration_loss = torch.nn.functional.mse_loss(prediction, demo_action[index])
+            loss = loss + cfg.demonstration_weight * demonstration_loss
         self.opt.zero_grad(set_to_none=True)
         if not torch.isfinite(loss):
             # A non-finite imagined return (a diverged world-model rollout) must not reach the weights.
@@ -104,6 +116,8 @@ class PolicyTrainer:
             "imag_immune_frac": float(immune.mean()),
             "nan_skips": float(self.nan_skips),
         }
+        if demonstration_loss is not None:
+            metrics["demonstration_loss"] = float(demonstration_loss.detach())
         for k, v in ro.reward_terms.items():
             metrics[f"imag_r/{k}"] = v
 

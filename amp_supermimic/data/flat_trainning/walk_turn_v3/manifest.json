@@ -1,0 +1,89 @@
+{
+  "schema": "wblwbl-physx-walk-turn-v3",
+  "robot": "wblwbl_dog_v1",
+  "style": "flat_walk_expert_with_commanded_turns",
+  "target_robot_mjcf_sha256": "a6ae3a95bf71c63737bf7c913f2bb37429e78a6ac07f1b68593e5504723e3084",
+  "training_modes": [
+    "forward",
+    "turn"
+  ],
+  "expert_motion_classes": [
+    "retargeted_walk",
+    "wblwbl_ik_walk"
+  ],
+  "turn_reference_policy": "No turn reference clip is loaded: existing turn clips do not reproduce their reference yaw in playback; turning is learned from command tracking reward.",
+  "records": [
+    {
+      "file": "retargeted_ai4_dog_walk_03.csv",
+      "frames": 456,
+      "duration_seconds": 9.1,
+      "sha256": "1b2425aaa76ffd43c2c35c9d441572f976543b0148c721a93cdb2efb75eca54a",
+      "fps": 50,
+      "kind": "retargeted_kine2go_walk",
+      "source_file": "c08ce5b6946ecaa7431b8d2f5ab0359af05a337596bd35dabfa36df04aa21716",
+      "target_mjcf_sha256": "a6ae3a95bf71c63737bf7c913f2bb37429e78a6ac07f1b68593e5504723e3084",
+      "foot_error_p95_m": 0.00022278921534822443,
+      "joint_velocity_p99_rad_s": 11.471257630022958,
+      "motion_usable_for_amp": true,
+      "playback_pass": false,
+      "playback_progress_ratio": -0.04940541514540659
+    },
+    {
+      "file": "retargeted_vhdc_horse1_s1_walk_01.csv",
+      "frames": 500,
+      "duration_seconds": 9.98,
+      "sha256": "a5296e3cc3f6c5a7be7c3f5e72cabcd73c71233e5b5fa728aa652b5c2a8df948",
+      "fps": 50,
+      "kind": "retargeted_kine2go_walk",
+      "source_file": "8f7cd6edf78a0c8d423ccd0da3cfcbf195896f743e74ddc1ebd7fe68872e40e5",
+      "target_mjcf_sha256": "a6ae3a95bf71c63737bf7c913f2bb37429e78a6ac07f1b68593e5504723e3084",
+      "foot_error_p95_m": 0.0018272236769823172,
+      "joint_velocity_p99_rad_s": 7.886270955518039,
+      "motion_usable_for_amp": true,
+      "playback_pass": false,
+      "playback_progress_ratio": -0.0720020053821515
+    },
+    {
+      "file": "wblwbl_ik_walk_w28_v22.csv",
+      "frames": 521,
+      "duration_seconds": 10.4,
+      "sha256": "0a09e62dfd2d7db28e489ad6b601d4d482e693162d090448b3336056a0d22f83",
+      "fps": 50,
+      "kind": "current_robot_ik_walk",
+      "target_mjcf_sha256": "a6ae3a95bf71c63737bf7c913f2bb37429e78a6ac07f1b68593e5504723e3084",
+      "nominal_speed_m_s": 0.22,
+      "duty_factor": 0.8,
+      "min_support_feet": 3,
+      "max_stance_slip_m_s": 2.5223506054188754e-07,
+      "maximum_ik_residual_m": 1.5691400194057535e-07
+    },
+    {
+      "file": "wblwbl_ik_walk_w30_v28.csv",
+      "frames": 402,
+      "duration_seconds": 8.02,
+      "sha256": "3ab1d15c3aa36a07d4c386a7b73b134a18fc5d2a294acce2f2f634423ee21bb6",
+      "fps": 50,
+      "kind": "current_robot_ik_walk",
+      "target_mjcf_sha256": "a6ae3a95bf71c63737bf7c913f2bb37429e78a6ac07f1b68593e5504723e3084",
+      "nominal_speed_m_s": 0.28,
+      "duty_factor": 0.8,
+      "min_support_feet": 3,
+      "max_stance_slip_m_s": 3.0495720181546425e-07,
+      "maximum_ik_residual_m": 1.5702349618311522e-07
+    },
+    {
+      "file": "wblwbl_ik_walk_w32_v32.csv",
+      "frames": 348,
+      "duration_seconds": 6.94,
+      "sha256": "c255ad77a2244cf6ae8b95777b131b911209db83a059c713d778683e0f8fbf1d",
+      "fps": 50,
+      "kind": "current_robot_ik_walk",
+      "target_mjcf_sha256": "a6ae3a95bf71c63737bf7c913f2bb37429e78a6ac07f1b68593e5504723e3084",
+      "nominal_speed_m_s": 0.32,
+      "duty_factor": 0.8,
+      "min_support_feet": 3,
+      "max_stance_slip_m_s": 4.579476288535111e-07,
+      "maximum_ik_residual_m": 1.4694282538081097e-07
+    }
+  ]
+}

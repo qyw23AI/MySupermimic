@@ -11,13 +11,44 @@ ROOT = Path(__file__).resolve().parents[2]
 UPSTREAM = ROOT / "third_party/trackerlab_supermimic/scripts/rls/supermimic"
 ROBOT = "wblwbl_dog_v1"
 TASK = f"locomotion/{ROBOT}/velocity"
-PROFILES = ("velocity", "stairs", "mountain", "parkour", "open_terrain", "open_flat")
+PROFILES = (
+    "velocity", "stairs", "mountain", "parkour", "open_terrain", "open_flat",
+    "amp_supermimic_parkour", "amp_supermimic_stepping_stones",
+)
 DEFAULT_SOURCE_CONFIG = ROOT / "him_supermimic/outputs/zero-start/b-seed511/config.json"
 URDF = ROOT / f"third_party/MyHIMLoco/legged_gym/resources/robots/{ROBOT}/urdf/wblwbl_dog.urdf"
 MJCF = ROOT.parent / f"robocon2027_sim_control/deploy_cpp/robot/{ROBOT}/xml/{ROBOT}.xml"
+QUADRUPED_SCAN_X = (-0.40, 0.90)
+QUADRUPED_SCAN_Y = (-0.38, 0.38)
 
 
-def register(mjcf, source_config):
+def _patch_height_scan():
+    """Use a quadruped-centered 17x11 height-scan box (meters) for WBLWBL."""
+    import torch
+    from trackerLab.tracker_env.mdp import supermimic_terrain
+
+    HeightField = supermimic_terrain.HeightField
+    if getattr(HeightField, "_wblwbl_scan_patched", False):
+        return
+    orig_init = HeightField.__init__
+
+    def patched_init(self, terrain, height, device):
+        orig_init(self, terrain, height, device)
+        gx, gy = torch.meshgrid(
+            torch.linspace(QUADRUPED_SCAN_X[0], QUADRUPED_SCAN_X[1], 17, device=device),
+            torch.linspace(QUADRUPED_SCAN_Y[0], QUADRUPED_SCAN_Y[1], 11, device=device),
+            indexing="ij",
+        )
+        self.offsets = torch.stack((gx.flatten(), gy.flatten()), -1)
+        self.model_offsets = torch.stack((gx[::2, ::2].flatten(), gy[::2, ::2].flatten()), -1)
+
+    HeightField.__init__ = patched_init
+    HeightField._wblwbl_scan_patched = True
+
+
+def register(mjcf, source_config, terrain_cfg=None):
+    if str(ROOT) not in sys.path:
+        sys.path.insert(0, str(ROOT))
     sys.path.insert(0, str(UPSTREAM))
     from bootstrap import configure_paths
 
@@ -42,11 +73,13 @@ def register(mjcf, source_config):
     root = ET.parse(mjcf).getroot()
     feet = tuple(f"{leg}_calf" for leg in ("RR", "RL", "FR", "FL"))
     offsets = []
+    foot_radii = []
     for name in feet:
         sphere = root.find(f".//body[@name='{name}']/geom[@type='sphere']")
         if sphere is None:
             raise ValueError(f"Missing foot collision sphere on {name}")
         offsets.append(tuple(map(float, sphere.attrib["pos"].split())))
+        foot_radii.append(float(sphere.attrib.get("size", "0.02").split()[0]))
     spec = robots.RobotSpec(ROBOT, joints, ("base_link", *feet), "base_link", "base_link",
                             str(mjcf.resolve()), tuple(pose[name] for name in joints),
                             (contract["action_scale"],) * len(joints))
@@ -72,8 +105,48 @@ def register(mjcf, source_config):
         terrain.ALL_TASKS[task_id] = terrain.TerrainTask(task_id, ROBOT, profile)
     from open_terrain import patch_open_terrain
     patch_open_terrain(ROBOT)
+    from trackerLab.tracker_env.mdp import supermimic_command
+    from amp_supermimic.legacy.wblwbl_dog_v1.wblwbl_dog_v1_stepping_stones_config import (
+        WblwblDogV1AmpSupermimicSteppingStonesCfg,
+    )
+    from amp_supermimic.legacy.wblwbl_dog_v1.wblwbl_dog_v1_wmp_parkour_config import (
+        WblwblDogV1AmpSupermimicParkourCfg,
+    )
+    from wmp_parkour import (
+        PARKOUR_PROFILE,
+        PARKOUR_PROFILES,
+        STEPPING_STONES_PROFILE,
+        generate_amp_supermimic_parkour,
+        generate_amp_supermimic_stepping_stones,
+        patch_parkour,
+    )
+
+    for parkour_profile in PARKOUR_PROFILES:
+        task_id = f"locomotion/{ROBOT}/{parkour_profile}"
+        terrain.ALL_TASKS[task_id] = terrain.TerrainTask(task_id, ROBOT, parkour_profile)
+        if parkour_profile not in terrain.PROFILES:
+            terrain.PROFILES = (*terrain.PROFILES, parkour_profile)
+            supermimic_command.PROFILES = (*supermimic_command.PROFILES, parkour_profile)
+    parkour_cfg = (terrain_cfg if getattr(terrain_cfg, "profile", None) == PARKOUR_PROFILE
+                   else WblwblDogV1AmpSupermimicParkourCfg().terrain)
+    stepping_cfg = (terrain_cfg if getattr(terrain_cfg, "profile", None) == STEPPING_STONES_PROFILE
+                    else WblwblDogV1AmpSupermimicSteppingStonesCfg().terrain)
+    previous_generate = getattr(terrain.generate, "_before_wmp_parkour", terrain.generate)
+
+    def generate(profile, height, seed=0):
+        if profile == PARKOUR_PROFILE:
+            return generate_amp_supermimic_parkour(parkour_cfg, seed)
+        if profile == STEPPING_STONES_PROFILE:
+            return generate_amp_supermimic_stepping_stones(stepping_cfg, seed)
+        return previous_generate(profile, height, seed)
+
+    generate._before_wmp_parkour = previous_generate
+    generate._open_terrain_patched = True
+    terrain.generate = generate
+    _patch_height_scan()
     FOOT_BODIES[ROBOT] = feet
     FOOT_OFFSETS[ROBOT] = tuple(offsets)
+    patch_parkour(ROBOT, foot_radii=tuple(foot_radii))
     return spec
 
 
@@ -197,6 +270,11 @@ def main():
         return
     if args.mode is None:
         parser.error("the following arguments are required: mode")
+    if args.task is None and args.mode == "train" and args.profile in (
+        "amp_supermimic_parkour",
+        "amp_supermimic_stepping_stones",
+    ):
+        args.task = args.profile
 
     env_cfg = train_cfg = None
     if args.task is not None:
@@ -209,7 +287,7 @@ def main():
         source_config = args.source_config or DEFAULT_SOURCE_CONFIG
         profile = args.profile or "velocity"
 
-    spec = register(mjcf, source_config)
+    spec = register(mjcf, source_config, env_cfg.terrain if env_cfg is not None else None)
     if env_cfg is not None:
         apply_runtime_task_patches(env_cfg)
     if args.mode == "prepare":

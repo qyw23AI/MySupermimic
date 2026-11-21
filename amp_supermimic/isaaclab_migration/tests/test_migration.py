@@ -7,14 +7,65 @@ import unittest
 
 import torch
 
-from amp_supermimic.isaaclab_migration.cli import FLAT
+from amp_supermimic.isaaclab_migration.cli import FLAT, action_diagnostic_tensors, validate_warm_start
 from amp_supermimic.isaaclab_migration.config import motion_receipt, resolve, robot_from
 from amp_supermimic.isaaclab_migration.runtime import Runtime, configure_trackerlab
 from amp_supermimic.isaaclab_migration.wmp_terrain import CourseAtlas, CourseEvents
-from amp_supermimic.legacy import list_tasks
+from amp_supermimic.legacy import class_to_dict, list_tasks, load_task_config
+from amp_supermimic.scripts.open_terrain import sample_open_flat
 
 
 class MigrationContracts(unittest.TestCase):
+    def test_physx_open_flat_inherits_warp_training_contract(self):
+        warp, warp_train = load_task_config("wblwbl_dog_v1_open_flat")
+        physx, physx_train = resolve(SimpleNamespace(task="wblwbl_dog_v1_physx_open_flat"))
+        warp_env = class_to_dict(warp.env)
+        physx_env = class_to_dict(physx.env)
+        physx_env.pop("solver_velocity_iterations")
+        self.assertEqual(warp_env, physx_env)
+        for field in ("amp", "rewards", "domain_rand"):
+            self.assertEqual(class_to_dict(getattr(warp, field)), class_to_dict(getattr(physx, field)))
+        self.assertEqual(class_to_dict(warp_train.world_model), class_to_dict(physx_train.world_model))
+        self.assertEqual(class_to_dict(warp_train.algorithm), class_to_dict(physx_train.algorithm))
+        self.assertEqual(class_to_dict(warp.commands.curriculum), class_to_dict(physx.commands.curriculum))
+
+    def test_open_flat_command_mode_filter_supports_walk_turn_and_moving_turn(self):
+        cfg = {
+            "fwd_vx_min": 0.20, "fwd_vx_start_max": 0.55, "fwd_vx_end_max": 2.0,
+            "bwd_vx_min": 0.15, "bwd_vx_start_max": 0.45, "bwd_vx_end_max": 1.0,
+            "strafe_vy_min": 0.10, "strafe_vy_start_max": 0.35, "strafe_vy_end_max": 0.75,
+            "turn_wz_min": 0.30, "turn_wz_start_max": 0.90, "turn_wz_end_max": 1.60,
+        }
+        commands, _ = sample_open_flat(cfg, 0.0, 768, "cpu", torch.float32,
+                                        mode_set=("forward", "turn", "forward_turn"))
+        self.assertTrue(torch.all(commands[:, 0] >= 0))
+        self.assertTrue(torch.all(commands[:, 1] == 0))
+        straight = (commands[:, 0] > 0) & (commands[:, 2] == 0)
+        in_place_turn = (commands[:, 0] == 0) & (commands[:, 2] != 0)
+        moving_turn = (commands[:, 0] > 0) & (commands[:, 2] != 0)
+        self.assertTrue(torch.any(straight))
+        self.assertTrue(torch.any(in_place_turn))
+        self.assertTrue(torch.any(moving_turn))
+        self.assertTrue(torch.any(commands[:, 2] > 0))
+        self.assertTrue(torch.any(commands[:, 2] < 0))
+
+    def test_physx_flat_keeps_explicit_feet_and_native_contact_solver(self):
+        flat, _ = resolve(SimpleNamespace(task="wblwbl_dog_v1_physx_open_flat"))
+        parkour, _ = resolve(SimpleNamespace(task="wblwbl_dog_v1_physx_parkour"))
+        self.assertFalse(flat.robot.merge_fixed_joints)
+        self.assertEqual(flat.env.solver_velocity_iterations, 1)
+        self.assertFalse(parkour.robot.merge_fixed_joints)
+
+    def test_trackerlab_parkour_uses_heightfield_diagonal(self):
+        from amp_supermimic.isaaclab_migration.parkour import collision_mesh
+
+        env, _ = resolve(SimpleNamespace(task="wblwbl_dog_v1_physx_parkour", level=2))
+        runtime = Runtime("parkour", env, robot_from(env), None, "cpu")
+        field = runtime.field(runtime.terrain, env.robot.standing_height, "cpu")
+        vertices, faces = collision_mesh(runtime.terrain)
+        points = torch.tensor(vertices[faces[::739]].mean(1), dtype=torch.float32)
+        torch.testing.assert_close(field.sample(points[:, :2]), points[:, 2], atol=1e-5, rtol=1e-5)
+
     def test_task_overrides_are_isolated(self):
         env, train = resolve(SimpleNamespace(task=FLAT, num_envs=2, iterations=3))
         self.assertEqual((env.env.num_envs, train.runner.iterations), (2, 3))
@@ -24,6 +75,36 @@ class MigrationContracts(unittest.TestCase):
         self.assertNotIn(FLAT, list_tasks(backend="warp"))
         with self.assertRaises(ValueError):
             resolve(SimpleNamespace(task=FLAT, level=2))
+
+    def test_action_diagnostics_detect_saturation_and_target_clipping(self):
+        action = torch.tensor([[0.0, 20.0, -30.0]])
+        xi = torch.zeros(1, 7)
+        default_q = torch.zeros(3)
+        qlo, qhi = torch.full((3,), -1.0), torch.full((3,), 1.0)
+        joint_pos = torch.tensor([[-1.0, 0.0, 1.0]])
+        joint_vel = torch.tensor([[1.0, -2.0, 3.0]])
+        sums, maximum = action_diagnostic_tensors(
+            action, xi, default_q, qlo, qhi, .25, 20.0, joint_pos, joint_vel)
+        self.assertEqual(sums.tolist(), [50.0, 2.0, 2.0, 8.0, 2.0, 2.0, 6.0])
+        self.assertEqual(maximum.item(), 30.0)
+
+    def test_warm_start_preserves_action_limit(self):
+
+        env, train = resolve(SimpleNamespace(task=FLAT, action_limit=20.))
+        robot = robot_from(env)
+        saved = {
+            "robot": env.robot.name,
+            "arguments": {"hist": train.world_model.hist, "action_limit": 20.},
+            "simulator_contract": {"joint_names": list(robot.joints), "default_q": list(robot.default_q),
+                                   "action_scale": [env.control.action_scale] * len(robot.joints)},
+        }
+        with TemporaryDirectory() as directory:
+            path = Path(directory) / "actor.pt"
+            torch.save(saved, path)
+            validate_warm_start(path, env, train, robot)
+            env.env.action_limit = 4.
+            with self.assertRaisesRegex(ValueError, "action_limit"):
+                validate_warm_start(path, env, train, robot)
 
     def test_real_references_feed_trackerlab_amp(self):
         env, train = resolve(SimpleNamespace(task=FLAT))
@@ -49,6 +130,24 @@ class MigrationContracts(unittest.TestCase):
             self.assertEqual(mdp.obs_dim, 232)
             self.assertEqual(train.world_model.hist, 10)
 
+    def test_reference_reset_adds_terrain_height_in_the_correct_frame(self):
+        from amp_supermimic.isaaclab_migration.backend import PhysxCommandSim
+
+        scene = PhysxCommandSim.__new__(PhysxCommandSim)
+        scene.atlas, scene.parkour = None, False
+        scene.mdp = SimpleNamespace(field=SimpleNamespace(
+            sample=lambda xy: .1 * xy[..., 0] + .05 * xy[..., 1]))
+        world_xy = torch.tensor([[10.2, 20.4]])
+        origins = torch.tensor([[10.0, 20.0]])
+        reference_z = torch.tensor([.4])
+        # Local HeightField: subtract the per-environment world origin first.
+        torch.testing.assert_close(scene._reference_root_height(world_xy, origins, reference_z),
+                                   torch.tensor([.44]))
+        # WMP atlas coordinates are global and must not subtract the environment origin.
+        scene.atlas = object()
+        torch.testing.assert_close(scene._reference_root_height(world_xy, origins, reference_z),
+                                   torch.tensor([2.44]))
+
     def test_transition_keeps_pre_reset_state(self):
         configure_trackerlab()
         from amp_supermimic.isaaclab_migration.backend import PhysxCommandSim
@@ -61,6 +160,7 @@ class MigrationContracts(unittest.TestCase):
         lower, upper = torch.tensor(robot.limits).T
         scene = PhysxCommandSim.__new__(PhysxCommandSim)
         scene.cfg, scene.events, scene.dt = env, None, .02
+        scene.parkour = scene.open_flat = False
         scene.default_q, scene.qlo, scene.qhi = torch.tensor(robot.default_q), lower, upper
         scene.mdp = runtime.make_mdp(field, scene.default_q, lower, upper)
         scene.c = torch.tensor([[0., .5, 0., 0., .4, 0., 0.]])
@@ -68,7 +168,7 @@ class MigrationContracts(unittest.TestCase):
         scene.a_prev = torch.zeros(1, 12)
         scene.ep_return = torch.zeros(1)
         scene.ep_tracking = torch.zeros(1)
-        scene.ep_step = torch.tensor([env.env.max_episode_steps - 1])
+        scene.ep_step = torch.zeros(1, dtype=torch.long)
         scene.command_interval = torch.tensor([150])
         scene.command_age = torch.tensor([12])
         scene.levels = torch.zeros(1, dtype=torch.long)
@@ -80,24 +180,56 @@ class MigrationContracts(unittest.TestCase):
 
         def reset(ids):
             position[ids, 0] = -1.
+            scene.a_prev[ids] = 0.
+            scene.c[ids] = 0.
+            scene.ep_step[ids] = 0
+            scene.ep_return[ids] = 0.
+            scene.ep_tracking[ids] = 0.
 
         scene.state = lambda: (position.clone(), torch.eye(3)[None],
                                torch.tensor([[.5, 0., 0.]]), torch.zeros(1, 3),
                                scene.default_q[None], torch.zeros(1, 12))
-        scene.sim = SimpleNamespace(step=integrate)
+        scene.sim = SimpleNamespace(step=lambda **kwargs: integrate(), has_gui=lambda: False)
         scene.scene = SimpleNamespace(write_data_to_sim=lambda: None, update=lambda dt: None)
         scene.robot = SimpleNamespace(set_joint_position_target=lambda *a, **k: None)
-        scene.reset = reset
-        scene.sample_commands = lambda ids: None
+        scene.reset = lambda ids, **kwargs: reset(ids)
+        scene.sample_commands = lambda ids, **kwargs: None
 
-        transition = scene.step(torch.zeros(1, 12))
+        first_action = torch.full((1, 12), .25)
+        first = scene.step(first_action, fixed_command=True)
+        self.assertFalse(first["done"].item())
+        torch.testing.assert_close(first["a_prev"], torch.zeros_like(first_action))
+        torch.testing.assert_close(scene.a_prev, first_action)
+
+        # End the next transition deliberately: its replay row must retain the
+        # pre-reset state and previous action, while reset clears live history.
+        scene.ep_step.fill_(env.env.max_episode_steps - 1)
+        next_action = torch.full((1, 12), .5)
+        transition = scene.step(next_action, fixed_command=True)
         self.assertTrue(transition["truncated"].item())
         self.assertFalse(transition["terminated"].item())
-        self.assertAlmostEqual(transition["s1"][0, 0].item(), .01)
+        self.assertAlmostEqual(transition["s1"][0, 0].item(), .02)
         self.assertEqual(position[0, 0].item(), -1.)
+        torch.testing.assert_close(transition["a_prev"], first_action)
+        torch.testing.assert_close(transition["a"], next_action)
+        torch.testing.assert_close(scene.a_prev, torch.zeros_like(next_action))
         replay = ReplayBuffer(4, 1, "cpu", 12, scenario_dim=7, command_timing=True)
         replay.add(transition)
         self.assertEqual(replay.size, 1)
+
+        # Viewer diagnostics can preserve the terminal pose instead of
+        # immediately teleporting the robot to its reset state.
+        scene.ep_step.fill_(env.env.max_episode_steps - 1)
+        position[0, 0] = 0.
+        scene.ep_return.zero_()
+        scene.ep_tracking.zero_()
+        scene.a_prev.zero_()
+        scene.c[0] = torch.tensor([0., .5, 0., 0., .4, 0., 0.])
+        held = scene.step(next_action, fixed_command=True, auto_reset=False)
+        self.assertTrue(held["truncated"].item())
+        self.assertAlmostEqual(position[0, 0].item(), .01)
+        self.assertEqual(scene.ep_step.item(), env.env.max_episode_steps)
+
 
     def test_wmp_l0_mesh_query_and_strict_finish(self):
         env, _ = resolve(SimpleNamespace(task="wblwbl_dog_v1_physx_wmp_stair_gap"))

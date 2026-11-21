@@ -122,7 +122,7 @@ class Trainer:
         heads = make_heads(env, cfg.robot, self.device)
         self.wm = WorldModel(cfg.world_model, heads, self.device)
         self.policy = Policy(cfg.policy).to(self.device)
-        self.critic = Critic(cfg.critic, feat_dim=spec.feat_dim, xi_dim=cfg.world_model.state_spec.xi_dim, pcfg=cfg.policy).to(self.device)
+        self.critic = Critic(cfg.critic, feat_dim=self.wm.spec.feat_dim, xi_dim=cfg.world_model.state_spec.xi_dim, pcfg=cfg.policy).to(self.device)
         for m in (self.wm, self.policy, self.critic):
             broadcast_params(m)
         self.wm_trainer = WorldModelTrainer(self.wm, self.lib, cfg.wm_trainer)
@@ -255,8 +255,10 @@ class Trainer:
                     torch.cuda.synchronize()
                     timers["wm"] += time.perf_counter() - t0
                     t0 = time.perf_counter()
-                    for _ in range(sch.policy_updates_per_wm_update):
-                        m_pi = self.policy_trainer.update(self.buffer)
+                    m_pi = {}
+                    if self.iteration - start_iteration >= sch.policy_start_iterations:
+                        for _ in range(sch.policy_updates_per_wm_update):
+                            m_pi = self.policy_trainer.update(self.buffer)
                     torch.cuda.synchronize()
                     timers["policy"] += time.perf_counter() - t0
                     self.num_updates += 1

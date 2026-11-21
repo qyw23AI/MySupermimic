@@ -58,6 +58,7 @@ class ScheduleCfg:
     updates_per_env_step: float = 0.4  # UTD
     policy_updates_per_wm_update: int = 1
     warmup_iterations: int = 40  # env steps before the first update (fills k-step windows)
+    policy_start_iterations: int = 0  # optional world-model-only updates before actor/critic training
     lr_final_ratio: float = 0.03
     lr_decay_fraction: float = 250_000 / 320_000
     # Iteration at which the cosine decay starts (lr = base before it). For annealing a resumed run: set it to the

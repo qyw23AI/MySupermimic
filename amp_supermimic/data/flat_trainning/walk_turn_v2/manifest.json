@@ -1,0 +1,73 @@
+{
+  "schema": "wblwbl-walk-turn-pool-v2",
+  "robot": "wblwbl_dog_v1",
+  "style": "walk_turn_focus",
+  "source": "retargeted data/wblwbl clips; immutable copies for this experiment",
+  "files": [
+    {
+      "file": "walk_ai4_dog_walk_03.csv",
+      "source_file": "amp_supermimic/data/wblwbl/walk/ai4_dog_walk_03/ai4_dog_walk_03.csv",
+      "split": "train",
+      "frames": 456,
+      "fps": 50,
+      "duration_seconds": 9.1,
+      "sha256": "ce129215b7eaacda85622be7bf2e4a4d561e945bec222d1dd2fe376f6bc9f1ef",
+      "motion_usable_for_amp": true,
+      "playback_pass": false,
+      "playback_joint_rmse_rad": 0.2445658660636923,
+      "playback_fall_frames": 0,
+      "playback_progress_ratio": -0.020762126512828633
+    },
+    {
+      "file": "walk_vhdc_horse1_s1_walk_01.csv",
+      "source_file": "amp_supermimic/data/wblwbl/walk/vhdc_horse1_s1_walk_01/vhdc_horse1_s1_walk_01.csv",
+      "split": "train",
+      "frames": 500,
+      "fps": 50,
+      "duration_seconds": 9.98,
+      "sha256": "f2952aaaba51a69613429ec4c7dac317766fe7922553e5fb26520f0447464ad5",
+      "motion_usable_for_amp": true,
+      "playback_pass": false,
+      "playback_joint_rmse_rad": 0.22631032672981097,
+      "playback_fall_frames": 0,
+      "playback_progress_ratio": -0.03269478754168927
+    },
+    {
+      "file": "turn_ai4_dog_synth_eight_walk.csv",
+      "source_file": "amp_supermimic/data/wblwbl/turn/ai4_dog_synth_eight_walk/ai4_dog_synth_eight_walk.csv",
+      "split": "train",
+      "frames": 980,
+      "fps": 50,
+      "duration_seconds": 19.58,
+      "sha256": "e5a6f519130ba4c7e432b1ed4f9186599f084bf4820ff8a31f93cbfd13479e1f",
+      "motion_usable_for_amp": true,
+      "playback_pass": true,
+      "playback_joint_rmse_rad": 0.24615615556122705,
+      "playback_fall_frames": 0,
+      "playback_progress_ratio": 0.5535856174478375
+    },
+    {
+      "file": "heldout_turn_ai4_dog_synth_circle_walk.csv",
+      "source_file": "amp_supermimic/data/wblwbl/turn/ai4_dog_synth_circle_walk/ai4_dog_synth_circle_walk.csv",
+      "split": "test",
+      "frames": 672,
+      "fps": 50,
+      "duration_seconds": 13.42,
+      "sha256": "890704c77aa8dc1480e14ad162096c53bcb637b1269f634bb9ebfa52bd9307fa",
+      "motion_usable_for_amp": true,
+      "playback_pass": false,
+      "playback_joint_rmse_rad": 0.2628405383327292,
+      "playback_fall_frames": 0,
+      "playback_progress_ratio": 0.1946312093808416
+    }
+  ],
+  "training_modes": [
+    "forward",
+    "turn"
+  ],
+  "notes": [
+    "No trot, reverse or strafe clips in the training split.",
+    "The eight-walk figure-eight clip is the only turning expert because its recorded playback report passed.",
+    "The circle-walk clip is held out; it is not loaded by AMP during training."
+  ]
+}

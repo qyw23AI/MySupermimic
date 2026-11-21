@@ -49,7 +49,8 @@ checkpoint ──(train.py evaluate / play_mujoco.py / train.py export)──▶
 | `train.py` | 主入口：`prepare` / `train` / `evaluate` / `export`；在内存中给 trackerlab 注册 WBLWBL 机器人、地形、步态，不改 third_party |
 | `open_terrain.py` | `open_terrain` profile：3×2 共 6 级课程地形与命令奖励（猴子补丁） |
 | `live_viewer.py` | 训练时的实时 MuJoCo 窗口（`--live-viewer`，CPU 子进程，显示速度箭头与 187 个高度扫描点） |
-| `play_mujoco.py` | 加载 checkpoint 的闭环 MuJoCo 回放（CPU） |
+| `play_mujoco.py` | 加载 checkpoint 的闭环 MuJoCo 回放（CPU，支持 `--cycle` 自动轮播多种指令） |
+| `play_motion.py` | 加载 `train.json` 动作池或单条 CSV 的 MuJoCo 参考动作轮播查看器（CPU） |
 | `view_terrain.py` | 静态查看/截图地形 |
 | `retarget_go2.py` | Go2（或 go2_flip_TO / NJU / A1-AMP JSON）→ WBLWBL 的 IK 重定向，并做 PD 回放审计，输出 CSV、`report.json`、`playback.npz`，通过筛选才写 `train.json` |
 | `retarget_wblwbl_actions.py` | 批量重定向 `data/go2/kine2go_all40` + go2_flip_TO + NJU 跳跃到 `data/wblwbl/<walk/turn/run/strafe/crawl/jump>/`，写 `action_index.json`（参数 `--workers`） |
@@ -95,14 +96,58 @@ $PY amp_supermimic/scripts/train.py export --checkpoint <ckpt.pt> --output <dir>
 `train_terrain.py` 的完整参数（`--amp-weight`、`--buffer-steps`、`--ckpt-every` 等）见 `third_party/trackerlab_supermimic/scripts/rls/supermimic/train_terrain.py` 的 `parse_args`。
 检查点每 `--ckpt-every`（默认 500）轮保存，`last.pt` 为最新。
 
+**地形高程扫描范围**：`train.py` 的 `register()` 会通过 `_patch_height_scan()` 将 `HeightField` 覆盖为四足适配范围 **`X=[-0.40, 0.90] m`、`Y=[-0.38, 0.38] m`**（17×11 = 187 点，世界模型与 Critic 子采样 9×6 = 54 点），覆盖前后足落点与前方预判；训练、评估与 `play_mujoco.py` / `view_terrain.py` 共享该设置。注：此补丁生效前训练的历史 checkpoint（如 `wblwbl_open_flat_10k`）仍是按 TrackerLab 默认人型缩放范围训得的。
+
 **导出产物**（`export_command_policy.py`）：`policy.ts`（TorchScript）、`actor.pt`、`metadata.json`。输入：观测历史 `[batch, hist, obs_dim]`（当前契约 `obs_dim=232`，含 187 点 17×11 高度扫描）和命令 `[batch, 12]`；动作公式 `clip(default_q + joint_offset + clip(action,-limit,limit)*action_scale, 关节限位)`。部署需要局部高度图和机体速度估计（见 metadata 的 `deployment_requirement`）。与 `robocon2027_sim_control/deploy_cpp` 的对接尚未在本文档验证。
 
-**可视化**：
+**可视化**（一条命令即可连续轮播查看全部动作，无需逐条输入）：
 
 ```bash
-$PY amp_supermimic/scripts/play_mujoco.py --checkpoint <ckpt.pt> --level 0 --vx 0.5     # 另有 --vy --wz --cycle --speed --no-scan --quadruped-scan --apply-scan --scan-x --scan-y --hfield --headless-steps
-$PY amp_supermimic/scripts/view_terrain.py --profile open_terrain --level 5               # 加 --snapshot-dir 保存 PNG
+# 1) 查看训练好的策略：自动轮播 前进 / 侧移 / 后退 / 转向 / 停止（--cycle）
+/home/qyw/miniconda3/envs/trackerlab_amp/bin/python amp_supermimic/scripts/play_mujoco.py \
+  --checkpoint <ckpt.pt> --level 0 --cycle
+
+#    如需固定单一速度或自定义地形/扫描范围：
+#    --vx 0.5 --vy 0.0 --wz 0.0        # 手动指定目标速度 (m/s, m/s, rad/s)
+#    --level 0..5 --hfield             # 切换地形难度（Level 0 默认平面，--hfield 强制网格）
+#    --speed 1.0 --no-follow --no-scan # 倍速、取消相机跟随、隐藏 187 个高程点
+#    --quadruped-scan --apply-scan     # 覆盖预览并喂给策略；也可用 --scan-x X0 X1 --scan-y Y0 Y1
+
+# 2) 查看 AMP 专家动作池：一条命令依次轮播 train.json 里的全部参考动作
+/home/qyw/miniconda3/envs/trackerlab_amp/bin/python amp_supermimic/scripts/play_motion.py \
+  --motion-config amp_supermimic/data/flat_trainning/pool/train.json
+
+#    可选参数：
+#    --clip forward                    # 只播文件名包含指定子串的动作
+#    --csv <path/to/clip.csv>          # 只看单条 19 列 CSV 动作
+#    --speed 0.5 --pause 0.8 --once    # 0.5 倍速慢放、片段间停顿、播完一遍退出
+
+# 3) 静态查看地形与多视角截图
+/home/qyw/miniconda3/envs/trackerlab_amp/bin/python amp_supermimic/scripts/view_terrain.py \
+  --profile open_terrain --level 5     # 加 --snapshot-dir <目录> 保存 PNG
 ```
+
+### AMP-SuperMimic 跑酷与梅花桩专项
+
+在 `legacy/wblwbl_dog_v1/wblwbl_dog_v1_wmp_parkour_config.py` 中通过继承管理地形配置与奖励权重：
+- `amp_supermimic_parkour`：包含 `flat_gap`、`tire_array`、`slope`、`stair` 四类地形（L0~L9，已移除梅花桩）。
+- `amp_supermimic_stepping_stones`：继承自 `amp_supermimic_parkour`，专门训练 ROBOCON 梅花桩（L0~L14，L10 对齐规则标准尺寸），并配置梅花桩专项足端落点、防踩坑、摆动净空与防滑移奖励。
+
+```bash
+# MuJoCo 中查看跑酷 L9 与梅花桩 L10
+$PY amp_supermimic/scripts/view_terrain.py --profile amp_supermimic_parkour --level 9
+$PY amp_supermimic/scripts/view_terrain.py --profile amp_supermimic_stepping_stones --level 10
+
+# 开始 MuJoCo-Warp + SuperMimic AMP 训练
+$PY amp_supermimic/scripts/train.py --task amp_supermimic_parkour train
+$PY amp_supermimic/scripts/train.py --task amp_supermimic_stepping_stones train
+
+# 训练后在梅花桩地形回放
+$PY amp_supermimic/scripts/play_mujoco.py --checkpoint <last.pt> \
+  --profile amp_supermimic_stepping_stones --level 10
+```
+
+训练、地形预览和策略回放共用同一个配置。上坡和下坡各用一条恒坡度的光滑平面，`slope_grades` 按高差除以水平距离设置。默认用 2 cm 的网格采样地形，轮胎中心保留孔洞，桩和缺口的边缘按网格三角形插值。
 
 ## 5. 专家数据生成
 

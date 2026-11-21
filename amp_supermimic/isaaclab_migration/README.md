@@ -1,6 +1,85 @@
 # TrackerLab SuperMimic 命令训练迁移到 Isaac Lab
 
-**状态：已实现首版代码，CPU 检查通过，PhysX 实机短测待进行。** 实施范围为 WBLWBL Dog V1 的平地 walk/turn、WMP `stair_gap`、`stair_gap_ramp` 与 `gap_combos`。本次 GPU 正在使用，测试期间隐藏了 GPU。
+## 正式训练顺序
+
+### 1. PhysX 平地
+
+正式任务 `wblwbl_dog_v1_physx_open_flat` 继承 `legacy/wblwbl_dog_v1/wblwbl_dog_v1_open_flat_config.py`，复用 Warp 入口的平地奖励公式和自适应指令课程。训练默认从头开始。两条入口读取同一个 AMP 清单 `amp_supermimic/data/flat_trainning/pool/train.json`。运行时校验数据并记录文件哈希，参考重置使用 PhysX URDF 足球筛选。
+
+| 设置 | 正式平地任务 |
+| --- | --- |
+| 规模 | 4096 环境，10,000 轮，种子 42，控制周期 0.02 s |
+| Actor 与世界模型 | 历史 10 帧，动作上限 20，想象视野 32，每轮 8 个世界模型批次，世界模型和策略批量均为 2048 |
+| AMP | 权重 0.20，历史 10 帧，批量 2048，每轮更新 2 次，参考重置概率 0.70 |
+| 主要奖励 | 线速度 0.20、yaw 0.09、存活 0.02，另有定向进度、等待惩罚及原有姿态、动作与关节约束 |
+| 随机化 | 每环境固定质心、质量/惯量、PD 与力矩缩放。回合重置采样摩擦及其余关节偏移 |
+
+数值设置沿用原任务。摩擦与接触的求解、驱动和 URDF 足球的实现由 PhysX 提供。
+
+```bash
+cd /home/qyw/supermimic
+PY=/home/qyw/miniconda3/envs/himloco/bin/python
+"$PY" -u -m amp_supermimic.isaaclab_migration train \
+  --task wblwbl_dog_v1_physx_open_flat \
+  --run-dir amp_supermimic/outputs/physx/open-flat-10k
+```
+
+用 `evaluate` 重载平地最终检查点，除默认前进与转向外，可显式传入多个 `--command VX VY WZ` 检查原地转、后退和侧移。记录前进、转向误差及跌倒率，按第 5 节验收。
+
+#### 平地想象长度对照
+
+固定指令评估初始化时会把配置中的 `terrain.friction` 写入 PhysX 接触材质和 `xi[0]`。启用域随机化的训练仍在每次重置时同步采样并写入两处。固定指令评估保留由训练配置决定的按环境质量、质心及电机参数随机化。
+
+用两个新目录各冷启动 500 轮，保持种子、AMP 池、真实采样和训练批量一致。除想象长度外，两组使用同一配置。想象长度变化也会让每次策略更新包含的预测转移数随之变化。随后用相同的评估种子和指令比较速度误差、yaw 误差、跌倒率和关节目标裁剪率。
+
+```bash
+cd /home/qyw/supermimic
+PY=/home/qyw/miniconda3/envs/himloco/bin/python
+for horizon in 8 32; do
+  run="amp_supermimic/outputs/physx/open-flat-horizon-${horizon}-pilot"
+  "$PY" -u -m amp_supermimic.isaaclab_migration train \
+    --task wblwbl_dog_v1_physx_open_flat --run-dir "$run" \
+    --iterations 500 --num-envs 1024 --seed 42 --horizon "$horizon" \
+    --wm-batch 512 --pi-batch 512 --amp-batch 512 || break
+  "$PY" -u -m amp_supermimic.isaaclab_migration evaluate \
+    --checkpoint "$run/last.pt" --output "$run/eval" \
+    --seed 801 --num-envs 16 --steps 1000 \
+    --command 0.5 0 0 --command 0.2 0 0.6 --command 0.2 0 -0.6 || break
+done
+```
+
+热启动排查可使用 `--warm-start amp_supermimic/outputs/physx/open-flat-10k/last.pt`。保留相同的环境、种子和 AMP 数据，使用 `--horizon 8 --wm-only-iters 100`，分别传入 `--project-joint-targets` 和 `--no-project-joint-targets`。开启时，世界模型和它的输入归一化都使用 PhysX 实际下发的关节目标所对应的动作。Actor 的历史动作与奖励仍沿用原有坐标。切换该开关需要用新目录重新训练世界模型，旧运行按保存时的动作输入方式恢复。实际生效值记录在 `simulator_contract.world_action_input`。
+
+摩擦范围消融可以在相同热启动命令上加 `--friction-range 0.9 1.1`。该选项修改启用域随机化时的回合重置采样区间，固定指令评估仍使用 `terrain.friction`。默认训练区间为 `0.3–1.2`。
+
+### 2. TrackerLab 跑酷课程
+
+平地通过验收后，`wblwbl_dog_v1_physx_parkour` 用平地 Actor 热启动。它调用 vendored TrackerLab 的 `terrain.generate("parkour", ...)` 生成 L0–L5 的台块与间隙，按原高度插值的网格对角线构建 PhysX 碰撞网格。训练复用 TrackerLab 的跑酷导航奖励、终点和难度升降规则，继续使用相同 AMP 池。世界模型与 Critic 重新初始化，关闭平地专家姿态重置，机器人从赛道起点出发。`--level 2` 可在短测中固定难度。
+
+```bash
+"$PY" -u -m amp_supermimic.isaaclab_migration train \
+  --task wblwbl_dog_v1_physx_parkour \
+  --run-dir amp_supermimic/outputs/physx/parkour \
+  --warm-start amp_supermimic/outputs/physx/open-flat-10k/last.pt
+```
+
+新任务已完成 GPU 链路短测，平地对齐版 8 环境 / 3 轮，TrackerLab 跑酷 L2 4 环境 / 3 轮。另用平地正式规模的 4096 环境和 2048 批量完成 1 轮完整更新，PyTorch 峰值分配约 8.86 GiB。短测关闭了编译，正式默认编译设置下的显存、10,000 轮训练与跑酷成绩待实测。
+
+**状态：平地、WMP `stair_gap` L0 和 `gap_combos` 已完成 GPU 训练短测。** 10,000 轮 Warp Actor 已在 PhysX 热启动并通过检查点重载，固定指令追踪仍待达标。
+
+## 2026-11-16 实机验证
+
+在 RTX 5060 Ti 上，平地冷启动（16 环境）、`stair_gap` L0（4 环境）、`gap_combos`（4 环境）和 Warp 10,000 轮 Actor 热启动（16 环境）各完成 3 轮，均保存 `last.pt`。WMP 短测只有 16 步预采样和 3 轮更新，期间没有完成完整回合。平地两个环境的左前髋关节在相反指令下分别变化 +0.161 rad 和 −0.162 rad，验证了这个关节的动作方向和物理响应。
+
+迁移后的 Actor 使用 10 帧历史和动作上限 20。沿用上游热启动规则，世界模型、Critic 和优化器重新初始化，当前专家池与源训练不同，AMP 优化器也重新初始化。用种子 801、4 个环境、每条指令 1000 控制步评估，结果如下。
+
+| 指令 `(vx, vy, yaw)` | 平面速度 RMSE（m/s） | 转向 RMSE（rad/s） | 跌倒 |
+| --- | ---: | ---: | ---: |
+| `(0.5, 0, 0)` | 0.498 | 0.095 | 0 |
+| `(0.2, 0, 0.6)` | 0.210 | 0.609 | 0 |
+| `(0.2, 0, -0.6)` | 0.197 | 0.591 | 0 |
+
+评估见 `amp_supermimic/outputs/physx/warp10k-transfer-eval-20261116/evaluation.json`。平地前进与转向未达到第 5 节的目标，下一步在相同指令与初始姿态下对比 Warp 和 PhysX 的观测、Actor 动作和机体响应。早期短测在写出训练或评估产物后遇到 Isaac Sim 退出超时。无相机的无界面模式现在跳过渲染，并使用 Isaac Sim 快速关闭，独立评估和 `gap_combos` 训练短测均已正常退出。
 
 ## 运行入口
 
@@ -120,4 +199,4 @@ GPU 空闲后的首个平地短测使用下面的命令。它使用 16 个环境
 - 首个 WMP 障碍推荐 `stair_gap` L0，之后扩展到 `stair_gap_ramp` 和混合课程。优先复用原几何与规则，机器人足底适配作为独立验收点。
 - 本计划默认首版复现 TrackerLab 命令策略的地形输入。若后续部署限定纯本体观测或指定传感器，应单独确定 Actor 和 Critic 的输入，再比较训练结果。
 
-5 项 CPU 回归测试已通过，覆盖配置隔离、专家池加载和 AMP 采样、重置前 37 维转移进入回放、WMP L0 阶段奖励和严格成功，以及课程升档。另用 CPU 模拟状态接入真实 TrackerLab 训练器，跑通世界模型、AMP、Actor、Critic 更新及检查点保存。GPU 容量、PhysX 接触和场景隔离、真实仿真训练更新及评估回放待实测。
+8 项 CPU 回归测试已通过，覆盖配置隔离、Warp/PhysX 平地任务配置对齐、TrackerLab 跑酷网格与高度插值一致性、热启动动作映射、AMP 采样、重置前回放，以及 WMP 阶段事件和课程升档。GPU 短测结果见文首，正式长训与实际跨越行为仍需验证。

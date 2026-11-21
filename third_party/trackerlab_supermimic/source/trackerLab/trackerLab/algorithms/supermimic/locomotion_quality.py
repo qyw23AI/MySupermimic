@@ -5,6 +5,7 @@ import math
 import torch
 
 from trackerTask.supermimic.gait import FOOT_BODIES, FOOT_OFFSETS
+from trackerLab.kinematics.supermimic.rotations import cross3
 from trackerLab.tracker_env.mdp.supermimic_command import CONTROL_DT
 
 
@@ -36,8 +37,7 @@ def _material_sole_state(position, rotation, velocity, angular, centers, radii):
     arm = (rotation[..., None, :, :] @ centers.to(rotation)[..., None]).squeeze(-1)
     arm = arm - radii.to(rotation)[..., None] * rotation.new_tensor((0., 0., 1.))
     return (position[..., None, :] + arm,
-            velocity[..., None, :] + torch.cross(
-                angular[..., None, :].expand_as(arm), arm, dim=-1))
+            velocity[..., None, :] + cross3(angular[..., None, :], arm))
 
 
 class LocomotionQuality:
@@ -128,7 +128,7 @@ class LocomotionQuality:
         p, R, v, w = self.kin.forward(*state)
         arm = (R[..., self.feet, :, :] @ self.offset.to(R)[..., None]).squeeze(-1)
         return (p[..., self.feet, :] + arm, R[..., self.feet, :, :],
-                v[..., self.feet, :] + torch.cross(w[..., self.feet, :], arm, dim=-1),
+                v[..., self.feet, :] + cross3(w[..., self.feet, :], arm),
                 w[..., self.feet, :])
 
     def sole_state(self, state):

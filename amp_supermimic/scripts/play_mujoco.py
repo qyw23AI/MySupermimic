@@ -47,7 +47,8 @@ def _state_from_data(data, qpos_ids, qvel_ids):
 
 
 def _load_policy_and_scene(
-    ckpt_path: Path, profile_override: str | None, seed_override: int | None, *, ground_plane: bool = False
+    ckpt_path: Path, profile_override: str | None, seed_override: int | None,
+    *, ground_plane: bool = False, level: int = 0
 ):
     sys.path.insert(0, str(ROOT / "amp_supermimic/scripts"))
     import train as wblwbl_train
@@ -69,7 +70,17 @@ def _load_policy_and_scene(
     action_limit = float(ck_args.get("action_limit", 20.0))
     hist_len = int(ck_args.get("hist", 10))
 
-    terrain = generate(profile, ROBOT_HEIGHTS[spec.name], seed=seed)
+    from wmp_parkour import PARKOUR_PROFILES, generate_wmp_parkour
+
+    if profile in PARKOUR_PROFILES:
+        from amp_supermimic.legacy import apply_runtime_task_patches, load_task_config
+
+        cfg, _ = load_task_config(profile)
+        apply_runtime_task_patches(cfg)
+        terrain = generate_wmp_parkour(cfg.terrain, seed, preview_level=level, profile=profile)
+        ground_plane = False
+    else:
+        terrain = generate(profile, ROBOT_HEIGHTS[spec.name], seed=seed)
     model, spec, height, qpos_ids, qvel_ids, _, _, actuator_ids, _ = build_model(
         spec.name, terrain, ground_plane=ground_plane
     )
@@ -93,7 +104,9 @@ def main():
     parser.add_argument("--checkpoint", type=Path, default=DEFAULT_CKPT, help="Path to iteration_XXXXXX.pt or last.pt")
     parser.add_argument("--profile", type=str, default=None, help="Override terrain profile (default: from checkpoint)")
     parser.add_argument("--seed", type=int, default=None, help="Override terrain seed (default: from checkpoint)")
-    parser.add_argument("--level", type=int, default=0, help="Terrain level 0..5 (default: 0)")
+    parser.add_argument("--level", type=int, default=0, help="Terrain difficulty (default: 0)")
+    parser.add_argument("--terrain-type", choices=("flat_gap", "tire_array", "slope_up", "slope_down", "stair", "stepping_stones"),
+                        help="Select a parkour / stepping-stones lane (default: first enabled lane)")
     parser.add_argument("--vx", type=float, default=0.45, help="Command forward velocity m/s")
     parser.add_argument("--vy", type=float, default=0.0, help="Command lateral velocity m/s")
     parser.add_argument("--wz", type=float, default=0.0, help="Command yaw rate rad/s")
@@ -132,10 +145,21 @@ def main():
         mdp,
         actor,
         body_velocities,
-    ) = _load_policy_and_scene(ckpt_path, args.profile, args.seed, ground_plane=use_plane)
+    ) = _load_policy_and_scene(ckpt_path, args.profile, args.seed, ground_plane=use_plane, level=args.level)
 
     lvl = max(0, min(int(args.level), len(terrain.centers) - 1))
-    if hasattr(terrain, "block_centers"):
+    from wmp_parkour import PARKOUR_PROFILES
+
+    mixed_parkour = terrain.profile in PARKOUR_PROFILES
+    if mixed_parkour:
+        lane = args.terrain_type or terrain.lane_types[0]
+        if lane not in terrain.lane_types:
+            parser.error(f"{lane} is disabled in the WMP parkour terrain configuration")
+        lvl = args.level
+        cx, cy = terrain.spawn_x, float(terrain.lane_centers[0, terrain.lane_types.index(lane)])
+    elif args.terrain_type is not None:
+        parser.error("--terrain-type requires a WMP parkour profile")
+    elif hasattr(terrain, "block_centers"):
         cx, cy = terrain.block_centers[lvl]
     else:
         cx, cy = 0.0, float(terrain.centers[lvl])
@@ -213,6 +237,8 @@ def main():
                 S1 = _state_from_data(data, qpos_ids, qvel_ids)
                 if bool(mdp.termination(S1, c)[0]):
                     falls += 1
+                    a_prev, hist = reset_robot()
+                elif mixed_parkour and data.qpos[0] >= terrain.goal_x:
                     a_prev, hist = reset_robot()
         S1 = _state_from_data(data, qpos_ids, qvel_ids)
         vb, wb = body_velocities(S1)
@@ -294,6 +320,9 @@ def main():
                 S1 = _state_from_data(data, qpos_ids, qvel_ids)
                 if bool(mdp.termination(S1, c)[0]):
                     print(f"[reset] fell at step {step_idx}, resetting to level {lvl}", flush=True)
+                    a_prev, hist = reset_robot()
+                elif mixed_parkour and data.qpos[0] >= terrain.goal_x:
+                    print(f"[reset] reached the finish on {lane} level {lvl}", flush=True)
                     a_prev, hist = reset_robot()
                 elif step_idx % 50 == 0:
                     vb, wb = body_velocities(S1)

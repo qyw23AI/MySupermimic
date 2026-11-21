@@ -19,6 +19,7 @@ class WblwblDogV1OpenFlatCfg(WblwblDogV1Cfg):
     class commands(WblwblDogV1Cfg.commands):
         range_mode = "full"
         resample_steps = (100, 250)
+        training_modes = None  # None keeps the default omnidirectional sampler.
         jump_height = 0.0
         jump_probability = 0.0
 
@@ -52,7 +53,7 @@ class WblwblDogV1OpenFlatCfg(WblwblDogV1Cfg):
         collision_mask_version = 2
 
     class amp(WblwblDogV1Cfg.amp):
-        motion_config = "amp_supermimic/data/training/pool/train.json"
+        motion_config = "amp_supermimic/data/flat_trainning/pool/train.json"
         amp_weight = 0.20
         foot_slide_weight = 0.008
         feet_close_weight = 0.008

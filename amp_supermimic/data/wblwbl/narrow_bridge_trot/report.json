@@ -1,0 +1,130 @@
+{
+  "source_kind": "procedural_diagonal_footsteps_and_wbl_ik",
+  "status": "kinematic_candidate",
+  "bridge_length_width_height_m": [
+    3.0,
+    0.4,
+    0.1
+  ],
+  "target_mjcf_sha256": "a6ae3a95bf71c63737bf7c913f2bb37429e78a6ac07f1b68593e5504723e3084",
+  "stance_labels_leg_order": [
+    "RR",
+    "RL",
+    "FR",
+    "FL"
+  ],
+  "fps": 50,
+  "clips": {
+    "bridge_trot_w26_v26": {
+      "knee_median_rad": -1.8010641008798807,
+      "knee_most_extended_rad": -1.6608639363020568,
+      "minimum_sole_height_m": 0.0004998811490706939,
+      "below_floor_frames": 0,
+      "min_lateral_foot_offset_ratio": 0.6068787289028288,
+      "min_lateral_foot_offset_m": 0.13000003711196292,
+      "median_body_velocity_m_s": [
+        0.26,
+        0.0,
+        0.0
+      ],
+      "joint_velocity_p99_rad_s": 3.733905370456481,
+      "nominal_speed_m_s": 0.26,
+      "period_s": 0.84,
+      "duty_factor": 0.62,
+      "feet_center_track_m": 0.26,
+      "normal_stance_track_m": 0.42725706239063743,
+      "sphere_radius_m": [
+        0.0238,
+        0.0238,
+        0.0238,
+        0.0238
+      ],
+      "min_lateral_edge_margin_m": 0.046199932577621006,
+      "max_stance_slip_m_s": 1.7766230306502945e-07,
+      "min_projected_com_support_margin_m": null,
+      "min_support_feet": 2,
+      "maximum_ik_residual_m": 1.6951908330792936e-07,
+      "max_joint_step_rad": 0.08044040027272759,
+      "peak_swing_clearance_m": 0.035499215350799876,
+      "frames": 438,
+      "duration_s": 8.74,
+      "torso_travel_m": 2.2724,
+      "csv_sha256": "10e878a856dd74490075578f8b7d0793038fc6d9a491dd7c5889327bbff3b729",
+      "unexpected_penetrating_contact_pairs": 0
+    },
+    "bridge_trot_w28_v32": {
+      "knee_median_rad": -1.7823274485853116,
+      "knee_most_extended_rad": -1.6321498312312237,
+      "minimum_sole_height_m": 0.0004998855328394031,
+      "below_floor_frames": 0,
+      "min_lateral_foot_offset_ratio": 0.6535616752382186,
+      "min_lateral_foot_offset_m": 0.14000003276642836,
+      "median_body_velocity_m_s": [
+        0.32000000000000006,
+        0.0,
+        0.0
+      ],
+      "joint_velocity_p99_rad_s": 4.234216499220518,
+      "nominal_speed_m_s": 0.32,
+      "period_s": 0.76,
+      "duty_factor": 0.62,
+      "feet_center_track_m": 0.28,
+      "normal_stance_track_m": 0.42725706239063743,
+      "sphere_radius_m": [
+        0.0238,
+        0.0238,
+        0.0238,
+        0.0238
+      ],
+      "min_lateral_edge_margin_m": 0.036199933562293674,
+      "max_stance_slip_m_s": 2.2571005903606442e-07,
+      "min_projected_com_support_margin_m": null,
+      "min_support_feet": 2,
+      "maximum_ik_residual_m": 1.6525400787548624e-07,
+      "max_joint_step_rad": 0.09517051064271143,
+      "peak_swing_clearance_m": 0.0354024844569905,
+      "frames": 357,
+      "duration_s": 7.12,
+      "torso_travel_m": 2.2784,
+      "csv_sha256": "7f2ddb8a492139672363f21fe4465a4fd99ce89b99882deaa6fe51ebb6be97d8",
+      "unexpected_penetrating_contact_pairs": 0
+    },
+    "bridge_trot_w30_v38": {
+      "knee_median_rad": -1.7672026198495647,
+      "knee_most_extended_rad": -1.5951669710053742,
+      "minimum_sole_height_m": 0.000499889221686825,
+      "below_floor_frames": 0,
+      "min_lateral_foot_offset_ratio": 0.7002446177607266,
+      "min_lateral_foot_offset_m": 0.1500000276111319,
+      "median_body_velocity_m_s": [
+        0.38,
+        0.0,
+        0.0
+      ],
+      "joint_velocity_p99_rad_s": 4.939297670074534,
+      "nominal_speed_m_s": 0.38,
+      "period_s": 0.72,
+      "duty_factor": 0.62,
+      "feet_center_track_m": 0.3,
+      "normal_stance_track_m": 0.42725706239063743,
+      "sphere_radius_m": [
+        0.0238,
+        0.0238,
+        0.0238,
+        0.0238
+      ],
+      "min_lateral_edge_margin_m": 0.02619993416721328,
+      "max_stance_slip_m_s": 2.791905678086298e-07,
+      "min_projected_com_support_margin_m": null,
+      "min_support_feet": 2,
+      "maximum_ik_residual_m": 1.6017575222207872e-07,
+      "max_joint_step_rad": 0.11253145830556743,
+      "peak_swing_clearance_m": 0.03544246214440146,
+      "frames": 301,
+      "duration_s": 6.0,
+      "torso_travel_m": 2.2800000000000002,
+      "csv_sha256": "cbaff9f9fa3dfbe92694e108ae44264e7c6a8fccf871b0a1f2df1554b5e5e434",
+      "unexpected_penetrating_contact_pairs": 0
+    }
+  }
+}

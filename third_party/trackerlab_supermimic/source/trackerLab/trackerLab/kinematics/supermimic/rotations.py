@@ -85,6 +85,16 @@ def quat_to_rotvec(q: torch.Tensor) -> torch.Tensor:
     return v * scale
 
 
+def cross3(a: torch.Tensor, b: torch.Tensor) -> torch.Tensor:
+    """Cross product on the final axis, using constant component indices.
+
+    Avoid Inductor's modulo-based indexing for torch.cross in fused GPU FK.
+    """
+    ax, ay, az = a.unbind(-1)
+    bx, by, bz = b.unbind(-1)
+    return torch.stack((ay * bz - az * by, az * bx - ax * bz, ax * by - ay * bx), dim=-1)
+
+
 def skew(v: torch.Tensor) -> torch.Tensor:
     x, y, z = v.unbind(-1)
     o = torch.zeros_like(x)

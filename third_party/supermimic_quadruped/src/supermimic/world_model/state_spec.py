@@ -64,6 +64,7 @@ class StateSpecCfg:
     # Input feature scales for [root_z, rot6d, lin_vel_h, ang_vel_b, joint_pos, joint_vel] (divide by these).
     in_scale: tuple[float, ...] = (1.0, 1.0, 1.0, 2.0, 1.0, 5.0)
     explicit_integration: bool = True
+    world_pose_features: bool = False
     # xi normalisation: (offset, scale) per xi entry: friction, encoder bias (nj), com offset (3) [, action delay].
     xi_offset: tuple[float, ...] = field(default_factory=_g1_xi_offset)
     xi_scale: tuple[float, ...] = field(default_factory=_g1_xi_scale)
@@ -78,7 +79,7 @@ class StateSpecCfg:
         if spec.has_action_delay:
             xi_off += (s.xi_delay[0],)
             xi_sc += (s.xi_delay[1],)
-        return StateSpecCfg(nj=nj, dt=dt, err_scale=s.err_scale, out_scale=s.out_scale, in_scale=s.in_scale, explicit_integration=explicit_integration, xi_offset=xi_off, xi_scale=xi_sc)
+        return StateSpecCfg(nj=nj, dt=dt, err_scale=s.err_scale, out_scale=s.out_scale, in_scale=s.in_scale, explicit_integration=explicit_integration, world_pose_features=spec.world_pose_features, xi_offset=xi_off, xi_scale=xi_sc)
 
     @property
     def state_dim(self) -> int:
@@ -107,7 +108,7 @@ class StateSpec:
         self.xi_scale = torch.tensor(cfg.xi_scale, device=device, dtype=dtype)
         self.state_dim = cfg.state_dim
         self.delta_dim = cfg.delta_dim
-        self.feat_dim = cfg.state_dim
+        self.feat_dim = cfg.state_dim + (4 if cfg.world_pose_features else 0)
         self.xi_dim = cfg.xi_dim
 
     # ------------------------------------------------------------------ split / features
@@ -124,7 +125,12 @@ class StateSpec:
         q_local = quat_canonical(quat_mul(quat_apply_inverse_quat(hq), q))
         v_h = quat_apply_inverse(hq, v)
         feat = torch.cat([p[..., 2:3], rot6d_from_quat(q_local), v_h, w, qj, qd], dim=-1)
-        return feat / self.in_scale
+        feat = feat / self.in_scale
+        if self.cfg.world_pose_features:
+            # Scene origin is the wall center. The terrain breaks translation/yaw symmetry.
+            heading = quat_apply(hq, torch.tensor([1., 0., 0.], device=p.device, dtype=p.dtype).expand_as(p))
+            feat = torch.cat([feat, p[..., :2], heading[..., :2]], dim=-1)
+        return feat
 
     def normalize_xi(self, xi: torch.Tensor) -> torch.Tensor:
         return (xi - self.xi_offset) / self.xi_scale

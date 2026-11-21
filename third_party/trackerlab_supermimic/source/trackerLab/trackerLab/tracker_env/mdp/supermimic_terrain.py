@@ -38,6 +38,7 @@ class HeightField:
         self.values = torch.as_tensor(terrain.heights, device=device)
         self.rows, self.cols = self.values.shape
         self.constant_surface = bool((terrain.heights == terrain.heights[0, 0]).all())
+        self.flat_outside = getattr(terrain, "profile", None) == "open_flat"
         x, y = torch.meshgrid(torch.linspace(-.3, 1.6, 17, device=device),
                               torch.linspace(-.55, .55, 11, device=device), indexing="ij")
         self.offsets = torch.stack((x.flatten(), y.flatten()), -1) * self.scale
@@ -75,7 +76,9 @@ class HeightField:
         offsets = self.offsets if offsets is None else offsets
         xy = self.scan_xy(S, offsets)
         scan = (S[0][..., 2:3] - self.sample(xy) - self.height) / self.scale
-        return torch.where(self.inside(xy), scan, torch.ones_like(scan)).clamp(-1, 1) * 2
+        if not self.flat_outside:
+            scan = torch.where(self.inside(xy), scan, torch.ones_like(scan))
+        return scan.clamp(-1, 1) * 2
 
     def model_features(self, S):
         return self.features(S, self.model_offsets)

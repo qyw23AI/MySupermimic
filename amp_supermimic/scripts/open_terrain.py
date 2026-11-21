@@ -188,6 +188,158 @@ def generate_open_flat(height: float, seed: int = 0):
     )
 
 
+def open_flat_limits(c, alpha):
+    a = max(0.0, min(1.0, float(alpha)))
+    return (
+        c["fwd_vx_start_max"] + a * (c["fwd_vx_end_max"] - c["fwd_vx_start_max"]),
+        c["bwd_vx_start_max"] + a * (c["bwd_vx_end_max"] - c["bwd_vx_start_max"]),
+        c["strafe_vy_start_max"] + a * (c["strafe_vy_end_max"] - c["strafe_vy_start_max"]),
+        c["turn_wz_start_max"] + a * (c["turn_wz_end_max"] - c["turn_wz_start_max"]),
+    )
+
+
+def sample_open_flat(cfg, alpha, count, device, dtype, mode_set=None):
+    import torch
+
+    fwd_max, bwd_max, vy_max, wz_max = open_flat_limits(cfg, alpha)
+    u = torch.rand(count, 4, device=device, dtype=dtype)
+    if mode_set is None:
+        mode = torch.randint(0, 6, (count,), device=device)
+    else:
+        mode_ids = {"stop": 0, "forward": 1, "backward": 2, "strafe": 3, "turn": 4, "mixed": 5, "forward_turn": 6}
+        unknown = set(mode_set) - mode_ids.keys()
+        if not mode_set or unknown:
+            raise ValueError(f"Invalid open_flat command mode set: {sorted(unknown)}")
+        allowed = torch.tensor([mode_ids[name] for name in mode_set], device=device, dtype=torch.long)
+        mode = allowed[torch.randint(len(allowed), (count,), device=device)]
+    commands = torch.zeros(count, 3, device=device, dtype=dtype)
+
+    # mode 0: stop (0, 0, 0)
+    forward = mode == 1
+    reverse = mode == 2
+    side = mode == 3
+    turn = mode == 4
+    mixed = mode == 5
+    forward_turn = mode == 6
+
+    commands[forward, 0] = cfg["fwd_vx_min"] + u[forward, 0] * (fwd_max - cfg["fwd_vx_min"])
+    commands[reverse, 0] = -(cfg["bwd_vx_min"] + u[reverse, 0] * (bwd_max - cfg["bwd_vx_min"]))
+    side_sign = torch.where(u[side, 1] < 0.5, -1.0, 1.0)
+    commands[side, 1] = side_sign * (cfg["strafe_vy_min"] + u[side, 0] * (vy_max - cfg["strafe_vy_min"]))
+    turn_sign = torch.where(u[turn, 2] < 0.5, -1.0, 1.0)
+    commands[turn, 2] = turn_sign * (cfg["turn_wz_min"] + u[turn, 0] * (wz_max - cfg["turn_wz_min"]))
+    commands[forward_turn, 0] = cfg["fwd_vx_min"] + u[forward_turn, 0] * (fwd_max - cfg["fwd_vx_min"])
+    forward_turn_sign = torch.where(u[forward_turn, 1] < 0.5, -1.0, 1.0)
+    commands[forward_turn, 2] = forward_turn_sign * (
+        cfg["turn_wz_min"] + u[forward_turn, 2] * (wz_max - cfg["turn_wz_min"]))
+
+    commands[mixed, 0] = -bwd_max + u[mixed, 0] * (0.85 * fwd_max + bwd_max)
+    commands[mixed, 1] = (2.0 * u[mixed, 1] - 1.0) * (0.85 * vy_max)
+    commands[mixed, 2] = (2.0 * u[mixed, 2] - 1.0) * (0.85 * wz_max)
+    return commands, u
+
+
+def update_open_flat_curriculum(self, transition, cfg, rewards):
+    terms = transition["reward_terms"]
+    self._vel_curriculum_steps += 1
+    self._vel_curriculum_env_steps += self.num_envs
+    self._vel_curriculum_vel_sum += float(terms["body_velocity"].sum().item())
+    self._vel_curriculum_yaw_sum += float(terms["yaw_rate"].sum().item())
+    self._vel_curriculum_dones += int(transition["done"].sum().item())
+    self._vel_curriculum_falls += int(transition["episode_fall"].sum().item())
+
+    if self._vel_curriculum_steps >= cfg["update_interval_steps"]:
+        vel_max = max(float(rewards["velocity_weight"]), 1e-6)
+        yaw_max = max(float(rewards["yaw_weight"]), 1e-6)
+        vel_track = (self._vel_curriculum_vel_sum / max(self._vel_curriculum_env_steps, 1)) / vel_max
+        yaw_track = (self._vel_curriculum_yaw_sum / max(self._vel_curriculum_env_steps, 1)) / yaw_max
+        equiv_eps = max(
+            float(self._vel_curriculum_dones),
+            self._vel_curriculum_env_steps / float(self.max_episode_steps),
+        )
+        fall_rate = self._vel_curriculum_falls / max(equiv_eps, 1.0)
+
+        old_alpha = self._vel_curriculum_alpha
+        action_tag = "hold"
+        if (
+            vel_track >= cfg["upgrade_vel_track"]
+            and yaw_track >= cfg["upgrade_yaw_track"]
+            and fall_rate <= cfg["upgrade_fall_rate"]
+            and old_alpha < 1.0
+        ):
+            self._vel_curriculum_alpha = min(1.0, round(old_alpha + cfg["step_up"], 4))
+            action_tag = "UP"
+        elif (
+            (fall_rate >= cfg["downgrade_fall_rate"] or vel_track < cfg["downgrade_vel_track"])
+            and old_alpha > 0.0
+        ):
+            self._vel_curriculum_alpha = max(0.0, round(old_alpha - cfg["step_down"], 4))
+            action_tag = "DOWN"
+
+        fwd_max, bwd_max, vy_max, wz_max = open_flat_limits(cfg, self._vel_curriculum_alpha)
+        if action_tag != "hold":
+            print(
+                f"[open_flat curriculum] {action_tag}: alpha {old_alpha:.2f}->{self._vel_curriculum_alpha:.2f} "
+                f"(vel_track={vel_track:.3f}, yaw_track={yaw_track:.3f}, fall_rate={fall_rate:.3f}) "
+                f"fwd=[{cfg['fwd_vx_min']:.2f},{fwd_max:.2f}] bwd=[-{bwd_max:.2f},-{cfg['bwd_vx_min']:.2f}] "
+                f"vy=±{vy_max:.2f} wz=±{wz_max:.2f}",
+                flush=True,
+            )
+        self._vel_curriculum_steps = 0
+        self._vel_curriculum_env_steps = 0
+        self._vel_curriculum_vel_sum = 0.0
+        self._vel_curriculum_yaw_sum = 0.0
+        self._vel_curriculum_dones = 0
+        self._vel_curriculum_falls = 0
+
+
+def open_flat_reward(self, S, a, a_prev, c, r, terms=False):
+    import torch
+    from trackerLab.tracker_env.mdp import supermimic_command as mdp_cmd
+
+    c = self.effective_command(c)
+    p, R, _, _, q, qd = S
+    scale = self.field.scale
+    v_body, w_body = mdp_cmd.body_velocities(S)
+    clearance = self._clearance(S)
+    cmd_xy = c[..., 1:3] / scale
+    vel_xy = v_body[..., :2] / scale
+    ev = (vel_xy - cmd_xy).square().sum(-1)
+    ew = (w_body[..., 2] - c[..., 3]).square()
+    speed = torch.linalg.vector_norm(cmd_xy, dim=-1)
+    translating = (speed > 0.10).to(ev.dtype)
+    turning = (c[..., 3].abs() > 0.10).to(ev.dtype)
+    projected = (vel_xy * cmd_xy).sum(-1) / speed.clamp_min(0.01)
+    directed_yaw = w_body[..., 2] * torch.sign(c[..., 3])
+    velocity_reward = r["velocity_weight"] * torch.exp(-ev / r["velocity_sigma"])
+    yaw_reward = r["yaw_weight"] * torch.exp(-ew / r["yaw_sigma"])
+    progress = (
+        r["progress_trans_weight"] * translating * (projected / speed.clamp_min(0.01)).clamp(0.0, 1.0)
+        + r["progress_yaw_weight"] * turning * (directed_yaw / c[..., 3].abs().clamp_min(0.05)).clamp(0.0, 1.0)
+    )
+    dont_wait = (
+        r["dont_wait_trans_weight"] * translating * torch.sigmoid((0.5 * speed - projected) / 0.04)
+        + r["dont_wait_yaw_weight"] * turning * torch.sigmoid((0.5 * c[..., 3].abs() - directed_yaw) / 0.08)
+    )
+    zero = torch.zeros_like(ev)
+    values = (
+        velocity_reward,
+        yaw_reward,
+        torch.full_like(ev, r["alive_weight"]),
+        r["upright_weight"] * (1 - R[..., 2, 2]),
+        r["clearance_weight"] * ((clearance - mdp_cmd.target_clearance(c)) / (0.2 * self.field.height)).square(),
+        r["posture_weight"] * (q - self.default_q).square().mean(-1),
+        r["action_rate_weight"] * (a - a_prev).square().mean(-1),
+        r["joint_vel_weight"] * qd.square().mean(-1),
+        r["joint_limit_weight"] * (torch.relu(q - self.soft_hi) + torch.relu(self.soft_lo - q)).sum(-1),
+        progress,
+        zero,
+        zero,
+        dont_wait,
+    )
+    reward = sum(values)
+    return (reward, dict(zip(mdp_cmd.TERMS, values))) if terms else reward
+
 def patch_open_terrain(robot: str) -> None:
     """Register ``open_terrain`` and ``open_flat`` onto TrackerLab."""
     import torch
@@ -246,13 +398,7 @@ def patch_open_terrain(robot: str) -> None:
 
         def _open_flat_limits(alpha: float):
             c = OPEN_FLAT_CURRICULUM
-            a = max(0.0, min(1.0, float(alpha)))
-            return (
-                c["fwd_vx_start_max"] + a * (c["fwd_vx_end_max"] - c["fwd_vx_start_max"]),
-                c["bwd_vx_start_max"] + a * (c["bwd_vx_end_max"] - c["bwd_vx_start_max"]),
-                c["strafe_vy_start_max"] + a * (c["strafe_vy_end_max"] - c["strafe_vy_start_max"]),
-                c["turn_wz_start_max"] + a * (c["turn_wz_end_max"] - c["turn_wz_start_max"]),
-            )
+            return open_flat_limits(c, alpha)
 
         @torch.no_grad()
         def patched_sample_commands(self, ids=None, *, jump_height=None):
@@ -275,29 +421,7 @@ def patch_open_terrain(robot: str) -> None:
             if not count:
                 return
             alpha = getattr(self, "_vel_curriculum_alpha", float(OPEN_FLAT_CURRICULUM["initial_alpha"]))
-            fwd_max, bwd_max, vy_max, wz_max = _open_flat_limits(alpha)
-            cfg = OPEN_FLAT_CURRICULUM
-            u = torch.rand(count, 4, device=self.device, dtype=self.c.dtype)
-            mode = torch.randint(0, 6, (count,), device=self.device)
-            commands = torch.zeros(count, 3, device=self.device, dtype=self.c.dtype)
-
-            # mode 0: stop (0, 0, 0)
-            forward = mode == 1
-            reverse = mode == 2
-            side = mode == 3
-            turn = mode == 4
-            mixed = mode == 5
-
-            commands[forward, 0] = cfg["fwd_vx_min"] + u[forward, 0] * (fwd_max - cfg["fwd_vx_min"])
-            commands[reverse, 0] = -(cfg["bwd_vx_min"] + u[reverse, 0] * (bwd_max - cfg["bwd_vx_min"]))
-            side_sign = torch.where(u[side, 1] < 0.5, -1.0, 1.0)
-            commands[side, 1] = side_sign * (cfg["strafe_vy_min"] + u[side, 0] * (vy_max - cfg["strafe_vy_min"]))
-            turn_sign = torch.where(u[turn, 2] < 0.5, -1.0, 1.0)
-            commands[turn, 2] = turn_sign * (cfg["turn_wz_min"] + u[turn, 0] * (wz_max - cfg["turn_wz_min"]))
-
-            commands[mixed, 0] = -bwd_max + u[mixed, 0] * (0.85 * fwd_max + bwd_max)
-            commands[mixed, 1] = (2.0 * u[mixed, 1] - 1.0) * (0.85 * vy_max)
-            commands[mixed, 2] = (2.0 * u[mixed, 2] - 1.0) * (0.85 * wz_max)
+            commands, u = sample_open_flat(OPEN_FLAT_CURRICULUM, alpha, count, self.device, self.c.dtype)
 
             self.c[ids, 1:4] = commands
             self.c[ids, 4] = self.target_clearance_m
@@ -317,58 +441,7 @@ def patch_open_terrain(robot: str) -> None:
                 and not self.stealth_keyboard_mode
                 and not hasattr(self, "_command_ranges")
             ):
-                terms = transition["reward_terms"]
-                self._vel_curriculum_steps += 1
-                self._vel_curriculum_env_steps += self.num_envs
-                self._vel_curriculum_vel_sum += float(terms["body_velocity"].sum().item())
-                self._vel_curriculum_yaw_sum += float(terms["yaw_rate"].sum().item())
-                self._vel_curriculum_dones += int(transition["done"].sum().item())
-                self._vel_curriculum_falls += int(transition["episode_fall"].sum().item())
-
-                cfg = OPEN_FLAT_CURRICULUM
-                if self._vel_curriculum_steps >= cfg["update_interval_steps"]:
-                    vel_max = max(float(OPEN_FLAT_REWARDS["velocity_weight"]), 1e-6)
-                    yaw_max = max(float(OPEN_FLAT_REWARDS["yaw_weight"]), 1e-6)
-                    vel_track = (self._vel_curriculum_vel_sum / max(self._vel_curriculum_env_steps, 1)) / vel_max
-                    yaw_track = (self._vel_curriculum_yaw_sum / max(self._vel_curriculum_env_steps, 1)) / yaw_max
-                    equiv_eps = max(
-                        float(self._vel_curriculum_dones),
-                        self._vel_curriculum_env_steps / float(self.max_episode_steps),
-                    )
-                    fall_rate = self._vel_curriculum_falls / max(equiv_eps, 1.0)
-
-                    old_alpha = self._vel_curriculum_alpha
-                    action_tag = "hold"
-                    if (
-                        vel_track >= cfg["upgrade_vel_track"]
-                        and yaw_track >= cfg["upgrade_yaw_track"]
-                        and fall_rate <= cfg["upgrade_fall_rate"]
-                        and old_alpha < 1.0
-                    ):
-                        self._vel_curriculum_alpha = min(1.0, round(old_alpha + cfg["step_up"], 4))
-                        action_tag = "UP"
-                    elif (
-                        (fall_rate >= cfg["downgrade_fall_rate"] or vel_track < cfg["downgrade_vel_track"])
-                        and old_alpha > 0.0
-                    ):
-                        self._vel_curriculum_alpha = max(0.0, round(old_alpha - cfg["step_down"], 4))
-                        action_tag = "DOWN"
-
-                    fwd_max, bwd_max, vy_max, wz_max = _open_flat_limits(self._vel_curriculum_alpha)
-                    if action_tag != "hold":
-                        print(
-                            f"[open_flat curriculum] {action_tag}: alpha {old_alpha:.2f}->{self._vel_curriculum_alpha:.2f} "
-                            f"(vel_track={vel_track:.3f}, yaw_track={yaw_track:.3f}, fall_rate={fall_rate:.3f}) "
-                            f"fwd=[{cfg['fwd_vx_min']:.2f},{fwd_max:.2f}] bwd=[-{bwd_max:.2f},-{cfg['bwd_vx_min']:.2f}] "
-                            f"vy=±{vy_max:.2f} wz=±{wz_max:.2f}",
-                            flush=True,
-                        )
-                    self._vel_curriculum_steps = 0
-                    self._vel_curriculum_env_steps = 0
-                    self._vel_curriculum_vel_sum = 0.0
-                    self._vel_curriculum_yaw_sum = 0.0
-                    self._vel_curriculum_dones = 0
-                    self._vel_curriculum_falls = 0
+                update_open_flat_curriculum(self, transition, OPEN_FLAT_CURRICULUM, OPEN_FLAT_REWARDS)
             return transition
 
         patched_sample_commands._open_flat_curriculum_patched = True
@@ -445,48 +518,7 @@ def patch_open_terrain(robot: str) -> None:
             if self.profile not in OPEN_PROFILES:
                 return orig_reward(self, S, a, a_prev, c, terms=terms)
             r = OPEN_FLAT_REWARDS
-            c = self.effective_command(c)
-            p, R, _, _, q, qd = S
-            scale = self.field.scale
-            v_body, w_body = mdp_cmd.body_velocities(S)
-            clearance = self._clearance(S)
-            cmd_xy = c[..., 1:3] / scale
-            vel_xy = v_body[..., :2] / scale
-            ev = (vel_xy - cmd_xy).square().sum(-1)
-            ew = (w_body[..., 2] - c[..., 3]).square()
-            speed = torch.linalg.vector_norm(cmd_xy, dim=-1)
-            translating = (speed > 0.10).to(ev.dtype)
-            turning = (c[..., 3].abs() > 0.10).to(ev.dtype)
-            projected = (vel_xy * cmd_xy).sum(-1) / speed.clamp_min(0.01)
-            directed_yaw = w_body[..., 2] * torch.sign(c[..., 3])
-            velocity_reward = r["velocity_weight"] * torch.exp(-ev / r["velocity_sigma"])
-            yaw_reward = r["yaw_weight"] * torch.exp(-ew / r["yaw_sigma"])
-            progress = (
-                r["progress_trans_weight"] * translating * (projected / speed.clamp_min(0.01)).clamp(0.0, 1.0)
-                + r["progress_yaw_weight"] * turning * (directed_yaw / c[..., 3].abs().clamp_min(0.05)).clamp(0.0, 1.0)
-            )
-            dont_wait = (
-                r["dont_wait_trans_weight"] * translating * torch.sigmoid((0.5 * speed - projected) / 0.04)
-                + r["dont_wait_yaw_weight"] * turning * torch.sigmoid((0.5 * c[..., 3].abs() - directed_yaw) / 0.08)
-            )
-            zero = torch.zeros_like(ev)
-            values = (
-                velocity_reward,
-                yaw_reward,
-                torch.full_like(ev, r["alive_weight"]),
-                r["upright_weight"] * (1 - R[..., 2, 2]),
-                r["clearance_weight"] * ((clearance - mdp_cmd.target_clearance(c)) / (0.2 * self.field.height)).square(),
-                r["posture_weight"] * (q - self.default_q).square().mean(-1),
-                r["action_rate_weight"] * (a - a_prev).square().mean(-1),
-                r["joint_vel_weight"] * qd.square().mean(-1),
-                r["joint_limit_weight"] * (torch.relu(q - self.soft_hi) + torch.relu(self.soft_lo - q)).sum(-1),
-                progress,
-                zero,
-                zero,
-                dont_wait,
-            )
-            reward = sum(values)
-            return (reward, dict(zip(mdp_cmd.TERMS, values))) if terms else reward
+            return open_flat_reward(self, S, a, a_prev, c, r, terms)
 
         patched_set_style_weight._open_terrain_patched = True
         patched_reward._open_terrain_patched = True

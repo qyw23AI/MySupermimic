@@ -52,6 +52,9 @@ class TrackingRewardCfg:
     w_torque_headroom: float = 0.0  # optional: weight on sum_j relu(|tau_j| - threshold)^2; 0 = term off
     torque_threshold: float = 0.0  # N*m, the actuator's continuous rating
     dt: float = 0.02
+    launch_velocity_weight: float = 0.0
+    placement_weight: float = 0.0
+    placement_indices: tuple[int, ...] = ()
 
     @staticmethod
     def from_robot(spec, dt: float = 0.02) -> "TrackingRewardCfg":
@@ -71,11 +74,14 @@ class TrackingRewardCfg:
             w_action_rate=spec.reward_w_action_rate,
             w_joint_limit=spec.reward_w_joint_limit,
             dt=dt,
+            launch_velocity_weight=spec.launch_velocity_weight,
+            placement_weight=spec.placement_weight,
+            placement_indices=tuple(spec.tracked_bodies.index(name) for name in spec.placement_bodies),
         )
 
     @property
     def max_step_reward(self) -> float:
-        return self.dt * (self.w_body_pos + self.w_body_ori + self.w_body_lin_vel + self.w_body_ang_vel + self.w_root_pos + self.w_root_ori + self.w_joint_pos + self.w_joint_vel)
+        return self.dt * (self.w_body_pos + self.w_body_ori + self.w_body_lin_vel + self.w_body_ang_vel + self.w_root_pos + self.w_root_ori + self.w_joint_pos + self.w_joint_vel + self.launch_velocity_weight + self.placement_weight)
 
     @property
     def term_names(self) -> tuple[str, ...]:
@@ -84,6 +90,10 @@ class TrackingRewardCfg:
             names.append("motion_joint_pos")
         if self.w_joint_vel != 0.0:
             names.append("motion_joint_vel")
+        if self.launch_velocity_weight:
+            names.append("jump_launch_velocity")
+        if self.placement_weight:
+            names.append("jump_placement")
         names += ["action_rate_l2", "joint_limit"]
         if self.w_torque_headroom != 0.0:
             names.append("torque_headroom")
@@ -160,6 +170,31 @@ def _sq_quat_err(q1: torch.Tensor, q2: torch.Tensor) -> torch.Tensor:
     return (v * v).sum(-1)
 
 
+def jump_launch_score(robot_vel, ref_vel):
+    """Shape launch in world x/z only while the reference is driving upward."""
+    error = ((robot_vel[..., (0, 2)] - ref_vel[..., (0, 2)]) / .65).square().sum(-1)
+    gate = ((ref_vel[..., 2] - .15) / .5).clamp(0., 1.)
+    return gate / (1. + error)
+
+
+def jump_placement_score(robot_pos, ref_pos):
+    """World-space tracking of the worse front-foot error, gated near the crest."""
+    error = ((robot_pos - ref_pos) / .12).square().sum(-1).amax(-1)
+    gate = ((ref_pos[..., 2].amin(-1) - .10) / .18).clamp(0., 1.)
+    return gate / (1. + error)
+
+
+def motion_jump_launch(env, command_name):
+    cmd = env.command_manager.get_term(command_name)
+    index = cmd.motion_anchor_body_index
+    return jump_launch_score(cmd.robot_body_lin_vel_w[:, index], cmd.body_lin_vel_w[:, index])
+
+
+def motion_jump_placement(env, command_name, indices):
+    cmd = env.command_manager.get_term(command_name)
+    return jump_placement_score(cmd.robot_body_pos_w[:, indices], cmd.body_pos_w[:, indices])
+
+
 def tracking_reward_terms(
     *,
     robot_body_pos_w: torch.Tensor,
@@ -210,6 +245,12 @@ def tracking_reward_terms(
         "motion_body_lin_vel": dt * cfg.w_body_lin_vel * torch.exp(-e_body_lin / cfg.std_body_lin_vel**2),
         "motion_body_ang_vel": dt * cfg.w_body_ang_vel * torch.exp(-e_body_ang / cfg.std_body_ang_vel**2),
     }
+    if cfg.launch_velocity_weight:
+        terms["jump_launch_velocity"] = dt * cfg.launch_velocity_weight * jump_launch_score(
+            robot_body_lin_vel_w[..., anchor_index, :], ref_body_lin_vel_w[..., anchor_index, :])
+    if cfg.placement_weight:
+        terms["jump_placement"] = dt * cfg.placement_weight * jump_placement_score(
+            robot_body_pos_w[..., cfg.placement_indices, :], ref_body_pos_w[..., cfg.placement_indices, :])
     if cfg.w_joint_pos != 0.0:
         assert ref_joint_pos is not None, "joint-space reward needs the reference joint positions"
         e_q = ((ref_joint_pos - joint_pos) ** 2).mean(-1)

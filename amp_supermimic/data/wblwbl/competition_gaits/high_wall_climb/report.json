@@ -1,0 +1,138 @@
+{
+  "frames": 552,
+  "fps": 50,
+  "duration_s": 11.02,
+  "body_forward_travel_m": 0.9850000000000001,
+  "obstacle_length_width_height_m": [
+    0.08,
+    0.8,
+    0.3
+  ],
+  "nominal_step_width_m": 0.368,
+  "planned_support_frames_on_top_by_leg": [
+    140,
+    140,
+    139,
+    142
+  ],
+  "maximum_foot_fit_error_m": 0.00032862303201029204,
+  "max_planned_stance_foot_speed_m_s": 0.005916659699161243,
+  "minimum_planted_foot_edge_margin_m": 0.006199999249668471,
+  "minimum_top_lateral_margin_m": 0.19619999882505612,
+  "worst_geometry_penetration_m": -0.0,
+  "collision_audit_rate_hz": 200,
+  "min_planned_support_count": 3,
+  "min_static_projected_com_margin_m": -0.11040363311867385,
+  "peak_joint_speed_rad_s": 14.731807819852794,
+  "knee_most_extended_rad": -0.5000001000000001,
+  "status": "kinematic_candidate",
+  "phases": [
+    {
+      "name": "Ready",
+      "start_frame": 0,
+      "stop_frame_exclusive": 1
+    },
+    {
+      "name": "Raise front trunk",
+      "start_frame": 1,
+      "stop_frame_exclusive": 26
+    },
+    {
+      "name": "Right front onto wall",
+      "start_frame": 26,
+      "stop_frame_exclusive": 59
+    },
+    {
+      "name": "Left front onto wall",
+      "start_frame": 59,
+      "stop_frame_exclusive": 92
+    },
+    {
+      "name": "Hold both front feet on top",
+      "start_frame": 92,
+      "stop_frame_exclusive": 112
+    },
+    {
+      "name": "Right rear steps under trunk",
+      "start_frame": 112,
+      "stop_frame_exclusive": 142
+    },
+    {
+      "name": "Left rear steps under trunk",
+      "start_frame": 142,
+      "stop_frame_exclusive": 172
+    },
+    {
+      "name": "Lift body over near edge",
+      "start_frame": 172,
+      "stop_frame_exclusive": 197
+    },
+    {
+      "name": "Right front onto far floor",
+      "start_frame": 197,
+      "stop_frame_exclusive": 233
+    },
+    {
+      "name": "Left front onto far floor",
+      "start_frame": 233,
+      "stop_frame_exclusive": 269
+    },
+    {
+      "name": "Move weight to far side",
+      "start_frame": 269,
+      "stop_frame_exclusive": 287
+    },
+    {
+      "name": "Right rear onto wall",
+      "start_frame": 287,
+      "stop_frame_exclusive": 322
+    },
+    {
+      "name": "Left rear onto wall",
+      "start_frame": 322,
+      "stop_frame_exclusive": 357
+    },
+    {
+      "name": "Hold both rear feet on top",
+      "start_frame": 357,
+      "stop_frame_exclusive": 372
+    },
+    {
+      "name": "Advance right front on floor",
+      "start_frame": 372,
+      "stop_frame_exclusive": 404
+    },
+    {
+      "name": "Advance left front on floor",
+      "start_frame": 404,
+      "stop_frame_exclusive": 436
+    },
+    {
+      "name": "Move hind hips beyond crest",
+      "start_frame": 436,
+      "stop_frame_exclusive": 461
+    },
+    {
+      "name": "Right rear onto far floor",
+      "start_frame": 461,
+      "stop_frame_exclusive": 496
+    },
+    {
+      "name": "Left rear onto far floor",
+      "start_frame": 496,
+      "stop_frame_exclusive": 531
+    },
+    {
+      "name": "Settle on far side",
+      "start_frame": 531,
+      "stop_frame_exclusive": 552
+    }
+  ],
+  "support_labels": {
+    "0": "swing",
+    "1": "floor",
+    "2": "obstacle_top"
+  },
+  "csv_sha256": "05bf2fa652463b93db1980a106cd0dc2851947710e3b898eb0ba503fd234d551",
+  "mjcf_sha256": "a6ae3a95bf71c63737bf7c913f2bb37429e78a6ac07f1b68593e5504723e3084"
+}

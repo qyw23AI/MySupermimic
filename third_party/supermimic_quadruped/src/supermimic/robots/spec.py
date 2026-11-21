@@ -140,6 +140,12 @@ class RobotSpec:
     support_foot_threshold: float = 0.0
     sim: SimSettings = field(default_factory=SimSettings)
     stand_height: float = 0.0  # nominal root height when standing (m)
+    # Fixed-scene tasks can attach world geometry and expose pose to the world model.
+    scene_setup: Callable | None = None
+    world_pose_features: bool = False
+    launch_velocity_weight: float = 0.0
+    placement_weight: float = 0.0
+    placement_bodies: tuple[str, ...] = ()
     viewer_distance: float = 2.8
     # Knock-down pushes for get-up training (plan D22), in m/s; sized per robot.
     push_speed: tuple[float, float] = (4.0, 6.0)

@@ -33,6 +33,8 @@ class PolicyCfg:
     decoder_last_gain: float = 0.01
     goal_dim: int = GOAL_DIM  # future_frames * (2nj + 10) (+9 with anchor_obs); set by the trainer
     nj: int = ACT_DIM
+    guide_frames: int = 0
+    residual_limit: float = .35
 
     @property
     def obs_dim(self) -> int:
@@ -96,9 +98,31 @@ class Policy(nn.Module):
         self.cfg = cfg
         self.encoders = nn.ModuleDict({"motion": MotionEncoder(cfg)})
         self.decoder = Decoder(cfg)
+        if cfg.guide_frames:
+            feature_size = 2 * cfg.goal_feat_dim
+            self.register_buffer("guide_keys", torch.zeros(cfg.guide_frames, feature_size))
+            self.register_buffer("guide_actions", torch.zeros(cfg.guide_frames, cfg.nj))
+
+    @torch.no_grad()
+    def set_action_guide(self, features: torch.Tensor, actions: torch.Tensor) -> None:
+        if actions.shape != self.guide_actions.shape or features.shape != self.guide_keys.shape:
+            raise ValueError("The reference action guide does not match the actor configuration")
+        scale = self.encoders["motion"].scale[:features.shape[-1]]
+        self.guide_keys.copy_(features * scale)
+        self.guide_actions.copy_(actions)
 
     def forward(self, obs_hist: torch.Tensor, goal: torch.Tensor, interface: str = "motion") -> torch.Tensor:
-        return self.decoder(self.encoders[interface](goal), obs_hist)
+        update = self.decoder(self.encoders[interface](goal), obs_hist)
+        if not self.cfg.guide_frames:
+            return update
+        key_size = self.guide_keys.shape[-1]
+        query = goal[..., :key_size] * self.encoders["motion"].scale[:key_size]
+        with torch.no_grad():
+            distances = torch.cdist(query.reshape(-1, key_size), self.guide_keys,
+                                    compute_mode="donot_use_mm_for_euclid_dist")
+            selected = self.guide_actions[distances.argmin(-1)].reshape_as(update)
+        return selected + self.cfg.residual_limit * update.tanh()
+
 
 
 class Critic(nn.Module):

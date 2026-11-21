@@ -878,7 +878,7 @@ def main():
         env.set_command_ranges(command_envelope["ranges"])
     elif args.command_range_mode == "reference":
         command_envelope = reference_envelope(
-            motion, terrain_navigation=task.profile in ("stairs", "mountain", "parkour"),
+            motion, terrain_navigation=mdp.terrain_navigation,
             minimum_forward_speed=.08 if task.profile == "stealth" else .15,
             forward_only=task.profile != "stealth")
         env.set_command_ranges(command_envelope["ranges"])

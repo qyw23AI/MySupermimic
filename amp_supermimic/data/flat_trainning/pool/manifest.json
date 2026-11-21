@@ -1,0 +1,189 @@
+{
+  "configs": {
+    "test": {
+      "file": "test.json",
+      "sha256": "36746b21abf8a8feccae2bd392c3c78d653076f45d01b531186b85a27a51f17c"
+    },
+    "train": {
+      "file": "train.json",
+      "sha256": "0d8ab1c8ad378505b05683108d6c3d5ab7aea146b1d908fc0c6d8fabe0e05a5b"
+    }
+  },
+  "files": [
+    {
+      "category": "forward",
+      "duration_seconds": 3.98,
+      "file": "forward__procedural_forward.csv",
+      "fps": 50,
+      "frames": 200,
+      "original_sha256": "3d4ef8fa3b54b5aed8c6231ae033d9f09772b86d1618ca2e840d6ff5726d582b",
+      "sha256": "3d4ef8fa3b54b5aed8c6231ae033d9f09772b86d1618ca2e840d6ff5726d582b",
+      "source_file": "amp_supermimic/data/flat_trainning/forward/procedural_forward/procedural_forward.csv",
+      "source_group": "forward/procedural_forward",
+      "split": "train"
+    },
+    {
+      "category": "backward",
+      "duration_seconds": 3.98,
+      "file": "backward__procedural_backward.csv",
+      "fps": 50,
+      "frames": 200,
+      "original_sha256": "a7aaa6a7108486770c6c9ab6ee5df0f1e7e1ba13cd518ac74d288467fdf24dd0",
+      "sha256": "a7aaa6a7108486770c6c9ab6ee5df0f1e7e1ba13cd518ac74d288467fdf24dd0",
+      "source_file": "amp_supermimic/data/flat_trainning/backward/procedural_backward/procedural_backward.csv",
+      "source_group": "backward/procedural_backward",
+      "split": "train"
+    },
+    {
+      "category": "turn_left",
+      "duration_seconds": 3.98,
+      "file": "turn_left__procedural_turn_left.csv",
+      "fps": 50,
+      "frames": 200,
+      "original_sha256": "72e93cdca472b0ae58c461de1acce7df84f52fdbe3aa3d4bffec076101bcef8e",
+      "sha256": "72e93cdca472b0ae58c461de1acce7df84f52fdbe3aa3d4bffec076101bcef8e",
+      "source_file": "amp_supermimic/data/flat_trainning/turn_left/procedural_turn_left/procedural_turn_left.csv",
+      "source_group": "turn_left/procedural_turn_left",
+      "split": "train"
+    },
+    {
+      "category": "turn_right",
+      "duration_seconds": 3.98,
+      "file": "turn_right__procedural_turn_right.csv",
+      "fps": 50,
+      "frames": 200,
+      "original_sha256": "24967fe2b6c90f9a199dc4adc07f5a724ce0f9c36aa72ecefe1ffd36e0114494",
+      "sha256": "24967fe2b6c90f9a199dc4adc07f5a724ce0f9c36aa72ecefe1ffd36e0114494",
+      "source_file": "amp_supermimic/data/flat_trainning/turn_right/procedural_turn_right/procedural_turn_right.csv",
+      "source_group": "turn_right/procedural_turn_right",
+      "split": "train"
+    },
+    {
+      "category": "strafe_left",
+      "duration_seconds": 3.98,
+      "file": "strafe_left__procedural_strafe_left.csv",
+      "fps": 50,
+      "frames": 200,
+      "original_sha256": "791e3df4efd86fcb5894c3bf1b43468a870fc9b17e19c06b42668d57c32ef92d",
+      "sha256": "791e3df4efd86fcb5894c3bf1b43468a870fc9b17e19c06b42668d57c32ef92d",
+      "source_file": "amp_supermimic/data/flat_trainning/strafe_left/procedural_strafe_left/procedural_strafe_left.csv",
+      "source_group": "strafe_left/procedural_strafe_left",
+      "split": "train"
+    },
+    {
+      "category": "strafe_right",
+      "duration_seconds": 3.98,
+      "file": "strafe_right__procedural_strafe_right.csv",
+      "fps": 50,
+      "frames": 200,
+      "original_sha256": "177ef27902c4a13aa7432afbdc80bf45d27e233f4ee014cf71983f1252fd8db1",
+      "sha256": "177ef27902c4a13aa7432afbdc80bf45d27e233f4ee014cf71983f1252fd8db1",
+      "source_file": "amp_supermimic/data/flat_trainning/strafe_right/procedural_strafe_right/procedural_strafe_right.csv",
+      "source_group": "strafe_right/procedural_strafe_right",
+      "split": "train"
+    },
+    {
+      "category": "heldout",
+      "duration_seconds": 9.98,
+      "file": "heldout__vhdc_horse1_s1_walk_02.csv",
+      "fps": 50,
+      "frames": 500,
+      "original_sha256": "1ce9f2b2805df22acdcb59d4067218de2b943e1b65c875e8b018c4184a5933f5",
+      "sha256": "1ce9f2b2805df22acdcb59d4067218de2b943e1b65c875e8b018c4184a5933f5",
+      "source_file": "amp_supermimic/data/flat_trainning/heldout/vhdc_horse1_s1_walk_02/vhdc_horse1_s1_walk_02.csv",
+      "source_group": "heldout/vhdc_horse1_s1_walk_02",
+      "split": "test"
+    },
+    {
+      "category": "forward",
+      "duration_seconds": 3.04,
+      "file": "forward__a1_trot2.csv",
+      "fps": 50,
+      "frames": 153,
+      "original_sha256": "918f948b8b4380c4493335ca25eb6485402ba0fd3ea0c6d1bfcaf41865ecb496",
+      "sha256": "918f948b8b4380c4493335ca25eb6485402ba0fd3ea0c6d1bfcaf41865ecb496",
+      "source_file": "amp_supermimic/data/flat_trainning/forward/a1_trot2/a1_trot2.csv",
+      "source_group": "forward/a1_trot2",
+      "split": "test"
+    }
+  ],
+  "fps": 50,
+  "joint_names": [
+    "RR_hip_joint",
+    "RR_thigh_joint",
+    "RR_calf_joint",
+    "RL_hip_joint",
+    "RL_thigh_joint",
+    "RL_calf_joint",
+    "FR_hip_joint",
+    "FR_thigh_joint",
+    "FR_calf_joint",
+    "FL_hip_joint",
+    "FL_thigh_joint",
+    "FL_calf_joint"
+  ],
+  "model_sha256": "a6ae3a95bf71c63737bf7c913f2bb37429e78a6ac07f1b68593e5504723e3084",
+  "quaternion_order": "xyzw",
+  "recipe": {
+    "categories": [
+      "forward",
+      "backward",
+      "turn_left",
+      "turn_right",
+      "strafe_left",
+      "strafe_right"
+    ],
+    "clips": [
+      {
+        "original_sha256": "3d4ef8fa3b54b5aed8c6231ae033d9f09772b86d1618ca2e840d6ff5726d582b",
+        "source_group": "forward/procedural_forward",
+        "split": "train"
+      },
+      {
+        "original_sha256": "a7aaa6a7108486770c6c9ab6ee5df0f1e7e1ba13cd518ac74d288467fdf24dd0",
+        "source_group": "backward/procedural_backward",
+        "split": "train"
+      },
+      {
+        "original_sha256": "72e93cdca472b0ae58c461de1acce7df84f52fdbe3aa3d4bffec076101bcef8e",
+        "source_group": "turn_left/procedural_turn_left",
+        "split": "train"
+      },
+      {
+        "original_sha256": "24967fe2b6c90f9a199dc4adc07f5a724ce0f9c36aa72ecefe1ffd36e0114494",
+        "source_group": "turn_right/procedural_turn_right",
+        "split": "train"
+      },
+      {
+        "original_sha256": "791e3df4efd86fcb5894c3bf1b43468a870fc9b17e19c06b42668d57c32ef92d",
+        "source_group": "strafe_left/procedural_strafe_left",
+        "split": "train"
+      },
+      {
+        "original_sha256": "177ef27902c4a13aa7432afbdc80bf45d27e233f4ee014cf71983f1252fd8db1",
+        "source_group": "strafe_right/procedural_strafe_right",
+        "split": "train"
+      },
+      {
+        "original_sha256": "1ce9f2b2805df22acdcb59d4067218de2b943e1b65c875e8b018c4184a5933f5",
+        "source_group": "heldout/vhdc_horse1_s1_walk_02",
+        "split": "test"
+      },
+      {
+        "original_sha256": "918f948b8b4380c4493335ca25eb6485402ba0fd3ea0c6d1bfcaf41865ecb496",
+        "source_group": "forward/a1_trot2",
+        "split": "test"
+      }
+    ],
+    "heldout": [
+      "heldout/vhdc_horse1_s1_walk_02",
+      "forward/a1_trot2"
+    ],
+    "schema": "wblwbl-retargeted-pool-recipe-v1"
+  },
+  "recipe_sha256": "90cf832777698ff8d6afc3cf46bd80d82335af2e54a8dec0fb17c7fc96b8294e",
+  "robot": "wblwbl_dog_v1",
+  "schema": "style-campaign-pool-v1",
+  "status": "ready",
+  "style": "walk_turn"
+}

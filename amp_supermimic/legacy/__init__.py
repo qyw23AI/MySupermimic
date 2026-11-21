@@ -10,6 +10,22 @@ ROOT = Path(__file__).resolve().parents[2]
 
 TASKS = {
     "wblwbl_dog_v1": ("wblwbl_dog_v1.wblwbl_dog_v1_config", "WblwblDogV1Cfg"),
+    "amp_supermimic_parkour": (
+        "wblwbl_dog_v1.wblwbl_dog_v1_wmp_parkour_config",
+        "WblwblDogV1AmpSupermimicParkourCfg",
+    ),
+    "amp_supermimic_stepping_stones": (
+        "wblwbl_dog_v1.wblwbl_dog_v1_stepping_stones_config",
+        "WblwblDogV1AmpSupermimicSteppingStonesCfg",
+    ),
+    "wblwbl_dog_v1_amp_supermimic_parkour": (
+        "wblwbl_dog_v1.wblwbl_dog_v1_wmp_parkour_config",
+        "WblwblDogV1AmpSupermimicParkourCfg",
+    ),
+    "wblwbl_dog_v1_amp_supermimic_stepping_stones": (
+        "wblwbl_dog_v1.wblwbl_dog_v1_stepping_stones_config",
+        "WblwblDogV1AmpSupermimicSteppingStonesCfg",
+    ),
     "wblwbl_dog_v1_open_flat": (
         "wblwbl_dog_v1.wblwbl_dog_v1_open_flat_config",
         "WblwblDogV1OpenFlatCfg",
@@ -19,11 +35,17 @@ TASKS = {
 
 _PHYSX_MODULE = "wblwbl_dog_v1.wblwbl_dog_v1_physx_config"
 PHYSX_TASKS = {
+    "wblwbl_dog_v1_physx_open_flat": (_PHYSX_MODULE, "WblwblDogV1PhysxOpenFlatCfg"),
+    "wblwbl_dog_v1_physx_parkour": (_PHYSX_MODULE, "WblwblDogV1PhysxParkourCfg"),
     "wblwbl_dog_v1_physx_flat": (_PHYSX_MODULE, "WblwblDogV1PhysxCfg"),
     "wblwbl_dog_v1_physx_wmp_stair_gap": (_PHYSX_MODULE, "WblwblDogV1PhysxWmpStairGapCfg"),
     "wblwbl_dog_v1_physx_wmp_stair_gap_ramp": (_PHYSX_MODULE, "WblwblDogV1PhysxWmpRampCfg"),
     "wblwbl_dog_v1_physx_wmp_gap_combos": (_PHYSX_MODULE, "WblwblDogV1PhysxWmpCombosCfg"),
 }
+PHYSX_TASKS.update({
+    "wblwbl_dog_v1_physx_bridge_trot": (_PHYSX_MODULE, "WblwblDogV1PhysxBridgeCfg"),
+    "wblwbl_dog_v1_physx_high_wall": (_PHYSX_MODULE, "WblwblDogV1PhysxWallCfg"),
+})
 TASKS.update(PHYSX_TASKS)
 
 
@@ -71,18 +93,50 @@ def load_task_config(task_name: str, num_envs: int | None = None):
 
 
 def apply_runtime_task_patches(env_cfg) -> None:
-    """Push config values into open_terrain runtime dictionaries before training."""
-    import open_terrain
+    """Push config values into runtime curriculum/reward dictionaries before training."""
+    import sys
 
-    cur_dict = class_to_dict(env_cfg.commands.curriculum)
-    for k, v in cur_dict.items():
-        if k in open_terrain.OPEN_FLAT_CURRICULUM:
-            open_terrain.OPEN_FLAT_CURRICULUM[k] = v
+    scripts_dir = str(ROOT / "amp_supermimic/scripts")
+    if scripts_dir not in sys.path:
+        sys.path.insert(0, scripts_dir)
 
+    profile = getattr(getattr(env_cfg, "terrain", None), "profile", None)
     rew_dict = class_to_dict(env_cfg.rewards)
-    for k, v in rew_dict.items():
-        if k in open_terrain.OPEN_FLAT_REWARDS:
-            open_terrain.OPEN_FLAT_REWARDS[k] = v
+
+    if profile in ("open_terrain", "open_flat", None):
+        import open_terrain
+
+        cur_dict = class_to_dict(env_cfg.commands.curriculum)
+        for k, v in cur_dict.items():
+            if k in open_terrain.OPEN_FLAT_CURRICULUM:
+                open_terrain.OPEN_FLAT_CURRICULUM[k] = v
+
+        for k, v in rew_dict.items():
+            if k in open_terrain.OPEN_FLAT_REWARDS:
+                open_terrain.OPEN_FLAT_REWARDS[k] = v
+
+    if profile in ("amp_supermimic_parkour", "amp_supermimic_stepping_stones"):
+        import wmp_parkour
+
+        is_stones = profile == wmp_parkour.STEPPING_STONES_PROFILE
+        target = (
+            wmp_parkour.STEPPING_STONES_REWARDS
+            if is_stones
+            else wmp_parkour.PARKOUR_REWARDS
+        )
+        for k, v in rew_dict.items():
+            if k in target:
+                target[k] = v
+
+        cmd_dict = class_to_dict(env_cfg.commands)
+        cmd_target = (
+            wmp_parkour.STEPPING_STONES_COMMANDS
+            if is_stones
+            else wmp_parkour.PARKOUR_COMMANDS
+        )
+        for k, v in cmd_dict.items():
+            if k in cmd_target:
+                cmd_target[k] = tuple(v) if isinstance(v, list) else v
 
 
 def build_upstream_train_args(env_cfg, train_cfg, cli_args: list[str]) -> list[str]:
